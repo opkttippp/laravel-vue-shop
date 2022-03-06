@@ -1,0 +1,59 @@
+version: '3.1'
+services:
+
+  nginx:
+    depends_on:
+      - php
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./:/var/www
+    networks:
+      - app-network
+
+  php:
+    depends_on:
+      - mysql
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    container_name: php
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./:/var/www
+    user: "1000:1000"
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    tty: true
+    environment:
+      MYSQL_ROOT_PASSWORD: tolik@
+      MYSQL_USER: tttolll
+      MYSQL_PASSWORD: tttolll
+      MYSQL_DATABASE: BASE
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+    #      - ./docker/mysql/conf/my.cnf:/etc/mysql/my.cnf
+    ports:
+      - "3306:3306"
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysqldata: {}
