@@ -1,0 +1,11 @@
+body {
+    background-image: url("../images/fone.jpeg");
+}
+
+.container {
+
+    background-color: #1d2124;
+    margin-top: 25px;
+    padding-top: 50px;
+    height: 100%;
+}

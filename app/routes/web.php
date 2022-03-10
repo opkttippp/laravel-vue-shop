@@ -3,9 +3,13 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    echo('Hello work !!');
+    echo('Hello working Boris !!');
 });
 
-Route::get('/user', function () {
-    echo 'Привет Анатолий';
+Route::get('/greeting', function () {
+    return view('green');
+});
+
+Route::get('/user/{id}/{name}', function ($id, $name) {
+    return view('user', ['id' => $id, 'name' => $name]);
 });
