@@ -1,0 +1,40 @@
+body {
+    background-image: url(/images/fone.jpeg?2db1a94ca6e10dcaea2ea9320582b267);
+}
+
+#container {
+    height: 100%;
+}
+
+.content {
+    margin-top: 8%;
+    padding-bottom: 8%;
+    border: red 1px solid;
+}
+
+.header {
+
+}
+
+.footer {
+    height: 8%;
+}
+
+.form-review {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 300px;
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 200px;
+    background-color: #4a5568;
+
+}
+
+.form-review button{
+    margin: 20px;
+}
+
