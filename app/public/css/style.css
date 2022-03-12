@@ -1,40 +1,118 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
 body {
     background-image: url(/images/fone.jpeg?2db1a94ca6e10dcaea2ea9320582b267);
+    background-size: 100%;
+    background-attachment: fixed;
+    padding: 0;
+    margin: 0;
+    font-family: verdana, arial, sans-serif;
 }
 
-#container {
-    height: 100%;
+body {
+    color: #fff;
+    font-size: 1.1em;
+    /*padding: 1em;*/
+    display: flex;
+    flex-direction: column;
 }
 
-.content {
-    margin-top: 8%;
-    padding-bottom: 8%;
-    border: red 1px solid;
+main {
+    display: flex;
+    /*border: red 1px solid;*/
 }
 
-.header {
-
+section {
+    padding: 6% 0;
+    margin: auto;
 }
 
-.footer {
+section h2 {
+    text-align: center;
+    padding: 10px;
+}
+
+aside {
+    flex: 1;
+    background-color: #37474f;
+    background-attachment: fixed;
+    order: -1;
+    max-width: 220px;
+}
+
+.sidebar-wrapper {
+    position: fixed;
+}
+
+header, footer {
+    display: flex;
+    background-color: #37474f;
     height: 8%;
+    align-items: center;
+    justify-content: center;
+}
+
+footer p {
+    margin: auto;
 }
 
 .form-review {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /*align-items: center;*/
+    /*justify-content: center;*/
     text-align: center;
     width: 300px;
-    margin-top: 80px;
-    margin-left: auto;
-    margin-right: auto;
-    min-height: 200px;
     background-color: #4a5568;
-
+    border-radius: 2%;
+    padding: 10px;
 }
 
-.form-review button{
-    margin: 20px;
+.form-review input {
+    width: 230px;
+    margin: auto;
 }
+
+/*---------------Sidebar---------------*/
+
+aside div .sidebar-nav {
+    position: fixed;
+    padding: 10% 0 0 0;
+    list-style: none;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    min-width: 220px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #10707f;
+}
+
+/*--------------changing size-----------------*/
+@media screen and (min-width: 600px) {
+    body {
+        min-height: 100vh;
+    }
+
+    main {
+        flex-direction: row;
+        min-height: 100%;
+        flex: 1 1 auto;
+    }
+}
+/*--------------------------------------------*/
 

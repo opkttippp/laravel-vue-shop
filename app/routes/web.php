@@ -9,6 +9,8 @@ Route::get('/greeting', [MainController::class, 'green']);
 
 Route::get('/review', [MainController::class, 'review']);
 
+Route::post('/review/check', [MainController::class, 'check']);
+
 
 Route::get('/user/{id}/{name}', function ($id, $name) {
     return view('user', ['id' => $id, 'name' => $name]);

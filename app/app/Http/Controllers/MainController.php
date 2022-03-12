@@ -20,4 +20,14 @@ class MainController extends Controller
     {
         return view('review');
     }
+    public function check(Request $request)
+    {
+//        dd($request);
+        $val = $request -> validate([
+            'email' => 'required|min:5|max:20',
+            'password' => 'unique,|min:5|max:20'
+        ]);
+//        return view('review');
+    }
+
 }

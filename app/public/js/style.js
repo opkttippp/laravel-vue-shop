@@ -2204,8 +2204,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-console.log('Привет !!');
-console.log('Привет !!');
 
 /***/ }),
 
