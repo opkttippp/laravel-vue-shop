@@ -8,10 +8,8 @@
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
-                    @foreach($errors -> all as $error)
-                        <li>
-
-                        </li>
+                    @foreach($errors -> all() as $error)
+                        <li>{{$error}}</li>
                     @endforeach
                 </ul>
             </div>
@@ -23,17 +21,16 @@
                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name">
             </div>
             <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter subject">
+            </div>
+            <div class="mb-3">
                 <label for="review" class="form-label">Review</label>
-                <p><textarea rows="5" type="text" id="review" name="review"></textarea></p>
+                <p><textarea class="form-control" type="text" id="review" name="review" placeholder="Нипишите что-нибудь"></textarea></p>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter your E-mail">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password"
-                       placeholder="Enter your Password">
             </div>
             <button type="submit" class="btn btn-success">Submit</button>
         </form>

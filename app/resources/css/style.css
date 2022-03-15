@@ -63,14 +63,15 @@ footer p {
     /*align-items: center;*/
     /*justify-content: center;*/
     text-align: center;
-    width: 300px;
+    width: 100%;
     background-color: #4a5568;
     border-radius: 2%;
     padding: 10px;
 }
 
-.form-review input {
-    width: 230px;
+.form-review input,
+.form-review textarea {
+    width: 420px;
     margin: auto;
 }
 

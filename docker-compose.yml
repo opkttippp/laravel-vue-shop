@@ -37,10 +37,10 @@ services:
     restart: unless-stopped
     tty: true
     environment:
-      MYSQL_ROOT_PASSWORD: tolik@
+      MYSQL_ROOT_PASSWORD: t
       MYSQL_USER: tttolll
       MYSQL_PASSWORD: tttolll
-      MYSQL_DATABASE: BASE
+      MYSQL_DATABASE: Laravel_db
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
     #      - ./docker/mysql/conf/my.cnf:/etc/mysql/my.cnf
