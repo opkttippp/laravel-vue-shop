@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactModal extends Model
 {
-    use HasFactory;
+    public bool $timestamps = false;
 }

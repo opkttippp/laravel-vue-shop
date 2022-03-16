@@ -7,7 +7,7 @@ Route::get('/', [MainController::class, 'home']);
 
 Route::get('/greeting', [MainController::class, 'green']);
 
-Route::get('/review', [MainController::class, 'review']);
+Route::get('/review', [MainController::class, 'review'])->name('review');
 
 Route::post('/review/check', [MainController::class, 'check']);
 

