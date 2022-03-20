@@ -14,6 +14,8 @@ return new class () extends Migration {
             $table->string('subject');
             $table->text('review');
             $table->string('email');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

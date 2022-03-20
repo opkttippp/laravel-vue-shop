@@ -5,16 +5,7 @@
 @section('main_content')
     <h2>Добавить отзыв</h2>
     <div class="form-review">
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors -> all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <form method="post" action="/review/check">
+        <form method="post" action="{{route('check')}}">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -37,14 +28,15 @@
         </form>
     </div>
 
-    <h2>Отзывы</h2>
+{{--    <h2>Отзывы</h2>--}}
 
-    @foreach($rev as $r)
-        <div class="alert alert-warning">
-            <h3>{{$r->name}}</h3>
-            <b>{{$r->subject}}</b>
-            <p>{{$r->review}}</p>
-            <p>{{$r->email}}</p>
-        </div>
-    @endforeach
+{{--    @foreach($rev as $r)--}}
+{{--        <div class="alert alert-warning">--}}
+{{--            <h3>{{$r->name}}</h3>--}}
+{{--            <b>{{$r->subject}}</b>--}}
+{{--            <p>{{$r->review}}</p>--}}
+{{--            <p>{{$r->email}}</p>--}}
+{{--            <p>{{$r->created_at}}</p>--}}
+{{--        </div>--}}
+{{--    @endforeach--}}
 @endsection

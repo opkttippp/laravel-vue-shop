@@ -5,6 +5,7 @@
 @endsection
 
 @section('main_content')
+    <div class="green">
 <?php
 $array = ['yellow', 'green', 'rosybrown', 'coral'];
 foreach ($array as $arr) {
@@ -17,4 +18,5 @@ foreach ($digit as $digital) {
     echo "<br>";
 }
 ?>
+    </div>
 @endsection

@@ -6,9 +6,12 @@ Home
 
 @section('aside')
 @parent
+<?php
+echo 1111;
+?>
 <h1>Hello !!</h1>
 @endsection
 
 @section('main_content')
-<h1 style="color: #d4edda">Home page.</h1>
+<h2 style="color: #d4edda">Home page.</h2>
 @endsection

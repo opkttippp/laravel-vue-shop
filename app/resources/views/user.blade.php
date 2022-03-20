@@ -6,7 +6,7 @@
 
 @section('main_content')
 
-    <h1 style="color: darkslategray">Привет</h1>
+    <h1 style="color: #95999c">Привет</h1>
 
     <?php
 
