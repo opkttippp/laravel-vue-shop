@@ -1,3 +1,9 @@
+@font-face {font-family: "Trattatello";
+    url("05289e866fe7e1e99d27a7a31f8d3b66.woff2") format("woff2"), /* chrome、firefox */
+    url("05289e866fe7e1e99d27a7a31f8d3b66.woff") format("woff"), /* chrome、firefox */
+    url("05289e866fe7e1e99d27a7a31f8d3b66.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+}
+
 * {
     box-sizing: border-box;
 }
@@ -41,17 +47,23 @@ aside {
     flex: 1;
     background-color: #37474f;
     background-attachment: fixed;
+    margin-top: 5%;
     order: -1;
     max-width: 220px;
 }
 
-.sidebar-wrapper {
-    position: fixed;
+.header, .footer {
+    display: flex;
+    margin-top: 25px;
+    background-color: rgb(47, 58, 68);
+    height: 8%;
+    align-items: center;
+    justify-content: center;
 }
 
-header, footer {
+.footer {
     display: flex;
-    background-color: #37474f;
+    background-color: rgb(47, 58, 68);
     height: 8%;
     align-items: center;
     justify-content: center;
@@ -62,8 +74,6 @@ footer p {
 }
 
 .form-review {
-    /*align-items: center;*/
-    /*justify-content: center;*/
     text-align: center;
     width: 50%;
     margin-left: 25%;
@@ -85,9 +95,45 @@ footer p {
 .button {
     width: 20%;
 }
+
+.reg_auth {
+    display: flex;
+    width: 18%;
+    margin-right: 2%;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.reg_auth a {
+    color: #7fd24f;
+}
+
+.top {
+    position: fixed;
+    display: flex;
+    margin-top: 0;
+    height: 25px;
+    width: 100%;
+    background-color: rgb(47, 58, 68);
+}
+
+.top p {
+    margin-left: 25px;
+    color: #b3b7bb;
+    /*font-family: Brush Script MT, serif ;*/
+    font-family: Trattatello, fantasy;
+}
+
+.top a {
+    display: block;
+    margin-top: 0;
+    padding-top: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
 /*---------------Sidebar---------------*/
 
-aside div .sidebar-nav {
+.sidebar-nav {
     position: fixed;
     padding: 10% 0 0 0;
     list-style: none;

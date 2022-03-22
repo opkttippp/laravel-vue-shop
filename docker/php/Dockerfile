@@ -5,7 +5,7 @@ RUN docker-php-ext-install pdo pdo_mysql
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 ## Set working directory
-WORKDIR /var/www
+WORKDIR /var/www/larav.local
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \

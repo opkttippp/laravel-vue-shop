@@ -11,12 +11,15 @@ class MainController extends Controller
 {
     public function home()
     {
-        return view('home');
+        return view('main.home', [
+            'title' => 'home',
+            'text' => 'home'
+        ]);
     }
 
     public function green()
     {
-        return view('green');
+        return view('main.green');
     }
 
     public function review()
@@ -24,7 +27,7 @@ class MainController extends Controller
         $view = new ContactModal();
 
 //        return view('review', ['rev' => $view->all()]);
-        return view('review');
+        return view('main.review');
     }
 
 
@@ -50,7 +53,9 @@ class MainController extends Controller
 //        $name = DB::table('contact_modals')->select('name')->get();
 //        return view('review')->with(compact('name'));
 
-        return redirect()->route('message')->with('success', 'Отзывы были добавлены');
+        return redirect()->route('message')->with(
+            'success', 'Отзывы были добавлены'
+        );
     }
 
     public function message()
@@ -59,19 +64,19 @@ class MainController extends Controller
 //        return view('message', ['rev' => ContactModal::all()]);
 //        return view('message', ['rev' => $message->orderBy('id', 'asc')->skip(1)->take(1)->get()]);
 //        return view('messageOne', ['rev' => $message->where('id', '=', $id)->get()]);
-        return view('message', ['rev' => $message->get()]);
+        return view('main.message', ['rev' => $message->get()]);
     }
 
     public function messageOne($id)
     {
         $message = new ContactModal();
-        return view('messageOne', ['rev' => $message->find($id)]);
+        return view('main.messageOne', ['rev' => $message->find($id)]);
     }
 
     public function messageOneUpdate($id)
     {
         $message = new ContactModal();
-        return view('messageOneUpdate', ['rev' => $message->find($id)]);
+        return view('main.messageOneUpdate', ['rev' => $message->find($id)]);
     }
 
     public function messOneUpSub($id, ValidRequest $request)
@@ -83,13 +88,17 @@ class MainController extends Controller
         $contact->review = $request->input('review');
         $contact->email = $request->input('email');
         $contact->save();
-        return redirect()->route('messageOne', $id)->with('success', 'Уснешное обновление');
+        return redirect()->route('messageOne', $id)->with(
+            'success', 'Уснешное обновление'
+        );
     }
 
     public function messageOneDelete($id)
     {
         $contact = ContactModal::find($id)->delete();
-        return redirect()->route('message', $id)->with('success', 'Уснешное удаление');
+        return redirect()->route('message', $id)->with(
+            'success', 'Уснешное удаление'
+        );
     }
 
 }

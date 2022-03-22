@@ -1,4 +1,8 @@
-<nav class=" header navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+<div class="top">
+    <p><img src="/images/leaf_1.jpg"  width="25px" alt="leaf"></p>
+    <p><a class="nav-link" href={{ route('home') }}>Mysite</a></p>
+</div>
+<nav class="header navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
     <div class="container-fluid">
         <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -23,7 +27,19 @@
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
+                <li>
+
+                </li>
             </ul>
+
+            <div class="reg_auth">
+                    <a href="#" class="btn btn-secondary">
+                        Войти
+                    </a>
+                <a href="#" class="btn btn-secondary">
+                    Регистрация
+                </a>
+            </div>
 
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
