@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Database\DBAL\TimestampType;
 
 return [
 
@@ -41,7 +42,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -136,6 +137,13 @@ return [
     |
     */
 
+//---------------------изменение таблицы с помощью-----------------------
+    'dbal' => [
+        'types' => [
+            'timestamp' => TimestampType::class,
+        ],
+    ],
+//-------------------------------------------------------------------------
     'providers' => [
 
         /*

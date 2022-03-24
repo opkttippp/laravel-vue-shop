@@ -1,3 +1,9 @@
+/*@font-face {font-family: "Trattatello";*/
+/*    url("05289e866fe7e1e99d27a7a31f8d3b66.woff2") format("woff2"), !* chrome、firefox *!*/
+/*    url("05289e866fe7e1e99d27a7a31f8d3b66.woff") format("woff"), !* chrome、firefox *!*/
+/*    url("05289e866fe7e1e99d27a7a31f8d3b66.ttf") format("truetype"), !* chrome、firefox、opera、Safari, Android, iOS 4.2+*!*/
+/*}*/
+
 * {
     box-sizing: border-box;
 }
@@ -26,7 +32,7 @@ main {
 }
 
 section {
-    padding: 6% 0;
+    padding: 7% 0;
     margin: auto;
     width: 80%;
 }
@@ -106,6 +112,7 @@ footer p {
     position: fixed;
     display: flex;
     margin-top: 0;
+    z-index: 1000;
     height: 25px;
     width: 100%;
     background-color: rgb(47, 58, 68);
@@ -124,6 +131,11 @@ footer p {
     padding-top: 0;
     text-decoration: none;
     cursor: pointer;
+}
+
+.message {
+    margin: 0;
+    padding: 0;
 }
 /*---------------Sidebar---------------*/
 

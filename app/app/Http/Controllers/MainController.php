@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidRequest;
-use App\Models\ContactModal;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,12 +22,12 @@ class MainController extends Controller
         return view('main.green');
     }
 
-    public function review()
+    public function reviewAdd()
     {
-        $view = new ContactModal();
-
-//        return view('review', ['rev' => $view->all()]);
-        return view('main.review');
+/*        new Review();
+        return view('review', ['rev' => $view->all()]);
+*/
+        return view('main.reviewAdd');
     }
 
 
@@ -39,8 +39,7 @@ class MainController extends Controller
 //            'review' => 'required|min:3|max:600',
 //            'email' => 'max:27'
 //        ]);
-
-        $contact = new ContactModal();
+        $contact = new Review();
 
         $contact->name = $request->input('name');
         $contact->subject = $request->input('subject');
@@ -49,56 +48,54 @@ class MainController extends Controller
 
         $contact->save();
 
-//        dd($request->input('review'));
-//        $name = DB::table('contact_modals')->select('name')->get();
-//        return view('review')->with(compact('name'));
-
-        return redirect()->route('message')->with(
-            'success', 'Отзывы были добавлены'
-        );
+        return redirect()->route('review')->with('success', 'Отзывы были добавлены');
+/*        dd($request->input('review'));
+        $name = DB::table('contact_modals')->select('name')->get();
+        return view('review')->with(compact('name'));*/
     }
 
-    public function message()
+    public function review()
     {
-        $message = new ContactModal();
-//        return view('message', ['rev' => ContactModal::all()]);
-//        return view('message', ['rev' => $message->orderBy('id', 'asc')->skip(1)->take(1)->get()]);
-//        return view('messageOne', ['rev' => $message->where('id', '=', $id)->get()]);
-        return view('main.message', ['rev' => $message->get()]);
+        $review = new Review();
+/*        return view('review', ['rev' => ContactModal::all()]);
+        return view('review', ['rev' => $review->orderBy('id', 'asc')->skip(1)->take(1)->get()]);
+        return view('reviewOne', ['rev' => $review->where('id', '=', $id)->get()]);*/
+        return view('main.review', ['rev' => $review->get()]);
     }
 
-    public function messageOne($id)
+    public function reviewOne($id)
     {
-        $message = new ContactModal();
-        return view('main.messageOne', ['rev' => $message->find($id)]);
+        $review = new Review();
+        return view('main.reviewOne', ['rev' => $review->find($id)]);
     }
 
-    public function messageOneUpdate($id)
+    public function reviewOneUpdate($id)
     {
-        $message = new ContactModal();
-        return view('main.messageOneUpdate', ['rev' => $message->find($id)]);
+        $review = new Review();
+        return view('main.reviewOneUpdate', ['rev' => $review->find($id)]);
     }
 
-    public function messOneUpSub($id, ValidRequest $request)
+    public function reviewUpdate($id, ValidRequest $request)
     {
-        $contact = ContactModal::find($id);
+        $contact = Review::find($id);
 
         $contact->name = $request->input('name');
         $contact->subject = $request->input('subject');
         $contact->review = $request->input('review');
         $contact->email = $request->input('email');
         $contact->save();
-        return redirect()->route('messageOne', $id)->with(
-            'success', 'Уснешное обновление'
+        return redirect()->route('reviewOne', $id)->with(
+            'success',
+            'Уснешное обновление'
         );
     }
 
-    public function messageOneDelete($id)
+    public function reviewOneDelete($id)
     {
-        $contact = ContactModal::find($id)->delete();
-        return redirect()->route('message', $id)->with(
-            'success', 'Уснешное удаление'
+        Review::find($id)->delete();
+        return redirect()->route('review', $id)->with(
+            'success',
+            'Уснешное удаление'
         );
     }
-
 }
