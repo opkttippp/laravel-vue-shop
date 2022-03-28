@@ -1,5 +1,5 @@
 <div class="top">
-    <p><img src="/images/leaf_1.jpg"  width="25px" alt="leaf"></p>
+    <p><img src="/images/leaf_1.jpg" width="25px" alt="leaf"></p>
     <p><a class="nav-link" href={{ route('home') }}>Mysite</a></p>
 </div>
 <nav class="header navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
@@ -16,7 +16,7 @@
                     <a class="nav-link" href={{ route('review') }}>Отзывы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ route('reviewAdd') }}>Добавить</a>
+                    <a class="nav-link" href={{ route('check') }}>Добавить</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
@@ -33,9 +33,9 @@
             </ul>
 
             <div class="reg_auth">
-                    <a href="#" class="btn btn-secondary">
-                        Войти
-                    </a>
+                <a href="#" class="btn btn-secondary">
+                    Войти
+                </a>
                 <a href="#" class="btn btn-secondary">
                     Регистрация
                 </a>

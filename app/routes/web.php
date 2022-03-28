@@ -8,9 +8,12 @@ Route::get('/', [MainController::class, 'home'])->name('home');
 
 Route::get('/greeting', [MainController::class, 'green'])->name('green');
 
-Route::get('/review/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
+//Route::get('/review/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
+//Route::post('/review/check', [MainController::class, 'check'])->name('check');
 
-Route::post('/review/check', [MainController::class, 'check'])->name('check');
+
+Route::match(['get', 'post'], '/review/check', [MainController::class, 'check'])->name('check');
+
 
 Route::get('/review', [MainController::class, 'review'])->name('review');
 
