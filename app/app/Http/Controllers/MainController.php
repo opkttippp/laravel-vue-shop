@@ -30,33 +30,20 @@ class MainController extends Controller
         return view('main.reviewAdd');
     }
 
-
     public function check(ValidRequest $request)
     {
-        /*        $val = $request->validate([
-                    'name' => 'required|min:3|max:20',
-                    'subject' => 'required|min:3|max:30',
-                    'review' => 'required|min:3|max:600',
-                    'email' => 'max:27'
-                ]);*/
-        dd($request);
-//        if ($request->has('name') and $request->has('review')) {
-//
-//            $contact = new Review();
-//            $contact->name = $request->input('name');
-//            $contact->subject = $request->input('subject');
-//            $contact->review = $request->input('review');
-//            $contact->email = $request->input('email');
-//
-//            $contact->save();
+            $contact = new Review();
+            $contact->name = $request->input('name');
+            $contact->subject = $request->input('subject');
+            $contact->review = $request->input('review');
+            $contact->email = $request->input('email');
 
-//            return redirect()->route('review')->with(
-//                'success',
-//                'Отзывы были добавлены'
-//            );
-//        } else {
-//            return view('main.reviewAdd');
-//        }
+            $contact->save();
+
+            return redirect()->route('review')->with(
+                'success',
+                'Отзывы были добавлены'
+            );
         /*        dd($request->input('review'));
                 $name = DB::table('contact_modals')->select('name')->get();
                 return view('review')->with(compact('name'));
@@ -66,11 +53,12 @@ class MainController extends Controller
     public function review()
     {
         $review = new Review();
+//        $review::paginate(3);
         /*        return view('review', ['rev' => ContactModal::all()]);
                 return view('review', ['rev' => $review->orderBy('id', 'asc')->skip(1)->take(1)->get()]);
                 return view('reviewOne', ['rev' => $review->where('id', '=', $id)->get()]);
         */
-        return view('main.review', ['rev' => $review->get()]);
+        return view('main.review', ['rev' => $review::paginate(3)]);
     }
 
     public function reviewOne($id)

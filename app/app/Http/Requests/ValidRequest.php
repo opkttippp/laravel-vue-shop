@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class ValidRequest extends FormRequest
 {
@@ -23,16 +24,17 @@ class ValidRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public static function rules()
     {
         return [
-            'name' => 'required|min:3|max:24',
+            'name' => 'required|alpha|min:3|max:24',
             'subject' => 'required|min:3|max:30',
             'review' => 'required|min:3|max:600',
             'email' => 'required|email|min:6|max:27'
         ];
     }
-//-------------Изменение одного поля errors---------------
+
+    //-------------Изменение одного поля errors---------------
 
     /*    public function attributes()
         {
@@ -43,14 +45,14 @@ class ValidRequest extends FormRequest
             ];
         }*/
 
-//-------------Изменение вывода текста errors по условию---
+    //-------------Изменение вывода текста errors по условию---
 
     public function messages()
     {
         return [
             'name.required' => 'Вы не ввели Имя',
-            'name.min' => 'Вы не ввели менее 3 символов',
-            'name.max' => 'Вы не ввели более 25 символов',
+            'name.min' => 'Вы ввели менее 3 символов',
+            'name.max' => 'Вы ввели более 25 символов',
         ];
     }
 }

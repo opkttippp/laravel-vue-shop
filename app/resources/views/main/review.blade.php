@@ -19,6 +19,7 @@
             <a href="{{route('reviewOne', $r->id)}}" class="button btn btn-primary">Детальнее ...</a>
         </div>
     @endforeach
+    @include('inc.pagin')
 @endsection
 
 

@@ -16,7 +16,7 @@
                     <a class="nav-link" href={{ route('review') }}>Отзывы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ route('check') }}>Добавить</a>
+                    <a class="nav-link" href={{ route('posts') }}>Добавить</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"

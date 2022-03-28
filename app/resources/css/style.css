@@ -137,6 +137,13 @@ footer p {
     margin: 0;
     padding: 0;
 }
+
+.pag {
+    display: flex;
+    /*align-items: center;*/
+    justify-content: center;
+    text-decoration: none;
+}
 /*---------------Sidebar---------------*/
 
 .sidebar-nav {

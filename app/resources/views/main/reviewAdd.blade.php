@@ -28,15 +28,15 @@
         </form>
     </div>
 
-{{--    <h2>Отзывы</h2>--}}
+    {{--    <h2>Отзывы</h2>--}}
 
-{{--    @foreach($rev as $r)--}}
-{{--        <div class="alert alert-warning">--}}
-{{--            <h3>{{$r->name}}</h3>--}}
-{{--            <b>{{$r->subject}}</b>--}}
-{{--            <p>{{$r->review}}</p>--}}
-{{--            <p>{{$r->email}}</p>--}}
-{{--            <p>{{$r->created_at}}</p>--}}
-{{--        </div>--}}
-{{--    @endforeach--}}
+    {{--    @foreach($rev as $r)--}}
+    {{--        <div class="alert alert-warning">--}}
+    {{--            <h3>{{$r->name}}</h3>--}}
+    {{--            <b>{{$r->subject}}</b>--}}
+    {{--            <p>{{$r->review}}</p>--}}
+    {{--            <p>{{$r->email}}</p>--}}
+    {{--            <p>{{$r->created_at}}</p>--}}
+    {{--        </div>--}}
+    {{--    @endforeach--}}
 @endsection

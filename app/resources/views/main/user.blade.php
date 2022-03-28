@@ -10,8 +10,8 @@
 
     <?php
 
-        echo '<div style="color: #aacd4e">id :{{$id}}</div>';
-        echo '<div style="color: darkgreen">Hello -{{$name}}</div>';
+    echo '<div style="color: #aacd4e">id :{{$id}}</div>';
+    echo '<div style="color: darkgreen">Hello -{{$name}}</div>';
 
     ?>
 

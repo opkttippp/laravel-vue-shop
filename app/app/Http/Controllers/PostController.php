@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
-
 //-----------------использование базы данных без модели----------------------
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
         //-----------------использование базы данных без модели-----------------
         /*        $posts = DB::table('reviews')->where('id', '>', 2)->get();
@@ -92,7 +92,21 @@ class PostController extends Controller
                         dump($category->posts);
                     }
                 }*/
-        $posts = Post::get();
-        return view('posts.show', ['posts' => $posts]);
+
+        if ($request->isMethod('post')) {
+            $post = new Post();
+            $post->name = $request->input('name');
+            $post->subject = $request->input('subject');
+            $post->review = $request->input('review');
+            $post->email = $request->input('email');
+            $post->save();
+
+//            $posts = Post::get();
+            $posts = Post::paginate(3);
+//            $posts->withPath('/posts');
+            $a = $request->fullUrl();
+            return view('posts.show', compact('posts', 'a'));
+        }
+        return view('posts.form');
     }
 }

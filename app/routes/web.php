@@ -8,12 +8,9 @@ Route::get('/', [MainController::class, 'home'])->name('home');
 
 Route::get('/greeting', [MainController::class, 'green'])->name('green');
 
-//Route::get('/review/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
-//Route::post('/review/check', [MainController::class, 'check'])->name('check');
-
-
-Route::match(['get', 'post'], '/review/check', [MainController::class, 'check'])->name('check');
-
+//Route::match(['get', 'post'], '/review/check', [MainController::class, 'check'])->name('check');
+Route::get('/review/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
+Route::post('/review/check', [MainController::class, 'check'])->name('check');
 
 Route::get('/review', [MainController::class, 'review'])->name('review');
 
@@ -86,4 +83,6 @@ Route::match('get', '/city/{name?}', function ($name = 'Minsk') {
 @endunless*/
 //{{--Coment--}}
 
-Route::get('/posts', [PostController::class, 'show']);
+//Route::get('/posts', [PostController::class, 'show']);
+
+Route::match(['post','get'], '/posts', [PostController::class, 'show'])->name('posts');
