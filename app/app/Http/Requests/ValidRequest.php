@@ -27,7 +27,7 @@ class ValidRequest extends FormRequest
     public static function rules()
     {
         return [
-            'name' => 'required|alpha|min:3|max:24',
+            'name' => 'required|regex:/[a-zA-Z0-9\s]+/|min:3|max:24',
             'subject' => 'required|min:3|max:30',
             'review' => 'required|min:3|max:600',
             'email' => 'required|email|min:6|max:27'

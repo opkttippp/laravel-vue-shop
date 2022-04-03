@@ -9,20 +9,20 @@
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name" value="{{ old('name') }}">
             </div>
             <div class="mb-3">
                 <label for="subject" class="form-label">Subject</label>
-                <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter subject">
+                <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter subject" value="{{ old('subject') }}">
             </div>
             <div class="mb-3">
                 <label for="review" class="form-label">Review</label>
                 <p><textarea class="form-control" type="text" id="review" name="review"
-                             placeholder="Нипишите что-нибудь"></textarea></p>
+                             placeholder="Нипишите что-нибудь">{{ old('review') }}</textarea></p>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your E-mail">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your E-mail" value="{{ old('email') }}">
             </div>
             <button type="submit" class="btn btn-success">Submit</button>
         </form>

@@ -1,31 +1,30 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
-Route::get('/', [MainController::class, 'home'])->name('home');
+Auth::routes();
+Route::get('/logout', [LoginController::class, 'logout']);
 
+
+Route::get('/', [MainController::class, 'home'])->name('home');
 Route::get('/greeting', [MainController::class, 'green'])->name('green');
 
-//Route::match(['get', 'post'], '/review/check', [MainController::class, 'check'])->name('check');
-Route::get('/review/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
-Route::post('/review/check', [MainController::class, 'check'])->name('check');
+Route::prefix('review')->group(function () {
+    Route::get('/', [MainController::class, 'review'])->name('review');
+    Route::get('/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
+    Route::post('/check', [MainController::class, 'check'])->name('check');
+    Route::get('/{id}', [MainController::class, 'reviewOne'])->name('reviewOne');
+    Route::get('/{id}/update', [MainController::class, 'reviewOneUpdate'])->name('reviewOneUpdate');
+    Route::post('/{id}/update', [MainController::class, 'reviewUpdate'])->name('reviewUpdate');
+    Route::get('/{id}/delete', [MainController::class, 'reviewOneDelete'])->name('reviewOneDelete');
+});
 
-Route::get('/review', [MainController::class, 'review'])->name('review');
-
-Route::get('/review/{id}', [MainController::class, 'reviewOne'])->name(
-    'reviewOne'
-);
-
-Route::get('/review/{id}/update', [MainController::class, 'reviewOneUpdate'])
-    ->name('reviewOneUpdate');
-
-Route::post('/review/{id}/update', [MainController::class, 'reviewUpdate'])
-    ->name('reviewUpdate');
-
-Route::get('/review/{id}/delete', [MainController::class, 'reviewOneDelete'])
-    ->name('reviewOneDelete');
+Route::fallback(function () {
+    echo "<img src='images/404-desktop-not-found.jpg'>";
+});
 
 //-------------------------Route------------------------------------------------
 /*Route::get('/users', function () {
@@ -85,4 +84,14 @@ Route::match('get', '/city/{name?}', function ($name = 'Minsk') {
 
 //Route::get('/posts', [PostController::class, 'show']);
 
-Route::match(['post','get'], '/posts', [PostController::class, 'show'])->name('posts');
+Route::match(['post', 'get'], '/posts', [PostController::class, 'show'])->name(
+    'posts'
+);
+
+
+Route::get('/post/show1', [PostController::class, 'show1'])->name('show1');
+Route::get('/post/show2', [PostController::class, 'show2'])->name('show2');
+
+
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

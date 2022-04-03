@@ -31,15 +31,37 @@
 
                 </li>
             </ul>
-
-            <div class="reg_auth">
-                <a href="#" class="btn btn-secondary">
-                    Войти
-                </a>
-                <a href="#" class="btn btn-secondary">
-                    Регистрация
-                </a>
-            </div>
+            {{----------------------------------------------------------------------------------------------}}
+            @auth
+                <div class="reg_auth">
+                        <a href='#'>
+                            <img src='/images/user.jpg' width='20' height='20' alt='user'>
+                        </a>
+                        <a href="#">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <a href="{{ route('logout') }}"
+                            {{--                       onclick="event.preventDefault();--}}
+                            {{--                       document.getElementById('logout-form').submit();"--}}
+                        >
+                            Выход
+                        </a>
+                    {{--                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
+                    {{--                        @csrf--}}
+                    {{--                        <input type="submit" value="Выход">--}}
+                    {{--                    </form>--}}
+                </div>
+            @endauth
+            @guest
+                <div class="reg_auth">
+                    <a href="{{ route('login') }}" class="btn btn-secondary">
+                        Войти
+                    </a>
+                    <a href="{{ route('register') }}" class="btn btn-secondary">
+                        Регистрация
+                    </a>
+                </div>
+            @endguest
 
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

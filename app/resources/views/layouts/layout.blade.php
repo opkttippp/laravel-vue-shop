@@ -5,10 +5,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title')</title>
-    <link rel="icon" href="/images/favicone/favic.ico" type="image/x-icon">
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title')</title>
+    <!-- Fonts -->
+    <link rel="icon" href="/images/favicone/favic.ico" type="image/x-icon">
+    <!-- Styles -->
     <link href={{ asset('css/style.css') }} rel="stylesheet" type="text/css">
+    <!-- Scripts -->
     <script src={{ asset('js/style.js') }}></script>
 
 </head>
@@ -19,6 +24,11 @@
 <main>
     <section>
         @include('inc.message')
+        @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
+            </div>
+        @endif
         @yield('main_content')
     </section>
     <aside>
