@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
@@ -25,8 +26,12 @@ Route::prefix('review')->group(function () {
 Route::fallback(function () {
     echo "<img src='images/404-desktop-not-found.jpg'>";
 });
+//-------------------------email confirm-------------------------------------
+
+Route::get('/verify/{token}', [RegisterController::class, 'verify'])->name('register.verify');
 
 //-------------------------Route------------------------------------------------
+
 /*Route::get('/users', function () {
     return view('users', ['user' => 'hello!!']);
 });
