@@ -10,6 +10,7 @@ services:
     tty: true
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
       - ./:/var/www/larav.local

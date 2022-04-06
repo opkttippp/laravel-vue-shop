@@ -23,7 +23,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::LOGIN;
+    protected $redirectTo = RouteServiceProvider::HOME;
 //    protected function redirectTo()
 //    {
 //        if (auth()->user()->role_id == 1) {
@@ -104,8 +104,8 @@ class RegisterController extends Controller
         $user->save();
         $this->guard()->login($user);
 
-        return redirect()->route('login')
-            ->with('success', 'Your e-mail is verified. You can now login.');
+        return redirect()->route('home')
+            ->with('success', 'Your e-mail is verified! Welcome!!');
     }
     //-----------------------------------------------------------------------
 }

@@ -64,6 +64,16 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="flex items-center justify-end mt-4">
+                            <a class="btn" href="{{ url('api/redirect/github') }}" title="GitHub" style="background: #313131; color: #ffffff; padding: 10px; width: 100%; text-align: center; display: block; border-radius:3px;">
+                                Login with GitHub
+                            </a>
+                        </div>
+                        <div class="flex items-center justify-end mt-4">
+                            <a class="btn" href="{{ url('api/redirect/facebook') }}" title="Facebook" style="background: #313131; color: #ffffff; padding: 10px; width: 100%; text-align: center; display: block; border-radius:3px;">
+                                Login with Facebook
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PostController;
@@ -14,7 +15,8 @@ Route::get('/', [MainController::class, 'home'])->name('home');
 Route::get('/greeting', [MainController::class, 'green'])->name('green');
 
 Route::prefix('review')->group(function () {
-    Route::get('/', [MainController::class, 'review'])->name('review');
+    Route::get('/', [MainController::class, 'review'])->name('review')->middleware('auth');
+    ;
     Route::get('/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
     Route::post('/check', [MainController::class, 'check'])->name('check');
     Route::get('/{id}', [MainController::class, 'reviewOne'])->name('reviewOne');
@@ -26,11 +28,19 @@ Route::prefix('review')->group(function () {
 Route::fallback(function () {
     echo "<img src='images/404-desktop-not-found.jpg'>";
 });
+
 //-------------------------email confirm-------------------------------------
-
 Route::get('/verify/{token}', [RegisterController::class, 'verify'])->name('register.verify');
+//-------------------------авторизация через соцсети-------------------------
+Route::group(['middleware' => ['web']], function ($api) {
+    Route::get('api/redirect/{service}', [SocialAuthController::class, 'redirectToProvider']);
+    Route::get('api/callback/{service}', [SocialAuthController::class, 'handleProviderCallback']);
+});
+//Route::get('auth/github', [GitHubController::class, 'gitRedirect']);
+//Route::get('auth/github/callback', [GitHubController::class, 'gitCallback']);
+//---------------------------------Route-------------------------------------
 
-//-------------------------Route------------------------------------------------
+
 
 /*Route::get('/users', function () {
     return view('users', ['user' => 'hello!!']);

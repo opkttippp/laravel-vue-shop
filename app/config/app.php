@@ -172,7 +172,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-
+//----------------авторизация через соцсети------------------------------
+        Laravel\Socialite\SocialiteServiceProvider::class,
+//-----------------------------------------------------------------------
         /*
          * Package Service Providers...
          */
@@ -200,7 +202,12 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+//----------------авторизация через соцсети------------------------------
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+//-----------------------------------------------------------------------
     ])->toArray(),
+
+
+
 
 ];

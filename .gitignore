@@ -14,3 +14,4 @@
 .vscode
 .php-cs-fixer.cache
 /.idea/
+/docker/mysql/data/
