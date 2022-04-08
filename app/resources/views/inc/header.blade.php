@@ -27,42 +27,41 @@
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
-                <li>
-
-                </li>
             </ul>
             {{----------------------------------------------------------------------------------------------}}
-            @auth
+            @if(Auth::guard('admin')->check())
                 <div class="reg_auth">
+                    <a href='#'>
+                        <img src='/images/user.jpg' width='20' height='20' alt='user'>
+                    </a>
+                    <a href="#">
+                        admin
+                    </a>
+                    <a href="{{ url('/admin/logout') }}">Выход</a>
+                </div>
+            @else
+                @auth
+                    <div class="reg_auth">
                         <a href='#'>
                             <img src='/images/user.jpg' width='20' height='20' alt='user'>
                         </a>
                         <a href="#">
                             {{ Auth::user()->name }}
                         </a>
-                        <a href="{{ route('logout') }}"
-                            {{--                       onclick="event.preventDefault();--}}
-                            {{--                       document.getElementById('logout-form').submit();"--}}
-                        >
-                            Выход
+                        <a href="{{ route('logout') }}">Выход</a>
+                    </div>
+                @endauth
+                @guest
+                    <div class="reg_auth">
+                        <a href="{{ route('login') }}" class="btn btn-secondary">
+                            Войти
                         </a>
-                    {{--                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
-                    {{--                        @csrf--}}
-                    {{--                        <input type="submit" value="Выход">--}}
-                    {{--                    </form>--}}
-                </div>
-            @endauth
-            @guest
-                <div class="reg_auth">
-                    <a href="{{ route('login') }}" class="btn btn-secondary">
-                        Войти
-                    </a>
-                    <a href="{{ route('register') }}" class="btn btn-secondary">
-                        Регистрация
-                    </a>
-                </div>
-            @endguest
-
+                        <a href="{{ route('register') }}" class="btn btn-secondary">
+                            Регистрация
+                        </a>
+                    </div>
+                @endguest
+            @endif
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>

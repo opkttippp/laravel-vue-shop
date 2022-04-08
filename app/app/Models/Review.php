@@ -34,4 +34,5 @@ use Illuminate\Http\Request;
 class Review extends Model
 {
     use HasFactory;
+
 }

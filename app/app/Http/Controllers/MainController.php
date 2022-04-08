@@ -4,21 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValidRequest;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
-
-    public function home()
+    public function home(Request $request)
     {
         return view('main.home', [
             'title' => 'home',
-            'text' => 'home'
+            'text' => 'home',
+            'request' => $request
         ]);
     }
 
@@ -29,9 +25,6 @@ class MainController extends Controller
 
     public function reviewAdd()
     {
-        /*        new Review();
-                return view('review', ['rev' => $view->all()]);
-        */
         return view('main.reviewAdd');
     }
 

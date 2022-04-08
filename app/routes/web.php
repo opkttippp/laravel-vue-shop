@@ -6,6 +6,18 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\AuthAdmin\AdminController;
+use App\Http\Controllers\AuthAdmin\LogAdminController;
+
+
+
+Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/admin/login', [LogAdminController::class,'showLoginForm']);
+Route::post('/admin/login', [LogAdminController::class,'Login']);
+Route::get('/admin/logout', [LogAdminController::class, 'logout']);
+
+
+
 
 Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout']);
@@ -15,11 +27,14 @@ Route::get('/', [MainController::class, 'home'])->name('home');
 Route::get('/greeting', [MainController::class, 'green'])->name('green');
 
 Route::prefix('review')->group(function () {
-    Route::get('/', [MainController::class, 'review'])->name('review')->middleware('auth');
+    Route::get('/', [MainController::class, 'review'])->name('review');
+//    Route::get('/', [MainController::class, 'review'])->name('review')->middleware('auth');
     ;
     Route::get('/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
     Route::post('/check', [MainController::class, 'check'])->name('check');
     Route::get('/{id}', [MainController::class, 'reviewOne'])->name('reviewOne');
+//    Route::get('/{id}', [MainController::class, 'reviewOne'])->name('reviewOne')->middleware(['password.confirm']);
+    ;
     Route::get('/{id}/update', [MainController::class, 'reviewOneUpdate'])->name('reviewOneUpdate');
     Route::post('/{id}/update', [MainController::class, 'reviewUpdate'])->name('reviewUpdate');
     Route::get('/{id}/delete', [MainController::class, 'reviewOneDelete'])->name('reviewOneDelete');
@@ -36,12 +51,7 @@ Route::group(['middleware' => ['web']], function ($api) {
     Route::get('api/redirect/{service}', [SocialAuthController::class, 'redirectToProvider']);
     Route::get('api/callback/{service}', [SocialAuthController::class, 'handleProviderCallback']);
 });
-//Route::get('auth/github', [GitHubController::class, 'gitRedirect']);
-//Route::get('auth/github/callback', [GitHubController::class, 'gitCallback']);
 //---------------------------------Route-------------------------------------
-
-
-
 /*Route::get('/users', function () {
     return view('users', ['user' => 'hello!!']);
 });
