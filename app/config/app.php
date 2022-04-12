@@ -174,6 +174,8 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 //----------------авторизация через соцсети------------------------------
         Laravel\Socialite\SocialiteServiceProvider::class,
+//----------------------Spatie permission and role-----------------------
+        Spatie\Permission\PermissionServiceProvider::class,
 //-----------------------------------------------------------------------
         /*
          * Package Service Providers...

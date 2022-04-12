@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\Auth\VerifyMail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -72,8 +74,19 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'verify_token' => Str::random(),
-            'status' => User::STATUS_INACTIVE,
+            'status' => User::STATUS_ACTIVE,
         ]);
+
+        //----------------------------создание роли user---------------
+//        $role = Role::create([
+//            'name' => 'user',
+//            'created_at' => Carbon::now(),
+//            'updated_at' => Carbon::now(),
+//        ]);
+        //----------------------------назначение роли user-------------
+//        $user->assignRole($role);
+        $user->assignRole('user');
+        //----------------------------------------------------------
 
         Mail::to($user->email)->send(new VerifyMail($user));
 
@@ -83,7 +96,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-        event(new Registered($user = $this->create($request->all())));
+        event(new Registered($this->create($request->all())));
 
         return redirect()->route('login')
             ->with(

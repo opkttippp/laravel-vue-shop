@@ -4,9 +4,16 @@ use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
+
+
+
+//--------------------------------Roles--------------------------------------
+Route::get('/admin/index', [RoleController::class, 'index']);
+//----------------------------------------------------------------------
 Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout']);
 
@@ -15,7 +22,8 @@ Route::get('/', [MainController::class, 'home'])->name('home');
 Route::get('/greeting', [MainController::class, 'green'])->name('green');
 
 Route::prefix('review')->group(function () {
-    Route::get('/', [MainController::class, 'review'])->name('review')->middleware('auth');
+//    Route::get('/', [MainController::class, 'review'])->name('review')->middleware('auth');
+    Route::get('/', [MainController::class, 'review'])->name('review');
     ;
     Route::get('/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
     Route::post('/check', [MainController::class, 'check'])->name('check');
@@ -102,11 +110,7 @@ Route::match('get', '/city/{name?}', function ($name = 'Minsk') {
 Route::match(['post', 'get'], '/posts', [PostController::class, 'show'])->name(
     'posts'
 );
-
-
 Route::get('/post/show1', [PostController::class, 'show1'])->name('show1');
 Route::get('/post/show2', [PostController::class, 'show2'])->name('show2');
-
-
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

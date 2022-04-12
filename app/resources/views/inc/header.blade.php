@@ -16,7 +16,7 @@
                     <a class="nav-link" href={{ route('review') }}>Отзывы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href={{ route('posts') }}>Добавить</a>
+                    <a class="nav-link" href={{ route('reviewAdd') }}>Добавить</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
@@ -32,36 +32,40 @@
                 </li>
             </ul>
             {{----------------------------------------------------------------------------------------------}}
-            @auth
-                <div class="reg_auth">
+            @role('admin')
+            <div class="reg_auth">
+                <a href="{{ url('/admin/index') }}">Roles</a>
+                <a href="#">
+                    admin
+                </a>
+                <a href="{{ route('logout') }}">Выход</a>
+            </div>
+            @endrole
+            @role('user')
+{{--            @else--}}
+{{--                @auth--}}
+                    <div class="reg_auth">
                         <a href='#'>
                             <img src='/images/user.jpg' width='20' height='20' alt='user'>
                         </a>
                         <a href="#">
                             {{ Auth::user()->name }}
                         </a>
-                        <a href="{{ route('logout') }}"
-                            {{--                       onclick="event.preventDefault();--}}
-                            {{--                       document.getElementById('logout-form').submit();"--}}
-                        >
-                            Выход
+                        <a href="{{ route('logout') }}">Выход</a>
+                    </div>
+{{--                @endauth--}}
+            @endrole
+                @guest
+                    <div class="reg_auth">
+                        <a href="{{ route('login') }}" class="btn btn-secondary">
+                            Войти
                         </a>
-                    {{--                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
-                    {{--                        @csrf--}}
-                    {{--                        <input type="submit" value="Выход">--}}
-                    {{--                    </form>--}}
-                </div>
-            @endauth
-            @guest
-                <div class="reg_auth">
-                    <a href="{{ route('login') }}" class="btn btn-secondary">
-                        Войти
-                    </a>
-                    <a href="{{ route('register') }}" class="btn btn-secondary">
-                        Регистрация
-                    </a>
-                </div>
-            @endguest
+                        <a href="{{ route('register') }}" class="btn btn-secondary">
+                            Регистрация
+                        </a>
+                    </div>
+                @endguest
+
 
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

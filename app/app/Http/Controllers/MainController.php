@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
 
     public function home()
     {
