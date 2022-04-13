@@ -32,41 +32,45 @@
                 </li>
             </ul>
             {{----------------------------------------------------------------------------------------------}}
+
             @role('admin')
             <div class="reg_auth">
-                <a href="{{ url('/admin/index') }}">Roles</a>
-                <a href="#">
-                    admin
-                </a>
+                <a href="{{ url('/admin/users') }}">Users</a>
+                <a href="{{ url('/admin/roles') }}">Roles</a>
+                <a href="#">admin</a>
+                <a href="{{ route('logout') }}">Выход</a>
+            </div>
+            @endrole
+            @role('manager')
+            <div class="reg_auth">
+                <a href="{{ url('/admin/roles') }}">Roles</a>
+                <a href="#">manager</a>
                 <a href="{{ route('logout') }}">Выход</a>
             </div>
             @endrole
             @role('user')
-{{--            @else--}}
-{{--                @auth--}}
-                    <div class="reg_auth">
-                        <a href='#'>
-                            <img src='/images/user.jpg' width='20' height='20' alt='user'>
-                        </a>
-                        <a href="#">
-                            {{ Auth::user()->name }}
-                        </a>
-                        <a href="{{ route('logout') }}">Выход</a>
-                    </div>
-{{--                @endauth--}}
+            {{--@auth()--}}
+            <div class="reg_auth">
+                <a href='#'>
+                    <img src='/images/user.jpg' width='20' height='20' alt='user'>
+                </a>
+                <a href="#">
+                    {{ Auth::user()->name }}
+                </a>
+                <a href="{{ route('logout') }}">Выход</a>
+            </div>
+            {{--@endauth--}}
             @endrole
-                @guest
-                    <div class="reg_auth">
-                        <a href="{{ route('login') }}" class="btn btn-secondary">
-                            Войти
-                        </a>
-                        <a href="{{ route('register') }}" class="btn btn-secondary">
-                            Регистрация
-                        </a>
-                    </div>
-                @endguest
-
-
+            @guest
+                <div class="reg_auth">
+                    <a href="{{ route('login') }}" class="btn btn-secondary">
+                        Войти
+                    </a>
+                    <a href="{{ route('register') }}" class="btn btn-secondary">
+                        Регистрация
+                    </a>
+                </div>
+            @endguest
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>

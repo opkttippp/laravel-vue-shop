@@ -131,11 +131,15 @@ footer p {
 
 .pag {
     display: flex;
-    /*align-items: center;*/
     justify-content: center;
     text-decoration: none;
 }
-/*---------------Sidebar---------------*/
+
+.roles {
+    margin-left: 30%;
+    /*text-align: center;*/
+}
+    /*---------------Sidebar---------------*/
 
 .sidebar-nav {
     position: fixed;
@@ -164,6 +168,7 @@ footer p {
 }
 
 /*--------------changing size-----------------*/
+
 @media screen and (min-width: 600px) {
     body {
         min-height: 100vh;

@@ -3,43 +3,82 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
     public function index()
     {
-        $roles = Role::orderBy('name')->get();
+//        $roles = Role::orderBy('id')->where('name', '!=', 'admin')->get();
+        $roles = Role::orderBy('id')->get();
         return view('roles.index', compact('roles'));
     }
 
     public function create()
     {
-        //
+        $permissions = Permission::OrderBy('id')->get();
+        return view('roles.create', compact('permissions'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|max:25',
+            'permissions' => 'required',
+            'permissions.*' => 'required|integer|exists:permissions,id'
+        ]);
+//        $role = Role::where('name', '!=', 'admin')->findOrFail($id);
+        $role = Role::find($id);
+        $role->update([
+            'name' => $request->name,
+        ]);
+
+        $permissions = Permission::whereIn('id', $request->permissions)->get();
+        $role->syncPermissions($permissions);
+
+        return redirect()->back()->with(
+            'success',
+            'Permissions updated!!'
+        );
     }
 
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:25',
+            'permissions' => 'required',
+            'permissions.*' => 'required|integer|exists:permissions,id'
+        ]);
+
+        $newRole = Role::create([
+            'name' => $request->name,
+        ]);
+
+        $permissions = Permission::whereIn('id', $request->permissions)->get();
+        $newRole->syncPermissions($permissions);
+
+        return redirect()->back()->with(
+            'success',
+            'Permissions created!!'
+        );
     }
 
-    public function show(Role $role)
+    public function edit($id)
     {
-        //
+        $role = Role::find($id);
+//        $role = Role::where('name', '!=', 'admin')->findOrFail($id);
+
+        $permissions = Permission::OrderBy('id')->get();
+        return view('roles.edit', compact(['permissions', 'role',]));
     }
 
-    public function edit(Role $role)
+    public function destroy($id)
     {
-        //
-    }
-
-    public function update(Request $request, Role $role)
-    {
-        //
-    }
-
-    public function destroy(Role $role)
-    {
-        //
+        Role::find($id)->delete();
+        return redirect()->back()->with(
+            'success',
+            'Уснешное удаление'
+        );
     }
 }

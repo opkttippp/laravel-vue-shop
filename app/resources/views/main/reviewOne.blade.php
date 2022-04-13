@@ -16,7 +16,11 @@
         @else
             <p>{{$rev->created_at}}</p>
         @endif
-        <p><a href="{{route('reviewOneUpdate', $rev->id)}}" class="button btn btn-primary">Редактировать</a></p>
-        <p><a href="{{route('reviewOneDelete', $rev->id)}}" class="button btn btn-danger">Удалить</a></p>
+        @if(auth()->user()->can('edit post'))
+            <p><a href="{{route('reviewOneUpdate', $rev->id)}}" class="button btn btn-primary">Редактировать</a></p>
+        @endif
+        @if(auth()->user()->can('delete post'))
+            <p><a href="{{route('reviewOneDelete', $rev->id)}}" class="button btn btn-danger">Удалить</a></p>
+        @endif
     </div>
 @endsection

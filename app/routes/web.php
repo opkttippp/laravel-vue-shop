@@ -5,15 +5,33 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
-
-
-
 //--------------------------------Roles--------------------------------------
-Route::get('/admin/index', [RoleController::class, 'index']);
-//----------------------------------------------------------------------
+
+    Route::prefix('/admin/roles')->group(function () {
+        Route::get('/', [RoleController::class, 'index'])->middleware('can:show post');
+        Route::get('/create', [RoleController::class, 'create'])->name('rolesCreate')->middleware('can:add post');
+        Route::post('/create', [RoleController::class, 'store'])->name('rolesStore')->middleware('can:add post');
+        Route::get('/update/{id}', [RoleController::class, 'edit'])->name('rolesEdit')->middleware('can:edit post');
+        Route::post('/update/{id}', [RoleController::class, 'update'])->name('rolesUpdate')->middleware('can:edit post');
+        Route::get('/delete/{id}', [RoleController::class, 'destroy'])->middleware('can:delete post');
+    });
+
+//--------------------------------Users--------------------------------------
+Route::middleware(['role:admin'])->prefix('/admin/users')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->middleware('can:show post');
+//    Route::get('/create', [UserController::class, 'create'])->name('rolesCreate')->middleware('can:add post');
+//    Route::post('/create', [UserController::class, 'store'])->name('rolesStore')->middleware('can:add post');
+    Route::get('/update/{id}', [UserController::class, 'edit'])->name('usersEdit')->middleware('can:edit post');
+    Route::post('/update/{id}', [UserController::class, 'update'])->name('usersUpdate')->middleware('can:edit post');
+    Route::get('/delete/{id}', [UserController::class, 'destroy'])->middleware('can:delete post');
+    });
+//Route::resource('admin', RoleController::class)->middleware('role:admin');
+//------------------------------------------------------------------------
+
 Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout']);
 
@@ -22,14 +40,14 @@ Route::get('/', [MainController::class, 'home'])->name('home');
 Route::get('/greeting', [MainController::class, 'green'])->name('green');
 
 Route::prefix('review')->group(function () {
-//    Route::get('/', [MainController::class, 'review'])->name('review')->middleware('auth');
-    Route::get('/', [MainController::class, 'review'])->name('review');
+    Route::get('/', [MainController::class, 'review'])->name('review')->middleware('auth');
+//    Route::get('/', [MainController::class, 'review'])->name('review');
     ;
     Route::get('/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
     Route::post('/check', [MainController::class, 'check'])->name('check');
     Route::get('/{id}', [MainController::class, 'reviewOne'])->name('reviewOne');
-    Route::get('/{id}/update', [MainController::class, 'reviewOneUpdate'])->name('reviewOneUpdate');
-    Route::post('/{id}/update', [MainController::class, 'reviewUpdate'])->name('reviewUpdate');
+    Route::get('/{id}/update', [MainController::class, 'reviewOneUpdate'])->name('reviewOneUpdate')->middleware('can:edit post');
+    Route::post('/{id}/update', [MainController::class, 'reviewUpdate'])->name('reviewUpdate')->middleware('can:edit post');
     Route::get('/{id}/delete', [MainController::class, 'reviewOneDelete'])->name('reviewOneDelete');
 });
 
