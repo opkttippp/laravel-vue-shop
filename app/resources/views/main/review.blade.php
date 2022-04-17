@@ -6,17 +6,22 @@
 
 @section('main_content')
     @foreach($rev as $r)
-        <div class="alert alert-info">
+        <div class="review">
             <h3>{{$r->name}}</h3>
-            <b>{{$r->subject}}</b>
-            <p>{{$r->review}}</p>
-            <p>{{$r->email}}</p>
+            <hr>
+            <b>subject - {{$r->subject}}</b>
+            <hr>
+            <p>review -{{$r->review}}</p>
+            <hr>
+            <p>email - {{$r->email}}
             @if(isset($r->updated_at))
-                <p>{{$r->updated_at}}</p>
+                {{$r->updated_at}}
             @else
-                <p>{{$r->created_at}}</p>
+                {{$r->created_at}}
             @endif
-            <a href="{{route('reviewOne', $r->id)}}" class="button btn btn-primary">Детальнее ...</a>
+            </p>
+            <a href="{{route('reviewOne', $r->id)}}" class="button btn btn-primary">More ...</a>
+
         </div>
     @endforeach
     @include('inc.pagin')

@@ -7,7 +7,7 @@
 @section('main_content')
     {{--    <p><a href="{{route('usersCreate')}}" class="button btn btn-success roles">Create</a></p>--}}
     @foreach($users as $user)
-        <div class="message alert alert-primary roles" role="alert" style="width: 40%">
+        <div class="roles">
             <h3>User: {{$user->id}}{{' - '}}{{$user->name}}</h3>
             {{--            <p>{{$user->created_at}}</p>--}}
             <p>Role:
@@ -25,10 +25,10 @@
             {{--                </div>--}}
             {{--            @endforeach--}}
             @if(auth()->user()->can('edit post'))
-                <p><a href="{{route('usersEdit', $user->id)}}" class="button btn btn-primary">Edit</a>
+                <a href="{{route('usersEdit', $user->id)}}" class="btn btn-primary">Edit</a>
             @endif
             @if(auth()->user()->can('delete post'))
-                <a href="{{url('/admin/users/delete', $user->id)}}" class="button btn btn-danger">Delete</a></p>
+                <a href="{{url('/admin/users/delete', $user->id)}}" class="btn btn-danger">Delete</a>
             @endif
         </div>
     @endforeach

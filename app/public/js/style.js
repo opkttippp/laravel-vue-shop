@@ -5171,10 +5171,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // ------
 
 
 
- // import "admin-lte/plugins/moment/moment.min.js";
 
-
- // import "admin-lte/plugins/summernote/summernote-bs4.min.js";
 
 
 

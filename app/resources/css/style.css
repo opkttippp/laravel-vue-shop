@@ -1,5 +1,12 @@
-@import "admin-lte/dist/css/adminlte.min.css";
 @import "bootstrap/dist/css/bootstrap.css";
+@import "admin-lte/plugins/fontawesome-free/css/all.min.css";
+@import "admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css";
+@import "admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css";
+@import "admin-lte/plugins/jqvmap/jqvmap.min.css";
+@import "admin-lte/dist/css/adminlte.min.css";
+@import "admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css";
+@import "admin-lte/plugins/daterangepicker/daterangepicker.css";
+@import "admin-lte/plugins/summernote/summernote-bs4.min.css";
 
 html,
 body {
@@ -14,49 +21,44 @@ body {
 body {
     color: #fff;
     font-size: 1.1em;
-    /*padding: 1em;*/
-    display: flex;
-    flex-direction: column;
 }
 
 main {
     display: flex;
+    flex-direction: row;
+    margin-top: 6%;
+    max-height: 60%;
     /*border: red 1px solid;*/
+    padding-bottom: 35px;
 }
 
 section {
-    padding: 7% 0;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1% auto;
     width: 80%;
 }
 
 section h2 {
     text-align: center;
-    padding: 10px;
     color: #b3b7bb;
 }
 
 aside {
-    flex: 1;
     background-color: #37474f;
     background-attachment: fixed;
-    margin-top: 5%;
-    order: -1;
-    max-width: 220px;
+    width: 18%;
+    min-height: 600px;
+    /*border: red 1px solid;*/
 }
 
 .header, .footer {
     display: flex;
-    margin-top: 25px;
-    background-color: rgb(47, 58, 68);
-    height: 8%;
-    align-items: center;
-    justify-content: center;
-}
-
-.footer {
-    display: flex;
-    background-color: rgb(47, 58, 68);
+    margin-top: 2%;
+    padding: 0;
+    /*background-color: rgb(47, 58, 68);*/
+    background-color: rgb(33, 36, 41);
     height: 8%;
     align-items: center;
     justify-content: center;
@@ -69,7 +71,6 @@ footer p {
 .form-review {
     text-align: center;
     width: 50%;
-    margin-left: 25%;
     background-color: #4a5568;
     border-radius: 2%;
     padding: 10px;
@@ -79,6 +80,15 @@ footer p {
 .form-review textarea {
     width: 420px;
     margin: auto;
+}
+
+.review {
+    background-color: rgb(0, 184, 131);
+    color: #4a5568;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 77%;
 }
 
 .green {
@@ -105,9 +115,11 @@ footer p {
 .top {
     position: fixed;
     display: flex;
-    margin-top: 0;
-    z-index: 1000;
-    height: 25px;
+    flex-direction: row;
+    height: 4%;
+    margin: 0;
+    padding: 0;
+    /*z-index: 1000;*/
     width: 100%;
     background-color: rgb(47, 58, 68);
 }
@@ -127,11 +139,6 @@ footer p {
     cursor: pointer;
 }
 
-.message {
-    margin: 0;
-    padding: 0;
-}
-
 .pag {
     display: flex;
     justify-content: center;
@@ -139,17 +146,38 @@ footer p {
 }
 
 .roles {
-    margin-left: 30%;
-    /*text-align: center;*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+    background-color: #4a5568;
+    text-align: center;
 }
-    /*---------------Sidebar---------------*/
+
+.create {
+    width: 90px;
+}
+
+.form-roles {
+    background-color: #4a5568;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 45%;
+}
+
+/*---------------Sidebar---------------*/
 
 .sidebar-nav {
     position: fixed;
-    padding: 10% 0 0 0;
+    padding: 5% 0;
     list-style: none;
     font-size: 18px;
     line-height: 60px;
+    width: 18%;
 }
 
 .sidebar-nav li {
@@ -164,7 +192,7 @@ footer p {
 }
 
 .sidebar-nav li a:hover {
-    min-width: 220px;
+    width: 100%;
     text-decoration: none;
     color: #fff;
     background-color: #10707f;

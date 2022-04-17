@@ -5,7 +5,7 @@
 @endsection
 
 @section('main_content')
-<div class="message alert alert-primary roles" role="alert" style="width: 40%">
+<div class="form-roles">
         <p><a href="{{url('/admin/roles')}}" class="button btn btn-success">Return</a></p>
         <form method="post" action="{{route('rolesStore')}}">
             @csrf

@@ -22,6 +22,9 @@
     @include('inc.header')
 </header>
 <main>
+    <aside>
+        @include('inc.aside')
+    </aside>
     <section>
         @include('inc.message')
         @if (session('status'))
@@ -31,9 +34,6 @@
         @endif
         @yield('main_content')
     </section>
-    <aside>
-        @include('inc.aside')
-    </aside>
 </main>
 <footer class="footer mt-auto text-white-50 fixed-bottom bg-dark">
     @include('inc.footer')
