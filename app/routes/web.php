@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\SocialAuthController;
+use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PostController;
@@ -9,29 +10,34 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
-//--------------------------------Roles--------------------------------------
+    //--------------------------------Roles--------------------------------------
 
-    Route::prefix('/admin/roles')->group(function () {
-        Route::get('/', [RoleController::class, 'index'])->middleware('can:show post');
-        Route::get('/create', [RoleController::class, 'create'])->name('rolesCreate')->middleware('can:add post');
-        Route::post('/create', [RoleController::class, 'store'])->name('rolesStore')->middleware('can:add post');
-        Route::get('/update/{id}', [RoleController::class, 'edit'])->name('rolesEdit')->middleware('can:edit post');
-        Route::post('/update/{id}', [RoleController::class, 'update'])->name('rolesUpdate')->middleware('can:edit post');
-        Route::get('/delete/{id}', [RoleController::class, 'destroy'])->middleware('can:delete post');
-    });
+Route::prefix('/admin/roles')->group(function () {
+    Route::get('/', [RoleController::class, 'index'])->middleware('can:show post');
+    Route::get('/create', [RoleController::class, 'create'])->name('rolesCreate')->middleware('can:add post');
+    Route::post('/create', [RoleController::class, 'store'])->name('rolesStore')->middleware('can:add post');
+    Route::get('/update/{id}', [RoleController::class, 'edit'])->name('rolesEdit')->middleware('can:edit post');
+    Route::post('/update/{id}', [RoleController::class, 'update'])->name('rolesUpdate')->middleware('can:edit post');
+    Route::get('/delete/{id}', [RoleController::class, 'destroy'])->middleware('can:delete post');
+});
 
 //--------------------------------Users--------------------------------------
 Route::middleware(['role:admin'])->prefix('/admin/users')->group(function () {
     Route::get('/', [UserController::class, 'index'])->middleware('can:show post');
-//    Route::get('/create', [UserController::class, 'create'])->name('rolesCreate')->middleware('can:add post');
-//    Route::post('/create', [UserController::class, 'store'])->name('rolesStore')->middleware('can:add post');
+    //    Route::get('/create', [UserController::class, 'create'])->name('rolesCreate')->middleware('can:add post');
+    //    Route::post('/create', [UserController::class, 'store'])->name('rolesStore')->middleware('can:add post');
     Route::get('/update/{id}', [UserController::class, 'edit'])->name('usersEdit')->middleware('can:edit post');
     Route::post('/update/{id}', [UserController::class, 'update'])->name('usersUpdate')->middleware('can:edit post');
     Route::get('/delete/{id}', [UserController::class, 'destroy'])->middleware('can:delete post');
-    });
+});
 //Route::resource('admin', RoleController::class)->middleware('role:admin');
-//------------------------------------------------------------------------
 
+//---------------------------------Admin-LTE-----------------------------
+Route::middleware(['role:admin'])->prefix('/admin')->group(function () {
+    Route::get('/', [IndexController::class, 'index']);
+});
+
+//------------------------------------------------------------------------
 Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout']);
 
@@ -41,7 +47,7 @@ Route::get('/greeting', [MainController::class, 'green'])->name('green');
 
 Route::prefix('review')->group(function () {
     Route::get('/', [MainController::class, 'review'])->name('review')->middleware('auth');
-//    Route::get('/', [MainController::class, 'review'])->name('review');
+    //    Route::get('/', [MainController::class, 'review'])->name('review');
     ;
     Route::get('/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
     Route::post('/check', [MainController::class, 'check'])->name('check');
@@ -125,10 +131,10 @@ Route::match('get', '/city/{name?}', function ($name = 'Minsk') {
 
 //Route::get('/posts', [PostController::class, 'show']);
 
-Route::match(['post', 'get'], '/posts', [PostController::class, 'show'])->name(
-    'posts'
-);
-Route::get('/post/show1', [PostController::class, 'show1'])->name('show1');
-Route::get('/post/show2', [PostController::class, 'show2'])->name('show2');
+    Route::match(['post', 'get'], '/posts', [PostController::class, 'show'])->name(
+        'posts'
+    );
+    Route::get('/post/show1', [PostController::class, 'show1'])->name('show1');
+    Route::get('/post/show2', [PostController::class, 'show2'])->name('show2');
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -37,7 +37,7 @@
             <div class="reg_auth">
                 <a href="{{ url('/admin/users') }}">Users</a>
                 <a href="{{ url('/admin/roles') }}">Roles</a>
-                <a href="#">admin</a>
+                <a href={{url('/admin')}}>admin</a>
                 <a href="{{ route('logout') }}">Выход</a>
             </div>
             @endrole
