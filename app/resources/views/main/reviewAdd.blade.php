@@ -5,7 +5,7 @@
 @section('main_content')
     <h2>Добавить отзыв</h2>
     <div class="form-review">
-        <form method="post" action="{{route('check')}}">
+        <form method="post" action="{{route('check')}}" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -24,19 +24,12 @@
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter your E-mail" value="{{ old('email') }}">
             </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Download avatar</label>
+                <input type="file" class="form-control" id="image" name="image"
+                       placeholder="Download your avatar">
+            </div>
             <button type="submit" class="btn btn-success">Submit</button>
         </form>
     </div>
-
-    {{--    <h2>Отзывы</h2>--}}
-
-    {{--    @foreach($rev as $r)--}}
-    {{--        <div class="alert alert-warning">--}}
-    {{--            <h3>{{$r->name}}</h3>--}}
-    {{--            <b>{{$r->subject}}</b>--}}
-    {{--            <p>{{$r->review}}</p>--}}
-    {{--            <p>{{$r->email}}</p>--}}
-    {{--            <p>{{$r->created_at}}</p>--}}
-    {{--        </div>--}}
-    {{--    @endforeach--}}
 @endsection

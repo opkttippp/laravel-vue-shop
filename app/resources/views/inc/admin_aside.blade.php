@@ -1,17 +1,16 @@
 @section('admin_aside')
-    <div class="sidebar">
+    @role('admin')
+    <div class="sidebar-wrapper">
         <a href="index3.html" class="brand-link">
-            <img src="images/admin_img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            <img src="/images/admin_img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">Admin-panel</span>
         </a>
 
-        <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="images/admin_img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <img src="/images/admin_img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{Auth::user()->name}}</a>
@@ -55,17 +54,12 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/tables/data.html" class="nav-link">
+                                <a href="{{url('review')}}" class="nav-link">
                                     <p>All post</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/tables/data.html" class="nav-link">
-                                    <p>Edit post</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/tables/simple.html" class="nav-link">
+                                <a href="{{url('review/add')}}" class="nav-link">
                                     <p>New post</p>
                                 </a>
                             </li>
@@ -74,7 +68,8 @@
 
 
                     <li class="nav-item">
-                        <a href="pages/gallery.html" class="nav-link">
+                        <a href="{{ url('/admin/users') }}" class="nav-link">
+
                             <i class="nav-icon far fa-image"></i>
                             <p>
                                 Users
@@ -83,7 +78,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="pages/gallery.html" class="nav-link">
+                        <a href="{{ url('/admin/roles') }}" class="nav-link">
                             <i class="nav-icon far fa-image"></i>
                             <p>
                                 Rols
@@ -93,8 +88,23 @@
 
                 </ul>
             </nav>
-
             @show
-
         </div>
     </div>
+    @endrole
+    @role('manager')
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"><a href="#"> Start Bootstrap </a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Shortcuts</a></li>
+            <li><a href="#">Overview</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+            {{--            @include('inc.dateTime')--}}
+            @show
+        </ul>
+    </div>
+    @endrole

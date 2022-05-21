@@ -8,14 +8,30 @@
 @import "admin-lte/plugins/daterangepicker/daterangepicker.css";
 @import "admin-lte/plugins/summernote/summernote-bs4.min.css";
 
+@font-face {
+    font-family: heinrich;
+    src: url('../../public/fonts/@font-face/heinrich.ttf'), url('../../public/fonts/@font-face/heinrich.eot');
+}
+
+@font-face {
+    font-family: heinrich;
+    font-style: italic;
+    src: url('../../public/fonts/@font-face/heinrichitalic.ttf'), url('../../public/fonts/@font-face/heinrichitalic.eot');
+}
+
+p {
+    font-family: heinrich, serif;
+    font-size: 1.5em;
+}
+
 html,
 body {
     background-image: url("../../public/images/fone.jpeg");
     background-size: 100%;
     background-attachment: fixed;
-    padding: 0;
     margin: 0;
-    font-family: verdana, arial, sans-serif;
+    /*font-family: verdana, a}rial, sans-serif;*/
+    font: 0.9em/1.2 Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -26,17 +42,16 @@ body {
 main {
     display: flex;
     flex-direction: row;
-    margin-top: 6%;
-    max-height: 60%;
     /*border: red 1px solid;*/
-    padding-bottom: 35px;
+    padding-top: 6%;
 }
 
 section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 1% auto;
+    margin: 5% auto;
+    padding-left: 20%;
     width: 80%;
 }
 
@@ -46,19 +61,28 @@ section h2 {
 }
 
 aside {
-    background-color: #37474f;
-    background-attachment: fixed;
+    display: flex;
+    position: fixed;
+    /*background-color: #37474f;*/
+    background-color: rgb(24, 22, 35, 0.5);
+
+    background-image: url(/images/logo.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+
+
     width: 18%;
-    min-height: 600px;
-    /*border: red 1px solid;*/
+    min-height: 81%;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 .header, .footer {
     display: flex;
-    margin-top: 2%;
+    margin-top: 25px;
     padding: 0;
-    /*background-color: rgb(47, 58, 68);*/
-    background-color: rgb(33, 36, 41);
+    /*background-color: rgb(24, 22, 35);*/
+    /*background-image: linear-gradient(to right, rgba(255,0,0,0), violet);*/
     height: 8%;
     align-items: center;
     justify-content: center;
@@ -70,7 +94,7 @@ footer p {
 
 .form-review {
     text-align: center;
-    width: 50%;
+    width: 60%;
     background-color: #4a5568;
     border-radius: 2%;
     padding: 10px;
@@ -78,17 +102,29 @@ footer p {
 
 .form-review input,
 .form-review textarea {
-    width: 420px;
+    width: 95%;
     margin: auto;
 }
 
 .review {
-    background-color: rgb(0, 184, 131);
-    color: #4a5568;
-    margin: 10px;
-    padding: 10px;
+    background-color: rgb(75, 81, 104);
+    color: whitesmoke;
+    border-radius: 2%;
+    margin: 20px;
+    padding: 20px;
     text-align: center;
     width: 77%;
+}
+
+.review a{
+    width: 30%;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: space-between;*/
+}
+
+.container{
+    color: #1d2124;
 }
 
 .green {
@@ -113,13 +149,11 @@ footer p {
 }
 
 .top {
-    position: fixed;
     display: flex;
     flex-direction: row;
-    height: 4%;
+    height: 25px;
     margin: 0;
     padding: 0;
-    /*z-index: 1000;*/
     width: 100%;
     background-color: rgb(47, 58, 68);
 }
@@ -127,7 +161,6 @@ footer p {
 .top p {
     margin-left: 25px;
     color: #b3b7bb;
-    /*font-family: Brush Script MT, serif ;*/
     font-family: Trattatello, fantasy;
 }
 
@@ -153,7 +186,7 @@ footer p {
     width: 100%;
     margin: 10px;
     padding: 10px;
-    background-color: #4a5568;
+    background-color: rgb(21, 42, 62);
     text-align: center;
 }
 
@@ -168,7 +201,6 @@ footer p {
     text-align: center;
     width: 45%;
 }
-
 /*---------------Sidebar---------------*/
 
 .sidebar-nav {
@@ -197,7 +229,6 @@ footer p {
     color: #fff;
     background-color: #10707f;
 }
-
 /*--------------changing size-----------------*/
 
 @media screen and (min-width: 600px) {
@@ -212,4 +243,8 @@ footer p {
     }
 }
 
-/*--------------------------------------------*/
+/*-------------------------------------------------CSS_New--------------------------------------------------*/
+
+/*-----------------------------video--------------------------------------*/
+
+/*-----------------------------sound--------------------------------------*/

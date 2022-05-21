@@ -8,7 +8,6 @@ use Eloquent;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
-
 /**
  * App\Models\ContactModal
  *

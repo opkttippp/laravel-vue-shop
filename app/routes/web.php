@@ -12,32 +12,34 @@ use App\Http\Controllers\MainController;
 
     //--------------------------------Roles--------------------------------------
 
-Route::prefix('/admin/roles')->group(function () {
-    Route::get('/', [RoleController::class, 'index'])->middleware('can:show post');
-    Route::get('/create', [RoleController::class, 'create'])->name('rolesCreate')->middleware('can:add post');
-    Route::post('/create', [RoleController::class, 'store'])->name('rolesStore')->middleware('can:add post');
-    Route::get('/update/{id}', [RoleController::class, 'edit'])->name('rolesEdit')->middleware('can:edit post');
-    Route::post('/update/{id}', [RoleController::class, 'update'])->name('rolesUpdate')->middleware('can:edit post');
-    Route::get('/delete/{id}', [RoleController::class, 'destroy'])->middleware('can:delete post');
+Route::prefix('/admin/roles')->controller(RoleController::class)->group(function () {
+    Route::get('/', 'index')->middleware('can:show post');
+    Route::get('/create', 'create')->name('rolesCreate')->middleware('can:add post');
+    Route::post('/create', 'store')->name('rolesStore')->middleware('can:add post');
+    Route::get('/update/{id}', 'edit')->name('rolesEdit')->middleware('can:edit post');
+    Route::post('/update/{id}', 'update')->name('rolesUpdate')->middleware('can:edit post');
+    Route::get('/delete/{id}', 'destroy')->middleware('can:delete post');
 });
 
-//--------------------------------Users--------------------------------------
-Route::middleware(['role:admin'])->prefix('/admin/users')->group(function () {
-    Route::get('/', [UserController::class, 'index'])->middleware('can:show post');
-    //    Route::get('/create', [UserController::class, 'create'])->name('rolesCreate')->middleware('can:add post');
-    //    Route::post('/create', [UserController::class, 'store'])->name('rolesStore')->middleware('can:add post');
-    Route::get('/update/{id}', [UserController::class, 'edit'])->name('usersEdit')->middleware('can:edit post');
-    Route::post('/update/{id}', [UserController::class, 'update'])->name('usersUpdate')->middleware('can:edit post');
-    Route::get('/delete/{id}', [UserController::class, 'destroy'])->middleware('can:delete post');
-});
-//Route::resource('admin', RoleController::class)->middleware('role:admin');
+//--------------------------------Users----------------------------------------
+
+Route::group(
+    ['prefix' => '/admin/users', 'middleware' => ['role:admin'], 'controller' => 'UserController::class'],
+    function () {
+        Route::get('/', 'index')->middleware('can:show post');
+        Route::get('/update/{id}', 'edit')->name('usersEdit')->middleware('can:edit post');
+        Route::post('/update/{id}', 'update')->name('usersUpdate')->middleware('can:edit post');
+        Route::get('/delete/{id}', 'destroy')->middleware('can:delete post');
+    }
+);
 
 //---------------------------------Admin-LTE-----------------------------
+
 Route::middleware(['role:admin'])->prefix('/admin')->group(function () {
     Route::get('/', [IndexController::class, 'index']);
 });
-
 //------------------------------------------------------------------------
+
 Auth::routes();
 Route::get('/logout', [LoginController::class, 'logout']);
 
@@ -47,9 +49,7 @@ Route::get('/greeting', [MainController::class, 'green'])->name('green');
 
 Route::prefix('review')->group(function () {
     Route::get('/', [MainController::class, 'review'])->name('review')->middleware('auth');
-    //    Route::get('/', [MainController::class, 'review'])->name('review');
-    ;
-    Route::get('/add', [MainController::class, 'reviewAdd'])->name('reviewAdd');
+    Route::get('/add', [MainController::class, 'reviewAdd'])->name('reviewAdd')->middleware('auth');
     Route::post('/check', [MainController::class, 'check'])->name('check');
     Route::get('/{id}', [MainController::class, 'reviewOne'])->name('reviewOne');
     Route::get('/{id}/update', [MainController::class, 'reviewOneUpdate'])->name('reviewOneUpdate')->middleware('can:edit post');
@@ -138,3 +138,33 @@ Route::match('get', '/city/{name?}', function ($name = 'Minsk') {
     Route::get('/post/show2', [PostController::class, 'show2'])->name('show2');
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::get('/{id}', function () {
+        return redirect()->route('green');
+    });
+
+    class Person
+    {
+        public function __construct()
+        {
+            echo "Человечество создано <br>";
+        }
+    }
+
+    class TV
+    {
+        public function __construct()
+        {
+            echo "ТВ Создать <br>";
+        }
+    }
+
+    class Family
+    {
+        public function __construct(Person $person, Tv $tv)
+        {
+            echo "Создано семьей <br>";
+        }
+    }
+    Route::get('test', function (Family $family) {
+    });

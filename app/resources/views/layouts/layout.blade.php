@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
+
     <title>@yield('title')</title>
     <!-- Fonts -->
     <link rel="icon" href="/images/favicone/favic.ico" type="image/x-icon">
@@ -23,22 +24,29 @@
 </header>
 <main>
     <aside>
-        @include('inc.aside')
+        {{--        @if (Auth::user() && Auth::user()->name === 'super-user')--}}
+        {{--            @include('inc.admin_aside')--}}
+        {{--        @else--}}
+        {{--            @include('inc.aside')--}}
+        {{--        @endif--}}
+
+        @role('admin')
+            @include('inc.admin_aside')
+        @else
+            @include('inc.aside')
+        @endrole
+
     </aside>
     <section>
         @include('inc.message')
-        @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
-        @endif
         @yield('main_content')
     </section>
 </main>
-<footer class="footer mt-auto text-white-50 fixed-bottom bg-dark">
+<footer>
     @include('inc.footer')
 </footer>
-
+<script src="{{asset('js/index.js')}}"></script>
+@stack('js')
 </body>
 </html>
 

@@ -17,10 +17,13 @@
             <p>{{$rev->created_at}}</p>
         @endif
         @if(auth()->user()->can('edit post'))
-            <p><a href="{{route('reviewOneUpdate', $rev->id)}}" class="button btn btn-primary">Edit</a></p>
+            <p><a href="{{route('reviewOneUpdate', $rev->id)}}" class="button btn btn-primary">
+                    <i class="fas fa-pencil-alt"></i>Edit</a></p>
         @endif
         @if(auth()->user()->can('delete post'))
-            <p><a href="{{route('reviewOneDelete', $rev->id)}}" class="button btn btn-danger">Delete</a></p>
+            <p><a href="{{route('reviewOneDelete', $rev->id)}}" class="button btn btn-danger" onclick="return confirm('Подтвердите удаление')">
+                    <i class="fas fa-trash-alt"></i>Delete</a></p>
         @endif
     </div>
 @endsection
+

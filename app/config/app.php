@@ -70,7 +70,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+//    'timezone' => 'UTC',
+    'timezone' => 'Europe/Kiev',
 
     /*
     |--------------------------------------------------------------------------
@@ -172,18 +173,18 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
 //----------------авторизация через соцсети------------------------------
         Laravel\Socialite\SocialiteServiceProvider::class,
+
 //----------------------Spatie permission and role-----------------------
         Spatie\Permission\PermissionServiceProvider::class,
 //-----------------------------------------------------------------------
         /*
          * Package Service Providers...
          */
+//-----------------Application Service Providers-------------------------
 
-        /*
-         * Application Service Providers...
-         */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -208,8 +209,6 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 //-----------------------------------------------------------------------
     ])->toArray(),
-
-
 
 
 ];

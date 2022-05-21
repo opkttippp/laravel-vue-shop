@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.layout')
 
 @section('title')
     Main Page

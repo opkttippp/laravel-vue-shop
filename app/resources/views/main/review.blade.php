@@ -21,10 +21,15 @@
             @endif
             </p>
             <a href="{{route('reviewOne', $r->id)}}" class="button btn btn-primary">More ...</a>
-
         </div>
     @endforeach
     @include('inc.pagin')
+    <script>
+        const target = document.querySelector('.alert')
+        if (typeof target !== 'undefined') {
+            setTimeout(() =>  document.querySelector('.alert').innerHTML = '', 3000)
+        }
+    </script>
 @endsection
 
 

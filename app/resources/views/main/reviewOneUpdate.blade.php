@@ -5,7 +5,7 @@
 @section('main_content')
     <h2>Обновить отзыв</h2>
     <div class="form-review">
-        <form method="post" action="{{route('reviewUpdate', $rev->id)}}">
+        <form method="post" action="{{route('reviewUpdate', $rev->id)}}" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -26,6 +26,11 @@
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" value="{{$rev->email}}" id="email" name="email"
                        placeholder="Enter your E-mail">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Download avatar</label>
+                <input type="file" class="form-control" value="{{$rev->avatar}}" id="image" name="image"
+                       placeholder="Download your avatar">
             </div>
             <button type="submit" class="btn btn-success">Обновить</button>
         </form>

@@ -1,0 +1,28 @@
+@font-size : 20px;
+@text-color: green;
+@text-color_2: blue;
+@text-color_3: yellow;
+
+h1 {
+    color: @text-color;
+    font-size: @font-size + 20px;
+}
+
+h2 {
+    color: @text-color_2;
+}
+h3 {
+    color: @text-color_3;
+    font-size: @font-size + 40px;
+}
+
+/* Данный код на стороне клиента будет преобразован в следующий CSS файл
+
+h1 {
+    color: green;
+}
+
+h2 {
+    color: green;
+}
+*/

@@ -2,19 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Video\VideoHosting;
 use App\Http\Requests\ValidRequest;
 use App\Models\Review;
+use App\Services\CalculateSumService;
+use App\Services\OneService;
+use App\Services\Video\Youtube;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 
 class MainController extends Controller
 {
 
-    public function home()
+//    public function home(VideoHosting $hosting)
+    public function home(Request $request, CalculateSumService $service)
     {
+        /*        session(['num' => 547]);
+                $request->session()->increment('num');
+                $data = $request->session()->all();
+        */
+        //        return view('main.home', [
+//            'title' => 'home',
+//            'text' => $data,
+//            'array' => [
+//                1 => 'one',
+//                2 => 'two',
+//                3 => 'three'
+//            ],
+//        ]);
+//        dd($service->start($request->all(), 'minus'));
+
         return view('main.home', [
             'title' => 'home',
-            'text' => 'home'
+            'date' => $request,
+//            'service' => App::makeWith(OneService::class, ['token' => 'token2']),
         ]);
     }
 
@@ -23,54 +44,47 @@ class MainController extends Controller
         return view('main.green');
     }
 
+
     public function reviewAdd()
     {
-        /*        new Review();
-                return view('review', ['rev' => $view->all()]);
-        */
         return view('main.reviewAdd');
     }
 
-    public function check(ValidRequest $request)
+    public function check(Review $review, ValidRequest $request)
     {
-            $contact = new Review();
-            $contact->name = $request->input('name');
-            $contact->subject = $request->input('subject');
-            $contact->review = $request->input('review');
-            $contact->email = $request->input('email');
 
-            $contact->save();
+        if ($request->hasFile('image')) {
+            $images = $request->file('image');
+            $path = $images->storeAs('images/avatar', $request->input('name').'.'.$images->getClientOriginalExtension());
+            $review->avatar = $path;
+        }
+//        dd($images);
+        $review->name = $request->input('name');
+        $review->subject = $request->input('subject');
+        $review->review = $request->input('review');
+        $review->email = $request->input('email');
 
-            return redirect()->route('review')->with(
-                'success',
-                'Отзывы были добавлены'
-            );
-        /*        dd($request->input('review'));
-                $name = DB::table('contact_modals')->select('name')->get();
-                return view('review')->with(compact('name'));
-        */
+        $review->save();
+
+        return redirect()->route('review')->with(
+            'success',
+            'Отзывы были добавлены'
+        );
     }
 
-    public function review()
+    public function review(Review $review)
     {
-        $review = new Review();
-//        $review::paginate(3);
-        /*        return view('review', ['rev' => ContactModal::all()]);
-                return view('review', ['rev' => $review->orderBy('id', 'asc')->skip(1)->take(1)->get()]);
-                return view('reviewOne', ['rev' => $review->where('id', '=', $id)->get()]);
-        */
+        //        $review = new Review();
         return view('main.review', ['rev' => $review::paginate(3)]);
     }
 
-    public function reviewOne($id)
+    public function reviewOne(Review $review, $id)
     {
-        $review = new Review();
         return view('main.reviewOne', ['rev' => $review->find($id)]);
     }
 
-    public function reviewOneUpdate($id)
+    public function reviewOneUpdate(Review $review, $id)
     {
-        $review = new Review();
         return view('main.reviewOneUpdate', ['rev' => $review->find($id)]);
     }
 
@@ -85,16 +99,16 @@ class MainController extends Controller
         $contact->save();
         return redirect()->route('reviewOne', $id)->with(
             'success',
-            'Уснешное обновление'
+            'Success edit'
         );
     }
 
     public function reviewOneDelete($id)
     {
         Review::find($id)->delete();
-        return redirect()->route('review', $id)->with(
+        return redirect()->route('review')->with(
             'success',
-            'Уснешное удаление'
+            'Success delete'
         );
     }
 }

@@ -58,7 +58,7 @@ class RoleController extends Controller
         $permissions = Permission::whereIn('id', $request->permissions)->get();
         $newRole->syncPermissions($permissions);
 
-        return redirect()->back()->with(
+        return redirect(url('admin/roles'))->with(
             'success',
             'Permissions created!!'
         );
@@ -78,7 +78,7 @@ class RoleController extends Controller
         Role::find($id)->delete();
         return redirect()->back()->with(
             'success',
-            'Уснешное удаление'
+            'Success delete'
         );
     }
 }
