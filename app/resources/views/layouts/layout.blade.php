@@ -45,8 +45,6 @@
 <footer>
     @include('inc.footer')
 </footer>
-<script src="{{asset('js/index.js')}}"></script>
-@stack('js')
 </body>
 </html>
 

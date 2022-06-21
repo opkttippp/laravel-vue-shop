@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Video\VideoHosting;
+use App\Components\SuperComponent;
+use App\Facade\SuperFacade;
 use App\Http\Requests\ValidRequest;
 use App\Models\Review;
 use App\Services\CalculateSumService;
-use App\Services\OneService;
-use App\Services\Video\Youtube;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
+
 
 class MainController extends Controller
 {
 
-//    public function home(VideoHosting $hosting)
-    public function home(Request $request, CalculateSumService $service)
-    {
+
+    public function home(
+        Request $request,
+        CalculateSumService $service,
+        SuperComponent $name
+    ) {
         /*        session(['num' => 547]);
                 $request->session()->increment('num');
                 $data = $request->session()->all();
@@ -35,6 +37,7 @@ class MainController extends Controller
         return view('main.home', [
             'title' => 'home',
             'date' => $request,
+//            'name' => SuperFacade::getNames(),
 //            'service' => App::makeWith(OneService::class, ['token' => 'token2']),
         ]);
     }
@@ -52,10 +55,13 @@ class MainController extends Controller
 
     public function check(Review $review, ValidRequest $request)
     {
-
         if ($request->hasFile('image')) {
             $images = $request->file('image');
-            $path = $images->storeAs('images/avatar', $request->input('name').'.'.$images->getClientOriginalExtension());
+            $path = $images->storeAs(
+                'images/avatar',
+                $request->input('name') . '.'
+                . $images->getClientOriginalExtension()
+            );
             $review->avatar = $path;
         }
 //        dd($images);

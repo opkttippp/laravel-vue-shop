@@ -1,4 +1,6 @@
 require('./bootstrap');
+require('./admin.js');
+require('./main.js');
 
 // -----------------app-------------------------------
 import "bootstrap/dist/js/bootstrap.bundle.min";

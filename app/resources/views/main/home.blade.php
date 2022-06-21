@@ -1,22 +1,23 @@
-@extends('layouts.New')
-{{--@extends('layouts.layout')--}}
+{{--@extends('layouts.New')--}}
 
-{{--@section('title')--}}
-{{--    {{$title}}--}}
-{{--@endsection--}}
+@extends('layouts.layout')
 
-{{--@section('aside')--}}
-{{--    @parent--}}
-{{--    --}}{{--    <h4 style="color: #10707f">Hello {{$title}} page!!</h4>--}}
+@section('title')
+    {{$title}}
+@endsection
 
-{{--@endsection--}}
+@section('aside')
+    @parent
+        <h4 style="color: #10707f">Hello {{$title}} page!!</h4>
 
-{{--@section('main_content')--}}
+@endsection
 
-{{--    <h2 style="color: #d4edda">{{ $title }} page.</h2>--}}
+@section('main_content')
 
+    <h2 style="color: #d4edda">{{ $title }} page.</h2>
+{{--    <h4>{{SuperFacade::getNames()}} !!</h4>--}}
 
-{{--    @push('js')--}}
-{{--<script>alert('hello')</script>--}}
-{{--    @endpush--}}
-{{--@endsection--}}
+    @push('js')
+<script>alert('hello')</script>
+    @endpush
+@endsection

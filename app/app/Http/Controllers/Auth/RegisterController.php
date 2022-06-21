@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\Worker\SendRegistrationMail;
 use App\Mail\Auth\VerifyMail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -63,9 +64,14 @@ class RegisterController extends Controller
 //            'updated_at' => Carbon::now(),
 //        ]);
         //----------------------------назначение роли user-------------
-//        $user->assignRole($role);
+
         $user->assignRole('user');
         //----------------------------------------------------------
+
+/*--------------------asinc worker----------------------------------------
+                SendRegistrationMail::dispatch($user);
+                Mail::to($this->user->email)->queue(new VerifyMail($this->user));
+------------------------------------------------------------------------*/
 
         Mail::to($user->email)->send(new VerifyMail($user));
 

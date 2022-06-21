@@ -190,6 +190,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\SuperSesProvider::class,
 
     ],
 
@@ -208,7 +209,7 @@ return [
 //----------------авторизация через соцсети------------------------------
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 //-----------------------------------------------------------------------
+        'SuperFacade' => App\Facade\SuperFacade::class
     ])->toArray(),
-
 
 ];

@@ -14956,6 +14956,25 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/admin.js":
+/*!*******************************!*\
+  !*** ./resources/js/admin.js ***!
+  \*******************************/
+/***/ (() => {
+
+document.addEventListener('DOMContentLoaded', function () {
+  var el = document.getElementsByClassName('nav-link');
+  var url = document.location.href;
+
+  for (var i = 0; i < el.length; i++) {
+    if (url === el[i].href) {
+      el[i].className += ' active';
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -14970,6 +14989,26 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
+
+/***/ }),
+
+/***/ "./resources/js/main.js":
+/*!******************************!*\
+  !*** ./resources/js/main.js ***!
+  \******************************/
+/***/ (() => {
+
+document.addEventListener('DOMContentLoaded', function () {
+  var _document$querySelect;
+
+  var target = (_document$querySelect = document.querySelector('.alert')) !== null && _document$querySelect !== void 0 ? _document$querySelect : undefined;
+
+  if (typeof target !== 'undefined') {
+    setTimeout(function () {
+      return document.querySelector('.alert').innerHTML = '';
+    }, 3000);
+  }
+});
 
 /***/ }),
 
@@ -15003,7 +15042,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var admin_lte_plugins_daterangepicker_daterangepicker_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(admin_lte_plugins_daterangepicker_daterangepicker_js__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var admin_lte_plugins_overlayScrollbars_js_jquery_overlayScrollbars_min_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js */ "./node_modules/admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js");
 /* harmony import */ var admin_lte_plugins_overlayScrollbars_js_jquery_overlayScrollbars_min_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(admin_lte_plugins_overlayScrollbars_js_jquery_overlayScrollbars_min_js__WEBPACK_IMPORTED_MODULE_10__);
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // -----------------app-------------------------------
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+__webpack_require__(/*! ./admin.js */ "./resources/js/admin.js");
+
+__webpack_require__(/*! ./main.js */ "./resources/js/main.js"); // -----------------app-------------------------------
 
 
  // -----------------Admin-lte-js---------------------
@@ -43141,9 +43184,9 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./resources/scss/app.scss":
+/***/ "./resources/css/style.css":
 /*!*********************************!*\
-  !*** ./resources/scss/app.scss ***!
+  !*** ./resources/css/style.css ***!
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -65071,7 +65114,7 @@ process.umask = function() { return 0; };
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/style": 0,
-/******/ 			"css/app": 0
+/******/ 			"css/style": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -65121,8 +65164,8 @@ process.umask = function() { return 0; };
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/style.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/scss/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/style"], () => (__webpack_require__("./resources/js/style.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/style"], () => (__webpack_require__("./resources/css/style.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
