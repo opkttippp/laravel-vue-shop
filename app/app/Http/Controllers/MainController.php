@@ -9,36 +9,15 @@ use App\Models\Review;
 use App\Services\CalculateSumService;
 use Illuminate\Http\Request;
 
-
 class MainController extends Controller
 {
 
 
-    public function home(
-        Request $request,
-        CalculateSumService $service,
-        SuperComponent $name
-    ) {
-        /*        session(['num' => 547]);
-                $request->session()->increment('num');
-                $data = $request->session()->all();
-        */
-        //        return view('main.home', [
-//            'title' => 'home',
-//            'text' => $data,
-//            'array' => [
-//                1 => 'one',
-//                2 => 'two',
-//                3 => 'three'
-//            ],
-//        ]);
-//        dd($service->start($request->all(), 'minus'));
-
+    public function home(Request $request)
+    {
         return view('main.home', [
             'title' => 'home',
             'date' => $request,
-//            'name' => SuperFacade::getNames(),
-//            'service' => App::makeWith(OneService::class, ['token' => 'token2']),
         ]);
     }
 

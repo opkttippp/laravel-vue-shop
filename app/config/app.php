@@ -208,8 +208,10 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
 //----------------авторизация через соцсети------------------------------
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-//-----------------------------------------------------------------------
-        'SuperFacade' => App\Facade\SuperFacade::class
+//---------------------------Учебный фасад-------------------------------
+        'SuperFacade' => App\Facade\SuperFacade::class,
+//-----------------------------Cart--------------------------------------
+//        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
     ])->toArray(),
 
 ];

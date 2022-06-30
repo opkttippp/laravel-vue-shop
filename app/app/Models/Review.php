@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Eloquent;
 use Illuminate\Support\Carbon;
-use Illuminate\Http\Request;
 
 /**
  * App\Models\ContactModal

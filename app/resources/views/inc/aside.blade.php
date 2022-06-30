@@ -10,6 +10,7 @@
                 <li><a href="#">Services</a></li>
                 <li><a href="#">Contact</a></li>
                 {{--            @include('inc.dateTime')--}}
+                <img src="/images/logo.png")) style="margin-left: 10%">
                 @show
             </ul>
         </div>

@@ -20,11 +20,11 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
-                       aria-expanded="false">Настройка</a>
+                       aria-expanded="false">Ассортимент</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/product') }}">Товары</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/category') }}">Категории</a></li>
+                        <li><a class="dropdown-item" href="#">Производители</a></li>
                     </ul>
                 </li>
                 <li>
@@ -70,6 +70,21 @@
                     </a>
                 </div>
             @endguest
+            <ul class="navbar-nav nav-flex-icon">
+                @if(Cart::content())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('cart.index')}}">
+                        <span class="badge red mr-1">
+                            {{Cart::count()}}
+                        </span>
+                            <i class="fa fa-shopping-cart"></i>
+                            <span class="clearfix d-none d-sm-inline-block">
+                            Cart
+                        </span>
+                        </a>
+                    </li>
+                @endif
+            </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>

@@ -4,7 +4,6 @@ require('./main.js');
 
 // -----------------app-------------------------------
 import "bootstrap/dist/js/bootstrap.bundle.min";
-
 // -----------------Admin-lte-js---------------------
 import "admin-lte/plugins/jquery/jquery.js";
 import "admin-lte/plugins/jquery/jquery.min.js";

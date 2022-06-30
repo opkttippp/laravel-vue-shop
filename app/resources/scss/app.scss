@@ -1,18 +1,46 @@
-$font-size : 20px;
-$text-color: green;
-$text-color_2: blue;
-$text-color_3: yellow;
+//$font-size : 20px;
+//$text-color: green;
+//$text-color_2: blue;
+//$text-color_3: yellow;
+//
+//h1 {
+//    color: $text-color;
+//    font-size: $font-size + 20px;
+//}
+//
+//h2 {
+//    color: $text-color_2;
+//    font-size: $font-size + 20px;
+//}
+//h3 {
+//    color: $text-color_3;
+//    font-size: $font-size + 30px;
+//}
 
-h1 {
-    color: $text-color;
-    font-size: $font-size + 20px;
-}
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-h2 {
-    color: $text-color_2;
-    font-size: $font-size + 20px;
+@import "../css/style.css";
+
+.navbar-laravel {
+    background-color: #fff3cd;
+    box-shadow: 0 2px 4px rgba(5, 0, 0, 0.04);
 }
-h3 {
-    color: $text-color_3;
-    font-size: $font-size + 30px;
-}
+$body-bg: #f8fafc;
+
+// Typography
+$font-family-sans-serif: "Nunito", sans-serif;
+$font-size-base: 0.9 rem;
+$line-height-base: 1.6;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66D9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;

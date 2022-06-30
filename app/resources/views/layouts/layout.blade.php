@@ -13,9 +13,9 @@
     <!-- Fonts -->
     <link rel="icon" href="/images/favicone/favic.ico" type="image/x-icon">
     <!-- Styles -->
-    <link href={{ asset('css/style.css') }} rel="stylesheet" type="text/css">
+    <link href={{ asset('css/app.css') }} rel="stylesheet" type="text/css">
+{{--    <link href={{ asset('css/name.css') }} rel="stylesheet" type="text/css">--}}
     <!-- Scripts -->
-    <script src={{ asset('js/style.js') }}></script>
 
 </head>
 <body>
@@ -45,6 +45,7 @@
 <footer>
     @include('inc.footer')
 </footer>
+<script src={{ asset('js/style.js') }}></script>
 </body>
 </html>
 
