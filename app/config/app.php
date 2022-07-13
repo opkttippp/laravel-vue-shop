@@ -210,8 +210,9 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 //---------------------------Учебный фасад-------------------------------
         'SuperFacade' => App\Facade\SuperFacade::class,
-//-----------------------------Cart--------------------------------------
-//        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Form' => Collective\Html\FormFacade::class,
     ])->toArray(),
 
 ];

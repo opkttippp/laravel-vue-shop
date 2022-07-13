@@ -8,16 +8,13 @@ use Illuminate\Http\Request;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 
-
 class ProductController extends Controller
 {
-
     public function index()
     {
         $prod = Product::orderBy('created_at', 'desc')->take(12)->paginate(3);
 
         return view('product.index', ['rev' => $prod]);
-
     }
 
     public function create()

@@ -5,34 +5,7 @@
 @endsection
 
 @section('main_content')
-    {{--    --}}{{--    @foreach($rev as $prod)--}}
-    {{--    @for($i = 1; $i <=2; $i++)--}}
-    {{--        <div class="review">--}}
-    {{--            <h3>{{$prod[$i]->title}}</h3>--}}
-    {{--            <hr>--}}
-    {{--            <h3>{{$prod[$i]->price}}</h3>--}}
-    {{--            <hr>--}}
-    {{--            <h3>{{$prod[$i]->description}}</h3>--}}
 
-    {{--            @if(isset($prod[$i]->updated_at))--}}
-    {{--                {{$prod[$i]->updated_at}}--}}
-    {{--            @else--}}
-    {{--                {{$prod[$i]->created_at}}--}}
-    {{--            @endif--}}
-    {{--            --}}{{--            </p>--}}
-    {{--            --}}{{--            <a href="{{route('reviewOne', $r->id)}}" class="button btn btn-primary">More ...</a>--}}
-    {{--        </div>--}}
-    {{--        @foreach($image[$i] as $img)--}}
-    {{--            <div style="float: left">--}}
-    {{--                <img src="{{asset($img->photos)}}" width="150" height="100">--}}
-    {{--                </div>--}}
-    {{--                    @endforeach--}}
-    {{--            @endfor--}}
-    {{--            --}}{{--    @endforeach--}}
-
-
-    {{--    @include('inc.pagin')--}}
-    <!--Carousel Wrapper-->
     <div class="container">
 
         <div id="carousel-example-2" class="carousel slide carousel-fade mb-3" data-ride="carousel">
@@ -108,22 +81,22 @@
                                 </a>
                             </h5>
 
-                                <img class="rounded mx-auto d-block mt-auto" src="{{asset($product->image)}}" width="190"
+                                <img class="rounded mx-auto d-block mt-auto" src="{{asset('storage/'.$product->image)}}" width="190"
                                      height="150" alt="tv">
 
                             <p>
                                 <a class="d-flex justify-content-start mt-4" href="/">
                             <span class="badge
-                            @if ($product->categories->id == 1)
+                            @if ($product->category->id == 1)
                                 badge-primary
-                                @elseif($product->categories->id == 2)
+                                @elseif($product->category->id == 2)
                                 badge-secondary
-                                @elseif($product->categories->id == 3)
+                                @elseif($product->category->id == 3)
                                 badge-success
-                                @elseif($product->categories->id == 4)
+                                @elseif($product->category->id == 4)
                                 badge-lime
                             @endif
-                                ">{{ $product->categories->name}}
+                                ">{{ $product->category->name}}
                             </span>
                                 </a>
                             </p>

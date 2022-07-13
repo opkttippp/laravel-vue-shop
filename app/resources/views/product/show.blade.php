@@ -16,13 +16,13 @@
             <div class="col-6 align-items-sm-start">
                 <div class="row">
                     <div class="col-12">
-                        <img src="{{asset($product->image)}}" class="img-fluid img-thumbnail" alt="Main image">
+                        <img src="{{asset('storage/'.$product->image)}}" class="img-fluid img-thumbnail" alt="Main image">
                     </div>
                 </div>
                 <div class="row mt-2">
                     @foreach($image as $img)
                         <div class="col-3">
-                            <img src="{{asset($img->photos)}}" height="100%" width="100%" alt="image">
+                            <img src="{{asset('storage/'.$img->photos)}}" height="100%" width="100%" alt="image">
                         </div>
                     @endforeach
                 </div>
@@ -35,16 +35,16 @@
                     <div class="mb-3">
                         <a class="d-flex justify-content-start mt-4" href="{{url("/product")}}">
                       <span class="col-3 text-lg badge
-                    @if ($product->categories->id == 1)
+                    @if ($product->category->id == 1)
                           badge-primary
-                    @elseif($product->categories->id == 2)
+                    @elseif($product->category->id == 2)
                           badge-secondary
-                    @elseif($product->categories->id == 3)
+                    @elseif($product->category->id == 3)
                           badge-success
-                    @elseif($product->categories->id == 4)
+                    @elseif($product->category->id == 4)
                           badge-lime
                     @endif
-                          ">{{ $product->categories->name}}
+                          ">{{ $product->category->name}}
                     </span>
                         </a>
                     </div>
@@ -86,7 +86,7 @@
             <!--Grid column-->
             <div class="col-lg-4 col-md-12 mb-4">
 
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid"
+                <img src="{{asset('images/product_footer_1.jpg')}}" class="img-fluid"
                      alt="">
 
             </div>
@@ -95,7 +95,7 @@
             <!--Grid column-->
             <div class="col-lg-4 col-md-6 mb-4">
 
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid"
+                <img src="{{asset('images/product_footer_2.jpg')}}" class="img-fluid"
                      alt="">
 
             </div>
@@ -104,7 +104,7 @@
             <!--Grid column-->
             <div class="col-lg-4 col-md-6 mb-4">
 
-                <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid"
+                <img src="{{asset('images/product_footer_3.jpg')}}" class="img-fluid"
                      alt="">
             </div>
         </div>

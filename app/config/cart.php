@@ -13,7 +13,6 @@ return [
     */
 
     'calculator' => \Gloudemans\Shoppingcart\Calculation\DefaultCalculator::class,
-//    'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -25,7 +24,7 @@ return [
     |
     */
 
-    'tax' => 21,
+//    'tax' => 21,
 
     /*
     |--------------------------------------------------------------------------
@@ -73,7 +72,7 @@ return [
 
         'decimal_point' => '.',
 
-        'thousand_separator' => ',',
+        'thousand_separator' => '',
 
     ],
 

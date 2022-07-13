@@ -1,5 +1,4 @@
 @section('admin_aside')
-    @role('admin')
     <div class="sidebar-wrapper">
         <a href="index3.html" class="brand-link">
             <img src="/images/admin_img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -31,7 +30,7 @@
             </div>
 
             <!-- Sidebar Menu -->
-            <nav class="mt-2">
+            <nav class="mt-2 h6">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
 
@@ -55,12 +54,16 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{url('review')}}" class="nav-link">
-                                    <p>All post</p>
+                                    <p>
+                                        All post
+                                    </p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{url('review/add')}}" class="nav-link">
-                                    <p>New post</p>
+                                    <p>
+                                        New post
+                                    </p>
                                 </a>
                             </li>
                         </ul>
@@ -69,7 +72,6 @@
 
                     <li class="nav-item">
                         <a href="{{ url('/admin/users') }}" class="nav-link">
-
                             <i class="nav-icon far fa-image"></i>
                             <p>
                                 Users
@@ -86,25 +88,17 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{ route('admin.products.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Products
+                            </p>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
             @show
         </div>
     </div>
-    @endrole
-{{--    @role('manager')--}}
-{{--    <div id="sidebar-wrapper">--}}
-{{--        <ul class="sidebar-nav">--}}
-{{--            <li class="sidebar-brand"><a href="#"> Start Bootstrap </a></li>--}}
-{{--            <li><a href="#">Dashboard</a></li>--}}
-{{--            <li><a href="#">Shortcuts</a></li>--}}
-{{--            <li><a href="#">Overview</a></li>--}}
-{{--            <li><a href="#">Events</a></li>--}}
-{{--            <li><a href="#">About</a></li>--}}
-{{--            <li><a href="#">Services</a></li>--}}
-{{--            <li><a href="#">Contact</a></li>--}}
-{{--            --}}{{--            @include('inc.dateTime')--}}
-{{--            @show--}}
-{{--        </ul>--}}
-{{--    </div>--}}
-{{--    @endrole--}}

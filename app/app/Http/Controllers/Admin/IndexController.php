@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\App;
 class IndexController extends Controller
 {
 
-    public function index()
+    public function index(User $users)
     {
-        $users = User::all()->count();
         return view('admin.index', compact('users'));
     }
 

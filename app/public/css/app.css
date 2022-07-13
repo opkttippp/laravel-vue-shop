@@ -11971,7 +11971,13 @@ footer p {
 }
 
 /*---------------------------------------------------------------------*/
+.search {
+    max-width: 150px;
+}
 
+.cart a{
+    min-width: 150px;
+}
 
 .navbar-laravel {
   background-color: #fff3cd;

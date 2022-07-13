@@ -24,18 +24,12 @@
 </header>
 <main>
     <aside>
-        {{--        @if (Auth::user() && Auth::user()->name === 'super-user')--}}
-        {{--            @include('inc.admin_aside')--}}
-        {{--        @else--}}
-        {{--            @include('inc.aside')--}}
-        {{--        @endif--}}
 
-        @role('admin')
+        @role('admin|manager')
             @include('inc.admin_aside')
         @else
             @include('inc.aside')
         @endrole
-
     </aside>
     <section>
         @include('inc.message')

@@ -34,16 +34,18 @@
             {{----------------------------------------------------------------------------------------------}}
             @role('admin')
             <div class="reg_auth">
-                <a href="{{ url('/admin/users') }}">Users</a>
-                <a href="{{ url('/admin/roles') }}">Roles</a>
+                <i class="nav-icon far fas fa-table"></i>
+
+{{--                <a href="{{ url('/admin/users') }}">Users</a>--}}
+{{--                <a href="{{ url('/admin/roles') }}">Roles</a>--}}
                 <a href={{url('/admin')}}>admin</a>
                 <a href="{{ route('logout') }}">Выход</a>
             </div>
             @endrole
             @role('manager')
             <div class="reg_auth">
-                <a href="{{ url('/admin/roles') }}">Roles</a>
-                <a href="#">manager</a>
+{{--                <a href="{{ url('/admin/roles') }}">Roles</a>--}}
+                <a href="{{url('/admin')}}">manager</a>
                 <a href="{{ route('logout') }}">Выход</a>
             </div>
             @endrole
@@ -70,7 +72,7 @@
                     </a>
                 </div>
             @endguest
-            <ul class="navbar-nav nav-flex-icon">
+            <ul class="navbar-nav nav-flex-icon cart">
                 @if(Cart::content())
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('cart.index')}}">
@@ -78,7 +80,7 @@
                             {{Cart::count()}}
                         </span>
                             <i class="fa fa-shopping-cart"></i>
-                            <span class="clearfix d-none d-sm-inline-block">
+                        <span class="clearfix d-none d-sm-inline-block">
                             Cart
                         </span>
                         </a>
@@ -86,7 +88,7 @@
                 @endif
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
 

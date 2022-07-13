@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,6 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    use FormAccessible;
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
@@ -50,4 +51,9 @@ class User extends Authenticatable
         = [
             'email_verified_at' => 'datetime',
         ];
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

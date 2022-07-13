@@ -11,8 +11,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('id')->get();
-        $permissions = Permission::OrderBy('id')->get();
+        $users = User::all();
+        $permissions = Permission::all();
         return view('users.index', compact(['users', 'permissions']));
     }
 
@@ -31,21 +31,19 @@ class UserController extends Controller
         //
     }
 
-    public function edit(User $user, $id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
         $roles = Role::orderBy('name')->get();
         return view('users.edit', compact(['user', 'roles']));
     }
 
-    public function update(Request $request, User $user, $id)
+    public function update(Request $request, User $user)
     {
         $request->validate([
             'name' => 'required|max:25',
             'role' => 'required|integer|exists:roles,id',
         ]);
 
-        $user = User::find($id);
         $user->update([
             'name' => $request->name
         ]);
@@ -59,9 +57,9 @@ class UserController extends Controller
         );
     }
 
-    public function destroy(User $user, $id)
+    public function destroy(User $user)
     {
-        User::find($id)->delete();
+        $user->delete();
         return redirect()->back()->with('success', ' User was deleted!!');
     }
 }

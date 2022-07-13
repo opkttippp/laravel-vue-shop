@@ -16,7 +16,6 @@
             @endif
             @if(auth()->user()->can('delete post'))
                 <a href="{{url('/admin/roles/delete', $role->id)}}" class="button btn btn-danger">Delete</a>
-
             @endif
         </div>
     @endforeach

@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\ProdController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
@@ -17,31 +19,30 @@ use App\Http\Controllers\MainController;
 Route::group(
     ['prefix' => '/admin/roles', 'middleware' => ['role:manager|admin'], 'controller'  => RoleController::class],
     function () {
-    //Route::prefix('/admin/roles')->controller(RoleController::class)->group(function () {
-    Route::get('/', 'index')->middleware('can:show post');
-    Route::get('/create', 'create')->name('rolesCreate')->middleware('can:add post');
-    Route::post('/create', 'store')->name('rolesStore')->middleware('can:add post');
-    Route::get('/update/{id}', 'edit')->name('rolesEdit')->middleware('can:edit post');
-    Route::post('/update/{id}', 'update')->name('rolesUpdate')->middleware('can:edit post');
-    Route::get('/delete/{id}', 'destroy')->middleware('can:delete post');
-}
+        Route::get('/', 'index')->middleware('can:show post');
+        Route::get('/create', 'create')->name('rolesCreate')->middleware('can:add post');
+        Route::post('/create', 'store')->name('rolesStore')->middleware('can:add post');
+        Route::get('/update/{id}', 'edit')->name('rolesEdit')->middleware('can:edit post');
+        Route::post('/update/{id}', 'update')->name('rolesUpdate')->middleware('can:edit post');
+        Route::get('/delete/{id}', 'destroy')->middleware('can:delete post');
+    }
 );
 
 //--------------------------------Users----------------------------------------
 
 Route::group(
-    ['prefix' => '/admin/users', 'middleware' => ['role:admin'], 'controller' => UserController::class],
+    ['prefix' => '/admin/users', 'middleware' => ['role:admin|manager'], 'controller' => UserController::class],
     function () {
-    Route::get('/', 'index')->middleware('can:show post');
-    Route::get('/update/{id}', 'edit')->name('usersEdit')->middleware('can:edit post');
-    Route::post('/update/{id}', 'update')->name('usersUpdate')->middleware('can:edit post');
-    Route::get('/delete/{id}', 'destroy')->middleware('can:delete post');
-}
+        Route::get('/', 'index')->middleware('can:show post');
+        Route::get('/update/{user}', 'edit')->name('usersEdit')->middleware('can:edit post');
+        Route::post('/update/{user}', 'update')->name('usersUpdate')->middleware('can:edit post');
+        Route::get('/delete/{user}', 'destroy')->middleware('can:delete post');
+    }
 );
 
 //---------------------------------Admin-LTE-----------------------------
 
-Route::middleware(['role:admin'])->prefix('/admin')->group(function () {
+Route::middleware(['role:admin|manager'])->prefix('/admin')->group(function () {
     Route::get('/', [IndexController::class, 'index']);
 });
 //------------------------------------------------------------------------
@@ -95,10 +96,41 @@ Route::get('/catalog', [CategoryController::class, 'catalog'])->name('catalog.in
 Route::group(['prefix' => '/cart', 'controller' => CartController::class], function () {
     Route::get('/', 'index')->name('cart.index');
     Route::get('/add/{product_id}', 'add')->name('cart.add');
+    Route::patch('/update', 'update')->name('cart.update');
+    Route::get('/drop{productId}', 'drop')->name('cart.drop');
 
-    Route::get('/update', 'update')->name('cart.update');
-    Route::get('/drop', 'drop')->name('cart.drop');
     Route::get('/destroy', 'destroy')->name('cart.destroy');
     Route::get('/checkout', 'checkout')->name('cart.checkout');
-//    Route::get('/cart/add/{product_id?}', [CartController::class,'add'])->name('cart.add');
+    Route::get('/success/{orderId}', 'success')->name('cart.success');
+});
+
+
+route::resource('/order', OrderController::class, ['only' => ['store', 'update', 'destroy', 'show']]);
+
+
+//--------------------------------------------------------------------------
+//Route::prefix('users')->group(function () {
+//    Route::get('/', 'UserController@index')->name('admin.users.index');
+//    Route::get('edit/{user}', 'UserController@edit')->name('admin.users.edit');
+//    Route::put('edit/{user}', 'UserController@update')->name('admin.users.update');
+//    Route::get('delete/{user}', 'UserController@delete')->name('admin.users.delete');
+//});
+
+// Products
+Route::group(['prefix' => 'admin/product', 'controller' => ProdController::class], function () {
+    Route::get('/', 'index')->name('admin.products.index');
+    Route::get('create', 'create')->name('admin.products.create');
+    Route::post('create', 'store')->name('admin.products.store');
+    Route::get('edit/{product}', 'edit')->name('admin.products.edit');
+    Route::put('edit/{product}', 'update')->name('admin.products.update');
+    Route::get('delete/{product}', 'delete')->name('admin.products.delete');
+    Route::get('drop/{id}', 'destroy')->name('admin.products.destroy');
+    Route::get('restore/{id}', 'restore')->name('admin.products.restore');
+});
+
+// Orders
+Route::prefix('orders')->group(function () {
+    Route::get('/', 'OrderController@index')->name('admin.orders.index');
+    Route::get('show/{id}', 'OrdersController@show')->name('admin.orders.show');
+    Route::get('delete/{id}', 'OrderController@delete')->name('admin.orders.delete');
 });

@@ -43,7 +43,6 @@ class MainController extends Controller
             );
             $review->avatar = $path;
         }
-//        dd($images);
         $review->name = $request->input('name');
         $review->subject = $request->input('subject');
         $review->review = $request->input('review');
