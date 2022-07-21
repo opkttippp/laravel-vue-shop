@@ -21,9 +21,9 @@
                     </ul>
                 @endif
                 @if(!isset($product))
-                    {{ Form::open(['route' => ['admin.products.store'], 'method' => 'post', 'files' => true]) }}
+                    {{ Form::open(['route' => ['admin.products.store'], 'method' => 'post', 'files' => true, 'id' => 'formElem']) }}
                 @else
-                    {{ Form::model($product, ['route' => ['admin.products.update', $product->getKey()], 'method' => 'put']) }}
+                    {{ Form::model($product, ['route' => ['admin.products.update', $product->getKey()], 'method' => 'put', 'files' => true, 'id' => 'formElem']) }}
                 @endif
                 <div class="form-group">
                     {{ Form::label('title', 'Title') }}
@@ -51,11 +51,19 @@
                                     ['class' => 'form-control', 'placeholder' => 'Select categories']
                     ) }}
                 </div>
-                <div class="form-group">
+
+                <div class="view m-4">
+                </div>
+
+                <div class="form-group" id="image">
                     {{ Form::label('image', 'Cover image') }}
                     {{ Form::file('image') }}
                 </div>
-                    <div class="form-group">
+
+                <div class="views m-4">
+                </div>
+
+                <div class="form-group" id="images">
                     {{ Form::label('images', 'Cover image') }}
                     {{Form::file('images[]', ['multiple'])}}
                 </div>
@@ -70,3 +78,43 @@
         <!-- /.card -->
     </div>
 @endsection
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+//-------------------------------Main Image------------------------------------------------
+        document.querySelector('#image').addEventListener('change', function () {
+
+            const formData = new FormData(formElem);
+            const name = formData.get('image').name;
+            const img = new Image(100, 100);
+            img.style = "border: 1px solid darkblue; margin: 10px";
+            img.src = '{{ asset('images') }}' + '/' + name;
+
+            let view = document.querySelector('.view');
+
+            if (view.innerHTML !== '') {
+                view.firstChild.remove();
+            }
+            view.insertBefore(img, view.firstChild);
+        });
+//--------------------------------Many Image------------------------------------------------
+        document.querySelector('#images').addEventListener('change', function () {
+
+            const formData = new FormData(formElem);
+            const name = formData.getAll('images[]');
+            let views = document.querySelector('.views');
+
+            while (views.firstChild) {
+                views.removeChild(views.firstChild);
+            }
+
+            for (let value of name) {
+                const img = new Image(100, 100);
+                img.style = "border: 1px solid darkblue; margin: 10px";
+                img.src = '{{ asset('images') }}' + '/' + value.name;
+                views.insertBefore(img, views.firstChild);
+            }
+        });
+//------------------------------------------------------------------------------------------
+    });
+</script>

@@ -35,7 +35,7 @@ class ProdController extends Controller
 
     public function store(ProductFormRequest $request)
     {
-//--------------------------------Main image----------------------------
+        //--------------------------------Main image----------------------------
 
         if ($request->has('image')) {
             $file = $request->file('image');
@@ -50,10 +50,10 @@ class ProdController extends Controller
         }
         $date = $request->all();
         $date['image'] = $path ?? null;
-//        dd($date['image']);
         $model = Product::create($date);
-//        dd($model->id);
-//-------------------------------Many images----------------------------
+
+        //-------------------------------Many images----------------------------
+
         if ($request->has('images')) {
             $files = $request->file('images');
             foreach ($files as $file) {
@@ -68,14 +68,13 @@ class ProdController extends Controller
                 $images[] = $path;
             }
         }
-
         foreach ($images as $image) {
             Gallerie::create([
                 'photos' => $image,
                 'product_id' => $model->id,
             ]);
         }
-//-----------------------------------------------------------------------
+        //-----------------------------------------------------------------------
 
         return redirect()->route('admin.products.index');
     }
@@ -85,16 +84,59 @@ class ProdController extends Controller
         $categories = Category::all();
         $categories = $categories->pluck('name', 'id');
         $productCategories = $product->category()->pluck('id');
+        $galleries = $product->galleries()->get();
 
         return view(
             'admin.products.edit',
-            compact('product', 'categories', 'productCategories')
+            compact('product', 'categories', 'productCategories', 'galleries')
         );
     }
 
     public function update(ProductFormRequest $request, Product $product)
     {
-        $product->update($request->all());
+        //--------------------------------Main image----------------------------
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $filenameWithExt = $file->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extention = $file->getClientOriginalExtension();
+            $fileNameToStore = $filename . '_' . time() . '.' . $extention;
+            $path = $file->storeAs(
+                'public/images/product',
+                $fileNameToStore
+            );
+        }
+        $date = $request->all();
+
+        $date['image'] = $path ?? $product->image;
+
+        //-------------------------------Many images----------------------------
+
+        if ($request->has('images')) {
+            $files = $request->file('images');
+            foreach ($files as $file) {
+                $filenameWithExt = $file->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extention = $file->getClientOriginalExtension();
+                $fileNameToStore = $filename . '_' . time() . '.' . $extention;
+                $path = $file->storeAs(
+                    'public/images/product',
+                    $fileNameToStore
+                );
+
+                $images[] = $path;
+            }
+            $product->galleries()->forceDelete();
+            foreach ($images as $image) {
+                Gallerie::create([
+                    'photos' => $image,
+                    'product_id' => $product->id,
+                ]);
+            }
+        }
+//-----------------------------------------------------------------------
+
+        $product->update($date);
         return redirect()->route('admin.products.index');
     }
 
