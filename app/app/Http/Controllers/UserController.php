@@ -13,7 +13,7 @@ class UserController extends Controller
     {
         $users = User::all();
         $permissions = Permission::all();
-        return view('users.index', compact(['users', 'permissions']));
+        return view('admin.users.index', compact(['users', 'permissions']));
     }
 
     public function create()
@@ -33,8 +33,13 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $roles = Role::orderBy('name')->get();
-        return view('users.edit', compact(['user', 'roles']));
+//        $roles = Role::orderBy('name')->get();
+
+        $roles = Role::all();
+        $roles = $roles->pluck('name', 'id');
+        $rolesList = $user->roles()->pluck('id');
+
+        return view('admin.users.edit', compact(['user', 'roles', 'rolesList']));
     }
 
     public function update(Request $request, User $user)
@@ -50,6 +55,8 @@ class UserController extends Controller
 
         $role = Role::find($request->role);
         $user->syncRoles($role->name);
+        $user->update($request->all());
+
 
         return redirect()->back()->with(
             'success',

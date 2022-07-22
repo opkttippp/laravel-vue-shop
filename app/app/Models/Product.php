@@ -23,6 +23,7 @@ class Product extends Model
             'barcode',
             'stock',
             'category_id',
+            'manufactur_id',
         ];
 
     public function category()
@@ -33,5 +34,10 @@ class Product extends Model
     public function galleries()
     {
         return $this->hasMany(Gallerie::class);
+    }
+
+    public function manufactur()
+    {
+        return $this->belongsTo(Manufactur::class);
     }
 }

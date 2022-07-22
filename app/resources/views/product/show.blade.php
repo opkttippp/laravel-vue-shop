@@ -50,11 +50,16 @@
                     </div>
                     <p class="lead">
                         <span class="mr-1"></span>
-                        <span>${{ $product->price }}</span>
+                        <span>₴{{ $product->price }}</span>
                     </p>
                     <p class="lead font-weight-bold">Description</p>
                     <p>
                         {{ Str::limit($product->description, 190, ' (...)') }}
+                    </p>
+
+                    <p class="lead font-weight-bold">Manufactur</p>
+                    <p>
+                        {{ $product->manufactur->name}} - {{ $product->manufactur->country}}
                     </p>
                 </div>
                 <!--Content-->

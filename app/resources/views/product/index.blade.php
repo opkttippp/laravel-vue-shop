@@ -100,7 +100,7 @@
                             </span>
                                 </a>
                             </p>
-                            <p class="d-flex justify-content-start fw-bold">&dollar;{{ $product->price }}</p>
+                            <p class="d-flex justify-content-start fw-bold">₴{{ $product->price }}</p>
                             <p class="card-text">
                                 {{ Str::limit($product->description, 69, ' (...)') }}
                             </p>
@@ -111,7 +111,7 @@
                     {{ $product->stock > 0 ? 'on stock' : 'not on stock'}}
                     </span>
                             <span class="float-right">
-                    <a href="{{ $product->stock > 0 ? route('cart.add', ['product_id' => $product->id]) : '#' }}"
+                    <a href="{{ $product->stock > 0 ? route('cart.add', ['productId' => $product->id]) : '#' }}"
                        class="btn btn-sm btn-outline-secondary waves-effect">
                     to cart <i class="fas fa-cart-arrow-down"></i>
                     </a>

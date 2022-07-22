@@ -9,6 +9,11 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">@yield('title')</h3>
+                <div class="card-tools">
+                    <div class="mt-2">
+                        <a href="{{ route('admin.products.index') }}" class="btn btn-primary">Return</a>
+                    </div>
+                </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -47,24 +52,24 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('category_id', 'Categories') }}
-                    {{ Form::select('category_id', $categories, $productCategories,
-                                    ['class' => 'form-control', 'placeholder' => 'Select categories']
+                    {{ Form::select('category_id', $categories, $productCategories,['class' => 'form-control', 'placeholder' => 'Select categories']
                     ) }}
                 </div>
-
+                <div class="form-group">
+                    {{ Form::label('manufactur_id', 'Manufacturs') }}
+                    {{ Form::select('manufactur_id', $manufactur, $productCategories,['class' => 'form-control', 'placeholder' => 'Select categories']
+                    ) }}
+                </div>
                 <div class="view m-4">
                 </div>
-
                 <div class="form-group" id="image">
-                    {{ Form::label('image', 'Cover image') }}
+                    {{ Form::label('image', 'Cover main image') }}
                     {{ Form::file('image') }}
                 </div>
-
                 <div class="views m-4">
                 </div>
-
                 <div class="form-group" id="images">
-                    {{ Form::label('images', 'Cover image') }}
+                    {{ Form::label('images', 'Cover other images') }}
                     {{Form::file('images[]', ['multiple'])}}
                 </div>
                 <!-- /.card-body -->

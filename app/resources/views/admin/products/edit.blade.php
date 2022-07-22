@@ -9,6 +9,11 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">@yield('title')</h3>
+                <div class="card-tools">
+                    <div class="mt-2">
+                        <a href="{{ route('admin.products.index') }}" class="btn btn-primary">Return</a>
+                    </div>
+                </div>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -48,8 +53,12 @@
                 <div class="form-group">
                     {{ Form::label('category_id', 'Categories') }}
                     {{ Form::select('category_id', $categories, $productCategories,
-                                    ['class' => 'form-control', 'placeholder' => 'Select categories']
-                    ) }}
+                                    ['class' => 'form-control']) }}
+                </div>
+                <div class="form-group">
+                    {{ Form::label('manufactur_id', 'Manufacturs') }}
+                    {{ Form::select('manufactur_id', $manufactur, $productManufactur,
+                                    ['class' => 'form-control']) }}
                 </div>
                 <div class="view m-4">
                     <img src="{{asset('storage/'.$product->image)}}" height="100px" width="100px" alt="image"

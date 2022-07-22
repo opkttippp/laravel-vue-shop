@@ -5,12 +5,11 @@
 @endsection
 
 @section('main_content')
-    <div class="col-12">
-        <div class="card text-dark">
+    <div class="col-12 text-dark">
+        <div class="card">
             <div class="card-header">
                 <h3 class="card-title"> Products </h3>
                 <div class="card-tools">
-{{--                    {{ $products->links() }}--}}
                     <div class="mt-2">
                         <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Create</a>
                     </div>
@@ -67,9 +66,10 @@
                     </tbody>
                 </table>
             </div>
-            <!-- /.card-body -->
         </div>
-        <!-- /.card -->
+        <div class="d-flex justify-content-center">
+            {{ $products->links() }}
+        </div>
     </div>
 
     @if(count($trashedProducts) > 0)

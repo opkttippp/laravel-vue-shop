@@ -12,13 +12,14 @@ class RoleController extends Controller
     {
 //        $roles = Role::orderBy('id')->where('name', '!=', 'admin')->get();
         $roles = Role::orderBy('id')->get();
-        return view('roles.index', compact('roles'));
+        return view('admin.roles.index', compact('roles'));
     }
 
     public function create()
     {
         $permissions = Permission::OrderBy('id')->get();
-        return view('roles.create', compact('permissions'));
+
+        return view('admin.roles.create', compact('permissions'));
     }
 
     public function update(Request $request, $id)
@@ -67,10 +68,8 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = Role::find($id);
-//        $role = Role::where('name', '!=', 'admin')->findOrFail($id);
-
         $permissions = Permission::OrderBy('id')->get();
-        return view('roles.edit', compact(['permissions', 'role',]));
+        return view('admin.roles.edit', compact(['permissions', 'role',]));
     }
 
     public function destroy($id)

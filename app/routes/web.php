@@ -19,11 +19,11 @@ use App\Http\Controllers\MainController;
 Route::group(
     ['prefix' => '/admin/roles', 'middleware' => ['role:manager|admin'], 'controller'  => RoleController::class],
     function () {
-        Route::get('/', 'index')->middleware('can:show post');
-        Route::get('/create', 'create')->name('rolesCreate')->middleware('can:add post');
-        Route::post('/create', 'store')->name('rolesStore')->middleware('can:add post');
-        Route::get('/update/{id}', 'edit')->name('rolesEdit')->middleware('can:edit post');
-        Route::post('/update/{id}', 'update')->name('rolesUpdate')->middleware('can:edit post');
+        Route::get('/', 'index')->name('admin.roles.index')->middleware('can:show post');
+        Route::get('/create', 'create')->name('admin.roles.create')->middleware('can:add post');
+        Route::post('/create', 'store')->name('admin.roles.store')->middleware('can:add post');
+        Route::get('/update/{id}', 'edit')->name('admin.roles.edit')->middleware('can:edit post');
+        Route::put('/update/{id}', 'update')->name('admin.roles.update')->middleware('can:edit post');
         Route::get('/delete/{id}', 'destroy')->middleware('can:delete post');
     }
 );
@@ -33,10 +33,10 @@ Route::group(
 Route::group(
     ['prefix' => '/admin/users', 'middleware' => ['role:admin|manager'], 'controller' => UserController::class],
     function () {
-        Route::get('/', 'index')->middleware('can:show post');
-        Route::get('/update/{user}', 'edit')->name('usersEdit')->middleware('can:edit post');
-        Route::post('/update/{user}', 'update')->name('usersUpdate')->middleware('can:edit post');
-        Route::get('/delete/{user}', 'destroy')->middleware('can:delete post');
+        Route::get('/', 'index')->name('admin.users.index')->middleware('can:show post');
+        Route::get('/update/{user}', 'edit')->name('admin.users.edit')->middleware('can:edit post');
+        Route::put('/update/{user}', 'update')->name('admin.users.update')->middleware('can:edit post');
+        Route::get('/delete/{user}', 'destroy')->name('admin.users.delete')->middleware('can:delete post');
     }
 );
 
@@ -76,7 +76,7 @@ Route::get('/verify/{token}', [RegisterController::class, 'verify'])->name(
     'register.verify'
 );
 //-------------------------авторизация через соцсети-------------------------
-Route::group(['middleware' => ['web']], function ($api) {
+Route::group(['middleware' => ['web']], function () {
     Route::get('api/redirect/{service}', [SocialAuthController::class, 'redirectToProvider']);
     Route::get('api/callback/{service}', [SocialAuthController::class, 'handleProviderCallback']);
 });
@@ -86,16 +86,13 @@ Route::group(['middleware' => ['web']], function ($api) {
 //---------------------------------Route-------------------------------------
 Route::resource('/product', ProductController::class)->parameters(['product' => 'id']);
 Route::resource('/category', CategoryController::class);
-//Route::get('/cart', [CategoryController::class, 'addToCart'])->name('cart.add');
 Route::get('/catalog/show', [CategoryController::class, 'catalog'])->name('catalog.show');
 Route::get('/catalog', [CategoryController::class, 'catalog'])->name('catalog.index');
 
-
-//---------------------------------Cart--------------------------------------
-
+//---------------------------------Cart----------------------------------------
 Route::group(['prefix' => '/cart', 'controller' => CartController::class], function () {
     Route::get('/', 'index')->name('cart.index');
-    Route::get('/add/{product_id}', 'add')->name('cart.add');
+    Route::get('/add/{productId}', 'add')->name('cart.add');
     Route::patch('/update', 'update')->name('cart.update');
     Route::get('/drop{productId}', 'drop')->name('cart.drop');
 
@@ -104,19 +101,10 @@ Route::group(['prefix' => '/cart', 'controller' => CartController::class], funct
     Route::get('/success/{orderId}', 'success')->name('cart.success');
 });
 
-
+//--------------------------------- Order --------------------------------------
 route::resource('/order', OrderController::class, ['only' => ['store', 'update', 'destroy', 'show']]);
 
-
-//--------------------------------------------------------------------------
-//Route::prefix('users')->group(function () {
-//    Route::get('/', 'UserController@index')->name('admin.users.index');
-//    Route::get('edit/{user}', 'UserController@edit')->name('admin.users.edit');
-//    Route::put('edit/{user}', 'UserController@update')->name('admin.users.update');
-//    Route::get('delete/{user}', 'UserController@delete')->name('admin.users.delete');
-//});
-
-// Products
+//--------------------------------Admin Products-------------------------------
 Route::group(['prefix' => 'admin/product', 'controller' => ProdController::class], function () {
     Route::get('/', 'index')->name('admin.products.index');
     Route::get('create', 'create')->name('admin.products.create');
@@ -128,7 +116,7 @@ Route::group(['prefix' => 'admin/product', 'controller' => ProdController::class
     Route::get('restore/{id}', 'restore')->name('admin.products.restore');
 });
 
-// Orders
+//-------------------------------------Orders---------------------------------
 Route::prefix('orders')->group(function () {
     Route::get('/', 'OrderController@index')->name('admin.orders.index');
     Route::get('show/{id}', 'OrdersController@show')->name('admin.orders.show');

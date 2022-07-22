@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductFormRequest;
 use App\Models\Category;
 use App\Models\Gallerie;
+use App\Models\Manufactur;
 use App\Models\Product;
 
 class ProdController extends Controller
@@ -23,13 +24,23 @@ class ProdController extends Controller
 
     public function create()
     {
+        //-------------------list categories-------------------------------------
         $categories = Category::all();
         $categories = $categories->pluck('name', 'id');
         $productCategories = [];
+        //-------------------list manufactur-------------------------------------
+        $manufactur = Manufactur::all();
+        $manufactur = $manufactur->pluck('name', 'id');
+        $productManufactur = [];
 
         return view(
             'admin.products.create',
-            compact('categories', 'productCategories')
+            compact(
+                'categories',
+                'productCategories',
+                'manufactur',
+                'productManufactur'
+            )
         );
     }
 
@@ -81,20 +92,33 @@ class ProdController extends Controller
 
     public function edit(Product $product)
     {
+        //-------------------list categories-------------------------------------
         $categories = Category::all();
         $categories = $categories->pluck('name', 'id');
         $productCategories = $product->category()->pluck('id');
+        //-------------------list manufactur-------------------------------------
+        $manufactur = Manufactur::all();
+        $manufactur = $manufactur->pluck('name', 'id');
+        $productManufactur = $product->manufactur()->pluck('id');
+
         $galleries = $product->galleries()->get();
 
         return view(
             'admin.products.edit',
-            compact('product', 'categories', 'productCategories', 'galleries')
+            compact(
+                'product',
+                'categories',
+                'productCategories',
+                'manufactur',
+                'productManufactur',
+                'galleries'
+            )
         );
     }
 
     public function update(ProductFormRequest $request, Product $product)
     {
-        //--------------------------------Main image----------------------------
+        //--------------------------------Main image-------------------------------
         if ($request->has('image')) {
             $file = $request->file('image');
             $filenameWithExt = $file->getClientOriginalName();
@@ -110,7 +134,7 @@ class ProdController extends Controller
 
         $date['image'] = $path ?? $product->image;
 
-        //-------------------------------Many images----------------------------
+        //-------------------------------Many images-------------------------------
 
         if ($request->has('images')) {
             $files = $request->file('images');
@@ -134,8 +158,6 @@ class ProdController extends Controller
                 ]);
             }
         }
-//-----------------------------------------------------------------------
-
         $product->update($date);
         return redirect()->route('admin.products.index');
     }
@@ -157,7 +179,8 @@ class ProdController extends Controller
     public function destroy($id)
     {
         $product = Product::onlyTrashed()->whereId($id)->first();
-        $product->galleries()->forceDelete();
+        //--------------------------CASCADE Delete-----------------------------
+//        $product->galleries()->forceDelete();
         $product->forceDelete();
 
         return redirect()->route('admin.products.index');

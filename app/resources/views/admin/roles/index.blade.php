@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-    Users
+    Roles
 @endsection
 
 @section('main_content')
@@ -13,7 +13,7 @@
                     {{--                    {{ $products->links() }}--}}
                     <div class="mt-2">
                         @if(auth()->user()->can('add post'))
-                            {{--                            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">Create</a>--}}
+                            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">Create</a>
                         @endif
                     </div>
                 </div>
@@ -22,37 +22,28 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
                         <th>Role</th>
+                        <th>Name</th>
+                        <th>Data</th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
+                    @foreach($roles as $role)
                         <tr>
-                            <td>{{ $user->getKey() }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>
-
-                                <span class="badge
-                                @foreach($user->roles as $role)
-                                {{$role->name == 'admin'? 'badge-danger' : 'badge-success'}}">
-                                        {{$role->name}}
-                                    @endforeach
-                            </span>
-                            </td>
+                            <td>{{$role->id}}</td>
+                            <td>{{$role->name}}</td>
+                            <td>{{$role->created_at}}</td>
                             <td>
                                 <div class="btn-group">
                                     @if(auth()->user()->can('edit post'))
-                                        <a href="{{route('admin.users.edit', $user->id)}}"
-                                           class="btn btn-primary">Edit</a>
+                                        <a href="{{route('admin.roles.edit', $role->id)}}" class="btn btn-primary">Edit</a>
                                     @endif
                                     @if(auth()->user()->can('delete post'))
-                                        <a href="{{route('admin.users.delete', $user->id)}}" class="btn btn-danger">Delete</a>
-                                    @endif                                </div>
+                                        <a href="{{url('/admin/roles/delete', $role->id)}}"
+                                           class="btn btn-danger">Delete</a>
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                     @endforeach
