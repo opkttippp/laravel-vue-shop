@@ -14,7 +14,7 @@
                 grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
                 /*grid-template-columns: 1fr 1fr 1fr;*/
                 /*grid-gap: 2vw;*/
-                /*background-color: #95999c;*/
+                background-color: #95999c;
             }
 
             #grid > div {
@@ -22,7 +22,7 @@
                 padding: .5em;
                 margin: .05em;
                 background: white;
-                box-shadow: 0 0 0 1px darkgrey;
+
             }
 
             #inner-grid {
@@ -47,7 +47,7 @@
         <div id="grid" class="mb-3">
             @foreach($rev as $product)
                 <div id="inner-grid">
-                    <div style="overflow: hidden; height: 150px;">
+                    <div style="overflow: hidden; height: 150px; ">
                         <a href="{{ route('product.show', ['id' => $product->id]) }}">
                             <img class="rounded mx-auto d-block" src="{{asset('storage/'.$product->image)}}"
                                  height="125px" alt="tv" style="width: 80%; height: 80%; object-fit: contain;">
@@ -55,13 +55,13 @@
                     </div>
                     <div id="inner-grid-div">
                         <div class="ml-3">
-                                <a href="{{ route('product.show', ['id' => $product->id]) }}">
-                                    {{ $product->title }}
-                                </a>
+                            <a href="{{ route('product.show', ['id' => $product->id]) }}">
+                                {{ $product->title }}
+                            </a>
                         </div>
                         <div>
                             <p>
-                                <a class="d-flex justify-content-start mt-4" href="{{ route('category.show',['id' => $product->category_id]) }}">
+                                <a class="d-flex justify-content-start mt-4" href="/">
                             <span class="badge
                             @if ($product->category->id == 1)
                                 badge-primary
@@ -78,7 +78,7 @@
                             </p>
                         </div>
                         <div>
-                        <p class="d-flex justify-content-start fw-bold">₴{{ $product->price }}</p>
+                            <p class="d-flex justify-content-start fw-bold">₴{{ $product->price }}</p>
                         </div>
                         <div class="card-footer">
                                 <span class="badge {{ $product->stock > 0 ? 'badge-success' : 'badge-danger'}} float-left mt-2">

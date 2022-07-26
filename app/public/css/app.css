@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);
 @charset "UTF-8";
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
@@ -11740,11 +11741,6 @@ html.os-html,html.os-html>.os-host{display:block;overflow:hidden;box-sizing:bord
 /*    url('../../public/fonts/@font-face/heinrich.eot');*/
 /*}*/
 
-p {
-    font-family: heinrich, serif;
-    font-size: 1.5em;
-}
-
 html,
 body {
     background-image: url(/images/fone.jpeg?2db1a94ca6e10dcaea2ea9320582b267);
@@ -11753,11 +11749,13 @@ body {
     margin: 0;
     /*font-family: verdana, a}rial, sans-serif;*/
     font: 0.9em/1.2 Arial, Helvetica, sans-serif;
+    color: #1d2124;
 }
 
-body {
-    color: #fff;
-    font-size: 1.1em;
+html,
+body a {
+    color: #1d2124;
+    text-decoration: none;
 }
 
 main {
@@ -11773,7 +11771,7 @@ section {
     align-items: center;
     margin: 5% auto;
     padding-left: 20%;
-    width: 86%;
+    width: 99%;
 }
 
 section h2 {
@@ -11842,7 +11840,8 @@ footer p {
 }
 
 .container{
-    color: #1d2124;
+    /*color: #1d2124;*/
+    /*background-color: whitesmoke;*/
 }
 
 .green {

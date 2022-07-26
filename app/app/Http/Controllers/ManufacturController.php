@@ -14,7 +14,9 @@ class ManufacturController extends Controller
      */
     public function index()
     {
-        //
+        $prod = Manufactur::orderBy('id', 'desc')->take(12)->paginate(3);
+
+        return view('manufactur.index', ['rev' => $prod]);
     }
 
     /**

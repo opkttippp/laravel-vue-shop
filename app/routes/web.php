@@ -17,13 +17,24 @@ use App\Http\Controllers\MainController;
 
 //--------------------------------Roles-----------------------------------------
 Route::group(
-    ['prefix' => '/admin/roles', 'middleware' => ['role:manager|admin'], 'controller'  => RoleController::class],
+    [
+        'prefix' => '/admin/roles', 'middleware' => ['role:manager|admin'],
+        'controller' => RoleController::class
+    ],
     function () {
-        Route::get('/', 'index')->name('admin.roles.index')->middleware('can:show post');
-        Route::get('/create', 'create')->name('admin.roles.create')->middleware('can:add post');
-        Route::post('/create', 'store')->name('admin.roles.store')->middleware('can:add post');
-        Route::get('/update/{id}', 'edit')->name('admin.roles.edit')->middleware('can:edit post');
-        Route::put('/update/{id}', 'update')->name('admin.roles.update')->middleware('can:edit post');
+        Route::get('/', 'index')->name('admin.roles.index')->middleware(
+            'can:show post'
+        );
+        Route::get('/create', 'create')->name('admin.roles.create')->middleware(
+            'can:add post'
+        );
+        Route::post('/create', 'store')->name('admin.roles.store')->middleware(
+            'can:add post'
+        );
+        Route::get('/update/{id}', 'edit')->name('admin.roles.edit')
+            ->middleware('can:edit post');
+        Route::put('/update/{id}', 'update')->name('admin.roles.update')
+            ->middleware('can:edit post');
         Route::get('/delete/{id}', 'destroy')->middleware('can:delete post');
     }
 );
@@ -31,12 +42,20 @@ Route::group(
 //--------------------------------Users----------------------------------------
 
 Route::group(
-    ['prefix' => '/admin/users', 'middleware' => ['role:admin|manager'], 'controller' => UserController::class],
+    [
+        'prefix' => '/admin/users', 'middleware' => ['role:admin|manager'],
+        'controller' => UserController::class
+    ],
     function () {
-        Route::get('/', 'index')->name('admin.users.index')->middleware('can:show post');
-        Route::get('/update/{user}', 'edit')->name('admin.users.edit')->middleware('can:edit post');
-        Route::put('/update/{user}', 'update')->name('admin.users.update')->middleware('can:edit post');
-        Route::get('/delete/{user}', 'destroy')->name('admin.users.delete')->middleware('can:delete post');
+        Route::get('/', 'index')->name('admin.users.index')->middleware(
+            'can:show post'
+        );
+        Route::get('/update/{user}', 'edit')->name('admin.users.edit')
+            ->middleware('can:edit post');
+        Route::put('/update/{user}', 'update')->name('admin.users.update')
+            ->middleware('can:edit post');
+        Route::get('/delete/{user}', 'destroy')->name('admin.users.delete')
+            ->middleware('can:delete post');
     }
 );
 
@@ -61,8 +80,10 @@ Route::group(
         Route::get('/add', 'reviewAdd')->name('reviewAdd')->middleware('auth');
         Route::post('/check', 'check')->name('check');
         Route::get('/{id}', 'reviewOne')->name('reviewOne');
-        Route::get('/{id}/update', 'reviewOneUpdate')->name('reviewOneUpdate')->middleware('can:edit post');
-        Route::post('/{id}/update', 'reviewUpdate')->name('reviewUpdate')->middleware('can:edit post');
+        Route::get('/{id}/update', 'reviewOneUpdate')->name('reviewOneUpdate')
+            ->middleware('can:edit post');
+        Route::post('/{id}/update', 'reviewUpdate')->name('reviewUpdate')
+            ->middleware('can:edit post');
         Route::get('/{id}/delete', 'reviewOneDelete')->name('reviewOneDelete');
     }
 );
@@ -77,48 +98,76 @@ Route::get('/verify/{token}', [RegisterController::class, 'verify'])->name(
 );
 //-------------------------авторизация через соцсети-------------------------
 Route::group(['middleware' => ['web']], function () {
-    Route::get('api/redirect/{service}', [SocialAuthController::class, 'redirectToProvider']);
-    Route::get('api/callback/{service}', [SocialAuthController::class, 'handleProviderCallback']);
+    Route::get(
+        'api/redirect/{service}',
+        [SocialAuthController::class, 'redirectToProvider']
+    );
+    Route::get(
+        'api/callback/{service}',
+        [SocialAuthController::class, 'handleProviderCallback']
+    );
 });
 //Route::get('auth/github', [GitHubController::class, 'gitRedirect']);
 //Route::get('auth/github/callback', [GitHubController::class, 'gitCallback']);
 
 //---------------------------------Route-------------------------------------
-Route::resource('/product', ProductController::class)->parameters(['product' => 'id']);
-Route::resource('/category', CategoryController::class);
-Route::get('/catalog/show', [CategoryController::class, 'catalog'])->name('catalog.show');
-Route::get('/catalog', [CategoryController::class, 'catalog'])->name('catalog.index');
-
+Route::resource('/product', ProductController::class)->parameters(
+    ['product' => 'id']
+);
+Route::resource('/category', CategoryController::class)->parameters(
+    ['category' => 'id']
+);
+Route::get('/catalog/show', [CategoryController::class, 'catalog'])->name(
+    'catalog.show'
+);
+Route::get('/catalog', [CategoryController::class, 'catalog'])->name(
+    'catalog.index'
+);
+//---------------------------------Manufactor-------------------------------------
+Route::get(
+    '/manufactor',
+    [\App\Http\Controllers\ManufacturController::class, 'index']
+)->name('manufactor.index');
 //---------------------------------Cart----------------------------------------
-Route::group(['prefix' => '/cart', 'controller' => CartController::class], function () {
-    Route::get('/', 'index')->name('cart.index');
-    Route::get('/add/{productId}', 'add')->name('cart.add');
-    Route::patch('/update', 'update')->name('cart.update');
-    Route::get('/drop{productId}', 'drop')->name('cart.drop');
+Route::group(
+    ['prefix' => '/cart', 'controller' => CartController::class],
+    function () {
+        Route::get('/', 'index')->name('cart.index');
+        Route::get('/add/{productId}', 'add')->name('cart.add');
+        Route::patch('/update', 'update')->name('cart.update');
+        Route::get('/drop{productId}', 'drop')->name('cart.drop');
 
-    Route::get('/destroy', 'destroy')->name('cart.destroy');
-    Route::get('/checkout', 'checkout')->name('cart.checkout');
-    Route::get('/success/{orderId}', 'success')->name('cart.success');
-});
+        Route::get('/destroy', 'destroy')->name('cart.destroy');
+        Route::get('/checkout', 'checkout')->name('cart.checkout');
+        Route::get('/success/{orderId}', 'success')->name('cart.success');
+    }
+);
 
 //--------------------------------- Order --------------------------------------
-route::resource('/order', OrderController::class, ['only' => ['store', 'update', 'destroy', 'show']]);
+route::resource(
+    '/order',
+    OrderController::class,
+    ['only' => ['store', 'update', 'destroy', 'show']]
+);
 
 //--------------------------------Admin Products-------------------------------
-Route::group(['prefix' => 'admin/product', 'controller' => ProdController::class], function () {
-    Route::get('/', 'index')->name('admin.products.index');
-    Route::get('create', 'create')->name('admin.products.create');
-    Route::post('create', 'store')->name('admin.products.store');
-    Route::get('edit/{product}', 'edit')->name('admin.products.edit');
-    Route::put('edit/{product}', 'update')->name('admin.products.update');
-    Route::get('delete/{product}', 'delete')->name('admin.products.delete');
-    Route::get('drop/{id}', 'destroy')->name('admin.products.destroy');
-    Route::get('restore/{id}', 'restore')->name('admin.products.restore');
-});
+Route::group(
+    ['prefix' => 'admin/product', 'controller' => ProdController::class],
+    function () {
+        Route::get('/', 'index')->name('admin.products.index');
+        Route::get('create', 'create')->name('admin.products.create');
+        Route::post('create', 'store')->name('admin.products.store');
+        Route::get('edit/{product}', 'edit')->name('admin.products.edit');
+        Route::put('edit/{product}', 'update')->name('admin.products.update');
+        Route::get('delete/{product}', 'delete')->name('admin.products.delete');
+        Route::get('drop/{id}', 'destroy')->name('admin.products.destroy');
+        Route::get('restore/{id}', 'restore')->name('admin.products.restore');
+    }
+);
 
 //-------------------------------------Orders---------------------------------
-Route::prefix('orders')->group(function () {
-    Route::get('/', 'OrderController@index')->name('admin.orders.index');
-    Route::get('show/{id}', 'OrdersController@show')->name('admin.orders.show');
-    Route::get('delete/{id}', 'OrderController@delete')->name('admin.orders.delete');
-});
+//Route::prefix('orders')->group(function () {
+//    Route::get('/', 'OrderController@index')->name('admin.orders.index');
+//    Route::get('show/{id}', 'OrderController@show')->name('admin.orders.show');
+//    Route::get('delete/{id}', 'OrderController@delete')->name('admin.orders.delete');
+//});
