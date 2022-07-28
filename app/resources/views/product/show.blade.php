@@ -10,7 +10,7 @@
             display: grid;
             grid-template-columns:repeat(auto-fill, minmax(25%, 1fr));
             /*align-self: center;*/
-            /*grid-template-columns: 1fr 1fr 1fr;*/
+            /*grid-template-rows: 400px;*/
             /*grid-gap: 2vw;*/
             /*background-color: #95999c;*/
         }
@@ -38,96 +38,16 @@
                         <img src="{{asset('storage/'.$product->image)}}"
                              alt="Main image" style="width: 80%; height: 80%; object-fit: contain; justify-content: center;">
                     </div>
-
-
-{{--                    <div id="carousel-example-2" class="carousel slide carousel-fade mb-3" data-ride="carousel">--}}
-{{--                        <!--Indicators-->--}}
-{{--                        <ol class="carousel-indicators">--}}
-{{--                            <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>--}}
-{{--                            <li data-target="#carousel-example-2" data-slide-to="1"></li>--}}
-{{--                            <li data-target="#carousel-example-2" data-slide-to="2"></li>--}}
-{{--                            <li data-target="#carousel-example-2" data-slide-to="3"></li>--}}
-{{--                        </ol>--}}
-{{--                        <!--/.Indicators-->--}}
-{{--                        <!--Slides-->--}}
-{{--                        <div class="carousel-inner" role="listbox">--}}
-{{--                            <div class="carousel-item active">--}}
-{{--                                <div class="view">--}}
-{{--                                    <img class="d-block w-100" src="{{asset('images/1.jpg')}}"--}}
-{{--                                         alt="First slide" style="max-height: 400px">--}}
-{{--                                    <div class="mask rgba-black-light"></div>--}}
-{{--                                </div>--}}
-{{--                                <div class="carousel-caption">--}}
-{{--                                    <h3 class="h3-responsive">Light mask</h3>--}}
-{{--                                    <p>First text</p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="carousel-item">--}}
-{{--                                <!--Mask color-->--}}
-{{--                                <div class="view">--}}
-{{--                                    <img class="d-block w-100" src="{{asset('images/2.jpg')}}"--}}
-{{--                                         alt="Second slide" style="max-height: 400px">--}}
-{{--                                    <div class="mask rgba-black-strong"></div>--}}
-{{--                                </div>--}}
-{{--                                <div class="carousel-caption">--}}
-{{--                                    <h3 class="h3-responsive">Strong mask</h3>--}}
-{{--                                    <p>Secondary text</p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="carousel-item">--}}
-{{--                                <!--Mask color-->--}}
-{{--                                <div class="view">--}}
-{{--                                    <img class="d-block w-100" src="{{asset('images/3.jpg')}}"--}}
-{{--                                         alt="Second slide" style="max-height: 400px">--}}
-{{--                                    <div class="mask rgba-black-strong"></div>--}}
-{{--                                </div>--}}
-{{--                                <div class="carousel-caption">--}}
-{{--                                    <h3 class="h3-responsive">Strong mask</h3>--}}
-{{--                                    <p>Secondary text</p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="carousel-item">--}}
-{{--                                <!--Mask color-->--}}
-{{--                                <div class="view">--}}
-{{--                                    <img class="d-block w-100" src="{{asset('images/4.jpg')}}"--}}
-{{--                                         alt="Second slide" style="max-height: 400px">--}}
-{{--                                    <div class="mask rgba-black-strong"></div>--}}
-{{--                                </div>--}}
-{{--                                <div class="carousel-caption">--}}
-{{--                                    <h3 class="h3-responsive">Strong mask</h3>--}}
-{{--                                    <p>Secondary text</p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <!--/.Slides-->--}}
-{{--                        <!--Controls-->--}}
-{{--                        <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">--}}
-{{--                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>--}}
-{{--                            <span class="sr-only">Previous</span>--}}
-{{--                        </a>--}}
-{{--                        <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">--}}
-{{--                            <span class="carousel-control-next-icon" aria-hidden="true"></span>--}}
-{{--                            <span class="sr-only">Next</span>--}}
-{{--                        </a>--}}
-{{--                        <!--/.Controls-->--}}
-{{--                    </div>--}}
-
-
-
-
-
-{{--                    <div class="d-flex flex-row justify-content-around m-2" style="height: 80px; cursor: pointer;">--}}
                     <div id="grid" style="cursor: pointer; margin-left: 20px;">
                         @foreach($image as $img)
                                 <img class="many p-2" src="{{asset('storage/'.$img->photos)}}" height="80%" width="80%"
                                      alt="image">
                         @endforeach
                     </div>
-{{--                    </div>--}}
                 </div>
-                <!--Grid column-->
 
-                <!--Grid column-->
+
+
                 <div class="col-md-6 mb-4">
                     <div class="">
                         <div class="mb-3">

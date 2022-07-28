@@ -1,5 +1,5 @@
-{{--@extends('layouts.layout')--}}
-@extends('layouts.nov')
+@extends('layouts.layout')
+{{--@extends('layouts.nov')--}}
 
 @section('title')
     {{$title}}

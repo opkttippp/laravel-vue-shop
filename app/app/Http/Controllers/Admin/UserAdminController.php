@@ -1,20 +1,50 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class UserController extends Controller
+class UserAdminController extends Controller
 {
-    public function index(User $user)
+    public function index()
     {
-        $roles = $user->roles->pluck('name');
-        $rolesList = [];
-        return view('user.index', compact('user', 'roles', 'rolesList'));
+        $users = User::all();
+        $permissions = Permission::all();
+        return view('admin.users.index', compact(['users', 'permissions']));
+    }
+
+    public function create()
+    {
+        //
+    }
+
+    public function store(Request $request)
+    {
+        //
+    }
+
+    public function show(User $user)
+    {
+        //
+    }
+
+    public function edit(User $user)
+    {
+//        $roles = Role::orderBy('name')->get();
+
+        $roles = Role::all();
+        $roles = $roles->pluck('name', 'id');
+        $rolesList = $user->roles()->pluck('id');
+
+        return view(
+            'admin.users.edit',
+            compact(['user', 'roles', 'rolesList'])
+        );
     }
 
     public function update(Request $request, User $user)
@@ -37,7 +67,11 @@ class UserController extends Controller
         }
         $request->validate([
             'name' => 'required|max:25',
+            'role' => 'required|integer|exists:roles,id',
         ]);
+
+        $role = Role::find($request->role);
+        $user->syncRoles($role->name);
 
         $user->update($date);
 
@@ -46,6 +80,13 @@ class UserController extends Controller
             'User updated!!'
         );
     }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->back()->with('success', ' User was deleted!!');
+    }
+
     public function deleteImage($images)
     {
         Storage::delete($images);

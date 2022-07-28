@@ -53,8 +53,9 @@ section h2 {
 }
 
 aside {
-    display: flex;
+    /*display: flex;*/
     position: fixed;
+    top: 50px;
     height: 100%;
     width: 18%;
     /*background-color: #37474f;*/
@@ -68,6 +69,7 @@ aside {
 
 .header, .footer {
     display: flex;
+    flex-direction: row;
     margin-top: 25px;
     padding: 0;
     /*background-color: rgb(24, 22, 35);*/

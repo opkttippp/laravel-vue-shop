@@ -26,7 +26,7 @@
     }
 </style>
 
-
+@include('inc.headerer');
 {{--<div class="top fixed-top">--}}
 {{--    <p><img src="{{ asset('images/leaf_1.jpg') }}" width="25px" alt="leaf"></p>--}}
 {{--    <p><a class="nav-link" href={{ route('home') }}>Mysite</a></p>--}}
@@ -52,30 +52,27 @@
                     <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#myModal">Categories</a>
                 </li>
             </ul>
-            <div class="showScroll"></div>
+{{--            <div class="showScroll"></div>--}}
             {{----------------------------------------------------------------------------------------------}}
             @role('admin')
             <div class="reg_auth">
                 <i class="nav-icon far fas fa-table"></i>
-
-                {{--                <a href="{{ url('/admin/users') }}">Users</a>--}}
-                {{--                <a href="{{ url('/admin/roles') }}">Roles</a>--}}
-                <a href={{url('/admin')}}>admin</a>
+                    {{ Auth::user()->name }}
                 <a href="{{ route('logout') }}">Выход</a>
             </div>
             @endrole
             @role('manager')
             <div class="reg_auth">
-                <a href="{{url('/admin')}}">manager</a>
+                    {{ Auth::user()->name }}
                 <a href="{{ route('logout') }}">Выход</a>
             </div>
             @endrole
             @role('user')
             <div class="reg_auth">
                 <a href='#'>
-                    <img src='/images/user.jpg' width='20' height='20' alt='user'>
+                    <img src="{{asset('storage/'.Auth::user()->avatar)}}"  alt="image" height="20px">
                 </a>
-                <a href="#">
+                <a href="{{ route('user.index',['user' => Auth::user()]) }}">
                     {{ Auth::user()->name }}
                 </a>
                 <a href="{{ route('logout') }}">Выход</a>
@@ -158,15 +155,22 @@
     document.addEventListener('DOMContentLoaded', function () {
 
         const top = document.querySelector('.top');
+        const header = document.querySelector('.header');
 
         window.addEventListener('scroll', function () {
-            let scrol = document.querySelector('.showScroll').innerHTML = pageYOffset + 'px';
+            // document.querySelector('.showScroll').innerHTML = pageYOffset + 'px';
 
-            if(scrol > 0)
+            if(pageYOffset > 0)
             {
-                // top.style = 'disp
-            }
+                top.classList.remove('fixed-top');
+                header.style = 'margin-top: 0'
+                // header.classList.add('fixed-top');
+            }else{
+                top.classList.add('fixed-top');
+                header.style = 'margin-top: 25px'
+                // header.classList.remove('fixed-top');
+        }
 
-        });
+    });
     });
 </script>

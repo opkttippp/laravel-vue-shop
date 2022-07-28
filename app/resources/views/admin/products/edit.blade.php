@@ -86,10 +86,10 @@
                         {{ Form::label('image', 'Main image') }}
                         {{ Form::file('image') }}
                     </div>
-                        <div id="grid" class="views m-2" style="">
+                        <div id="grid" class="views m-2" style="overflow: hidden;">
                             @foreach($galleries as $gall)
-                                <img src="{{asset('storage/'.$gall->photos)}}" height="70%" width="70%" alt="image"
-                                     style="width: 70%; height: 70%; object-fit: contain; margin: 10px;">
+                                <img src="{{asset('storage/'.$gall->photos)}}"  alt="image" height="100px"
+                                     style="width: 100px; height: 100px; object-fit: contain; margin: 10px; justify-content: center;">
                             @endforeach
                         </div>
                     <div class="form-group m-4" id="images">

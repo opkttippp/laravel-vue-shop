@@ -21,12 +21,12 @@
             <div class="card-body">
                 <table class="table">
                     <thead>
-                    <tr>
+                    <tr style="text-align: center">
                         <th>#</th>
                         <th>Name</th>
+                        <th>Avatar</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,6 +34,12 @@
                         <tr>
                             <td>{{ $user->getKey() }}</td>
                             <td>{{ $user->name }}</td>
+                            <td>
+                                <div style="overflow: hidden; height: 75px;">
+                                        <img class="rounded mx-auto d-block" src="{{asset('storage/'.$user->avatar)}}"
+                                              alt="tv" style="width: 80%; height: 80%; object-fit: contain;">
+                                </div>
+                            </td>
                             <td>{{ $user->email }}</td>
                             <td>
 

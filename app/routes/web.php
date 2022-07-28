@@ -10,10 +10,33 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+
+
+
+//--------------------------------Users----------------------------------------
+
+Route::group(
+    [
+        'prefix' => '/admin/users', 'middleware' => ['role:admin|manager'],
+        'controller' => UserAdminController::class
+    ],
+    function () {
+        Route::get('/', 'index')->name('admin.users.index')->middleware(
+            'can:show post'
+        );
+        Route::get('/update/{user}', 'edit')->name('admin.users.edit')
+            ->middleware('can:edit post');
+        Route::put('/update/{user}', 'update')->name('admin.users.update')
+            ->middleware('can:edit post');
+        Route::get('/delete/{user}', 'destroy')->name('admin.users.delete')
+            ->middleware('can:delete post');
+    }
+);
 
 //--------------------------------Roles-----------------------------------------
 Route::group(
@@ -36,26 +59,6 @@ Route::group(
         Route::put('/update/{id}', 'update')->name('admin.roles.update')
             ->middleware('can:edit post');
         Route::get('/delete/{id}', 'destroy')->middleware('can:delete post');
-    }
-);
-
-//--------------------------------Users----------------------------------------
-
-Route::group(
-    [
-        'prefix' => '/admin/users', 'middleware' => ['role:admin|manager'],
-        'controller' => UserController::class
-    ],
-    function () {
-        Route::get('/', 'index')->name('admin.users.index')->middleware(
-            'can:show post'
-        );
-        Route::get('/update/{user}', 'edit')->name('admin.users.edit')
-            ->middleware('can:edit post');
-        Route::put('/update/{user}', 'update')->name('admin.users.update')
-            ->middleware('can:edit post');
-        Route::get('/delete/{user}', 'destroy')->name('admin.users.delete')
-            ->middleware('can:delete post');
     }
 );
 
@@ -171,3 +174,6 @@ Route::group(
 //    Route::get('show/{id}', 'OrderController@show')->name('admin.orders.show');
 //    Route::get('delete/{id}', 'OrderController@delete')->name('admin.orders.delete');
 //});
+//---------------------------------UserOwner----------------------------------
+Route::get('/user/{user}', [UserController::class, 'index'])->name('user.index');
+Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');

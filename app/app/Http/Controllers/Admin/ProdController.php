@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Gallerie;
 use App\Models\Manufactur;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProdController extends Controller
 {
@@ -131,9 +132,12 @@ class ProdController extends Controller
             );
         }
         $date = $request->all();
-
-        $date['image'] = $path ?? $product->image;
-
+        if (isset($path)) {
+            $this->deleteImage($product->image);
+            $date['image'] = $path;
+        } else {
+            ($date['image'] = $product->image);
+        }
         //-------------------------------Many images-------------------------------
 
         if ($request->has('images')) {
@@ -150,12 +154,16 @@ class ProdController extends Controller
 
                 $images[] = $path;
             }
-            $product->galleries()->forceDelete();
-            foreach ($images as $image) {
-                Gallerie::create([
-                    'photos' => $image,
-                    'product_id' => $product->id,
-                ]);
+
+            if (isset($images)) {
+                $this->deleteImage($product->galleries);
+                $product->galleries()->forceDelete();
+                foreach ($images as $image) {
+                    Gallerie::create([
+                        'photos' => $image,
+                        'product_id' => $product->id,
+                    ]);
+                }
             }
         }
         $product->update($date);
@@ -184,5 +192,15 @@ class ProdController extends Controller
         $product->forceDelete();
 
         return redirect()->route('admin.products.index');
+    }
+
+    public function deleteImage($images)
+    {
+        if (is_object($images)) {
+            foreach ($images as $image) {
+                Storage::delete($image->photos);
+            }
+        }
+        Storage::delete($images);
     }
 }
