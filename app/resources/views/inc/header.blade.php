@@ -27,11 +27,12 @@
 </style>
 
 
-<div class="top fixed-top">
-    <p><img src="{{ asset('images/leaf_1.jpg') }}" width="25px" alt="leaf"></p>
-    <p><a class="nav-link" href={{ route('home') }}>Mysite</a></p>
-</div>
+{{--<div class="top fixed-top">--}}
+{{--    <p><img src="{{ asset('images/leaf_1.jpg') }}" width="25px" alt="leaf"></p>--}}
+{{--    <p><a class="nav-link" href={{ route('home') }}>Mysite</a></p>--}}
+{{--</div>--}}
 <nav class="header navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+
     <div class="container-fluid">
         <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -61,9 +62,6 @@
                 {{--                <a href="{{ url('/admin/roles') }}">Roles</a>--}}
                 <a href={{url('/admin')}}>admin</a>
                 <a href="{{ route('logout') }}">Выход</a>
-            </div>
-            <div id="showScroll">
-
             </div>
             @endrole
             @role('manager')
@@ -112,7 +110,6 @@
                 <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-
         </div>
     </div>
 </nav>
@@ -163,7 +160,8 @@
         const top = document.querySelector('.top');
 
         window.addEventListener('scroll', function () {
-            const scrol = document.getElementById('showScroll').innerHTML = pageYOffset + 'px';
+            let scrol = document.querySelector('.showScroll').innerHTML = pageYOffset + 'px';
+
             if(scrol > 0)
             {
                 // top.style = 'disp

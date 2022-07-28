@@ -24,7 +24,6 @@
 </header>
 <main>
     <aside>
-
         @role('admin|manager')
             @include('inc.admin_aside')
         @else
