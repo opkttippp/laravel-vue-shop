@@ -69,9 +69,7 @@
             @endrole
             @role('user')
             <div class="reg_auth">
-                <a href='#'>
                     <img src="{{asset('storage/'.Auth::user()->avatar)}}"  alt="image" height="20px">
-                </a>
                 <a href="{{ route('user.index',['user' => Auth::user()]) }}">
                     {{ Auth::user()->name }}
                 </a>

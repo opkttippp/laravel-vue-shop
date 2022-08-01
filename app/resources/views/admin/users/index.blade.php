@@ -31,13 +31,13 @@
                     </thead>
                     <tbody>
                     @foreach($users as $user)
-                        <tr>
+                        <tr onload="checkEvent()" id="user">
                             <td>{{ $user->getKey() }}</td>
                             <td>{{ $user->name }}</td>
                             <td>
                                 <div style="overflow: hidden; height: 75px;">
-                                        <img class="rounded mx-auto d-block" src="{{asset('storage/'.$user->avatar)}}"
-                                              alt="tv" style="width: 80%; height: 80%; object-fit: contain;">
+                                    <img class="rounded mx-auto d-block" src="{{asset('storage/'.$user->avatar)}}"
+                                         alt="tv" style="width: 80%; height: 80%; object-fit: contain;">
                                 </div>
                             </td>
                             <td>{{ $user->email }}</td>
@@ -68,3 +68,40 @@
         </div>
     </div>
 @endsection
+<script>
+    // function checkEvent() {
+    //-------------------------------------1-------------------------------------
+    // function checkEvent() {
+    //     fetch('/api/user', {headers: {"Content-Type": "application/json"
+    //     }}).then(response => response.json()
+    //     ).then(data => console.log(data))
+    // };
+    //------------------------------------2-------------------------------------
+    // function checkEvent() {
+    //     fetch('/api/user').then((response) => {
+    //         return response.json();
+    //     }).then((data) => {
+    //             console.log(data);
+    //         });
+    // }
+    //-------------------------------------3-------------------------------------
+    // }
+    async function checkEvent() {
+
+        let response = await fetch('/api/user', {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        let data = await response.json();
+        console.log(data);
+        // for (let dat in data) {
+        //
+        //     console.log(dat);
+        // }
+    }
+
+    checkEvent();
+</script>
+
+
