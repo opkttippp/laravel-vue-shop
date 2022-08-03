@@ -115,6 +115,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::resource('/product', ProductController::class)->parameters(
     ['product' => 'id']
 );
+Route::get('/product/search/{title?}', [ProductController::class, 'search'])->name('product.search');
 Route::resource('/category', CategoryController::class)->parameters(
     ['category' => 'id']
 );

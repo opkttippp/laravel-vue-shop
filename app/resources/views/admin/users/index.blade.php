@@ -31,9 +31,9 @@
                     </thead>
                     <tbody>
                     @foreach($users as $user)
-                        <tr onload="checkEvent()" id="user">
-                            <td>{{ $user->getKey() }}</td>
-                            <td>{{ $user->name }}</td>
+                        <tr>
+                            <td id="id">{{ $user->id }}</td>
+                            <td id="name">{{ $user->name }}</td>
                             <td>
                                 <div style="overflow: hidden; height: 75px;">
                                     <img class="rounded mx-auto d-block" src="{{asset('storage/'.$user->avatar)}}"
@@ -86,22 +86,39 @@
     // }
     //-------------------------------------3-------------------------------------
     // }
-    async function checkEvent() {
+    document.addEventListener('DOMContentLoaded', function () {
 
-        let response = await fetch('/api/user', {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        let data = await response.json();
-        console.log(data);
-        // for (let dat in data) {
-        //
-        //     console.log(dat);
-        // }
-    }
+        async function checkEvent() {
+            let id = document.querySelector('#id');
 
-    checkEvent();
+            // let response = await fetch('/api/user', {
+            //     headers: {
+            //         "Content-Type": "application/json"
+            //     }
+            // });
+            // let data = await response.json();
+            // let dataset = data.data;
+            //
+            // for (let i = 1; i < dataset.length; i++) {
+            //     let id_back = document.createElement('div');
+            //     id_back.innerHTML = value.id;
+            //     id.append(id_back);
+            // }
+
+            // fetch('/api/user')
+            //     .then(response => {
+            //         return response.json();
+            //     })
+            //     .then(products => {
+            //
+            //         console.log(products);
+            //     })
+
+        }
+
+
+        checkEvent();
+    });
 </script>
 
 

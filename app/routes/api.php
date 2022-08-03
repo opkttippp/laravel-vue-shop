@@ -1,13 +1,19 @@
 <?php
 
-use App\Http\Controllers\Api\V1\UserApiController;
+use App\Http\Controllers\Api\ProductApiController;
+use App\Http\Controllers\Api\SearchApiController;
+use App\Http\Controllers\Api\UserApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::apiResources([
     'user' => UserApiController::class,
 ]);
+Route::apiResources([
+    'product' => ProductApiController::class,
+]);
+Route::post('/search', [SearchApiController::class, 'show']);

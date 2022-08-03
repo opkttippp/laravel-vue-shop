@@ -52,24 +52,24 @@
                     <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#myModal">Categories</a>
                 </li>
             </ul>
-{{--            <div class="showScroll"></div>--}}
+            {{--            <div class="showScroll"></div>--}}
             {{----------------------------------------------------------------------------------------------}}
             @role('admin')
             <div class="reg_auth">
                 <i class="nav-icon far fas fa-table"></i>
-                    {{ Auth::user()->name }}
+                {{ Auth::user()->name }}
                 <a href="{{ route('logout') }}">Выход</a>
             </div>
             @endrole
             @role('manager')
             <div class="reg_auth">
-                    {{ Auth::user()->name }}
+                {{ Auth::user()->name }}
                 <a href="{{ route('logout') }}">Выход</a>
             </div>
             @endrole
             @role('user')
             <div class="reg_auth">
-                    <img src="{{asset('storage/'.Auth::user()->avatar)}}"  alt="image" height="20px">
+                <img src="{{asset('storage/'.Auth::user()->avatar)}}" alt="image" height="20px">
                 <a href="{{ route('user.index',['user' => Auth::user()]) }}">
                     {{ Auth::user()->name }}
                 </a>
@@ -101,24 +101,27 @@
                     </li>
                 @endif
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2 search" type="search" placeholder="Search" aria-label="Search">
+
+            <form class="d-flex" method="get" action="{{route('product.search')}}">
+{{--                @csrf--}}
+                <input id="search" value="" onkeyup="checkEvent()" aria-label="Search" name='search'
+                       autocomplete="off">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            {{--            <div id="container-search">--}}
+            {{--                <ul class="results me-2"></ul>--}}
+            {{--            </div>--}}
         </div>
     </div>
 </nav>
+/*---------------------------Modal Category-----------------------------------*/
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
-
-            <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Product selection</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-
-            <!-- Modal body -->
             <div class="modal-body d-flex flex-row">
                 <div class="menu-list">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -148,27 +151,95 @@
         </div>
     </div>
 </div>
+
+/*---------------------------Modal Search-----------------------------------*/
+<div class="modal" id="myModal_Search">
+    <div class="arrow-5 arrow-5-top">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <ul class="results navbar-nav me-auto m-2 p-2 mb-lg-0">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
+    /*---------------------------live Search-----------------------------------*/
+    const modal = document.querySelector('#myModal_Search');
 
+    async function checkEvent() {
+        let val = document.querySelector("#search").value;
+        if (val.length >= 3) {
+            // val = JSON.stringify({val})
+            console.log(val);
+            const rawResponse = await fetch('/api/search/',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({val})
+                });
+            let content = await rawResponse.json();
+            console.log(content);
+            if (content.length !== 0) {
+                let output = '';
+                for (let cont of content) {
+                    let Html = '<li>' + cont.title + '</li>';
+                    output += Html;
+                }
+                const res = document.querySelector('.results');
+                res.innerHTML = output;
+                modal.style = ('display:block');
+                EventAdd(res);
+            } else resultHide();
+        } else resultHide();
+
+        function resultHide() {
+            document.querySelector('.results').innerHTML = '';
+            modal.style = ('display:none');
+        }
+
+        function addInSearch(event) {
+            document.querySelector('#search').value = event;
+            resultHide();
+        }
+
+        document.onclick = function () {
+            resultHide();
+        }
+
+        function EventAdd(res) {
+            for (let i = 0; i < res.children.length; i++) {
+                res.children[i].addEventListener('click', event => {
+                    addInSearch(event.target.innerText);
+                });
+            }
+        }
+    }
+
+    /*---------------------------Top hide-----------------------------------*/
     document.addEventListener('DOMContentLoaded', function () {
-
         const top = document.querySelector('.top');
         const header = document.querySelector('.header');
 
         window.addEventListener('scroll', function () {
             // document.querySelector('.showScroll').innerHTML = pageYOffset + 'px';
 
-            if(pageYOffset > 0)
-            {
+            if (pageYOffset > 0) {
                 top.classList.remove('fixed-top');
                 header.style = 'margin-top: 0'
                 // header.classList.add('fixed-top');
-            }else{
+            } else {
                 top.classList.add('fixed-top');
                 header.style = 'margin-top: 25px'
                 // header.classList.remove('fixed-top');
-        }
+            }
+        });
+    });
 
-    });
-    });
+    /*----------------------------------------------------------------------*/
+
 </script>

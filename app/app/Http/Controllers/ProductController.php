@@ -32,17 +32,23 @@ class ProductController extends Controller
     {
         $prod = $product->find($id);
         $img = $prod->galleries;
-
         return view('product.show', [
             'product' => $prod,
             'image' => $img,
-//            'i' => $i
         ]);
     }
 
-    public function edit(Product $product)
+    public function search(Request $request)
     {
-        //
+        $product = Product::where('title', $request->search)->first();
+        $img = $product->galleries;
+        return view(
+            'product.show',
+            [
+                'product' => $product,
+                'image' => $img,
+            ]
+        );
     }
 
     public function update(Request $request, Product $product)
