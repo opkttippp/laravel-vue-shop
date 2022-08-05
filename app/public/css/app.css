@@ -11994,9 +11994,11 @@ footer p {
     height: auto;
     border: none;
 }
+
 .result {
     background-color: whitesmoke;
 }
+
 .results li {
     width: 300px;
     height: auto;
@@ -12008,12 +12010,12 @@ footer p {
     cursor: pointer;
 }
 
-/*---------------------------------------------------------------------*/
 
 .arrow-5-top {
     position: relative;
     z-index: 10;
 }
+
 .arrow-5-top::after {
     content: '';
     width: 0;
@@ -12023,6 +12025,7 @@ footer p {
     z-index: 10;
     border: 0;
 }
+
 .arrow-5-top::after {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
@@ -12030,6 +12033,116 @@ footer p {
     left: 50%;
     border-bottom: 10px solid whitesmoke;
     top: -9px;
+}
+
+/*--------------------------Raiting--------------------------------*/
+.rating-area {
+    overflow: hidden;
+}
+
+/*.rating-area:not(:checked) > input {*/
+/*    display: none;*/
+/*}*/
+
+/*.rating-area:not(:checked) > label {*/
+/*    float: right;*/
+/*    width: 26px;*/
+/*    padding: 0;*/
+/*    cursor: pointer;*/
+/*    font-size: 21px;*/
+/*    line-height: 21px;*/
+/*    color: lightgrey;*/
+/*}*/
+
+/*.rating-area:not(:checked) > label:before {*/
+/*    content: '★';*/
+/*}*/
+
+/*.rating-area > input:checked ~ label {*/
+/*    color: gold;*/
+/*}*/
+
+
+/*.rating-area > input:checked + label:hover,*/
+/*.rating-area > input:checked + label:hover ~ label,*/
+/*.rating-area > input:checked ~ label:hover,*/
+/*.rating-area > input:checked ~ label:hover ~ label,*/
+/*.rating-area > label:hover ~ input:checked ~ label {*/
+/*    color: gold;*/
+/*}*/
+
+/*.rate-area > label:active {*/
+/*    position: relative;*/
+/*}*/
+/*.stars {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+.rating-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.star-rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.c-star {
+    width: 24px;
+    height: 24px;
+}
+
+.active {
+    fill: rgb(255, 174, 14);
+}
+
+.inactive {
+    fill: rgb(210, 210, 210)
+}
+
+body {
+    padding: 1rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/*---------------------------------menu_product------------------------------*/
+.menu-product {
+    background-color: rgb(245, 245, 245);
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.menu-product > li > a {
+    color: rgb(22, 20, 33);
+}
+
+.menu-product > li > a:hover {
+    color: #00b44e;
+}
+
+.menu-product > li > .menu-product-active {
+    color: #00b44e;
+}
+/*-----------------------------------product_title--------------------------------*/
+.product_title {
+    font-size: 2em;
+    font-family: "Helvetica Neue", sans-serif;
+}
+/*-----------------------------------product_menu--------------------------------*/
+.product_menu > div >  a {
+    color: #00b44e;
+}
+
+.product_menu > div > a:hover {
+    color: #2b6b4f;
 }
 
 .navbar-laravel {

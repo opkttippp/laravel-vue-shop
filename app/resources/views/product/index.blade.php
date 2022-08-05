@@ -48,20 +48,20 @@
             @foreach($rev as $product)
                 <div id="inner-grid">
                     <div style="overflow: hidden; height: 150px;">
-                        <a href="{{ route('product.show', ['id' => $product->id]) }}">
+                        <a href="{{ route('product.show', ['product' => $product->id]) }}">
                             <img class="rounded mx-auto d-block" src="{{asset('storage/'.$product->image)}}"
                                  height="125px" alt="tv" style="width: 80%; height: 80%; object-fit: contain;">
                         </a>
                     </div>
                     <div id="inner-grid-div">
                         <div class="ml-3">
-                                <a href="{{ route('product.show', ['id' => $product->id]) }}">
+                                <a href="{{ route('product.show', ['product' => $product->id]) }}">
                                     {{ $product->title }}
                                 </a>
                         </div>
-                        <div>
+                        <div class="pl-2">
                             <p>
-                                <a class="d-flex justify-content-start mt-4" href="{{ route('category.show',['id' => $product->category_id]) }}">
+                                <a class="d-flex justify-content-start mt-4" href="{{ route('category.show',['category' => $product->category_id]) }}">
                             <span class="badge
                             @if ($product->category->id == 1)
                                 badge-primary
@@ -77,7 +77,7 @@
                                 </a>
                             </p>
                         </div>
-                        <div>
+                        <div class="pl-2">
                         <p class="d-flex justify-content-start fw-bold">₴{{ $product->price }}</p>
                         </div>
                         <div class="card-footer">

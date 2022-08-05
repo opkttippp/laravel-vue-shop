@@ -112,13 +112,12 @@ Route::group(['middleware' => ['web']], function () {
 //Route::get('auth/github/callback', [GitHubController::class, 'gitCallback']);
 
 //---------------------------------Route-------------------------------------
-Route::resource('/product', ProductController::class)->parameters(
-    ['product' => 'id']
-);
-Route::get('/product/search/{title?}', [ProductController::class, 'search'])->name('product.search');
-Route::resource('/category', CategoryController::class)->parameters(
-    ['category' => 'id']
-);
+Route::resource('/product', ProductController::class);
+Route::get('/product/{product}/character', [ProductController::class, 'character'])->name('product.character');
+
+Route::get('/product/search/name', [ProductController::class, 'search'])->name('product.search');
+Route::resource('/category', CategoryController::class);
+
 Route::get('/catalog/show', [CategoryController::class, 'catalog'])->name(
     'catalog.show'
 );

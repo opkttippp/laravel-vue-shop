@@ -33,25 +33,22 @@
 {{--</div>--}}
 <nav class="header navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
 
-    <div class="container-fluid">
-        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href={{ route('home') }}>Главная</a>
-                </li>
-                <li class="nav-item">
+    <div class="container-fluid product_menu">
+                <div class="nav-item">
+                    <a class="nav-link" style="color: #00b44e;" href={{ route('home') }}>Главная</a>
+                </div>
+                <div class="nav-item">
                     <a class="nav-link" href={{ route('green') }}>Уведомления</a>
-                </li>
-                <li class="nav-item">
+                </div>
+                <div class="nav-item">
                     <a class="nav-link" href={{ route('review') }}>Отзывы</a>
-                </li>
-                <li class="nav-item">
+                </div>
+                <div class="nav-item">
                     <a class="nav-link" href={{ route('reviewAdd') }}>Добавить</a>
-                </li>
-                <li class="nav-item">
+                </div>
+                <div class="nav-item">
                     <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#myModal">Categories</a>
-                </li>
-            </ul>
+                </div>
             {{--            <div class="showScroll"></div>--}}
             {{----------------------------------------------------------------------------------------------}}
             @role('admin')
@@ -136,9 +133,9 @@
                                 <div class="menu_categ navbar-nav me-auto mb-2 mb-lg-0">
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li><a class="dropdown-item list"
-                                               href="{{ asset(route('category.show', ['id' => 1])) }}">TV</a></li>
+                                               href="{{ asset(route('category.show', ['category' => 1])) }}">TV</a></li>
                                         <li><a class="dropdown-item list"
-                                               href="{{ asset(route('category.show', ['id' => 2])) }}">Mobile</a></li>
+                                               href="{{ asset(route('category.show', ['category' => 2])) }}">Mobile</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -171,7 +168,6 @@
     async function checkEvent() {
         let val = document.querySelector("#search").value;
         if (val.length >= 3) {
-            // val = JSON.stringify({val})
             console.log(val);
             const rawResponse = await fetch('/api/search/',
                 {
