@@ -25,6 +25,7 @@ class Product extends Model
             'category_id',
             'manufactur_id',
         ];
+    private mixed $galleries;
 
     public function category()
     {

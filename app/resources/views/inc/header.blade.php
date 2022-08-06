@@ -27,91 +27,90 @@
 </style>
 
 @include('inc.headerer');
-{{--<div class="top fixed-top">--}}
-{{--    <p><img src="{{ asset('images/leaf_1.jpg') }}" width="25px" alt="leaf"></p>--}}
-{{--    <p><a class="nav-link" href={{ route('home') }}>Mysite</a></p>--}}
-{{--</div>--}}
+<div class="top fixed-top">
+    <p><img src="{{ asset('images/leaf_1.jpg') }}" width="25px" alt="leaf"></p>
+    <p><a class="nav-link" href={{ route('home') }}>Mysite</a></p>
+</div>
 <nav class="header navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
 
     <div class="container-fluid product_menu">
-                <div class="nav-item">
-                    <a class="nav-link" style="color: #00b44e;" href={{ route('home') }}>Главная</a>
-                </div>
-                <div class="nav-item">
-                    <a class="nav-link" href={{ route('green') }}>Уведомления</a>
-                </div>
-                <div class="nav-item">
-                    <a class="nav-link" href={{ route('review') }}>Отзывы</a>
-                </div>
-                <div class="nav-item">
-                    <a class="nav-link" href={{ route('reviewAdd') }}>Добавить</a>
-                </div>
-                <div class="nav-item">
-                    <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#myModal">Categories</a>
-                </div>
-            {{--            <div class="showScroll"></div>--}}
-            {{----------------------------------------------------------------------------------------------}}
-            @role('admin')
-            <div class="reg_auth">
-                <i class="nav-icon far fas fa-table"></i>
+        <div class="nav-item">
+            <a class="nav-link" style="color: #00b44e;" href={{ route('home') }}>Главная</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href={{ route('green') }}>Уведомления</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href={{ route('review') }}>Отзывы</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href={{ route('reviewAdd') }}>Добавить</a>
+        </div>
+        <div class="nav-item">
+            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#myModal">Categories</a>
+        </div>
+                    <div class="showScroll"></div>
+{{---------------------------------------------------------------------------------------------}}
+        @role('admin')
+        <div class="reg_auth">
+            <i class="nav-icon far fas fa-table"></i>
+            {{ Auth::user()->name }}
+            <a href="{{ route('logout') }}">Выход</a>
+        </div>
+        @endrole
+        @role('manager')
+        <div class="reg_auth">
+            {{ Auth::user()->name }}
+            <a href="{{ route('logout') }}">Выход</a>
+        </div>
+        @endrole
+        @role('user')
+        <div class="reg_auth">
+            <img src="{{asset('storage/'.Auth::user()->avatar)}}" alt="image" height="20px">
+            <a href="{{ route('user.index',['user' => Auth::user()]) }}">
                 {{ Auth::user()->name }}
-                <a href="{{ route('logout') }}">Выход</a>
-            </div>
-            @endrole
-            @role('manager')
+            </a>
+            <a href="{{ route('logout') }}">Выход</a>
+        </div>
+        @endrole
+        @guest
             <div class="reg_auth">
-                {{ Auth::user()->name }}
-                <a href="{{ route('logout') }}">Выход</a>
-            </div>
-            @endrole
-            @role('user')
-            <div class="reg_auth">
-                <img src="{{asset('storage/'.Auth::user()->avatar)}}" alt="image" height="20px">
-                <a href="{{ route('user.index',['user' => Auth::user()]) }}">
-                    {{ Auth::user()->name }}
+                <a href="{{ route('login') }}" class="btn btn-secondary">
+                    Войти
                 </a>
-                <a href="{{ route('logout') }}">Выход</a>
+                <a href="{{ route('register') }}" class="btn btn-secondary">
+                    Регистрация
+                </a>
             </div>
-            @endrole
-            @guest
-                <div class="reg_auth">
-                    <a href="{{ route('login') }}" class="btn btn-secondary">
-                        Войти
-                    </a>
-                    <a href="{{ route('register') }}" class="btn btn-secondary">
-                        Регистрация
-                    </a>
-                </div>
-            @endguest
-            <ul class="navbar-nav nav-flex-icon cart">
-                @if(Cart::content())
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('cart.index')}}">
+        @endguest
+        <ul class="navbar-nav nav-flex-icon cart">
+            @if(Cart::content())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('cart.index')}}">
                         <span class="badge red mr-1">
                             {{Cart::count()}}
                         </span>
-                            <i class="fa fa-shopping-cart"></i>
-                            <span class="clearfix d-none d-sm-inline-block">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="clearfix d-none d-sm-inline-block">
                             Cart
                         </span>
-                        </a>
-                    </li>
-                @endif
-            </ul>
+                    </a>
+                </li>
+            @endif
+        </ul>
 
-            <form class="d-flex" method="get" action="{{route('product.search')}}">
-{{--                @csrf--}}
-                <input id="search" value="" onkeyup="checkEvent()" aria-label="Search" name='search'
-                       autocomplete="off">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            {{--            <div id="container-search">--}}
-            {{--                <ul class="results me-2"></ul>--}}
-            {{--            </div>--}}
-        </div>
+        <form class="d-flex" method="get" action="{{route('product.search')}}">
+                            @csrf
+            <input id="search" value="" onkeyup="checkEvent()" aria-label="Search" name='search'
+                   autocomplete="off">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+                    <div id="container-search">
+                        <ul class="results me-2"></ul>
+                    </div>
     </div>
 </nav>
-/*---------------------------Modal Category-----------------------------------*/
+{{-----------------------------Modal Category-------------------------------------}}
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -135,7 +134,8 @@
                                         <li><a class="dropdown-item list"
                                                href="{{ asset(route('category.show', ['category' => 1])) }}">TV</a></li>
                                         <li><a class="dropdown-item list"
-                                               href="{{ asset(route('category.show', ['category' => 2])) }}">Mobile</a></li>
+                                               href="{{ asset(route('category.show', ['category' => 2])) }}">Mobile</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
     </div>
 </div>
 
-/*---------------------------Modal Search-----------------------------------*/
+{{-----------------------------Modal Search-------------------------------------}}
 <div class="modal" id="myModal_Search">
     <div class="arrow-5 arrow-5-top">
         <div class="modal-dialog">
@@ -222,20 +222,19 @@
         const header = document.querySelector('.header');
 
         window.addEventListener('scroll', function () {
-            // document.querySelector('.showScroll').innerHTML = pageYOffset + 'px';
 
             if (pageYOffset > 0) {
                 top.classList.remove('fixed-top');
-                header.style = 'margin-top: 0'
-                // header.classList.add('fixed-top');
+                top.style = 'margin-top: 0px; transition: all 0.3s;'
+                header.style = 'margin-top: 0px; transition: all 0.3s;'
             } else {
                 top.classList.add('fixed-top');
-                header.style = 'margin-top: 25px'
-                // header.classList.remove('fixed-top');
+                top.style = 'margin-top: 0px; transition: all 0.3s;'
+                header.style = 'transition: all 0.3s;'
             }
         });
     });
 
-    /*----------------------------------------------------------------------*/
+/*----------------------------------------------------------------------*/
 
 </script>

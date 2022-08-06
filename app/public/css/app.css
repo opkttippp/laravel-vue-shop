@@ -11762,7 +11762,8 @@ main {
     display: flex;
     flex-direction: row;
     /*border: red 1px solid;*/
-    padding-top: 6%;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 section {
@@ -12120,23 +12121,25 @@ body {
     list-style-type: none;
 }
 
-.menu-product > li > a {
-    color: rgb(22, 20, 33);
+.router-link {
+    cursor: pointer;
+    color: #00b44e;
+
 }
 
-.menu-product > li > a:hover {
-    color: #00b44e;
+.router-link:hover {
+    color: #2b6b4f;
 }
 
 .menu-product > li > .menu-product-active {
-    color: #00b44e;
+    color: #2b6b4f;
 }
 /*-----------------------------------product_title--------------------------------*/
 .product_title {
     font-size: 2em;
     font-family: "Helvetica Neue", sans-serif;
 }
-/*-----------------------------------product_menu--------------------------------*/
+/*-----------------------------------Menu--------------------------------*/
 .product_menu > div >  a {
     color: #00b44e;
 }
@@ -12144,6 +12147,7 @@ body {
 .product_menu > div > a:hover {
     color: #2b6b4f;
 }
+/*--------------------------------------------------------------------------*/
 
 .navbar-laravel {
   background-color: #fff3cd;

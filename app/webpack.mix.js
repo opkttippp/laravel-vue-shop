@@ -8,4 +8,4 @@ const mix = require('laravel-mix');
 //     .less('resources/less/app.less', 'public/css');
 // --------------------------Scss-----------------------------------
 mix.js('resources/js/style.js', 'public/js')
-    .sass('resources/scss/app.scss', 'public/css');
+    .sass('resources/scss/app.scss', 'public/css').vue({version: 3});

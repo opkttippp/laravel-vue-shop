@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallerie;
+use App\Models\Manufactur;
 use App\Models\Product;
 use App\Models\Star;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class ProductController extends Controller
 
     public function show(Product $product, Star $star)
     {
-//        $product = $product->find($id);
+        $image = $product->galleries;
         $item = $product->stars->count();
         if ($item) {
             $status = $star->where('product_id', $product->id)->sum('status');
@@ -40,13 +41,16 @@ class ProductController extends Controller
             $item = 0;
             $stars = 0;
         }
+        $category = $product->category;
+        $manufactur = $product->manufactur;
 
-        $img = $product->galleries;
         return view('product.show', [
             'product' => $product,
-            'image' => $img,
+            'image' => $image,
             'stars' => $stars,
             'item' => $item,
+            'category' => $category,
+            'manufactur' => $manufactur,
         ]);
     }
 
@@ -62,7 +66,7 @@ class ProductController extends Controller
     public function search(Star $star, Request $request)
     {
         $product = Product::where('title', $request->search)->first();
-        $img = $product->galleries;
+        $image = $product->galleries;
         $item = $product->stars->count();
         if ($item) {
             $status = $star->where('product_id', $product->id)->sum('status');
@@ -71,15 +75,16 @@ class ProductController extends Controller
             $item = 0;
             $stars = 0;
         }
-        return view(
-            'product.show',
-            [
-                'product' => $product,
-                'image' => $img,
-                'stars' => $stars,
-                'item' => $item,
-            ]
-        );
+        $category = $product->category;
+        $manufactur = $product->manufactur;
+        return view('product.show', [
+            'product' => $product,
+            'image' => $image,
+            'stars' => $stars,
+            'item' => $item,
+            'category' => $category,
+            'manufactur' => $manufactur,
+        ]);
     }
 
     public function update(Request $request, Product $product)

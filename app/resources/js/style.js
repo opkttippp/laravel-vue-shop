@@ -1,6 +1,7 @@
 require('./bootstrap');
 require('./admin.js');
 require('./main.js');
+require('./vue.js');
 
 // -----------------app-------------------------------
 import "bootstrap/dist/js/bootstrap.bundle.min";
