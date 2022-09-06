@@ -20,7 +20,7 @@
 </head>
 <body>
 <header>
-    @include('inc.header')
+    @include('inc.nav')
 </header>
 <main>
     <aside>

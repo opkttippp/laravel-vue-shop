@@ -12,6 +12,7 @@
             #grid {
                 display: grid;
                 grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+                margin: 0;
                 /*grid-template-columns: 1fr 1fr 1fr;*/
                 /*grid-gap: 2vw;*/
                 /*background-color: #95999c;*/

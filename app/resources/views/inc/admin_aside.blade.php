@@ -1,7 +1,7 @@
 @section('admin_aside')
     <div class="sidebar-wrapper pt-5 text-light">
         <div class="sidebar">
-            <div class="brand-link mt-1 mb-1 d-flex justify-content-evenly">
+            <div class="brand-link mt-5 mb-1 d-flex justify-content-evenly">
                 <div class="image">
                         <img src="{{asset('storage/'.Auth::user()->avatar)}}"  alt="image" height="20px">
                 </div>

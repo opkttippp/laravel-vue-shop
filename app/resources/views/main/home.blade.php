@@ -14,8 +14,6 @@
 @section('main_content')
 
     <h2 style="color: #d4edda">{{ $title }} page.</h2>
-    <h4>{{SuperFacade::getNames()}} !!</h4>
-
     @push('js')
 <script>alert('hello')</script>
     @endpush

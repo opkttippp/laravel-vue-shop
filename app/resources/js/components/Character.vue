@@ -24,23 +24,17 @@
                     </li>
                 </ul>
             </div>
-            <!--Grid row-->
             <div class="columns">
-                <div class="col-md-12 m-4 p-3">
-<!--                    <div class="d-flex flex-column bd-highlight m-2 p-3">-->
-
-                        <div class="m-3 p-4" style="text-align: justify;">
-                            {{ product.description }}
-                        </div>
-                        <hr>
-                        <div class="p-4">
-                            {{ manufactur.name }} - {{ manufactur.country }}
-                        </div>
-
-<!--                    </div>-->
+                <div class="col-md-12 mt-4 mr-3">
+                    <p style="text-align: justify;">
+                        {{ product.description }}
+                    </p>
+                    <hr>
+                    <div class="p-4">
+                        {{ manufactur.name }} - {{ manufactur.country }}
+                    </div>
                 </div>
             </div>
-            <!--Grid row-->
         </div>
     </div>
 

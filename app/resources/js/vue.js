@@ -12,13 +12,11 @@ const routes = [
         path: '/',
         name: 'Main',
         component: Main,
-
     },
     {
         path: '/char',
         name: 'Character',
         component: Character,
-
     }
     ];
 
@@ -26,8 +24,6 @@ const routes = [
         history: createWebHashHistory(),
         routes,
     })
-
-    // app.component("product-show", Main)
-    // app.component("product-char", Character)
-
+// app.component("product-show", Main)
+// app.component("product-char", Character)
     app.use(router).mount("#app");

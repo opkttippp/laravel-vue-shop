@@ -36,7 +36,7 @@ class ProductController extends Controller
         $item = $product->stars->count();
         if ($item) {
             $status = $star->where('product_id', $product->id)->sum('status');
-            $stars = intval(round($status / $item, 0));
+            $stars = (round($status / $item, 2));
         } else {
             $item = 0;
             $stars = 0;
