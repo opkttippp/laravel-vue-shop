@@ -4,6 +4,7 @@ import {createRouter, createWebHashHistory} from 'vue-router';
 
 import Main from "./components/Main";
 import Character from "./components/Character";
+import Review from "./components/Review";
 
 const app = createApp({});
 
@@ -17,6 +18,11 @@ const routes = [
         path: '/char',
         name: 'Character',
         component: Character,
+    },
+    {
+        path: '/review',
+        name: 'Review',
+        component: Review,
     }
     ];
 

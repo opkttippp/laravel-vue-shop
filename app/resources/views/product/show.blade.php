@@ -11,7 +11,9 @@
                      :stars="{{json_encode($stars)}}"
                      :item="{{json_encode($item)}}"
                      :category="{{json_encode($category)}}"
-                     :manufactur="{{json_encode($manufactur)}}">
+                     :manufactur="{{json_encode($manufactur)}}"
+                     :review="{{json_encode($review)}}"
+                     :user="{{json_encode($user)}}">
         </router-view>
     </div>
 @endsection

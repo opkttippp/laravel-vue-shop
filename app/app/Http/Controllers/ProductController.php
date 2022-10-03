@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Gallerie;
 use App\Models\Manufactur;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\Star;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -32,10 +34,16 @@ class ProductController extends Controller
 
     public function show(Product $product, Star $star)
     {
+        $rev = $product->reviews;
+        foreach ($rev as $r){
+            $user[] = $r->user;
+        }
+
         $image = $product->galleries;
         $item = $product->stars->count();
+
         if ($item) {
-            $status = $star->where('product_id', $product->id)->sum('status');
+            $status = $star->where('product_id', $product)->sum('status');
             $stars = (round($status / $item, 2));
         } else {
             $item = 0;
@@ -43,7 +51,6 @@ class ProductController extends Controller
         }
         $category = $product->category;
         $manufactur = $product->manufactur;
-
         return view('product.show', [
             'product' => $product,
             'image' => $image,
@@ -51,6 +58,8 @@ class ProductController extends Controller
             'item' => $item,
             'category' => $category,
             'manufactur' => $manufactur,
+            'review' => $rev,
+            'user' => $user,
         ]);
     }
 
@@ -66,6 +75,10 @@ class ProductController extends Controller
     public function search(Star $star, Request $request)
     {
         $product = Product::where('title', $request->search)->first();
+        $rev = $product->reviews;
+        foreach ($rev as $r){
+            $user[] = $r->user;
+        }
         $image = $product->galleries;
         $item = $product->stars->count();
         if ($item) {
@@ -84,6 +97,8 @@ class ProductController extends Controller
             'item' => $item,
             'category' => $category,
             'manufactur' => $manufactur,
+            'review' => $rev,
+            'user' => $user,
         ]);
     }
 

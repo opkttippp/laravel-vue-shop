@@ -24,15 +24,25 @@
                     </li>
                 </ul>
             </div>
-            <div class="columns">
-                <div class="col-md-12 mt-4 mr-3">
-                    <p style="text-align: justify; margin: 2% 3%">
-                        {{ product.description }}
+            <button class="btn btn-success" style="width: 20%; margin-left: 75%; margin-top: 2%"> Оставить отзыв</button>
+            <div class="m-4" v-for="rev in review" :key="review.id" style="display: flex; flex-direction: row;">
+                <div>
+                    <p style="text-align: center;">
+                        {{ rev.user.name}}
                     </p>
-                    <hr>
-                    <div class="p-4">
-                        {{ manufactur.name }} - {{ manufactur.country }}
-                    </div>
+                    <img :src="'http://larav.local/storage/' +  rev.user.avatar"
+                         alt="images" style="width:100px; height: 100px;">
+                </div>
+                <div style="text-align: justify; margin: 5% 0 0 3%;">
+                    <p>
+                        {{ rev.review }}
+                    </p>
+                    <p>
+                        {{ rev.subject }}
+                    </p>
+                    <p>
+                        {{ rev.email }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -44,10 +54,8 @@
 export default {
     props: {
         product: Object,
-        image: Object,
-        stars: Number,
-        item: Number,
-        manufactur: Object,
+        review: Object,
+        user: Object,
     }
 }
 </script>

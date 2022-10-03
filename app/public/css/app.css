@@ -11842,8 +11842,6 @@ footer p {
 
 .container {
     margin: 1rem;
-    /*color: #1d2124;*/
-    /*background-color: whitesmoke;*/
 }
 
 .green {
@@ -11983,10 +11981,7 @@ footer p {
 }
 
 /*----------------------------Search-----------------------------------*/
-/*.container-search {*/
-/*    position: absolute;*/
-/*    margin-left: -50%;*/
-/*}*/
+
 #myModal_Search {
     margin-top: 5%;
     margin-left: 65%;

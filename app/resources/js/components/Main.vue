@@ -14,7 +14,7 @@
                         <router-link class="nav-link router-link" to="/char">Характеристики</router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link router-link" href='#'>Отзывы</a>
+                        <router-link class="nav-link router-link" to="/review">Отзывы</router-link>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link router-link" href='#'>Задать вопрос</a>
@@ -75,7 +75,11 @@
                     </p>
                     <p class="mt-4">Description</p>
                     <p class="mt-4 mr-3" style="text-align: justify;">
-                        {{ product.description }}
+<!--                        var sliced = text.slice(0,10);-->
+<!--                        if (sliced.length < text.length) {-->
+<!--                        sliced += '...';-->
+<!--                        }-->
+                        {{ product.description.slice(0,300) + ` ...` }}
                     </p>
                     <p class="lead font-weight-bold">Manufactur</p>
                     <p>
