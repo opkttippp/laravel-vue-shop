@@ -32,18 +32,19 @@ class ProductController extends Controller
         //
     }
 
-    public function show(Product $product, Star $star)
+    public function show(Product $product)
     {
         $rev = $product->reviews;
-        foreach ($rev as $r){
+        $status = 0;
+        foreach ($rev as $r) {
             $user[] = $r->user;
+            $status += $r->status;
         }
 
         $image = $product->galleries;
-        $item = $product->stars->count();
+        $item = $rev->count();
 
         if ($item) {
-            $status = $star->where('product_id', $product)->sum('status');
             $stars = (round($status / $item, 2));
         } else {
             $item = 0;
@@ -76,7 +77,7 @@ class ProductController extends Controller
     {
         $product = Product::where('title', $request->search)->first();
         $rev = $product->reviews;
-        foreach ($rev as $r){
+        foreach ($rev as $r) {
             $user[] = $r->user;
         }
         $image = $product->galleries;

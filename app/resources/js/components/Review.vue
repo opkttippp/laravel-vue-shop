@@ -24,16 +24,20 @@
                     </li>
                 </ul>
             </div>
-            <button class="btn btn-success" style="width: 20%; margin-left: 75%; margin-top: 2%"> Оставить отзыв</button>
+            <button class="btn btn-success" style="width: 20%; margin-left: 75%; margin-top: 2%"> Оставить отзыв
+            </button>
             <div class="m-4" v-for="rev in review" :key="review.id" style="display: flex; flex-direction: row;">
                 <div>
                     <p style="text-align: center;">
-                        {{ rev.user.name}}
+                        {{ rev.user.name }}
                     </p>
                     <img :src="'http://larav.local/storage/' +  rev.user.avatar"
                          alt="images" style="width:100px; height: 100px;">
                 </div>
                 <div style="text-align: justify; margin: 5% 0 0 3%;">
+                    <p>
+                        <StarRating :rating="rev.status"></StarRating>
+                    </p>
                     <p>
                         {{ rev.review }}
                     </p>
@@ -51,10 +55,17 @@
 </template>
 
 <script>
+
+import StarRating from "./StarRating";
+
 export default {
+    components: {
+        StarRating
+    },
     props: {
         product: Object,
         review: Object,
+        stars: Number,
         user: Object,
     }
 }
