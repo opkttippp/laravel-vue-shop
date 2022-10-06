@@ -1,5 +1,4 @@
-@extends('layouts.layout')
-
+@extends('layouts.layoutAdmin')
 @section('title')
     Create Role
 @endsection

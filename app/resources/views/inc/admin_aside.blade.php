@@ -7,7 +7,8 @@
                 </div>
                 <div class="info">
                     <a class="d-block d-flex justify-content-evenly text-light"
-                       href="{{ route('user.index',['user' => Auth::user()]) }}">
+{{--                       href="{{ route('user.index',['user' => Auth::user()]) }}">--}}
+                       href="{{  url('/admin/users/update' ,['user' => Auth::user()]) }}">
                         {{Auth::user()->name}}</a>
                 </div>
             </div>
@@ -89,8 +90,22 @@
 
                     <li class="nav-item">
                         <a href="{{ route('admin.products.index') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>
+                            <i class="fas fa-shopping-bag nav-icon"></i>                            <p>
+                                Orders
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.products.index') }}" class="nav-link">
+                            <i class="fas fa-list nav-icon"></i>                            <p>
+                                Category
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.products.index') }}" class="nav-link">
+                            <i class="fas fa-tshirt nav-icon"></i>                            <p>
                                 Products
                             </p>
                         </a>

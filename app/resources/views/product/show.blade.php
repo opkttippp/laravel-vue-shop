@@ -15,5 +15,7 @@
                      :review="{{json_encode($review)}}"
                      :user="{{json_encode($user)}}">
         </router-view>
+{{--        @include('inc.pagin')--}}
     </div>
+
 @endsection

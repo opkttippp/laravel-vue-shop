@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.layoutAdmin')
 
 @section('title')
     Edit Product

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ProductApiController;
+use App\Http\Controllers\Api\ReviewApiController;
 use App\Http\Controllers\Api\SearchApiController;
 use App\Http\Controllers\Api\UserApiController;
 use Illuminate\Http\Request;
@@ -17,3 +18,5 @@ Route::apiResources([
     'product' => ProductApiController::class,
 ]);
 Route::post('/search', [SearchApiController::class, 'show']);
+
+Route::get('/{product}/review', [ReviewApiController::class, 'index']);
