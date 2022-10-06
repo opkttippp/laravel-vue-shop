@@ -17,8 +17,8 @@
                 </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
-                <table class="table dark">
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -27,7 +27,7 @@
                         <th>Price</th>
                         <th>Barcode</th>
                         <th>Stock</th>
-                        <th></th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -82,14 +82,15 @@
                     <h3 class="card-title"> Trashed </h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
-                    <table class="table">
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
                         <thead>
                         <tr>
                             <th>#</th>
                             <th>Title</th>
                             <th>Barcode</th>
                             <th>Stock</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>

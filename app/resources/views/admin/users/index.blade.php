@@ -17,8 +17,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table">
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
                     <thead>
                     <tr style="text-align: center">
                         <th>#</th>
@@ -26,6 +26,7 @@
                         <th>Avatar</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,13 +42,12 @@
                             </td>
                             <td>{{ $user->email }}</td>
                             <td>
-
                                 <span class="badge
                                 @foreach($user->roles as $role)
                                 {{$role->name == 'admin'? 'badge-danger' : 'badge-success'}}">
-                                        {{$role->name}}
+                                {{$role->name}}
                                     @endforeach
-                            </span>
+                                </span>
                             </td>
                             <td>
                                 <div class="btn-group">
@@ -57,7 +57,8 @@
                                     @endif
                                     @if(auth()->user()->can('delete post'))
                                         <a href="{{route('admin.users.delete', $user->id)}}" class="btn btn-danger">Delete</a>
-                                    @endif                                </div>
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                     @endforeach

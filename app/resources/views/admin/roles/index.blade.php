@@ -18,14 +18,14 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <table class="table">
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
                     <thead>
                     <tr>
                         <th>Role</th>
                         <th>Name</th>
                         <th>Data</th>
-                        <th></th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>

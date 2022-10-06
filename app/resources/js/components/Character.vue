@@ -1,6 +1,6 @@
 <template>
 
-    <div class="container dark-grey-text mt-0">
+    <div class="container-fluid dark-grey-text mt-0">
         <div class="card">
             <div class="col-12 mt-1 mb-1">
                 <p class="product_title">{{ product.title }}</p>

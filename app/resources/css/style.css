@@ -347,18 +347,12 @@ footer p {
 /*    justify-content: center;*/
 /*    align-items: center;*/
 /*}*/
+
 .rating-area {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-/*.star-rating {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    gap: 4px;*/
-/*}*/
 
 .c-star {
     width: 24px;

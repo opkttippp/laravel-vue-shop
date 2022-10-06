@@ -40,7 +40,7 @@ class ProductController extends Controller
             $status += $r->status;
         }
         $image = $product->galleries;
-        $item = 1;
+        $item = Review::where('product_id', $product->id)->count();
         if ($item) {
             $stars = (round($status / $item, 2));
         } else {

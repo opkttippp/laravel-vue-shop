@@ -24,14 +24,11 @@
 </header>
 <main>
     <aside>
-
-{{--        @role('admin|manager')--}}
-{{--            @include('inc.admin_aside')--}}
-{{--        @else--}}
-{{--            @include('inc.aside')--}}
-{{--        @endrole--}}
-
+        @role('admin|manager')
+            @include('inc.admin_aside')
+        @else
             @include('inc.aside')
+        @endrole
     </aside>
     <section>
         @include('inc.message')

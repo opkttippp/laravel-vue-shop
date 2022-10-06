@@ -33,7 +33,7 @@
 {{--</div>--}}
 <nav class="header navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
 
-    <div class="container-fluid product_menu">
+    <div class="container-fluid product_menu" style="position: relative">
         <div class="nav-item">
             <a class="nav-link" style="color: #00b44e;" href={{ route('home') }}>Главная</a>
         </div>
@@ -49,8 +49,8 @@
         <div class="nav-item">
             <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#myModal">Categories</a>
         </div>
-                    <div class="showScroll"></div>
-{{---------------------------------------------------------------------------------------------}}
+        <div class="showScroll"></div>
+        {{---------------------------------------------------------------------------------------------}}
         @role('admin')
         <div class="reg_auth">
             <i class="nav-icon far fas fa-table"></i>
@@ -98,13 +98,49 @@
                 </li>
             @endif
         </ul>
+        <div class="nav-link searc">
+            <a data-widget="navbar-search" href="#" role="button" onclick="searc()">
+                <div class="d-flex p-2"
+                    style="height: 20%;
+                    border: 1px solid white;
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+                    border-radius: 25px;">
+                    <p class="navbar-nav nav-flex-icon cart ml-3 mr-3">Search</p>
+                    <i class="fas fa-search mr-3 ml-3"></i>
+                </div>
+            </a>
+        </div>
+        <div class="navbar-search-block mr-2" style="margin-left: 65%;">
+            <form class="form-inline" method="get" action="{{route('product.search')}}">
+                <div class="input-group input-group"
+                    style="height: 88%;
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+                    border-radius: 25px;
+                    border: 1px solid white;
+                    background-color: #343a40;">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                           aria-label="Search" id="search" value="" onkeyup="checkEvent()" name='search'
+                           autocomplete="off"
+                           style="background: none; border: none;">
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar submit" type="submit" style="visibility: hidden; ">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <button class="btn btn-navbar" onclick="clos()" type="button" data-widget="navbar-search"
+                                style="border-radius: 32%; background: none; border: none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-        <form class="d-flex" method="get" action="{{route('product.search')}}">
-                            @csrf
-            <input id="search" value="" onkeyup="checkEvent()" aria-label="Search" name='search'
-                   autocomplete="off">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        {{--        <form class="d-flex" method="get" action="{{route('product.search')}}">--}}
+        {{--                            @csrf--}}
+        {{--            <input id="search" value="" onkeyup="checkEvent()" aria-label="Search" name='search'--}}
+        {{--                   autocomplete="off">--}}
+        {{--            <button class="btn btn-outline-success" type="submit">Search</button>--}}
+        {{--        </form>--}}
     </div>
 </nav>
 {{-----------------------------Modal Category-------------------------------------}}
@@ -158,7 +194,8 @@
     </div>
 </div>
 <script type="text/javascript">
-/*---------------------------live Search-----------------------------------*/
+
+    /*---------------------------live Search-----------------------------------*/
     const modal = document.querySelector('#myModal_Search');
 
     async function checkEvent() {
@@ -197,6 +234,7 @@
         function addInSearch(event) {
             document.querySelector('#search').value = event;
             resultHide();
+            document.querySelector('.submit').click();
         }
 
         document.onclick = function () {
@@ -212,7 +250,7 @@
         }
     }
 
-/*---------------------------Top hide-----------------------------------*/
+    /*---------------------------Top hide-----------------------------------*/
     document.addEventListener('DOMContentLoaded', function () {
         const top = document.querySelector('.top');
         const header = document.querySelector('.header');
@@ -229,6 +267,17 @@
         });
     });
 
-/*----------------------------------------------------------------------*/
+    /*-------------------------------Hidden search--------------------------------*/
+
+    function searc() {
+        let sear = document.querySelector('.searc');
+        sear.style = 'transition: all 0.3s ease; opacity: 0'
+    };
+
+    function clos() {
+        let sear = document.querySelector('.searc');
+        sear.style = 'transition: all 0.7s ease; opacity: 100%'
+    };
+    /*----------------------------------------------------------------------------*/
 
 </script>

@@ -33,6 +33,10 @@
                     {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) }}
                 </div>
                 <div class="form-group">
+                    {{ Form::label('pass', 'Password') }}
+                    {{ Form::text( 'pass', null, ['class' => 'form-control', 'placeholder' => 'Password']) }}
+                </div>
+                <div class="form-group">
                     {{ Form::label('role', 'Role') }}
                     {{ Form::select('role', $roles, $rolesList, ['class' => 'form-control']) }}
                 </div>

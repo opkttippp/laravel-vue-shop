@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -40,7 +41,6 @@ class UserAdminController extends Controller
         $roles = Role::all();
         $roles = $roles->pluck('name', 'id');
         $rolesList = $user->roles()->pluck('id');
-
         return view(
             'admin.users.edit',
             compact(['user', 'roles', 'rolesList'])
@@ -60,15 +60,24 @@ class UserAdminController extends Controller
                 $fileNameToStore
             );
         }
-        $date = $request->all();
-        if (isset($path)) {
-            $this->deleteImage($user->avatar);
-            $date['avatar'] = $path;
-        }
+
         $request->validate([
             'name' => 'required|max:25',
             'role' => 'required|integer|exists:roles,id',
         ]);
+
+        $date = $request->all();
+
+        if (isset($path)) {
+            $this->deleteImage($user->avatar);
+            $date['avatar'] = $path;
+        }
+
+        if (!empty($date['pass'])) {
+            $date['pass'] = Hash::make($date['pass']);
+        }
+
+        $date['password'] = $date['pass'] ?? $user->password;
 
         $role = Role::find($request->role);
         $user->syncRoles($role->name);
