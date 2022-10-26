@@ -17,7 +17,10 @@ class ProductResource extends JsonResource
             'price' => $this->price,
             'barcode' => $this->barcode,
             'stock' => $this->stock,
-
+            'imageAll' => $this->galleries,
+            'manufactur' => $this->manufactur,
+            'category' => $this->category,
+            'stars' => $this->star,
         ];
     }
 }

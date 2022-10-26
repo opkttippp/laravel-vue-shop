@@ -11,36 +11,9 @@ use Illuminate\Http\Request;
 class ReviewApiController extends Controller
 {
 
-    public function index(Product $product)
+    public function index()
     {
-
-//        $rev = $product->reviews;
-        $rev = Review::where('product_id', $product->id)->paginate(3);
-        $status = 0;
-        foreach ($rev as $r) {
-            $user[] = $r->user;
-            $status += $r->status;
-        }
-        $image = $product->galleries;
-        $item = 1;
-        if ($item) {
-            $stars = (round($status / $item, 2));
-        } else {
-            $item = 0;
-            $stars = 0;
-        }
-        $category = $product->category;
-        $manufactur = $product->manufactur;
-        return ([
-            'product' => $product,
-            'image' => $image,
-            'stars' => $stars,
-            'item' => $item,
-            'category' => $category,
-            'manufactur' => $manufactur,
-            'review' => $rev,
-            'user' => $user,
-        ]);
+        return 'Ok';
     }
 
     public function create()
@@ -55,7 +28,26 @@ class ReviewApiController extends Controller
 
     public function show($id)
     {
-        //
+        $rev = Review::where('product_id', $id)->get();
+        $status = 0;
+        foreach ($rev as $r) {
+            $user[] = $r->user;
+            $status += $r->status;
+        }
+
+        $item = Review::where('product_id', $id)->count();
+        if ($item) {
+            $stars = (round($status / $item, 2));
+        } else {
+            $item = 0;
+            $stars = 0;
+        }
+
+        return ([
+            'stars' => $stars,
+            'item' => $item,
+            'review' => $rev
+        ]);
     }
 
     public function edit($id)

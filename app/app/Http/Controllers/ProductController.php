@@ -15,8 +15,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $prod = Product::orderBy('created_at', 'desc')->take(12)->paginate(3);
-        return view('product.index', ['rev' => $prod]);
+        return view('product.index');
     }
 
     public function create()
@@ -72,33 +71,25 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        $product = Product::where('title', $request->search)->first();
-        $rev = $product->reviews;
-        $status = 0;
-        foreach ($rev as $r) {
-            $user[] = $r->user;
-            $status += $r->status;
-        }
-        $image = $product->galleries;
-        $item = $rev->count();
-        if ($item) {
-            $stars = intval(round($status / $item, 2));
-        } else {
-            $item = 0;
-            $stars = 0;
-        }
-        $category = $product->category;
-        $manufactur = $product->manufactur;
-        return view('product.show', [
-            'product' => $product,
-            'image' => $image,
-            'stars' => $stars,
-            'item' => $item,
-            'category' => $category,
-            'manufactur' => $manufactur,
-            'review' => $rev,
-            'user' => $user,
-        ]);
+        $id = Product::where('title', $request->search)->first()->id;
+//        $product = Product::where('title', $request->search)->first();
+//        $rev = $product->reviews;
+//        $status = 0;
+//        foreach ($rev as $r) {
+//            $user[] = $r->user;
+//            $status += $r->status;
+//        }
+//        $image = $product->galleries;
+//        $item = $rev->count();
+//        if ($item) {
+//            $stars = intval(round($status / $item, 2));
+//        } else {
+//            $item = 0;
+//            $stars = 0;
+//        }
+//        $category = $product->category;
+//        $manufactur = $product->manufactur;
+        return redirect('product#/show/' . $id);
     }
 
     public function update(Request $request, Product $product)

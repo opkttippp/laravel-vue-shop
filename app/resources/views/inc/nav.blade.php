@@ -101,7 +101,7 @@
         <div class="nav-link searc">
             <a data-widget="navbar-search" href="#" role="button" onclick="searc()">
                 <div class="d-flex p-2"
-                    style="height: 20%;
+                     style="height: 20%;
                     border: 1px solid white;
                     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
                     border-radius: 25px;">
@@ -113,7 +113,7 @@
         <div class="navbar-search-block mr-2" style="margin-left: 65%;">
             <form class="form-inline" method="get" action="{{route('product.search')}}">
                 <div class="input-group input-group"
-                    style="height: 88%;
+                     style="height: 88%;
                     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
                     border-radius: 25px;
                     border: 1px solid white;
@@ -154,7 +154,8 @@
             <div class="modal-body d-flex flex-row">
                 <div class="menu-list">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li><a class="dropdown-item menu_goods" href="{{ url('/product') }}">Товары</a></li>
+                        <li><a class="dropdown-item menu_goods" href="{{ asset(route('product.index')) }}">Товары</a>
+                        </li>
                         <li>
                             <div class="menu_category"><a class="dropdown-item"
                                                           href="{{ asset(route('category.index')) }}">Категории

@@ -5,16 +5,17 @@
             <span v-for="index in starLimit" :key="index" class="star star-colored"></span>
         </div>
     </div>
+    <!--                            <div v-if="products.stars" class="stars d-flex justify-content-center align-items-center ml-4">-->
+    <!--                                <b id="grade">{{ products.stars }}</b>-->
+    <!--                                &nbsp;({{ item }}&nbsp;оценок)-->
+    <!--                            </div>-->
 </template>
 
 <script>
 export default {
     name: "StarRating",
     props: {
-        rating: {
-            type: Number,
-            default: 0
-        },
+        id: Number,
         starLimit: {
             type: Number,
             default: 5
@@ -23,10 +24,27 @@ export default {
     },
     computed: {
         ratingWidth() {
-            return this.rating / this.starLimit * 100
+            return this.rev.stars / this.starLimit * 100
         },
         ratingWidthStyle() {
             return `width: ${this.ratingWidth}%;`
+        }
+    },
+    mounted() {
+//--------------------------------------Image--------------------------------------------
+        this.getResults()
+    },
+    methods: {
+        getResults() {
+            this.axios.get('http://larav.local/api/review/' + this.id)
+                .then(res => {
+                    this.rev = res.data;
+                });
+        },
+    },
+    data() {
+        return {
+            rev: {}
         }
     }
 }

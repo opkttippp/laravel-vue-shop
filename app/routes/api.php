@@ -17,6 +17,10 @@ Route::apiResources([
 Route::apiResources([
     'product' => ProductApiController::class,
 ]);
+
+Route::apiResources([
+    'review' => ReviewApiController::class,
+]);
 Route::post('/search', [SearchApiController::class, 'show']);
 
 Route::get('/{product}/review', [ReviewApiController::class, 'index']);

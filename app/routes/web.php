@@ -112,9 +112,11 @@ Route::group(['middleware' => ['web']], function () {
 
 //---------------------------------Route-------------------------------------
 Route::resource('/product', ProductController::class);
+
 Route::get('/product/{product}/character', [ProductController::class, 'character'])->name('product.character');
 
 Route::get('/product/search/name', [ProductController::class, 'search'])->name('product.search');
+
 Route::resource('/category', CategoryController::class);
 
 Route::get('/catalog/show', [CategoryController::class, 'catalog'])->name(
