@@ -6,16 +6,15 @@
                 <p class="product_title">{{ products.title }}</p>
             </div>
             <div class="col-12">
-
                 <ul class="menu-product d-flex justify-content-around">
-                    <li class="nav-item">
-                        <router-link class="nav-link router-link" to>Все о товаре</router-link>
+                    <li class="nav-item" v-if="products.id">
+                        <router-link class="nav-link router-link" :to="{name: 'Main', params: {id: products.id }}">Все о товаре</router-link>
                     </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link router-link" to="/char">Характеристики</router-link>
+                    <li class="nav-item" v-if="products.id">
+                        <router-link class="nav-link router-link" :to="{name: 'Character', params: { id: products.id }}">Характеристики</router-link>
                     </li>
-                    <li class="nav-item">
-                        <router-link class="nav-link router-link" to="/review">Отзывы</router-link>
+                    <li class="nav-item" v-if="products.id">
+                        <router-link class="nav-link router-link" :to="{name: 'Review', params: {id: products.id }}">Отзывы</router-link>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link router-link" href='#'>Задать вопрос</a>
@@ -25,9 +24,7 @@
                     </li>
                 </ul>
             </div>
-            <!--Grid row-->
             <div class="row">
-                <!--Grid column-->
                 <div class="col-6">
                     <div class="d-flex justify-content-center one" style="overflow: hidden; height: 400px;">
                         <img :src="'http://larav.local/storage/' + products.image"
@@ -41,12 +38,9 @@
                 </div>
                 <div class="col-md-6 mt-2">
 
-
                     <div class="d-flex justify-content-start" v-if="products.id">
-                        <StarRating :id=products.id></StarRating>
+                        <StarRating :id = products.id></StarRating>
                     </div>
-
-
                     <div class="mt-3 mb-3">
                         <router-link to="" class="d-flex justify-content-start mt-4">
                             <span v-if="products.category"
@@ -61,10 +55,7 @@
                     </p>
                     <p class="mt-4">Description</p>
                     <p class="mt-4 mr-3" style="text-align: justify;">
-
-                        <!--                                {{ products.description.slice(0,300) + ` ...` }}-->
                         {{ products.description }}
-
                     </p>
                     <p class="lead font-weight-bold">Manufactur</p>
                     <p v-if="products.manufactur">
@@ -72,13 +63,16 @@
                     </p>
                 </div>
             </div>
+
             <hr>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 text-center">
                     <h4 class="my-4 h4">Additional information</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo
+                        soluta
                         odit voluptates,
-                        quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
+                        quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in
+                        laborum.</p>
                 </div>
             </div>
             <div class="d-flex justify-content-center">
@@ -94,18 +88,17 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
 import StarRating from "./StarRating";
-
 export default {
-    components: {
-        StarRating
-    },
+    name: "Main",
     props: {
         id: Number
+    },
+    components: {
+        StarRating
     },
     mounted() {
 //--------------------------------------Image--------------------------------------------
@@ -114,7 +107,7 @@ export default {
     },
     methods: {
         getResults() {
-            this.axios.get('http://larav.local/api/product/' + this.id)
+            this.axios.get('http://larav.local/api/products/' + this.id)
                 .then(res => {
                     console.log(res.data.data);
                     this.products = res.data.data;

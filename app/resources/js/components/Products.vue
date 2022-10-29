@@ -25,11 +25,12 @@
                 <div class="pl-2">
                     <p class="d-flex justify-content-start fw-bold">₴{{ product.price }}</p>
                 </div>
-                <div class="card-footer">
-                        <span :class="[(product.stock > 0) ? 'badge badge-success' : 'badge badge-danger']" class="float-left mt-2">
-                        {{ product.stock }}
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <span>В наличии - </span>
+                        <span :class="[(product.stock > 0) ? 'badge badge-success' : 'badge badge-danger']" style="width: 20%; height: 50%;">
+                         <p style="">{{ product.stock }}</p>
                         </span>
-                    <span class="float-right">
+                    <span>
 <!--                        <a href="{{ product.stock > 0 ? route('cart.add', ['productId' => $product->id]) : '#' }}"-->
                         <a href="#"
                               class="btn btn-sm btn-outline-secondary waves-effect">
@@ -47,16 +48,16 @@
 import Carousel from "./Carousel"
 
 export default {
+    name: "Products",
     components: {
         Carousel
     },
-    name: "Product",
     mounted() {
         this.getResults()
     },
     methods: {
         getResults() {
-            this.axios.get('http://larav.local/api/product/')
+            this.axios.get('http://larav.local/api/products/')
                 .then(res => {
                     console.log(res.data.data);
                     this.products = res.data.data;

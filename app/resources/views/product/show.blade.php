@@ -15,11 +15,11 @@
 {{--                     :review="{{json_encode($review)}}"--}}
 {{--                     :user="{{json_encode($user)}}">--}}
 {{--        </router-view>--}}
-        <div class="container">
-            <div id="app">
-                <router-view :id="{{json_encode($id)}}"></router-view>
-            </div>
-        </div>
+{{--        <div class="container">--}}
+{{--            <div id="app">--}}
+{{--                <router-view :id="{{json_encode($id)}}"></router-view>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 {{--        @include('inc.pagin')--}}
     </div>
 

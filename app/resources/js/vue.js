@@ -2,7 +2,7 @@ import {createApp} from "vue";
 import {createRouter, createWebHashHistory} from 'vue-router';
 import axios from "axios";
 
-import Product from "./components/Product";
+import Products from "./components/Products";
 import Main from "./components/Main";
 import Character from "./components/Character";
 import Review from "./components/Review";
@@ -12,8 +12,8 @@ const app = createApp({});
 const routes = [
     {
         path: '/',
-        name: 'Product',
-        component: Product,
+        name: 'Products',
+        component: Products,
     },
     {
         path: '/show/:id',
@@ -22,22 +22,25 @@ const routes = [
         props: true
     },
     {
-        path: '/char',
+        path: '/char/:id',
         name: 'Character',
         component: Character,
-    },
+        props: true
+    }
+    ,
     {
-        path: '/review',
+        path: '/review/:id',
         name: 'Review',
         component: Review,
+        props: true
     }
-    ];
+];
 
-    const router = createRouter({
-        history: createWebHashHistory(),
-        routes,
-    })
+const router = createRouter({
+    history: createWebHashHistory(),
+    routes,
+})
 
-    app.use(router)
-    app.config.globalProperties.axios = axios
-    app.mount('#app')
+app.use(router)
+app.config.globalProperties.axios = axios
+app.mount('#app')

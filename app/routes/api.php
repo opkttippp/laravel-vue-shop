@@ -15,7 +15,7 @@ Route::apiResources([
     'user' => UserApiController::class,
 ]);
 Route::apiResources([
-    'product' => ProductApiController::class,
+    'products' => ProductApiController::class,
 ]);
 
 Route::apiResources([
