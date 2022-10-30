@@ -74,11 +74,11 @@ export default {
     flex-shrink: 0;
 
     &-colored {
-        background: url('../../../public/images/star-yellow.svg') center no-repeat;
+        background: url('../../../../public/images/star-yellow.svg') center no-repeat;
     }
 
     &-outlined {
-        background: url('../../../public/images/star-outlined.svg') center no-repeat;
+        background: url('../../../../public/images/star-outlined.svg') center no-repeat;
         gap: 4px;
     }
 }

@@ -1,23 +1,23 @@
 <template>
     <Carousel></Carousel>
     <div id="grid" class="mb-3">
-        <div id="inner-grid" v-for="product in products">
+        <div id="inner-grid" v-for="product in PRODUCTS" :key="product.id">
             <div style="overflow: hidden; height: 150px;">
-                <router-link :to="{name: 'Main', params: {id: product.id }}">
+                <router-link :to="{name: 'Show', params: {id: product.id }}">
                     <img class="rounded mx-auto d-block" :src="'http://larav.local/storage/' + product.image"
                          height="125px" alt="tv" style="width: 80%; height: 80%; object-fit: contain;">
                 </router-link>
             </div>
             <div id="inner-grid-div">
                 <div class="ml-3">
-                    <router-link :to="{name: 'Main', params: {id: product.id }}">
+                    <router-link :to="{name: 'Show', params: {id: product.id }}">
                         {{ product.title }}
                     </router-link>
                 </div>
                 <div class="pl-2">
                     <p>
                         <router-link class="d-flex justify-content-start mt-4"
-                                     :to="{name: 'Main', params: {id: product.id }}">
+                                     :to="{name: 'Show', params: {id: product.id }}">
                             <span class="badge badge-success">{{ product.category.name }}</span>
                         </router-link>
                     </p>
@@ -27,13 +27,14 @@
                 </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <span>В наличии - </span>
-                        <span :class="[(product.stock > 0) ? 'badge badge-success' : 'badge badge-danger']" style="width: 20%; height: 50%;">
+                    <span :class="[(product.stock > 0) ? 'badge badge-success' : 'badge badge-danger']"
+                          style="width: 20%; height: 50%;">
                          <p style="">{{ product.stock }}</p>
                         </span>
                     <span>
 <!--                        <a href="{{ product.stock > 0 ? route('cart.add', ['productId' => $product->id]) : '#' }}"-->
                         <a href="#"
-                              class="btn btn-sm btn-outline-secondary waves-effect">
+                           class="btn btn-sm btn-outline-secondary waves-effect">
                               to cart <i class="fas fa-cart-arrow-down"></i>
                         </a>
                     </span>
@@ -45,24 +46,28 @@
 
 <script>
 
-import Carousel from "./Carousel"
+import Carousel from "../components/Carousel"
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: "Products",
     components: {
         Carousel
     },
-    mounted() {
-        this.getResults()
+    props: {
+
     },
+    computed: {
+        ...mapGetters (['PRODUCTS']),
+    },
+    mounted() {
+        this.GET_PRODUCTS()
+    }
+    ,
     methods: {
-        getResults() {
-            this.axios.get('http://larav.local/api/products/')
-                .then(res => {
-                    console.log(res.data.data);
-                    this.products = res.data.data;
-                });
-        }
+        ...mapActions([
+            'GET_PRODUCTS'
+                ]),
     },
     data() {
         return {

@@ -8,7 +8,7 @@
             <div class="col-12">
                 <ul class="menu-product d-flex justify-content-around">
                     <li class="nav-item" v-if="products.id">
-                        <router-link class="nav-link router-link" :to="{name: 'Main', params: {id: products.id }}">Все о товаре</router-link>
+                        <router-link class="nav-link router-link" :to="{name: 'Show', params: {id: products.id }}">Все о товаре</router-link>
                     </li>
                     <li class="nav-item" v-if="products.id">
                         <router-link class="nav-link router-link" :to="{name: 'Character', params: { id: products.id }}">Характеристики</router-link>
@@ -91,23 +91,27 @@
 </template>
 
 <script>
-import StarRating from "./StarRating";
+
+import StarRating from "../components/StarRating";
+
 export default {
-    name: "Main",
+    name: "Show",
     props: {
         id: Number
     },
     components: {
         StarRating
     },
-    mounted() {
+    created() {
 //--------------------------------------Image--------------------------------------------
         this.getResults()
+    },
+    mounted() {
         this.selectImage()
     },
     methods: {
         getResults() {
-            this.axios.get('http://larav.local/api/products/' + this.id)
+            this.axios.get(`${this.$store.getters.GET_SERVER_URL}/products/${this.id}`)
                 .then(res => {
                     console.log(res.data.data);
                     this.products = res.data.data;

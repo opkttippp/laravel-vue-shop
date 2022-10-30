@@ -1,46 +1,52 @@
 import {createApp} from "vue";
-import {createRouter, createWebHashHistory} from 'vue-router';
+
+import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router';
 import axios from "axios";
+import {store} from './vue/store/store';
 
-import Products from "./components/Products";
-import Main from "./components/Main";
-import Character from "./components/Character";
-import Review from "./components/Review";
+import App from "./vue/App";
+import Products from "./vue/views/Products";
+import Show from "./vue/views/Show";
+import Character from "./vue/views/Character";
+import Review from "./vue/views/Review";
 
-const app = createApp({});
+
+const app = createApp({App});
 
 const routes = [
+
     {
         path: '/',
         name: 'Products',
         component: Products,
+        props: true,
     },
     {
         path: '/show/:id',
-        name: 'Main',
-        component: Main,
-        props: true
+        name: 'Show',
+        component: Show,
+        props: true,
     },
     {
         path: '/char/:id',
         name: 'Character',
         component: Character,
         props: true
-    }
-    ,
+    },
     {
         path: '/review/:id',
         name: 'Review',
         component: Review,
         props: true
     }
-];
+    ];
 
-const router = createRouter({
-    history: createWebHashHistory(),
-    routes,
-})
 
-app.use(router)
-app.config.globalProperties.axios = axios
-app.mount('#app')
+    const router = createRouter({
+        history: createWebHashHistory(),
+        routes,
+    })
+    app.use(store)
+    app.use(router)
+    app.config.globalProperties.axios = axios
+    app.mount('#app')
