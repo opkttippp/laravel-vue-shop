@@ -408,3 +408,28 @@ footer p {
 }
 
 /*--------------------------------------------------------------------------*/
+.menu-list {
+    position: relative;
+    width: 30%;
+    height: 80px;
+}
+
+.menu_categ {
+    position: absolute;
+    width: 100%;
+    height: 65%;
+    left: 130px;
+    bottom: 0;
+    right: 0;
+    top: 18px;
+    padding: 5px;
+    display: none;
+}
+
+.menu-list > ul > li > a:hover, .list:hover {
+    color: #10707f;
+}
+
+.menu-list > ul > li > .menu_category:hover .menu_categ {
+    display: block;
+}

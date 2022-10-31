@@ -2,16 +2,21 @@ import {createApp} from "vue";
 
 import {createRouter, createWebHashHistory, createWebHistory} from 'vue-router';
 import axios from "axios";
-import {store} from './vue/store/store';
+import store from './vue/store/store';
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
 import App from "./vue/App";
 import Products from "./vue/views/Products";
 import Show from "./vue/views/Show";
 import Character from "./vue/views/Character";
 import Review from "./vue/views/Review";
-
+import CartButton from "./vue/components/Cart/CartButton";
+import CartModal from "./vue/components/Cart/CartModal";
 
 const app = createApp({App});
+
+app.component("cart-button", CartButton);
+app.component("cart-modal", CartModal);
 
 const routes = [
 

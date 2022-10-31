@@ -13,7 +13,7 @@
     <!-- Fonts -->
     <link rel="icon" href="/images/favicone/favic.ico" type="image/x-icon">
     <!-- Styles -->
-    <link href={{ asset('css/app.css') }} rel="stylesheet" type="text/css">
+    <link href={{ asset('css/style.css') }} rel="stylesheet" type="text/css">
 {{--    <link href={{ asset('css/name.css') }} rel="stylesheet" type="text/css">--}}
 <!-- Scripts -->
 

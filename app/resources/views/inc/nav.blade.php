@@ -1,29 +1,29 @@
 <style>
-    .menu-list {
-        position: relative;
-        width: 30%;
-        height: 60px;
-    }
+    /*.menu-list {*/
+    /*    position: relative;*/
+    /*    width: 30%;*/
+    /*    height: 60px;*/
+    /*}*/
 
-    .menu_categ {
-        position: absolute;
-        width: 100%;
-        height: 65%;
-        left: 130px;
-        bottom: 0;
-        right: 0;
-        top: 18px;
-        padding: 5px;
-        display: none;
-    }
+    /*.menu_categ {*/
+    /*    position: absolute;*/
+    /*    width: 100%;*/
+    /*    height: 65%;*/
+    /*    left: 130px;*/
+    /*    bottom: 0;*/
+    /*    right: 0;*/
+    /*    top: 18px;*/
+    /*    padding: 5px;*/
+    /*    display: none;*/
+    /*}*/
 
-    .menu-list > ul > li > a:hover, .list:hover {
-        color: #10707f;
-    }
+    /*.menu-list > ul > li > a:hover, .list:hover {*/
+    /*    color: #10707f;*/
+    /*}*/
 
-    .menu-list > ul > li > .menu_category:hover .menu_categ {
-        display: block;
-    }
+    /*.menu-list > ul > li > .menu_category:hover .menu_categ {*/
+    /*    display: block;*/
+    /*}*/
 </style>
 
 @include('inc.header');
@@ -83,21 +83,22 @@
                 </a>
             </div>
         @endguest
-        <ul class="navbar-nav nav-flex-icon cart">
-            @if(Cart::content())
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('cart.index')}}">
-                        <span class="badge red mr-1">
-                            {{Cart::count()}}
-                        </span>
-                        <i class="fa fa-shopping-cart"></i>
-                        <span class="clearfix d-none d-sm-inline-block">
-                            Cart
-                        </span>
-                    </a>
-                </li>
-            @endif
-        </ul>
+{{--        <ul class="navbar-nav nav-flex-icon cart">--}}
+{{--            @if(Cart::content())--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link" href="{{route('cart.index')}}">--}}
+{{--                        <span class="badge red mr-1">--}}
+{{--                            {{Cart::count()}}--}}
+{{--                        </span>--}}
+{{--                        <i class="fa fa-shopping-cart"></i>--}}
+{{--                        <span class="clearfix d-none d-sm-inline-block">--}}
+{{--                            Cart--}}
+{{--                        </span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            @endif--}}
+{{--        </ul>--}}
+        <cart-button></cart-button>
         <div class="nav-link searc">
             <a data-widget="navbar-search" href="#" role="button" onclick="searc()">
                 <div class="d-flex p-2"
@@ -183,7 +184,7 @@
     </div>
 </div>
 
-{{-----------------------------Modal Search-------------------------------------}}
+{{-------------------------------Modal Search---------------------------------------}}
 <div class="modal" id="myModal_Search">
     <div class="arrow-5 arrow-5-top">
         <div class="modal-dialog">
@@ -194,12 +195,12 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
 
-    /*---------------------------live Search-----------------------------------*/
-    const modal = document.querySelector('#myModal_Search');
-
-    async function checkEvent() {
+/*---------------------------live Search-----------------------------------*/
+async function checkEvent() {
+        const modal = document.querySelector('#myModal_Search');
         let val = document.querySelector("#search").value;
         if (val.length >= 3) {
             console.log(val);
@@ -280,5 +281,4 @@
         sear.style = 'transition: all 0.7s ease; opacity: 100%'
     };
     /*----------------------------------------------------------------------------*/
-
 </script>

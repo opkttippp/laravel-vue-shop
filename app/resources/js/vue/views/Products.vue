@@ -26,17 +26,19 @@
                     <p class="d-flex justify-content-start fw-bold">₴{{ product.price }}</p>
                 </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <span>В наличии - </span>
-                    <span :class="[(product.stock > 0) ? 'badge badge-success' : 'badge badge-danger']"
-                          style="width: 20%; height: 50%;">
-                         <p style="">{{ product.stock }}</p>
-                        </span>
+                    <span>В наличии -</span>
+                    <span>
+                        <strong v-if="product.stock" class="text-success">{{ product.stock }}</strong>
+                        <strong v-else class="text-danger">Sold out</strong>
+                    </span>
                     <span>
 <!--                        <a href="{{ product.stock > 0 ? route('cart.add', ['productId' => $product->id]) : '#' }}"-->
-                        <a href="#"
-                           class="btn btn-sm btn-outline-secondary waves-effect">
-                              to cart <i class="fas fa-cart-arrow-down"></i>
-                        </a>
+                        <button :class="`btn w-100 shadow-none ${product.stock ? 'btn-success' : 'btn-secondary' }`"
+                                :disabled="!product.stock"
+                                @click="addProductToCart(product)">
+                              to cart
+                            <i class="fas fa-cart-arrow-down"></i>
+                        </button>
                     </span>
                 </div>
             </div>
@@ -47,18 +49,17 @@
 <script>
 
 import Carousel from "../components/Carousel"
-import { mapActions, mapGetters } from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
     name: "Products",
     components: {
         Carousel
     },
-    props: {
-
-    },
+    props: {},
     computed: {
-        ...mapGetters (['PRODUCTS']),
+        ...mapGetters(['PRODUCTS']),
+
     },
     mounted() {
         this.GET_PRODUCTS()
@@ -67,7 +68,10 @@ export default {
     methods: {
         ...mapActions([
             'GET_PRODUCTS'
-                ]),
+        ]),
+        addProductToCart(product) {
+            this.$store.commit("addProductToCart", product)
+        }
     },
     data() {
         return {

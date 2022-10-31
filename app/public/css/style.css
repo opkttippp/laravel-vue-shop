@@ -11740,31 +11740,30 @@ html.os-html,html.os-html>.os-host{display:block;overflow:hidden;box-sizing:bord
 /*    url('../../public/fonts/@font-face/heinrich.eot');*/
 /*}*/
 
-p {
-    font-family: heinrich, serif;
-    font-size: 1.5em;
-}
-
 html,
 body {
     background-image: url(/images/fone.jpeg?2db1a94ca6e10dcaea2ea9320582b267);
     background-size: 100%;
     background-attachment: fixed;
     margin: 0;
+    padding: 0;
     /*font-family: verdana, a}rial, sans-serif;*/
     font: 0.9em/1.2 Arial, Helvetica, sans-serif;
+    color: #1d2124;
 }
 
-body {
-    color: #fff;
-    font-size: 1.1em;
+html,
+body a {
+    color: #1d2124;
+    text-decoration: none;
 }
 
 main {
     display: flex;
     flex-direction: row;
     /*border: red 1px solid;*/
-    padding-top: 6%;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 section {
@@ -11772,8 +11771,8 @@ section {
     flex-direction: column;
     align-items: center;
     margin: 5% auto;
-    padding-left: 20%;
-    width: 80%;
+    padding-left: 18%;
+    width: 96%;
 }
 
 section h2 {
@@ -11782,28 +11781,25 @@ section h2 {
 }
 
 aside {
-    display: flex;
     position: fixed;
+    height: 100%;
+    width: 18%;
     /*background-color: #37474f;*/
+    z-index: 1;
     background-color: rgb(24, 22, 35, 0.5);
-    background-image: url(/images/logo.png);
     background-position: bottom;
     background-repeat: no-repeat;
-
-
-    width: 18%;
-    min-height: 81%;
+    margin-bottom: 0;
     padding-top: 0;
     margin-top: 0;
 }
 
 .header, .footer {
     display: flex;
-    margin-top: 25px;
+    flex-direction: row;
+    margin-top: 2rem;
+    height: 50px;
     padding: 0;
-    /*background-color: rgb(24, 22, 35);*/
-    /*background-image: linear-gradient(to right, rgba(255,0,0,0), violet);*/
-    height: 8%;
     align-items: center;
     justify-content: center;
 }
@@ -11836,15 +11832,15 @@ footer p {
     width: 77%;
 }
 
-.review a{
+.review a {
     width: 30%;
     /*display: flex;*/
     /*align-items: center;*/
     /*justify-content: space-between;*/
 }
 
-.container{
-    color: #1d2124;
+.container {
+    margin: 1rem;
 }
 
 .green {
@@ -11866,9 +11862,10 @@ footer p {
 .reg_auth a {
     color: #7fd24f;
     text-decoration: none;
-    transition:transform 1s ease-in-out;
+    transition: transform 1s ease-in-out;
     /*transition: color 2s, box-shadow 1.5s*/
 }
+
 .reg_auth a:hover {
     color: #7fd24f;
     transform: scale(1.3);
@@ -11879,7 +11876,7 @@ footer p {
 .top {
     display: flex;
     flex-direction: row;
-    height: 25px;
+    height: 2rem;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -11929,6 +11926,7 @@ footer p {
     text-align: center;
     width: 45%;
 }
+
 /*---------------Sidebar---------------*/
 
 .sidebar-nav {
@@ -11957,6 +11955,7 @@ footer p {
     color: #fff;
     background-color: #10707f;
 }
+
 /*--------------changing size-----------------*/
 
 @media screen and (min-width: 600px) {
@@ -11971,9 +11970,193 @@ footer p {
     }
 }
 
-/*-------------------------------------------------CSS_New--------------------------------------------------*/
+/*---------------------------------------------------------------------*/
+.search {
+    max-width: 150px;
+}
 
-/*-----------------------------video--------------------------------------*/
+.cart a {
+    min-width: 150px;
+}
 
-/*-----------------------------sound--------------------------------------*/
+/*----------------------------Search-----------------------------------*/
+
+#myModal_Search {
+    margin-top: 5%;
+    margin-left: 65%;
+    width: 400px;
+    height: auto;
+    border: none;
+}
+
+.result {
+    background-color: whitesmoke;
+}
+
+.results li {
+    width: 300px;
+    height: auto;
+}
+
+.results > li:hover {
+    /*border: #0c9c0d 2px solid;*/
+    color: #00a87d;
+    cursor: pointer;
+}
+
+
+.arrow-5-top {
+    position: relative;
+    z-index: 10;
+}
+
+.arrow-5-top::after {
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    position: absolute;
+    z-index: 10;
+    border: 0;
+}
+
+.arrow-5-top::after {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    margin-left: -10px;
+    left: 50%;
+    border-bottom: 10px solid whitesmoke;
+    top: -9px;
+}
+
+/*--------------------------Raiting--------------------------------*/
+.rating-area {
+    overflow: hidden;
+}
+
+/*.rating-area:not(:checked) > input {*/
+/*    display: none;*/
+/*}*/
+
+/*.rating-area:not(:checked) > label {*/
+/*    float: right;*/
+/*    width: 26px;*/
+/*    padding: 0;*/
+/*    cursor: pointer;*/
+/*    font-size: 21px;*/
+/*    line-height: 21px;*/
+/*    color: lightgrey;*/
+/*}*/
+
+/*.rating-area:not(:checked) > label:before {*/
+/*    content: '★';*/
+/*}*/
+
+/*.rating-area > input:checked ~ label {*/
+/*    color: gold;*/
+/*}*/
+
+
+/*.rating-area > input:checked + label:hover,*/
+/*.rating-area > input:checked + label:hover ~ label,*/
+/*.rating-area > input:checked ~ label:hover,*/
+/*.rating-area > input:checked ~ label:hover ~ label,*/
+/*.rating-area > label:hover ~ input:checked ~ label {*/
+/*    color: gold;*/
+/*}*/
+
+/*.rate-area > label:active {*/
+/*    position: relative;*/
+/*}*/
+/*.stars {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+.rating-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-star {
+    width: 24px;
+    height: 24px;
+}
+
+.active {
+    fill: rgb(255, 174, 14);
+}
+
+.inactive {
+    fill: rgb(210, 210, 210)
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/*---------------------------------menu_product------------------------------*/
+.menu-product {
+    background-color: rgb(245, 245, 245);
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.router-link {
+    cursor: pointer;
+    color: #00b44e;
+
+}
+
+.router-link:hover {
+    color: #2b6b4f;
+}
+
+.menu-product > li > .menu-product-active {
+    color: #2b6b4f;
+}
+
+/*-----------------------------------product_title--------------------------------*/
+.product_title {
+    font-size: 2em;
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+/*-----------------------------------Menu--------------------------------*/
+.product_menu > div > a {
+    color: #00b44e;
+}
+
+.product_menu > div > a:hover {
+    color: #2b6b4f;
+}
+
+/*--------------------------------------------------------------------------*/
+.menu-list {
+    position: relative;
+    width: 30%;
+    height: 80px;
+}
+
+.menu_categ {
+    position: absolute;
+    width: 100%;
+    height: 65%;
+    left: 130px;
+    bottom: 0;
+    right: 0;
+    top: 18px;
+    padding: 5px;
+    display: none;
+}
+
+.menu-list > ul > li > a:hover, .list:hover {
+    color: #10707f;
+}
+
+.menu-list > ul > li > .menu_category:hover .menu_categ {
+    display: block;
+}
 

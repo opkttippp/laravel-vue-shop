@@ -13,31 +13,37 @@
     <!-- Fonts -->
     <link rel="icon" href="/images/favicone/favic.ico" type="image/x-icon">
     <!-- Styles -->
-    <link href={{ asset('css/app.css') }} rel="stylesheet" type="text/css">
+    <link href={{ asset('css/style.css') }} rel="stylesheet" type="text/css">
 {{--    <link href={{ asset('css/name.css') }} rel="stylesheet" type="text/css">--}}
-    <!-- Scripts -->
+<!-- Scripts -->
 
 </head>
 <body>
-<header>
-    @include('inc.nav')
-</header>
-<main>
-    <aside>
-        @role('admin|manager')
+
+<div id="app">
+    <header>
+        @include('inc.nav')
+    </header>
+    <main>
+        <aside>
+            @role('admin|manager')
             @include('inc.admin_aside')
-        @else
-            @include('inc.aside')
-        @endrole
-    </aside>
-    <section>
-        @include('inc.message')
-        @yield('main_content')
-    </section>
-</main>
-<footer>
-    @include('inc.footer')
-</footer>
+            @else
+                @include('inc.aside')
+                @endrole
+        </aside>
+        <section>
+            <div class="container">
+                <cart-modal></cart-modal>
+                @include('inc.message')
+                @yield('main_content')
+            </div>
+        </section>
+    </main>
+    <footer>
+        @include('inc.footer')
+    </footer>
+</div>
 <script src={{ asset('js/style.js') }}></script>
 </body>
 </html>
