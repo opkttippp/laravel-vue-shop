@@ -12,7 +12,6 @@
 @endsection
 
 @section('main_content')
-
     <h2 style="color: #d4edda">{{ $title }} page.</h2>
     @push('js')
 <script>alert('hello')</script>

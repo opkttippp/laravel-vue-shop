@@ -5,25 +5,7 @@
             <div class="col-12 mt-1 mb-1">
                 <p class="product_title">{{ products.title }}</p>
             </div>
-            <div class="col-12">
-                <ul class="menu-product d-flex justify-content-around">
-                    <li class="nav-item" v-if="products.id">
-                        <router-link class="nav-link router-link" :to="{name: 'Show', params: {id: products.id }}">Все о товаре</router-link>
-                    </li>
-                    <li class="nav-item" v-if="products.id">
-                        <router-link class="nav-link router-link" :to="{name: 'Character', params: { id: products.id }}">Характеристики</router-link>
-                    </li>
-                    <li class="nav-item" v-if="products.id">
-                        <router-link class="nav-link router-link" :to="{name: 'Review', params: {id: products.id }}">Отзывы</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link router-link" href='#'>Задать вопрос</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link router-link" href='#'>Фото</a>
-                    </li>
-                </ul>
-            </div>
+            <Menu_show :products = products></Menu_show>
             <div class="row">
                 <div class="col-6">
                     <div class="d-flex justify-content-center one" style="overflow: hidden; height: 400px;">
@@ -63,7 +45,7 @@
                     </p>
                 </div>
             </div>
-
+<!--{{getResults}}-->
             <hr>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 text-center">
@@ -93,30 +75,29 @@
 <script>
 
 import StarRating from "../components/StarRating";
+import Menu_show from "../components/Menu_show";
 
 export default {
     name: "Show",
     props: {
-        id: Number
+        id: String
     },
     components: {
-        StarRating
+        StarRating,
+        Menu_show
     },
     created() {
-//--------------------------------------Image--------------------------------------------
-        this.getResults()
+
     },
     mounted() {
         this.selectImage()
     },
+    computed: {
+        products() {
+            return this.$store.getters.getProductById(parseInt(this.id))
+        }
+    },
     methods: {
-        getResults() {
-            this.axios.get(`${this.$store.getters.GET_SERVER_URL}/products/${this.id}`)
-                .then(res => {
-                    console.log(res.data.data);
-                    this.products = res.data.data;
-                });
-        },
         selectImage() {
             const one = document.querySelector('.one');
             let div = document.querySelectorAll(".many");
@@ -139,11 +120,7 @@ export default {
         }
 
     },
-    data() {
-        return {
-            products: {}
-        }
-    }
+
 }
 </script>
 <style>

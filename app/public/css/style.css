@@ -12160,3 +12160,8 @@ footer p {
     display: block;
 }
 
+/*---------------------------Aside-admin-avtar-----------------------*/
+.avatar-aside {
+    height: 50px;
+}
+

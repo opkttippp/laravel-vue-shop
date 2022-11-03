@@ -20,6 +20,7 @@
                                      :to="{name: 'Show', params: {id: product.id }}">
                             <span class="badge badge-success">{{ product.category.name }}</span>
                         </router-link>
+
                     </p>
                 </div>
                 <div class="pl-2">

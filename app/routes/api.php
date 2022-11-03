@@ -4,7 +4,7 @@ use App\Http\Controllers\Api\ProductApiController;
 use App\Http\Controllers\Api\ReviewApiController;
 use App\Http\Controllers\Api\SearchApiController;
 use App\Http\Controllers\Api\UserApiController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\UserAuthApiController;
 use Illuminate\Support\Facades\Route;
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 Route::apiResources([
     'user' => UserApiController::class,
 ]);
+
 Route::apiResources([
     'products' => ProductApiController::class,
 ]);
 
+Route::apiResources([
+    'auth' => UserAuthApiController::class,
+]);
 Route::apiResources([
     'review' => ReviewApiController::class,
 ]);

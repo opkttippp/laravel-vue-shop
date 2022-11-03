@@ -1,5 +1,4 @@
 <template>
-
         <div class="modal fade" id="cartModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
              aria-labelledby="cartModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -13,7 +12,6 @@
                     </div>
                     <div v-if="!cartIsEmpty" class="modal-body p-4">
                         <cart-products-list></cart-products-list>
-
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cartModalBilling">
                             Order
                         </button>
@@ -26,23 +24,41 @@
                 </div>
             </div>
         </div>
-    <cart-billing-form></cart-billing-form>
+<!--    <cart-billing-form v-for="user in getUser"-->
+<!--                       :id="user.id"-->
+<!--                       :name="user.name"-->
+<!--    >-->
+        <cart-billing-form :user = getAuth>
+    </cart-billing-form>
 </template>
 
 <script>
 import CartProductsList from "./CartProductsList";
 import CartBillingForm from "./CartBillingForm";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
     name: "CartModal",
     components: {CartBillingForm, CartProductsList},
     computed: {
-        cartIsEmpty() {
-            return this.$store.getters.cartIsEmpty;
+        getAuth() {
+            return this.$store.state.user;
         },
-        totalAmount() {
-            return this.$store.getters.totalAmount;
-        },
+        ...mapGetters(['USER']),
     },
+    mounted() {
+        this.GET_USER()
+    },
+    cartIsEmpty() {
+        return this.$store.getters.cartIsEmpty;
+    },
+    totalAmount() {
+        return this.$store.getters.totalAmount;
+    },
+    methods: {
+        ...mapActions([
+            'GET_USER'
+        ]),
+    }
 }
 </script>

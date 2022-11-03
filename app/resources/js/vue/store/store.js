@@ -5,11 +5,19 @@ const store = createStore({
     state: {
         backendURL: "http://larav.local/api",
         cartProducts: cart ? JSON.parse(cart) : [],
-        products: []
+        products: [],
+        user: {},
+        review: []
     },
     mutations: {
         SET_PRODUCTS_STATE: (state, products) => {
             state.products = products
+        },
+        SET_USER_STATE: (state, user) => {
+            state.user = user
+        },
+        SET_REVIEW_STATE: (state, review) => {
+            state.review = review
         },
         saveCart(state) {
             window.localStorage.setItem('cart', JSON.stringify(state.cartProducts));
@@ -73,7 +81,28 @@ const store = createStore({
                     console.log(error)
                     return error
                 });
-        }
+        },
+        GET_USER({commit}) {
+            return axios('http://larav.local/api/auth', {method: "GET"})
+                .then(user => {
+                    commit('SET_USER_STATE', user.data);
+                    return user.data;
+                }).catch((error) => {
+                    console.log(error)
+                    return error
+                });
+        },
+        GET_REVIEW({commit}) {
+            return axios('http://larav.local/api/review', {method: "GET"})
+                .then(review => {
+                    commit('SET_REVIEW_STATE', review.data.data);
+                    // console.log(review.data.data)
+                    return review.data.data;
+                }).catch((error) => {
+                    console.log(error)
+                    return error
+                });
+        },
     },
     getters: {
         GET_SERVER_URL: state => {
@@ -81,6 +110,9 @@ const store = createStore({
         },
         PRODUCTS(state) {
             return state.products;
+        },
+        USER(state) {
+            return state.user;
         },
         totalAmount: (state) => (
             state.cartProducts.reduce((total, {amount}) => total + amount, 0)
@@ -93,10 +125,16 @@ const store = createStore({
             )
         ),
         cartIsEmpty: (state) => !state.cartProducts.length,
-        getProductById: (state) => (productId) => (
-            state.cartProducts.find(({id}) => productId === id)
-        ),
-    }
+        getProductById: (state) => (id) => {
+            return state.products.find(product => product.id === id)
+        },
+        getReviewById: (state) => (id) => {
+            // console.log(id)
+            // console.log(state.review)
+            // console.log(state.review.find(review => review.product_id  === id))
+            return state.review.filter(review => review.product_id  === id)
+        },
+    },
 });
 
 export default store;

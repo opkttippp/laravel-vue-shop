@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\Api\ReviewApiController;
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {

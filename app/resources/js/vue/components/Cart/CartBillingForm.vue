@@ -8,19 +8,20 @@
                         <h5 class="modal-title" id="cartModalTitle2">
                             Shopping Cart ({{ totalAmount }} Items)
                         </h5>
+
                         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-4">
                         <form method="post" class="row g-3 mb-3" ref="formHTML">
+                            {{ user.name }}111
                             <h5>Billing details</h5>
                             <div class="col-md-6">
                                 <label for="firstName" class="form-label">First Name</label>
-                                <input v-model="firstName" type="text"
+                                <input v-model="user.name" type="text"
                                        :class="{ 'form-control': true, 'is-invalid': firstNameInvalidMsg }"
                                        id="firstName" placeholder="First Name" name="firstName">
                                 <div v-if="firstNameInvalidMsg" class="invalid-feedback">
-                                    {{ firstNameInvalidMsg }}
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -30,22 +31,22 @@
                             </div>
                             <div class="col-12">
                                 <label for="city" class="form-label">City</label>
-                                <input v-model="city" type="text" class="form-control" id="city" placeholder="City"
+                                <input v-model="user.avatar" type="text" class="form-control" id="city" placeholder="City"
                                        name="city">
                             </div>
                             <div class="col-12">
                                 <label for="address" class="form-label">Address</label>
-                                <input v-model="address" type="text" class="form-control" id="address"
+                                <input v-model="user.address" type="text" class="form-control" id="address"
                                        placeholder="Address" name="address">
                             </div>
                             <div class="col-md-6">
                                 <label for="email" class="form-label">Email Address</label>
-                                <input v-model="email" type="email" class="form-control" id="email"
+                                <input v-model="user.email" type="email" class="form-control" id="email"
                                        placeholder="Email Address" name="email">
                             </div>
                             <div class="col-md-6">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input v-model="phone" type="text" class="form-control" id="phone"
+                                <input v-model="user.phone" type="text" class="form-control" id="phone"
                                        placeholder="+38(099) 999-99-99" name="phone">
                             </div>
                             <div class="col-12 d-flex justify-content-end">
@@ -66,6 +67,9 @@
 <script>
 export default {
     name: "CartBillingForm",
+    props: {
+        user: {}
+    },
     data: () => ({
         products: [],
         firstName: "",
@@ -91,7 +95,7 @@ export default {
         },
         removeAll() {
             this.$store.commit("removeOrder")
-        },
+        }
     },
     methods: {
         placeOrder() {

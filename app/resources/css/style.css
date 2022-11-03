@@ -433,3 +433,8 @@ footer p {
 .menu-list > ul > li > .menu_category:hover .menu_categ {
     display: block;
 }
+
+/*---------------------------Aside-admin-avtar-----------------------*/
+.avatar-aside {
+    height: 50px;
+}

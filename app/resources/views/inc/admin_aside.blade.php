@@ -1,16 +1,14 @@
 @section('admin_aside')
     <div class="sidebar-wrapper pt-5 text-light">
         <div class="sidebar">
-            <div class="brand-link mt-5 mb-1 d-flex justify-content-evenly">
+            <div class="brand-link mt-5 mb-1 d-flex justify-content-around">
                 <div class="image">
-                    <img src="{{asset('storage/'.Auth::user()->avatar)}}" alt="image" height="20px">
+                    <img src="{{asset('storage/'.Auth::user()->avatar)}}" alt="image" class="avatar-aside">
                 </div>
-                <div class="info">
-                    <a class="d-block d-flex justify-content-evenly text-light"
+                    <a class="d-block d-flex text-light align-items-center"
                        {{--                       href="{{ route('user.index',['user' => Auth::user()]) }}">--}}
                        href="{{  url('/admin/users/update' ,['user' => Auth::user()]) }}">
                         {{Auth::user()->name}}</a>
-                </div>
             </div>
             <div class="brand-link mt-1 mb-1  d-flex justify-content-evenly">
                 <p class="brand-text font-weight-light">Role - {{ Auth::user()->roles->pluck('name')->first() }}</p>

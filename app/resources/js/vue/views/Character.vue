@@ -1,64 +1,43 @@
 <template>
     <div class="container-fluid dark-grey-text mt-0">
         <div class="card">
-<!--            <div class="col-12 mt-1 mb-1">-->
+            <div class="col-12 mt-1 mb-1">
 
-<!--                <p class="product_title">{{ title }}</p>-->
-<!--            </div>-->
-<!--            <div class="col-12">-->
-<!--                <ul class="menu-product d-flex justify-content-around">-->
-<!--                    <li class="nav-item" v-if="id">-->
-<!--                        <router-link class="nav-link router-link" :to="{name: 'Main', params: {id: id }}">Все о товаре</router-link>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item" v-if="id">-->
-<!--                        <router-link class="nav-link router-link" :to="{name: 'Character', params: {id: id }}">Характеристики</router-link>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item" v-if="id">-->
-<!--                        <router-link class="nav-link router-link" :to="{name: 'Review', params: {id: id }}">Отзывы</router-link>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link router-link" href='#'>Задать вопрос</a>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link router-link" href='#'>Фото</a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--            <div class="columns">-->
-<!--                <div class="col-md-12 mt-4 mr-3">-->
-<!--                    <p style="text-align: justify; margin: 2% 3%;">-->
-<!--                        {{ products.description }}-->
-<!--                    </p>-->
-<!--                    <hr>-->
-<!--                    <div class="p-4" v-if="products.manufactur">-->
-<!--                        {{ products.manufactur.name }} - {{ products.manufactur.country }}-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+                <p class="product_title">{{ products.title }}</p>
+            </div>
+            <Menu_show :products = products></Menu_show>
+            <div class="columns">
+                <div class="col-md-12 mt-4 mr-3">
+                    <p style="text-align: justify; margin: 2% 3%;">
+                        {{ products.description }}
+                    </p>
+                    <hr>
+                    <div class="p-4" v-if="products.manufactur">
+                        {{ products.manufactur.name }} - {{ products.manufactur.country }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
 </template>
 
 <script>
+import Menu_show from "../components/Menu_show";
 
 export default {
-
     name: "Character",
-    props: {
-        id: Number,
-        title: String
+    components: {
+        Menu_show
     },
-    mounted() {
-        this.getProduct();
-    }
-    ,
-    methods: {
-        getProduct() {
-            console.log( this.id);
-            console.log( this.title);
+    props: {
+        id: String
+    },
+    computed: {
+        products() {
+            return this.$store.getters.getProductById(parseInt(this.id))
         }
-    }
+    },
 }
 
 </script>

@@ -7,11 +7,14 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductApiController extends Controller
 {
     public function index()
     {
+
+        $this->middleware("auth");
         return ProductResource::collection(Product::all());
     }
 
