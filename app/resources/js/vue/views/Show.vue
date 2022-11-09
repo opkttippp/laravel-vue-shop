@@ -1,11 +1,11 @@
 <template>
 
-    <div class="container-fluid dark-grey-text mt-0">
+    <div class="container-fluid dark-grey-text mt-0" v-if="products">
         <div class="card">
             <div class="col-12 mt-1 mb-1">
                 <p class="product_title">{{ products.title }}</p>
             </div>
-            <Menu_show :products = products></Menu_show>
+            <Menu_show :products=products></Menu_show>
             <div class="row">
                 <div class="col-6">
                     <div class="d-flex justify-content-center one" style="overflow: hidden; height: 400px;">
@@ -21,7 +21,7 @@
                 <div class="col-md-6 mt-2">
 
                     <div class="d-flex justify-content-start" v-if="products.id">
-                        <StarRating :id = products.id></StarRating>
+                        <StarRating :id=products.id></StarRating>
                     </div>
                     <div class="mt-3 mb-3">
                         <router-link to="" class="d-flex justify-content-start mt-4">
@@ -45,7 +45,7 @@
                     </p>
                 </div>
             </div>
-<!--{{getResults}}-->
+            <!--{{getResults}}-->
             <hr>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 text-center">
@@ -76,6 +76,7 @@
 
 import StarRating from "../components/StarRating";
 import Menu_show from "../components/Menu_show";
+// import {mapActions} from "vuex";
 
 export default {
     name: "Show",
@@ -91,13 +92,18 @@ export default {
     },
     mounted() {
         this.selectImage()
+        // this.GET_PRODUCTS()
+        this.$store.dispatch('GET_PRODUCTS')
     },
     computed: {
         products() {
-            return this.$store.getters.getProductById(parseInt(this.id))
+            return this.$store.getters.getProductById(parseInt(this.id));
         }
     },
     methods: {
+        // ...mapActions([
+        //     'GET_PRODUCTS'
+        // ]),
         selectImage() {
             const one = document.querySelector('.one');
             let div = document.querySelectorAll(".many");

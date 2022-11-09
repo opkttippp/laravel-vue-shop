@@ -8,51 +8,44 @@
                         <h5 class="modal-title" id="cartModalTitle2">
                             Shopping Cart ({{ totalAmount }} Items)
                         </h5>
-
                         <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-4">
-                        <form method="post" class="row g-3 mb-3" ref="formHTML">
-                            {{ user.name }}111
+                        <form class="row g-3 mb-3">
                             <h5>Billing details</h5>
                             <div class="col-md-6">
-                                <label for="firstName" class="form-label">First Name</label>
-                                <input v-model="user.name" type="text"
-                                       :class="{ 'form-control': true, 'is-invalid': firstNameInvalidMsg }"
-                                       id="firstName" placeholder="First Name" name="firstName">
-                                <div v-if="firstNameInvalidMsg" class="invalid-feedback">
-                                </div>
+                                <label for="name" class="form-label">Name</label>
+                                <input v-model="name" type="text" class="form-control" id="name"
+                                       placeholder="Name" name="name">
                             </div>
                             <div class="col-md-6">
-                                <label for="lastName" class="form-label">Last Name</label>
-                                <input v-model="lastName" type="text" class="form-control" id="lastName"
-                                       placeholder="Last Name" name="lastName">
-                            </div>
-                            <div class="col-12">
-                                <label for="city" class="form-label">City</label>
-                                <input v-model="user.avatar" type="text" class="form-control" id="city" placeholder="City"
-                                       name="city">
+                                <label for="lastname" class="form-label">Last Name</label>
+                                <input v-model="lastname" type="text" class="form-control" id="lastname"
+                                       placeholder="Last Name" name="lastname">
                             </div>
                             <div class="col-12">
                                 <label for="address" class="form-label">Address</label>
-                                <input v-model="user.address" type="text" class="form-control" id="address"
+                                <input v-model="address" type="text" class="form-control" id="address"
                                        placeholder="Address" name="address">
                             </div>
                             <div class="col-md-6">
-                                <label for="email" class="form-label">Email Address</label>
-                                <input v-model="user.email" type="email" class="form-control" id="email"
+                                <label for="email" class="form-label">Email</label>
+                                <input v-model="email" type="email" class="form-control" id="email"
                                        placeholder="Email Address" name="email">
                             </div>
                             <div class="col-md-6">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input v-model="user.phone" type="text" class="form-control" id="phone"
+                                <input v-model="phone" type="text" class="form-control" id="phone"
                                        placeholder="+38(099) 999-99-99" name="phone">
                             </div>
+                            <div class="col-md-6">
+                                <label for="comment" class="form-label">Comment</label>
+                                <input type="text" class="form-control" id="comment"
+                                       placeholder="..." name="comment">
+                            </div>
                             <div class="col-12 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-success">
-                                    <!--                    @click="fetchProducts"-->
-                                    <!--            >-->
+                                <button type="submit" class="btn btn-success" @click.prevent="onSubmit">
                                     Place Order
                                 </button>
                             </div>
@@ -65,21 +58,31 @@
 </template>
 
 <script>
+
 export default {
     name: "CartBillingForm",
     props: {
-        user: {}
+        id: Number,
+        name: String,
+        lastname: String,
+        address: String,
+        email: String,
+        phone: Number,
     },
-    data: () => ({
-        products: [],
-        firstName: "",
-        lastName: "",
-        city: "",
-        address: "",
-        email: "",
-        phone: "",
-        firstNameInvalidMsg: "",
-    }),
+    data: function () {
+        return {
+            id: this.id,
+            name: this.name,
+            lastname: this.lastname,
+            address: this.address,
+            email: this.email,
+            phone: this.phone,
+            comment: "",
+            total: "",
+            firstNameInvalidMsg: "",
+            orderId: "",
+        }
+    },
     watch: {
         firstName(newFirstName) {
             if (newFirstName.length > 20) {
@@ -95,30 +98,50 @@ export default {
         },
         removeAll() {
             this.$store.commit("removeOrder")
+        },
+        cartIsEmpty() {
+            return this.$store.getters.cartIsEmpty;
+        },
+        totalAmount() {
+            return this.$store.getters.totalAmount;
+        },
+
+        cartProducts() {
+            return this.$store.state.cartProducts;
+        },
+        totalPrice() {
+            return this.$store.getters.totalPrice;
         }
     },
     methods: {
-        placeOrder() {
-        },
-        // fetchProducts: async function() {
-        //     let formData = this.firstName;
-        //     try {
-        //         const response = await fetch("/api/product/mail.php",
-        //             {
-        //                 method: 'POST',
-        //                 headers: {
-        //                     'Accept': 'application/json',
-        //                     'Content-Type': 'application/json'
-        //                 },
-        //                 body: JSON.stringify({formData})
-        //             }
-        //         );
-        //         this.products = await response.json()
-        //         alert(this.products)
-        //     } catch (e) {
-        //         console.error(e)
-        //     }
-        // },
+        onSubmit() {
+
+            // function getCookie(name) {
+            //     function escape(s) {
+            //         return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1');
+            //     }
+            //
+            //     let match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
+            //     return match ? match[1] : null;
+            // }
+            // console.log(document.cookie);
+            // let csrfToken = getCookie('XSRF-TOKEN');
+            // console.log(csrfToken);
+
+            return axios.post('http://larav.local/api/order',
+                {
+                    user_id: this.id,
+                    customerName: this.name,
+                    customerLastName: this.lastname,
+                    customerEmail: this.email,
+                    customerAddress: this.address,
+                    customerPhone: this.phone,
+                    comment: this.comment,
+                    cartProducts: this.cartProducts,
+                }).then((res) => {
+                (console.log(res));
+            });
+        }
     }
 }
 </script>

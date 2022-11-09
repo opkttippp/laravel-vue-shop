@@ -1,7 +1,5 @@
 FROM php:fpm
 
-RUN docker-php-ext-install pdo pdo_mysql
-
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 ## Set working directory
@@ -22,7 +20,8 @@ RUN apt-get update && apt-get install -y \
     vim \
     unzip \
     git \
-    curl
+    curl \
+    memcached
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

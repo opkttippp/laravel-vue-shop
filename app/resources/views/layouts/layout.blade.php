@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- CSRF Token -->
-    {{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{--    <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script>--}}
     <title>@yield('title')</title>
     <!-- Fonts -->
     <link rel="icon" href="/images/favicone/favic.ico" type="image/x-icon">

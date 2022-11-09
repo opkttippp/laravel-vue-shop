@@ -83,21 +83,6 @@
                 </a>
             </div>
         @endguest
-{{--        <ul class="navbar-nav nav-flex-icon cart">--}}
-{{--            @if(Cart::content())--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a class="nav-link" href="{{route('cart.index')}}">--}}
-{{--                        <span class="badge red mr-1">--}}
-{{--                            {{Cart::count()}}--}}
-{{--                        </span>--}}
-{{--                        <i class="fa fa-shopping-cart"></i>--}}
-{{--                        <span class="clearfix d-none d-sm-inline-block">--}}
-{{--                            Cart--}}
-{{--                        </span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            @endif--}}
-{{--        </ul>--}}
         <cart-button></cart-button>
         <div class="nav-link searc">
             <a data-widget="navbar-search" href="#" role="button" onclick="searc()">
@@ -198,23 +183,23 @@
 
 <script type="text/javascript">
 
-/*---------------------------live Search-----------------------------------*/
-async function checkEvent() {
+    /*---------------------------live Search-----------------------------------*/
+    async function checkEvent() {
         const modal = document.querySelector('#myModal_Search');
         let val = document.querySelector("#search").value;
         if (val.length >= 3) {
-            console.log(val);
             const rawResponse = await fetch('/api/search/',
                 {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': "{{csrf_token()}}"
                     },
                     body: JSON.stringify({val})
                 });
             let content = await rawResponse.json();
-            console.log(content);
+            // console.log(content);
             if (content.length !== 0) {
                 let output = '';
                 for (let cont of content) {

@@ -1,10 +1,13 @@
 import {createStore} from "vuex";
 
 let cart = window.localStorage.getItem('cart');
+// let prod = window.localStorage.getItem('prod');
+
 const store = createStore({
     state: {
         backendURL: "http://larav.local/api",
         cartProducts: cart ? JSON.parse(cart) : [],
+        // products: prod ? JSON.parse(prod) : [],
         products: [],
         user: {},
         review: []
@@ -19,6 +22,9 @@ const store = createStore({
         SET_REVIEW_STATE: (state, review) => {
             state.review = review
         },
+        // saveProducts(state) {
+        //     window.localStorage.setItem('prod', JSON.stringify(state.products));
+        // },
         saveCart(state) {
             window.localStorage.setItem('cart', JSON.stringify(state.cartProducts));
         },
@@ -76,6 +82,7 @@ const store = createStore({
             return axios('http://larav.local/api/products', {method: "GET"})
                 .then(products => {
                     commit('SET_PRODUCTS_STATE', products.data.data);
+                    // this.commit('saveProducts');
                     return products.data.data;
                 }).catch((error) => {
                     console.log(error)

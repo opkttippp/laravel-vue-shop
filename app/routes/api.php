@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\OrderApiController;
 use App\Http\Controllers\Api\ProductApiController;
 use App\Http\Controllers\Api\ReviewApiController;
 use App\Http\Controllers\Api\SearchApiController;
@@ -11,12 +12,16 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+
 Route::apiResources([
     'user' => UserApiController::class,
 ]);
 
 Route::apiResources([
     'products' => ProductApiController::class,
+]);
+Route::apiResources([
+    'order' => OrderApiController::class,
 ]);
 
 Route::apiResources([
@@ -28,3 +33,4 @@ Route::apiResources([
 Route::post('/search', [SearchApiController::class, 'show']);
 
 Route::get('/{product}/review', [ReviewApiController::class, 'index']);
+
