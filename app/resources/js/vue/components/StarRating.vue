@@ -1,51 +1,63 @@
 <template>
-    <div class="star-rating">
+    <div class="star-rating" v-if="review">
         <span v-for="index in starLimit" :key="index" class="star star-outlined"></span>
         <div class="star-rating__colored" :style="ratingWidthStyle">
             <span v-for="index in starLimit" :key="index" class="star star-colored"></span>
         </div>
     </div>
-    <!--                            <div v-if="products.stars" class="stars d-flex justify-content-center align-items-center ml-4">-->
-    <!--                                <b id="grade">{{ products.stars }}</b>-->
-    <!--                                &nbsp;({{ item }}&nbsp;оценок)-->
-    <!--                            </div>-->
+    <div class="stars d-flex justify-content-center align-items-center ml-4">
+        <b id="grade">{{ this.stars }}</b>
+        &nbsp;({{ this.item }}&nbsp;оценки)
+    </div>
 </template>
-
 <script>
 export default {
     name: "StarRating",
     props: {
-        id: Number,
+        review: {
+            type: Array,
+            default: []
+        },
         starLimit: {
             type: Number,
             default: 5
         }
 
     },
+    data: function () {
+        return {
+            stars: {
+                type: Number
+            },
+            item: {
+                type: Number
+            }
+        }
+    },
     computed: {
         ratingWidth() {
-            return this.rev.stars / this.starLimit * 100
+            this.getResults()
+            return this.stars / this.starLimit * 100
         },
         ratingWidthStyle() {
             return `width: ${this.ratingWidth}%;`
         }
     },
-    mounted() {
-//--------------------------------------Image--------------------------------------------
-        this.getResults()
-    },
     methods: {
         getResults() {
-            this.axios.get('http://larav.local/api/review/' + this.id)
-                .then(res => {
-                    this.rev = res.data;
-                });
+            let item = this.review.length
+            let sum = this.review.reduce(function (sum, n) {
+                return sum + n.status;
+            }, 0);
+            this.stars = sum / item
+            this.item = item
         },
-    },
-    data() {
-        return {
-            rev: {}
-        }
+        // getResults() {
+        //     this.axios.get('http://larav.local/api/review/' + this.id)
+        //         .then(res => {
+        //             this.rev = res.data;
+        //         });
+        // },
     }
 }
 </script>

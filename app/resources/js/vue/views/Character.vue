@@ -5,7 +5,7 @@
 
                 <p class="product_title">{{ products.title }}</p>
             </div>
-            <Menu_show :products = products></Menu_show>
+            <MenuShow :products = products></MenuShow>
             <div class="columns">
                 <div class="col-md-12 mt-4 mr-3">
                     <p style="text-align: justify; margin: 2% 3%;">
@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import Menu_show from "../components/Menu_show";
+import MenuShow from "../components/MenuShow";
 
 export default {
     name: "Character",
     components: {
-        Menu_show
+        MenuShow
     },
     props: {
         id: String

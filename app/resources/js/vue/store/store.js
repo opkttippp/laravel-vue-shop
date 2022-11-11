@@ -83,6 +83,7 @@ const store = createStore({
                 .then(products => {
                     commit('SET_PRODUCTS_STATE', products.data.data);
                     // this.commit('saveProducts');
+                    // console.log(products.data.data)
                     return products.data.data;
                 }).catch((error) => {
                     console.log(error)
@@ -118,6 +119,9 @@ const store = createStore({
         PRODUCTS(state) {
             return state.products;
         },
+        REVIEW(state) {
+            return state.review;
+        },
         USER(state) {
             return state.user;
         },
@@ -132,14 +136,17 @@ const store = createStore({
             )
         ),
         cartIsEmpty: (state) => !state.cartProducts.length,
+
         getProductById: (state) => (id) => {
             return state.products.find(product => product.id === id)
         },
+
         getReviewById: (state) => (id) => {
-            // console.log(id)
-            // console.log(state.review)
-            // console.log(state.review.find(review => review.product_id  === id))
-            return state.review.filter(review => review.product_id  === id)
+            return state.review.filter(review => review.product_id === id)
+        },
+
+        getUser: (state) => {
+            return state.user
         },
     },
 });

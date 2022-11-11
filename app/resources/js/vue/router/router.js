@@ -5,14 +5,12 @@ import Show from "../../vue/views/Show";
 import Character from "../../vue/views/Character";
 import Review from "../../vue/views/Review";
 
-
 const routes = [
 
     {
         path: '/',
         name: 'Products',
         component: Products,
-        props: true,
     },
     {
         path: '/show/:id',
@@ -39,4 +37,5 @@ const routes = [
         history: createWebHashHistory(),
         routes,
     })
+
     export default router;

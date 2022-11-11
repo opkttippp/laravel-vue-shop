@@ -32,12 +32,13 @@
                        :address="getAuth.address"
     >
     </cart-billing-form>
+
 </template>
 
 <script>
 import CartProductsList from "./CartProductsList";
 import CartBillingForm from "./CartBillingForm";
-import {mapActions, mapGetters} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
     name: "CartModal",
@@ -46,7 +47,6 @@ export default {
         getAuth() {
             return this.$store.state.user;
         },
-        ...mapGetters(['USER']),
         cartIsEmpty() {
             return this.$store.getters.cartIsEmpty;
         },

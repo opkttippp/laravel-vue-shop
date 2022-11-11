@@ -64,11 +64,21 @@ export default {
     },
     mounted() {
         this.GET_PRODUCTS()
+        // this.GET_REVIEW()
+            // window.addEventListener('resize', function () {
+            //     if (window.innerWidth > 767) {
+            //         console.log('Desktop')
+            //     } else {
+            //         console.log('Mobile')
+            //     }
+            //
+            // })
     }
     ,
     methods: {
         ...mapActions([
-            'GET_PRODUCTS'
+            'GET_PRODUCTS',
+            // 'GET_REVIEW',
         ]),
         addProductToCart(product) {
             this.$store.commit("addProductToCart", product)

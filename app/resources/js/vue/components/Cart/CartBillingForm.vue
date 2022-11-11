@@ -128,6 +128,7 @@ export default {
             // let csrfToken = getCookie('XSRF-TOKEN');
             // console.log(csrfToken);
 
+
             return axios.post('http://larav.local/api/order',
                 {
                     user_id: this.id,

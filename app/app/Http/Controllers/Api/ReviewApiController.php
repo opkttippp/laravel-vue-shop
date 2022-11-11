@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ReviewResource;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewApiController extends Controller
 {
@@ -28,11 +29,13 @@ class ReviewApiController extends Controller
     public function show($id)
     {
         $rev = Review::where('product_id', $id)->get();
-        $status = 0;
-        foreach ($rev as $r) {
-            $user[] = $r->user;
-            $status += $r->status;
-        }
+        $user = $rev->where('user_id', Auth::user()->id)->pluck('status');
+        $status = Review::where('product_id', $id)->pluck('status')->sum();
+
+//        $status = 0;
+//        foreach ($rev as $r) {
+//            $status += $r->status;
+//        }
 
         $item = Review::where('product_id', $id)->count();
         if ($item) {
@@ -45,7 +48,8 @@ class ReviewApiController extends Controller
         return ([
             'stars' => $stars,
             'item' => $item,
-            'review' => $rev
+            'review' => $rev,
+            'user' => $user
         ]);
     }
 
