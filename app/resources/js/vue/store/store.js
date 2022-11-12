@@ -1,15 +1,15 @@
 import {createStore} from "vuex";
 
 let cart = window.localStorage.getItem('cart');
-// let prod = window.localStorage.getItem('prod');
 
 const store = createStore({
     state: {
         backendURL: "http://larav.local/api",
         cartProducts: cart ? JSON.parse(cart) : [],
-        // products: prod ? JSON.parse(prod) : [],
         products: [],
-        user: {},
+        user: {
+            type: Object
+        },
         review: []
     },
     mutations: {
@@ -22,9 +22,7 @@ const store = createStore({
         SET_REVIEW_STATE: (state, review) => {
             state.review = review
         },
-        // saveProducts(state) {
-        //     window.localStorage.setItem('prod', JSON.stringify(state.products));
-        // },
+
         saveCart(state) {
             window.localStorage.setItem('cart', JSON.stringify(state.cartProducts));
         },
@@ -72,45 +70,53 @@ const store = createStore({
             state.cartProducts.splice(index, 1);
             this.commit('saveCart');
         },
-        removeOrder() {
-            this.cartProducts = '';
+        removeOrder(state) {
+            state.cartProducts = [];
             this.commit('saveCart');
         }
     },
     actions: {
-        GET_PRODUCTS({commit}) {
-            return axios('http://larav.local/api/products', {method: "GET"})
+        GET_PRODUCTS({state, commit}, page) {
+            return axios.get('http://larav.local/api/products', {
+                params: {
+                    page: page
+                }})
                 .then(products => {
-                    commit('SET_PRODUCTS_STATE', products.data.data);
-                    // this.commit('saveProducts');
-                    // console.log(products.data.data)
-                    return products.data.data;
+                    commit('SET_PRODUCTS_STATE', products.data);
+                    return products.data;
                 }).catch((error) => {
                     console.log(error)
-                    return error
+                });
+        },
+        GET_PRODUCTS_ID({state, commit}, id) {
+            this.GET_PRODUCTS;
+            return axios.get('http://larav.local/api/products/' + id)
+                .then(products => {
+                    commit('SET_PRODUCTS_STATE', products.data);
+                    return products.data;
+                }).catch((error) => {
+                    console.log(error)
                 });
         },
         GET_USER({commit}) {
-            return axios('http://larav.local/api/auth', {method: "GET"})
+            return  axios('http://larav.local/api/auth', {method: "GET"})
                 .then(user => {
                     commit('SET_USER_STATE', user.data);
                     return user.data;
                 }).catch((error) => {
                     console.log(error)
-                    return error
+                    // return error
                 });
         },
         GET_REVIEW({commit}) {
             return axios('http://larav.local/api/review', {method: "GET"})
                 .then(review => {
                     commit('SET_REVIEW_STATE', review.data.data);
-                    // console.log(review.data.data)
                     return review.data.data;
                 }).catch((error) => {
                     console.log(error)
-                    return error
                 });
-        },
+        }
     },
     getters: {
         GET_SERVER_URL: state => {
@@ -128,17 +134,18 @@ const store = createStore({
         totalAmount: (state) => (
             state.cartProducts.reduce((total, {amount}) => total + amount, 0)
         ),
-        totalPrice: (state) => (
+    totalPrice: (state) => (
             state.cartProducts.reduce(
                 (total, {price, amount}) =>
-                    total + (amount * price),
+                total + (amount * price),
                 0
-            )
+            ).toFixed(2)
         ),
-        cartIsEmpty: (state) => !state.cartProducts.length,
+    cartIsEmpty: (state) => !state.cartProducts.length,
 
-        getProductById: (state) => (id) => {
-            return state.products.find(product => product.id === id)
+    getProductById: (state) => (id) => {
+        if(state.products.data)
+        return state.products.data.find(product => product.id === id)
         },
 
         getReviewById: (state) => (id) => {

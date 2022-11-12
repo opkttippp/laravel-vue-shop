@@ -3,10 +3,11 @@
         <div class="v-popup">
             <div class="v-popup-header">
                 <h2>Review</h2>
-                <span><i class="material-icons clos"
-                         @click="closePop"
-                >close
-            </i></span>
+                <span>
+                    <i class="material-icons close"
+                       @click="closePop"
+                    ></i>
+                </span>
             </div>
             <div class="v-popup-content">
                 <slot></slot>
@@ -29,7 +30,7 @@ export default {
         let vm = this;
         document.addEventListener('click', function (item) {
             if (item.target === vm.$refs['popup']) {
-            vm.closePop();
+                vm.closePop();
             }
         })
     }

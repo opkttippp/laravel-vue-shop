@@ -12,12 +12,12 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Login or Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
 
-                                @error('email')
+                                @error('login')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -63,16 +63,6 @@
                                     </a>
                                 @endif
                             </div>
-                        </div>
-                        <div class="flex items-center justify-end mt-4">
-                            <a class="btn" href="{{ url('api/redirect/github') }}" title="GitHub" style="background: #313131; color: #ffffff; padding: 10px; width: 100%; text-align: center; display: block; border-radius:3px;">
-                                Login with GitHub
-                            </a>
-                        </div>
-                        <div class="flex items-center justify-end mt-4">
-                            <a class="btn" href="{{ url('api/redirect/facebook') }}" title="Facebook" style="background: #313131; color: #ffffff; padding: 10px; width: 100%; text-align: center; display: block; border-radius:3px;">
-                                Login with Facebook
-                            </a>
                         </div>
                     </form>
                 </div>

@@ -83,43 +83,46 @@
                 </a>
             </div>
         @endguest
-        <cart-button></cart-button>
-        <div class="nav-link searc">
-            <a data-widget="navbar-search" href="#" role="button" onclick="searc()">
-                <div class="d-flex p-2"
-                     style="height: 20%;
-                    border: 1px solid white;
-                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
-                    border-radius: 25px;">
-                    <p class="navbar-nav nav-flex-icon cart ml-3 mr-3">Search</p>
-                    <i class="fas fa-search mr-3 ml-3"></i>
-                </div>
-            </a>
-        </div>
-        <div class="navbar-search-block mr-2" style="margin-left: 65%;">
-            <form class="form-inline" method="get" action="{{route('product.search')}}">
-                <div class="input-group input-group"
-                     style="height: 88%;
+        <cart-button
+            style="margin-right: 170px;"
+        >
+        </cart-button>
+        {{--        <div class="nav-link searc">--}}
+        {{--            <a data-widget="navbar-search" href="#" role="button" onclick="searc()">--}}
+        {{--                <div class="d-flex p-2"--}}
+        {{--                     style="height: 20%;--}}
+        {{--                    border: 1px solid white;--}}
+        {{--                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);--}}
+        {{--                    border-radius: 25px;">--}}
+        {{--                    <p class="navbar-nav nav-flex-icon cart ml-3 mr-3">Search</p>--}}
+        {{--                    <i class="fas fa-search mr-3 ml-3"></i>--}}
+        {{--                </div>--}}
+        {{--            </a>--}}
+        {{--        </div>--}}
+
+        <form id="form" class="form-inline searchForm" method="get" action="{{route('product.search')}}">
+            <div class="input-group input-group"
+                 style="height: 88%;
                     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
                     border-radius: 25px;
                     border: 1px solid white;
                     background-color: #343a40;">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                           aria-label="Search" id="search" value="" onkeyup="checkEvent()" name='search'
-                           autocomplete="off"
-                           style="background: none; border: none;">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar submit" type="submit" style="visibility: hidden; ">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <button class="btn btn-navbar" onclick="clos()" type="button" data-widget="navbar-search"
-                                style="border-radius: 32%; background: none; border: none;">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
+                <input class="form-control form-control-navbar inputSearch" type="search" placeholder="Search"
+                       aria-label="Search" id="search" value="" onkeyup="checkEvent()" name='search'
+                       autocomplete="off"
+                       style="background: none; border: none;">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar submit" type="submit" style="visibility: hidden;">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    {{--                        <button class="btn btn-navbar" onclick="clos()" type="button" data-widget="navbar-search"--}}
+                    {{--                                style="border-radius: 32%; background: none; border: none;">--}}
+                    {{--                            <i class="fas fa-times"></i>--}}
+                    {{--                        </button>--}}
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
+
 
         {{--        <form class="d-flex" method="get" action="{{route('product.search')}}">--}}
         {{--                            @csrf--}}
@@ -160,7 +163,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a class="dropdown-item menu_manuf" href="{{ route('manufactor.index') }}">Производители</a>
+                        <li><a class="dropdown-item menu_manuf" href="{{ route('manufactur.index') }}">Производители</a>
                         </li>
                     </ul>
                 </div>
@@ -182,24 +185,35 @@
 </div>
 
 <script type="text/javascript">
-
+    document.addEventListener('DOMContentLoaded', function () {
+        form.addEventListener("focusin", () => form.classList.add('focused'));
+        form.addEventListener("focusout", () => form.classList.remove('focused'));
+    });
     /*---------------------------live Search-----------------------------------*/
     async function checkEvent() {
         const modal = document.querySelector('#myModal_Search');
         let val = document.querySelector("#search").value;
         if (val.length >= 3) {
-            const rawResponse = await fetch('/api/search/',
+            const content = await axios.post('/api/search/',
                 {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': "{{csrf_token()}}"
-                    },
-                    body: JSON.stringify({val})
-                });
-            let content = await rawResponse.json();
-            // console.log(content);
+                    val: val
+                }).then((res) => {
+                return res.data;
+            })
+            {{--    --}}
+            {{--const rawResponse = await fetch('/api/search/',--}}
+            {{--    {--}}
+            {{--        method: 'POST',--}}
+            {{--        headers: {--}}
+            {{--            'Accept': 'application/json',--}}
+            {{--            'Content-Type': 'application/json',--}}
+            {{--            'X-CSRF-TOKEN': "{{csrf_token()}}"--}}
+            {{--        },--}}
+            {{--        body: JSON.stringify({val})--}}
+            {{--    });--}}
+            {{--let content = await rawResponse.json();--}}
+
+            // console.log(content.length);
             if (content.length !== 0) {
                 let output = '';
                 for (let cont of content) {
@@ -221,7 +235,16 @@
         function addInSearch(event) {
             document.querySelector('#search').value = event;
             resultHide();
-            document.querySelector('.submit').click();
+            document.querySelector('.submit').click((e) => e.preventDefault());
+            getProduct(event)
+        }
+
+        async function getProduct(event) {
+            await axios.post('/api/search/',
+                {
+                    val: event
+                }).then((res) => {
+            })
         }
 
         document.onclick = function () {
@@ -256,14 +279,17 @@
 
     /*-------------------------------Hidden search--------------------------------*/
 
-    function searc() {
-        let sear = document.querySelector('.searc');
-        sear.style = 'transition: all 0.3s ease; opacity: 0'
-    };
-
-    function clos() {
-        let sear = document.querySelector('.searc');
-        sear.style = 'transition: all 0.7s ease; opacity: 100%'
-    };
+    // function searc() {
+    //     let sear = document.querySelector('.searc');
+    //     sear.style = 'transition: all 0.3s ease; opacity: 0'
+    // };
+    //
+    // function clos() {
+    //     let sear = document.querySelector('.searc');
+    //     sear.style = 'transition: all 0.7s ease; opacity: 100%'
+    // };
     /*----------------------------------------------------------------------------*/
 </script>
+
+<style scoped="">
+</style>

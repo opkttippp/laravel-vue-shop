@@ -52,20 +52,16 @@ class Admin extends Seeder
 //
 //        $user->assignRole($role3);
         $user = User::create([
-            'name' => 'super-user',
+            'id' => 1,
+            'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('admin'),
             'status' => User::STATUS_ACTIVE,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
 
-        $role = Role::create([
-            'name' => 'admin',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-
+        $role = Role::findByName('admin');
         $user->assignRole($role);
     }
 }

@@ -10,7 +10,7 @@
         </thead>
         <tbody>
         <cart-product-item
-            v-for="(product, index) in cartProducts"
+            v-for="(product, index) in this.cartProducts"
             :id="product.id"
             :title="product.title"
             :price="product.price"
@@ -39,10 +39,12 @@ import CartProductItem from "./CartProductItem";
 export default {
     name: "CartProductsList",
     components: { CartProductItem },
+    props: {
+        cartProducts: {
+            type: []
+        }
+    },
     computed: {
-        cartProducts() {
-            return this.$store.state.cartProducts;
-        },
         totalAmount() {
             return this.$store.getters.totalAmount;
         },

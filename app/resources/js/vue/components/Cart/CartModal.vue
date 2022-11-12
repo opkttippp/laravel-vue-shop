@@ -1,35 +1,47 @@
 <template>
-    <div class="modal fade" id="cartModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="cartModalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cartModalTitle">
-                        Shopping Cart ({{ totalAmount }} Items)
-                    </h5>
-                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-                <div v-if="!cartIsEmpty" class="modal-body p-4">
-                    <cart-products-list></cart-products-list>
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cartModalBilling">
-                        Order
-                    </button>
-                </div>
-                <div v-else class="modal-body p-4 d-flex justify-content-center">
-                    <p>
-                        Cart is empty...
-                    </p>
+
+        <div class="modal fade" id="cartModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+             aria-labelledby="cartModalTitle1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cartModalTitle1">
+                            Shopping Cart ({{ totalAmount }} Items)
+                        </h5>
+                        <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                                aria-label="Close">
+                        </button>
+                    </div>
+                    <div v-if="!cartIsEmpty" class="modal-body p-4">
+                        <cart-products-list
+                            :cartProducts="cartProducts"
+                        >
+                        </cart-products-list>
+                        <button  class="btn btn-success"
+                                data-mdb-backdrop="false"
+                                data-bs-dismiss="modal"
+                                data-bs-target="#cartModalBilling"
+                                data-bs-toggle="modal"
+                        >
+                            Order
+                        </button>
+                    </div>
+                    <div v-else class="modal-body p-4 d-flex justify-content-center">
+                        <p>
+                            Cart is empty...
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
     <cart-billing-form :id="getAuth.id"
                        :name="getAuth.name"
                        :lastname="getAuth.lastname"
                        :phone="getAuth.phone"
                        :email="getAuth.email"
                        :address="getAuth.address"
+                       :cartProducts="cartProducts"
     >
     </cart-billing-form>
 
@@ -38,11 +50,16 @@
 <script>
 import CartProductsList from "./CartProductsList";
 import CartBillingForm from "./CartBillingForm";
+import OrderModal from "./OrderModal";
 import {mapActions} from "vuex";
 
 export default {
     name: "CartModal",
-    components: {CartBillingForm, CartProductsList},
+    components: {
+        CartBillingForm,
+        CartProductsList,
+        OrderModal
+    },
     computed: {
         getAuth() {
             return this.$store.state.user;
@@ -53,6 +70,9 @@ export default {
         totalAmount() {
             return this.$store.getters.totalAmount;
         },
+        cartProducts() {
+            return this.$store.state.cartProducts;
+        },
     },
     mounted() {
         this.GET_USER()
@@ -61,6 +81,18 @@ export default {
         ...mapActions([
             'GET_USER'
         ]),
+        remove() {
+            let data = document.querySelectorAll('.modal-backdrop');
+            console.log(data);
+            for (let i = 0; i < 2; ++i) {
+                data[i].remove();
+            }
+        }
     }
 }
 </script>
+<style>
+/*.btn {*/
+/*    z-index: -1*/
+/*}*/
+</style>

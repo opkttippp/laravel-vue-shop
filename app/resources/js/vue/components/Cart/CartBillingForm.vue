@@ -1,8 +1,8 @@
 <template>
-    <div class="container">
+
         <div class="modal fade" id="cartModalBilling" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-             aria-labelledby="cartModalTitle2">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+             aria-labelledby="cartModalTitle2" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="cartModalTitle2">
@@ -39,14 +39,18 @@
                                 <input v-model="phone" type="text" class="form-control" id="phone"
                                        placeholder="+38(099) 999-99-99" name="phone">
                             </div>
-                            <div class="col-md-6">
-                                <label for="comment" class="form-label">Comment</label>
-                                <input type="text" class="form-control" id="comment"
-                                       placeholder="..." name="comment">
+                            <div class="col-md-12">
+                                <label class="form-label">Comment</label>
+                                <textarea class="form-control" name="comment" id="comment" rows=5 placeholder="..."
+                                          v-model=this.comment></textarea>
                             </div>
                             <div class="col-12 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-success" @click.prevent="onSubmit">
+                                <button type="submit" class="btn btn-success" @click.prevent="onSubmit"
+                                        data-bs-target="#orderModal" data-bs-toggle="modal" data-bs-dismiss="modal">
                                     Place Order
+                                </button>
+                                <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                                        aria-label="Close">
                                 </button>
                             </div>
                         </form>
@@ -54,13 +58,23 @@
                 </div>
             </div>
         </div>
-    </div>
+
+    <order-modal :name=this.name
+                 :order=this.order
+    >
+    </order-modal>
+
 </template>
 
 <script>
 
+import OrderModal from "./OrderModal";
+
 export default {
     name: "CartBillingForm",
+    components: {
+        OrderModal
+    },
     props: {
         id: Number,
         name: String,
@@ -68,19 +82,21 @@ export default {
         address: String,
         email: String,
         phone: Number,
+        cartProducts: Number,
     },
     data: function () {
         return {
-            id: this.id,
-            name: this.name,
-            lastname: this.lastname,
-            address: this.address,
-            email: this.email,
-            phone: this.phone,
+            // id: this.id,
+            // name: this.name,
+            // lastname: this.lastname,
+            // address: this.address,
+            // email: this.email,
+            // phone: this.phone,
             comment: "",
             total: "",
             firstNameInvalidMsg: "",
             orderId: "",
+            order: "",
         }
     },
     watch: {
@@ -96,39 +112,27 @@ export default {
         isPlaceOrderDisabled() {
             return !!this.firstNameInvalidMsg;
         },
-        removeAll() {
-            this.$store.commit("removeOrder")
-        },
         cartIsEmpty() {
             return this.$store.getters.cartIsEmpty;
         },
         totalAmount() {
             return this.$store.getters.totalAmount;
         },
-
-        cartProducts() {
-            return this.$store.state.cartProducts;
-        },
         totalPrice() {
             return this.$store.getters.totalPrice;
         }
     },
     methods: {
+        removeAll() {
+            this.$store.commit("removeOrder")
+        },
         onSubmit() {
-
-            // function getCookie(name) {
-            //     function escape(s) {
-            //         return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1');
-            //     }
-            //
-            //     let match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
-            //     return match ? match[1] : null;
-            // }
-            // console.log(document.cookie);
-            // let csrfToken = getCookie('XSRF-TOKEN');
-            // console.log(csrfToken);
-
-
+                let data = document.querySelectorAll('.modal-backdrop');
+                console.log(data);
+                for (let i = 0; i < 2; ++i) {
+                    data[i].remove();
+                }
+            console.log(data);
             return axios.post('http://larav.local/api/order',
                 {
                     user_id: this.id,
@@ -138,9 +142,11 @@ export default {
                     customerAddress: this.address,
                     customerPhone: this.phone,
                     comment: this.comment,
+                    total: this.totalPrice,
                     cartProducts: this.cartProducts,
                 }).then((res) => {
-                (console.log(res));
+                this.order = res.data;
+                this.removeAll();
             });
         }
     }

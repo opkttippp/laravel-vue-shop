@@ -1,5 +1,5 @@
 {
     "require": {
-        "laravel/passport": "^11.3"
+        "friendsofphp/php-cs-fixer": "^3.13"
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Gallerie;
 use App\Models\Manufactur;
 use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class ProdController extends Controller
@@ -33,22 +34,22 @@ class ProdController extends Controller
         $manufactur = Manufactur::all();
         $manufactur = $manufactur->pluck('name', 'id');
         $productManufactur = [];
-
+        //-----------------------------------------------------------------------
         return view(
             'admin.products.create',
             compact(
                 'categories',
                 'productCategories',
                 'manufactur',
-                'productManufactur'
+                'productManufactur',
             )
-        );
+        )->with('error', 'Error data');
     }
 
     public function store(ProductFormRequest $request)
     {
         //--------------------------------Main image----------------------------
-
+//        dd($request);
         if ($request->has('image')) {
             $file = $request->file('image');
             $filenameWithExt = $file->getClientOriginalName();
@@ -79,16 +80,19 @@ class ProdController extends Controller
                 );
                 $images[] = $path;
             }
+            foreach ($images as $image) {
+                Gallerie::create([
+                    'photos' => $image,
+                    'product_id' => $model->id,
+                ]);
+            }
         }
-        foreach ($images as $image) {
-            Gallerie::create([
-                'photos' => $image,
-                'product_id' => $model->id,
-            ]);
-        }
+
         //-----------------------------------------------------------------------
 
-        return redirect()->route('admin.products.index');
+        return redirect()->route('admin.products.index')->with(
+            'status', 'Product created!'
+        );
     }
 
     public function edit(Product $product)
@@ -133,7 +137,9 @@ class ProdController extends Controller
         }
         $date = $request->all();
         if (isset($path)) {
-            $this->deleteImage($product->image);
+            if ($product->image) {
+                $this->deleteImage($product->image);
+            }
             $date['image'] = $path;
         } else {
             ($date['image'] = $product->image);
@@ -156,8 +162,10 @@ class ProdController extends Controller
             }
 
             if (isset($images)) {
-                $this->deleteImage($product->galleries);
-                $product->galleries()->forceDelete();
+                if ($product->galleries) {
+                    $this->deleteImage($product->galleries);
+                    $product->galleries()->forceDelete();
+                }
                 foreach ($images as $image) {
                     Gallerie::create([
                         'photos' => $image,
@@ -187,10 +195,12 @@ class ProdController extends Controller
     public function destroy($id)
     {
         $product = Product::onlyTrashed()->whereId($id)->first();
-        //--------------------------CASCADE Delete-----------------------------
-//        $product->galleries()->forceDelete();
+        if ($product->image) {
+            $this->deleteImage($product->image);
+//        $this->deleteImage($product->galleries());
+            $product->galleries()->forceDelete();
+        }
         $product->forceDelete();
-
         return redirect()->route('admin.products.index');
     }
 

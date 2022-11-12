@@ -48,22 +48,4 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function getStarAttribute()
-    {
-        $rev = $this->reviews;
-
-        $status = 0;
-        foreach ($rev as $r) {
-            $user[] = $r->user;
-            $status += $r->status;
-        }
-        $item = Review::where('product_id', $this->id)->count();
-        if ($item) {
-            $stars = (round($status / $item, 2));
-        } else {
-            $item = 0;
-            $stars = 0;
-        }
-        return $stars;
-    }
 }

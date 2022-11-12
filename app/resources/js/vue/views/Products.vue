@@ -1,7 +1,7 @@
 <template>
     <Carousel></Carousel>
     <div id="grid" class="mb-3">
-        <div id="inner-grid" v-for="product in PRODUCTS" :key="product.id">
+        <div id="inner-grid" v-for="product in PRODUCTS.data" :key="product.id">
             <div style="overflow: hidden; height: 150px;">
                 <router-link :to="{name: 'Show', params: {id: product.id }}">
                     <img class="rounded mx-auto d-block" :src="'http://larav.local/storage/' + product.image"
@@ -24,7 +24,7 @@
                     </p>
                 </div>
                 <div class="pl-2">
-                    <p class="d-flex justify-content-start fw-bold">₴{{ product.price }}</p>
+                    <p class="d-flex justify-content-start fw-bold">₴ {{ product.price }}</p>
                 </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <span>В наличии -</span>
@@ -45,6 +45,22 @@
             </div>
         </div>
     </div>
+    <div class="page__wraper">
+<!--        <div v-for="pageNumber in PRODUCTS.meta.links"-->
+<!--             :key="pageNumber.label"-->
+<!--             class="page"-->
+<!--             @click="GET_PRODUCTS(pageNumber.label)"-->
+<!--        >-->
+<!--            <p v-if="pageNumber.label !== 1" :class="pageNumber.active ? 'active' : ''">{{ pageNumber.label }}</p>-->
+<!--        </div>-->
+        <b-pagination
+            v-model="page"
+            :total-rows=PRODUCTS.meta.total
+            :per-page=PRODUCTS.meta.per_page
+            aria-controls="my-table"
+            @click="changePage(page)"
+        ></b-pagination>
+    </div>
 </template>
 
 <script>
@@ -58,37 +74,34 @@ export default {
         Carousel
     },
     props: {},
+    data() {
+        return {
+            page: 1
+        }
+    },
     computed: {
         ...mapGetters(['PRODUCTS']),
-
     },
-    mounted() {
-        this.GET_PRODUCTS()
-        // this.GET_REVIEW()
-            // window.addEventListener('resize', function () {
-            //     if (window.innerWidth > 767) {
-            //         console.log('Desktop')
-            //     } else {
-            //         console.log('Mobile')
-            //     }
-            //
-            // })
+    watch: {
+        page() {
+            return this.GET_PRODUCTS(this.page)
+        }
+    },
+    created() {
+        this.GET_PRODUCTS(this.page);
     }
     ,
     methods: {
+        changePage(page) {
+            this.page = page;
+        },
         ...mapActions([
             'GET_PRODUCTS',
-            // 'GET_REVIEW',
         ]),
         addProductToCart(product) {
             this.$store.commit("addProductToCart", product)
         }
     },
-    data() {
-        return {
-            products: []
-        }
-    }
 }
 </script>
 
@@ -123,6 +136,23 @@ export default {
 
 #inner-grid > div > a > img {
     margin-top: 10%;
+}
+
+.page__wraper {
+    display: flex;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.page {
+    border: 1px solid black;
+    padding: 10px;
+    background-color: white;
+    margin: 6px;
+}
+
+.current-page {
+    border: 2px solid teal;
 }
 </style>
 

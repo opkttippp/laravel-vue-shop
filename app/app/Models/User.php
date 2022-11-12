@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Collective\Html\Eloquent\FormAccessible;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,20 +11,20 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
+    use Notifiable;
     use FormAccessible;
     use HasApiTokens;
     use HasFactory;
-    use Notifiable;
     use HasRoles;
     use HasPermissions;
 
 
     //--------------------------------email-----------------------------------
     public const STATUS_DELETED = 0;
-    public const STATUS_INACTIVE = 9;
-    public const STATUS_ACTIVE = 10;
+    public const STATUS_INACTIVE = 1;
+    public const STATUS_ACTIVE = 2;
     //------------------------------------------------------------------------
 
 //    protected string $guard_name = 'web';
@@ -41,8 +42,6 @@ class User extends Authenticatable
             'provider',
             'provider_id',
             'avatar',
-            'access_token',
-            'access_token',
             'access_token',
         ];
 
@@ -67,8 +66,4 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
-//    public function getUserAttribute()
-//    {
-//        return Auth::user() ?? 'guestUser';
-//    }
 }

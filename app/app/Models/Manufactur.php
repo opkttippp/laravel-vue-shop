@@ -9,6 +9,15 @@ class Manufactur extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    protected $fillable
+        = [
+            'country',
+            'name',
+            'image',
+        ];
+
     public function products()
     {
         return $this->hasMany(Product::class);

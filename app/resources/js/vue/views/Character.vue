@@ -33,6 +33,10 @@ export default {
     props: {
         id: String
     },
+    created() {
+        this.$store.dispatch('GET_REVIEW')
+        this.$store.dispatch('GET_PRODUCTS_ID', (parseInt(this.id)));
+    },
     computed: {
         products() {
             return this.$store.getters.getProductById(parseInt(this.id))

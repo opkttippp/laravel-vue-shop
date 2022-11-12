@@ -21,6 +21,7 @@ class ReviewResource extends JsonResource
             'updated_at' => $this->updated_at,
             'status' => $this->status,
             'user' => $this->user,
+            'product' => $this->product
         ];
     }
 }

@@ -46,7 +46,7 @@ services:
       MYSQL_DATABASE: Laravel_db
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
-    #      - ./docker/mysql/conf/my.cnf:/etc/mysql/my.cnf
+      - ./docker/mysql/conf/my.cnf:/etc/mysql/my.cnf
     ports:
       - "3306:3306"
     security_opt:

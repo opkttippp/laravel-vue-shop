@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductApiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
         $this->middleware("auth");
-        return ProductResource::collection(Product::all());
+        return ProductResource::collection(Product::paginate(3));
+//        return ProductResource::collection(Product::paginate(3, ['*'], 'page', $request['page']));
     }
 
     public function create()
@@ -30,7 +31,8 @@ class ProductApiController extends Controller
 
     public function show(Product $product)
     {
-        return new ProductResource($product);
+//        return new ProductResource($product);
+        return ProductResource::collection(Product::Where('id', $product->id)->paginate(1));
     }
 
     public function edit($id)

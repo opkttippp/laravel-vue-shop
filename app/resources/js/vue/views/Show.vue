@@ -19,16 +19,11 @@
                     </div>
                 </div>
                 <div class="col-md-6 mt-2">
-
                     <div class="d-flex justify-content-start">
-
-
                         <StarRating
                             :review=review
                         >
                         </StarRating>
-
-
                     </div>
                     <div class="mt-3 mb-3">
                         <router-link to="" class="d-flex justify-content-start mt-4">
@@ -85,7 +80,7 @@ import StarRating from "../components/StarRating";
 import StarRatingUser from "../components/StarRatingUser";
 import MenuShow from "../components/MenuShow";
 // import {mapActions} from "vuex";
-import {mapActions, mapGetters} from 'vuex'
+// import {mapActions, mapGetters} from 'vuex'
 
 export default {
     name: "Show",
@@ -96,10 +91,12 @@ export default {
         StarRating,
         MenuShow
     },
-    mounted() {
-        this.selectImage()
+    created() {
         this.$store.dispatch('GET_REVIEW')
-        this.$store.dispatch('GET_PRODUCTS')
+        this.$store.dispatch('GET_PRODUCTS_ID',(parseInt(this.id)));
+    },
+    mounted() {
+        this.selectImage();
     },
     computed: {
         products() {
@@ -145,6 +142,7 @@ export default {
 #grid > img {
     font-size: 1.1vw;
     background: white;
+    padding: 5px;
     width: 80%;
     height: 80%;
 }

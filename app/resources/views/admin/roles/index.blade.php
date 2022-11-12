@@ -12,7 +12,7 @@
                 <div class="card-tools">
                     {{--                    {{ $products->links() }}--}}
                     <div class="mt-2">
-                        @if(auth()->user()->can('add post'))
+                        @if(auth()->user()->can('add'))
                             <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">Create</a>
                         @endif
                     </div>
@@ -36,10 +36,10 @@
                             <td>{{$role->created_at}}</td>
                             <td>
                                 <div class="btn-group">
-                                    @if(auth()->user()->can('edit post'))
+                                    @if(auth()->user()->can('edit'))
                                         <a href="{{route('admin.roles.edit', $role->id)}}" class="btn btn-primary">Edit</a>
                                     @endif
-                                    @if(auth()->user()->can('delete post'))
+                                    @if(auth()->user()->can('delete'))
                                         <a href="{{url('/admin/roles/delete', $role->id)}}"
                                            class="btn btn-danger">Delete</a>
                                     @endif

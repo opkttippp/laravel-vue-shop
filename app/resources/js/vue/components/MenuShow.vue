@@ -40,6 +40,7 @@ export default {
         menu.forEach(n => {
             if (n.className === "router-link-active router-link-exact-active nav-link router-link") {
                 n.classList.add('disabled');
+                // n.style = "color:#39bcd3";
             }
         })
     }

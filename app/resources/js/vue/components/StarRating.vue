@@ -49,15 +49,9 @@ export default {
             let sum = this.review.reduce(function (sum, n) {
                 return sum + n.status;
             }, 0);
-            this.stars = sum / item
+            this.stars = (sum / item).toFixed(2)
             this.item = item
-        },
-        // getResults() {
-        //     this.axios.get('http://larav.local/api/review/' + this.id)
-        //         .then(res => {
-        //             this.rev = res.data;
-        //         });
-        // },
+        }
     }
 }
 </script>

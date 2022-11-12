@@ -1,0 +1,12 @@
+Column,Value (1)
+id,63
+customerName,admin
+customerLastName,ddd
+customerEmail,admin@gmail.com
+customerPhone,3456789
+customerAddress,sss
+comment,qwerttt
+total,166395.00
+created_at,2022-12-04 01:46:41
+updated_at,2022-12-04 01:46:41
+user_id,1

@@ -11,31 +11,26 @@ use Illuminate\Foundation\Testing\WithFaker;
 class RegistrationTest extends TestCase
 {
     use WithFaker;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+
     public function test_example()
     {
 
-//        $response = $this->get('/');
-//
-//        $response->assertStatus(200);
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
 
         $name = 'tttolll';
-//        Mail::fake();
+        Mail::fake();
         $this->post('/login', [
 
             'name' => $name,
-//            'email' => $this->faker()->email,
-            'password' => '12345678'
+            'email' => $this->faker()->email,
+            'password' => 'admin'
 
         ]);
-//        Mail::assertSent(SendRegistrationMail::class);
+        Mail::assertSent(SendRegistrationMail::class);
         $this->assertDatabaseHas('users', [
-            'name' => $name
+//            'name' => 'guest'
         ]);
-
     }
 }

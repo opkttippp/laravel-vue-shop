@@ -60,8 +60,8 @@ aside {
     width: 18%;
     /*background-color: #37474f;*/
     z-index: 1;
-    /*background-color: rgb(24, 22, 35, 0.5);*/
-    background-color: white;
+    background-color: rgb(24, 22, 35, 0.5);
+    /*background-color: white;*/
     background-position: bottom;
     background-repeat: no-repeat;
     margin-bottom: 0;
@@ -81,6 +81,10 @@ aside {
 
 footer p {
     margin: auto;
+}
+
+.table td {
+    vertical-align: middle;
 }
 
 .form-review {
@@ -246,8 +250,16 @@ footer p {
 }
 
 /*---------------------------------------------------------------------*/
-.search {
-    max-width: 150px;
+.searchForm {
+    position: absolute;
+    margin-left: 85%;
+    width: 150px;
+    transition: all 0.3s;
+}
+.focused{
+    width: 310px;
+    margin-left: 70%;
+    transition: all 0.3s;
 }
 
 .cart a {

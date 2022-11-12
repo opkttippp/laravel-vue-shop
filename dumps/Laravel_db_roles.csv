@@ -1,0 +1,6 @@
+Column,Value (1),Value (2),Value (3)
+id,1,2,3
+name,admin,manager,user
+guard_name,web,web,web
+created_at,2022-11-30 15:52:37,2022-11-30 15:53:53,2022-11-30 15:54:01
+updated_at,2022-11-30 15:52:37,2022-11-30 15:53:53,2022-11-30 15:54:01

@@ -11,7 +11,8 @@
                         {{Auth::user()->name}}</a>
             </div>
             <div class="brand-link mt-1 mb-1  d-flex justify-content-evenly">
-                <p class="brand-text font-weight-light">Role - {{ Auth::user()->roles->pluck('name')->first() }}</p>
+{{--                <p class="brand-text font-weight-light">Role - {{ Auth::user()->roles->pluck('name')->first() }}</p>--}}
+                <p class="brand-text font-weight-light">Role - {{ Auth::user()->name }}</p>
             </div>
 
             <nav class="mt-2 h6">
@@ -37,7 +38,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{url('review')}}" class="nav-link">
+                                <a href="{{url('admin/reviews')}}" class="nav-link">
                                     <p>
                                         All review
                                     </p>
@@ -73,7 +74,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('admin.products.index') }}" class="nav-link">
+                        <a href="{{ route('admin.orders.index') }}" class="nav-link">
                             <i class="fas fa-shopping-bag nav-icon"></i>
                             <p>
                                 Orders
@@ -81,7 +82,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.products.index') }}" class="nav-link">
+                        <a href="{{ route('admin.category.index') }}" class="nav-link">
                             <i class="fas fa-list nav-icon"></i>
                             <p>
                                 Category
@@ -94,6 +95,15 @@
                             <i class="fas fa-tshirt nav-icon"></i>
                             <p>
                                 Products
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.manufactur.index') }}" class="nav-link">
+                            <i class="fa fa-solid fa-industry nav-icon"></i>
+                            <p>
+                                Manufacturs
                             </p>
                         </a>
                     </li>

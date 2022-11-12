@@ -4,6 +4,7 @@
 @endsection
 
 @section('main_content')
+
     <div class="col-12 text-dark">
         <div class="card">
             <div class="card-header">
@@ -20,7 +21,7 @@
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                     <thead>
-                    <tr style="text-align: center">
+                    <tr>
                         <th>#</th>
                         <th>Name</th>
                         <th>Avatar</th>
@@ -35,10 +36,8 @@
                             <td id="id">{{ $user->id }}</td>
                             <td id="name">{{ $user->name }}</td>
                             <td>
-                                <div style="overflow: hidden; height: 75px;">
-                                    <img class="rounded mx-auto d-block" src="{{asset('storage/'.$user->avatar)}}"
-                                         alt="tv" style="width: 80%; height: 80%; object-fit: contain;">
-                                </div>
+                                <img class="avat" src="{{asset('storage/'.$user->avatar)}}" alt="tv"
+                                style="width:85px; height: 85px; border-radius: 50%;">
                             </td>
                             <td>{{ $user->email }}</td>
                             <td>
@@ -51,11 +50,11 @@
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    @if(auth()->user()->can('edit post'))
+                                    @if(auth()->user()->can('edit'))
                                         <a href="{{route('admin.users.edit', $user->id)}}"
                                            class="btn btn-primary">Edit</a>
                                     @endif
-                                    @if(auth()->user()->can('delete post'))
+                                    @if(auth()->user()->can('delete'))
                                         <a href="{{route('admin.users.delete', $user->id)}}" class="btn btn-danger">Delete</a>
                                     @endif
                                 </div>
@@ -67,58 +66,42 @@
             </div>
         </div>
     </div>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            async function checkEvent() {
+                let id = document.querySelector('#id');
+
+                // let response = await fetch('/api/user', {
+                //     headers: {
+                //         "Content-Type": "application/json"
+                //     }
+                // });
+                // let data = await response.json();
+                // let dataset = data.data;
+                //
+                // for (let i = 1; i < dataset.length; i++) {
+                //     let id_back = document.createElement('div');
+                //     id_back.innerHTML = value.id;
+                //     id.append(id_back);
+                // }
+
+                // fetch('/api/user')
+                //     .then(response => {
+                //         return response.json();
+                //     })
+                //     .then(products => {
+                //
+                //         console.log(products);
+                //     })
+
+            }
+            checkEvent();
+        });
+    </script>
 @endsection
-<script>
-    // function checkEvent() {
-    //-------------------------------------1-------------------------------------
-    // function checkEvent() {
-    //     fetch('/api/user', {headers: {"Content-Type": "application/json"
-    //     }}).then(response => response.json()
-    //     ).then(data => console.log(data))
-    // };
-    //------------------------------------2-------------------------------------
-    // function checkEvent() {
-    //     fetch('/api/user').then((response) => {
-    //         return response.json();
-    //     }).then((data) => {
-    //             console.log(data);
-    //         });
-    // }
-    //-------------------------------------3-------------------------------------
-    // }
-    document.addEventListener('DOMContentLoaded', function () {
-
-        async function checkEvent() {
-            let id = document.querySelector('#id');
-
-            // let response = await fetch('/api/user', {
-            //     headers: {
-            //         "Content-Type": "application/json"
-            //     }
-            // });
-            // let data = await response.json();
-            // let dataset = data.data;
-            //
-            // for (let i = 1; i < dataset.length; i++) {
-            //     let id_back = document.createElement('div');
-            //     id_back.innerHTML = value.id;
-            //     id.append(id_back);
-            // }
-
-            // fetch('/api/user')
-            //     .then(response => {
-            //         return response.json();
-            //     })
-            //     .then(products => {
-            //
-            //         console.log(products);
-            //     })
-
-        }
 
 
-        checkEvent();
-    });
-</script>
 
 

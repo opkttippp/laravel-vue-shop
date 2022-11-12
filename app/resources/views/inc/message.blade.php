@@ -10,15 +10,11 @@
     </div>
 @endif
 
-@if(session('success'))
+@if(session('status'))
     <div class="alert">
         <div class="alert alert-success">
-            {{session('success')}}
+            {{session('status')}}
         </div>
     </div>
 @endif
-{{--@if (session('status'))--}}
-{{--    <div class="alert alert-success" role="alert">--}}
-{{--        {{ session('status') }}--}}
-{{--    </div>--}}
-{{--@endif--}}
+

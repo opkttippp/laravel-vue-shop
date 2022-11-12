@@ -16,13 +16,13 @@
                     </div>
                 </div>
             </div>
-            <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+                <table class="table table-hover align-middle"  style="vertical-align: middle;">
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Title</th>
+                        <th>Image</th>
                         <th>Categories</th>
                         <th>Price</th>
                         <th>Barcode</th>
@@ -36,21 +36,14 @@
                             <tr>
                                 <td>{{ $product->getKey() }}</td>
                                 <td>{{ $product->title }}</td>
+                                <td style="height: 50px; width: 50px;">
+                                    <img src="{{asset('storage/'.$product->image)}}" alt="image"
+                                         style="width: 80%; height: 80%; object-fit: contain; margin: 10px;">
+                                </td>
                                 <td>
-                                            <span class="badge
-                                             @if ($product->category->id == 1)
-                                                bg-teal
-@elseif($product->category->id == 2)
-                                                bg-purple
-@elseif($product->category->id == 3)
-                                                bg-maroon
-@elseif($product->category->id == 4)
-                                                bg-navy
-@elseif($product->category->id == 5)
-                                                bg-success
-@endif
-                                                mr-1">{{ $product->category->name }}
-                                            </span>
+                                    <span class="badge" style="background-color: {{$product->category->color}};">
+                                        {{ $product->category->name }}
+                                    </span>
                                 </td>
                                 <td>${{ $product->price }}</td>
                                 <td>{{ $product->barcode }}</td>
@@ -74,14 +67,12 @@
             {{ $products->links() }}
         </div>
     </div>
-
     @if(count($trashedProducts) > 0)
         <div class="col-12 text-dark">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title"> Trashed </h3>
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
                         <thead>

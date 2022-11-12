@@ -15,7 +15,6 @@
                     </div>
                 </div>
             </div>
-            <!-- /.card-header -->
             <div class="card-body">
                 @if($errors->count() > 0)
                     <p>The following errors have occurred:</p>
@@ -66,11 +65,11 @@
                     {{ Form::label('image', 'Cover main image') }}
                     {{ Form::file('image') }}
                 </div>
-                <div class="views m-4">
+                <div class="views m-4" style="display: flex; flex-direction: row; overflow: hidden;">
                 </div>
                 <div class="form-group" id="images">
                     {{ Form::label('images', 'Cover other images') }}
-                    {{Form::file('images[]', ['multiple'])}}
+                    {{ Form::file('images[]', ['multiple', 'id' => 'img'])}}
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -88,38 +87,46 @@
     document.addEventListener('DOMContentLoaded', function () {
 //-------------------------------Main Image------------------------------------------------
         document.querySelector('#image').addEventListener('change', function () {
-
-            const formData = new FormData(formElem);
-            const name = formData.get('image').name;
-            const img = new Image(100, 100);
-            img.style = "border: 1px solid darkblue; margin: 10px";
-            img.src = '{{ asset('images') }}' + '/' + name;
-
             let view = document.querySelector('.view');
-
-            if (view.innerHTML !== '') {
-                view.firstChild.remove();
+            let file = document.querySelector('#image[type=file]').files[0];
+            let img = document.createElement("img");
+            img.style = "height: 120px; width: 120px; object-fit: contain; margin: 10px; border: 1px solid darkgrey;"
+            while (view.firstChild) {
+                view.removeChild(view.firstChild);
             }
-            view.insertBefore(img, view.firstChild);
+            let reader = new FileReader();
+            reader.onloadend = function () {
+                img.src = reader.result;
+                view.appendChild(img);
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                img.src = "";
+            }
+
         });
 //--------------------------------Many Image------------------------------------------------
         document.querySelector('#images').addEventListener('change', function () {
-
-            const formData = new FormData(formElem);
-            const name = formData.getAll('images[]');
             let views = document.querySelector('.views');
-
+            let files = document.querySelector('#images input[id=img]').files;
             while (views.firstChild) {
                 views.removeChild(views.firstChild);
             }
-
-            for (let value of name) {
-                const img = new Image(100, 100);
-                img.style = "border: 1px solid darkblue; margin: 10px";
-                img.src = '{{ asset('images') }}' + '/' + value.name;
-                views.insertBefore(img, views.firstChild);
+            for (let val of files) {
+                let img = document.createElement("img");
+                img.style = "height: 120px; width: 120px; object-fit: contain; margin: 10px; border: 1px solid darkgrey;"
+                let reader = new FileReader();
+                reader.onloadend = function () {
+                    img.src = reader.result;
+                    views.appendChild(img);
+                }
+                if (val) {
+                    reader.readAsDataURL(val);
+                } else {
+                    img.src = "";
+                }
             }
         });
-//------------------------------------------------------------------------------------------
     });
 </script>

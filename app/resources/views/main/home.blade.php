@@ -2,17 +2,24 @@
 {{--@extends('layouts.nov')--}}
 
 @section('title')
-    {{$title}}
+    <h2>Home Page</h2>
+
+    @if(session())
+        <div class="alert">
+            <div class="alert alert-success">
+                {{session('success')}}
+            </div>
+        </div>
+    @endif
 @endsection
 
 @section('aside')
     @parent
-        <h4 style="color: #10707f">Hello {{$title}} page!!</h4>
 
 @endsection
 
 @section('main_content')
-    <h2 style="color: #d4edda">{{ $title }} page.</h2>
+{{--    <h2 style="color: #d4edda">{{ $title }} page.</h2>--}}
     @push('js')
 <script>alert('hello')</script>
     @endpush
