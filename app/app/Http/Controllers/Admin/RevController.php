@@ -9,10 +9,9 @@ use Illuminate\Http\Request;
 
 class RevController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $reviews = Review::all();
-
         return view(
             'admin.reviews.index',
             compact('reviews')

@@ -2,19 +2,22 @@
     <div class="sidebar-wrapper pt-5 text-light">
         <div class="sidebar">
             <div class="brand-link mt-5 mb-1 d-flex justify-content-around">
+                @if(Auth::user())
                 <div class="image">
+
                     <img src="{{asset('storage/'.Auth::user()->avatar)}}" alt="image" class="avatar-aside">
                 </div>
                     <a class="d-block d-flex text-light align-items-center"
                        {{--                       href="{{ route('user.index',['user' => Auth::user()]) }}">--}}
                        href="{{  url('/admin/users/update' ,['user' => Auth::user()]) }}">
                         {{Auth::user()->name}}</a>
+
             </div>
             <div class="brand-link mt-1 mb-1  d-flex justify-content-evenly">
 {{--                <p class="brand-text font-weight-light">Role - {{ Auth::user()->roles->pluck('name')->first() }}</p>--}}
                 <p class="brand-text font-weight-light">Role - {{ Auth::user()->name }}</p>
             </div>
-
+            @endif
             <nav class="mt-2 h6">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">

@@ -1,4 +1,5 @@
-@extends('layouts.layoutAdmin')
+@extends('layouts.layout')
+
 @section('title')
     Edit user
 @endsection

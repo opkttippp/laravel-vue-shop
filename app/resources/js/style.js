@@ -4,7 +4,7 @@ require('./main.js');
 require('./vue.js');
 
 // -----------------app-------------------------------
-import "bootstrap/dist/js/bootstrap.bundle.min";
+// import "bootstrap/dist/js/bootstrap.bundle.js";
 // -----------------Admin-lte-js---------------------
 import "admin-lte/plugins/jquery/jquery.js";
 import "admin-lte/plugins/jquery/jquery.min.js";

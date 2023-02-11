@@ -15,37 +15,13 @@ class IndexController extends Controller
         return view('admin.index', compact('users'));
     }
 
-    public function create()
-    {
-        //
-    }
+//    public function show($id)
+//    {
+//        $environment = App::environment();
+//        return view('admin.user', [
+//            'id' => $id,
+//            'environment' => $environment
+//        ]);
+//    }
 
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        $environment = App::environment();
-        return view('admin.user', [
-            'id' => $id,
-            'environment' => $environment
-        ]);
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -80,7 +80,8 @@ const store = createStore({
             return axios.get('http://larav.local/api/products', {
                 params: {
                     page: page
-                }})
+                }
+            })
                 .then(products => {
                     commit('SET_PRODUCTS_STATE', products.data);
                     return products.data;
@@ -89,32 +90,32 @@ const store = createStore({
                 });
         },
         GET_PRODUCTS_ID({state, commit}, id) {
-            this.GET_PRODUCTS;
             return axios.get('http://larav.local/api/products/' + id)
                 .then(products => {
                     commit('SET_PRODUCTS_STATE', products.data);
+                    // console.log(products.data)
                     return products.data;
                 }).catch((error) => {
-                    console.log(error)
+                    return error
                 });
         },
         GET_USER({commit}) {
-            return  axios('http://larav.local/api/auth', {method: "GET"})
+            return axios.get('http://larav.local/api/auth')
                 .then(user => {
                     commit('SET_USER_STATE', user.data);
+                    console.log(user.data)
                     return user.data;
                 }).catch((error) => {
-                    console.log(error)
-                    // return error
+                    return error
                 });
         },
         GET_REVIEW({commit}) {
-            return axios('http://larav.local/api/review', {method: "GET"})
+            return axios.get('http://larav.local/api/review')
                 .then(review => {
                     commit('SET_REVIEW_STATE', review.data.data);
                     return review.data.data;
                 }).catch((error) => {
-                    console.log(error)
+                    return error
                 });
         }
     },
@@ -134,18 +135,18 @@ const store = createStore({
         totalAmount: (state) => (
             state.cartProducts.reduce((total, {amount}) => total + amount, 0)
         ),
-    totalPrice: (state) => (
+        totalPrice: (state) => (
             state.cartProducts.reduce(
                 (total, {price, amount}) =>
-                total + (amount * price),
+                    total + (amount * price),
                 0
             ).toFixed(2)
         ),
-    cartIsEmpty: (state) => !state.cartProducts.length,
+        cartIsEmpty: (state) => !state.cartProducts.length,
 
-    getProductById: (state) => (id) => {
-        if(state.products.data)
-        return state.products.data.find(product => product.id === id)
+        getProductById: (state) => (id) => {
+            if (state.products.data)
+                return state.products.data.find(product => product.id === id)
         },
 
         getReviewById: (state) => (id) => {

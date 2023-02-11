@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -10,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-
     use AuthenticatesUsers;
 
     protected $redirectTo = RouteServiceProvider::HOME;
@@ -25,7 +25,6 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-
         $this->validate($request, [
             'login' => 'required|string',
             'password' => 'required|string'
@@ -35,7 +34,6 @@ class LoginController extends Controller
             $this->loginType => $request->login,
             'password' => $request->password
         ];
-
 
         if (Auth::attempt($credentials)) {
             return redirect()->intended($this->redirectTo);

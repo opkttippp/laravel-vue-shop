@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 
 import Products from "../../vue/views/Products";
 import Show from "../../vue/views/Show";
@@ -8,24 +8,24 @@ import Review from "../../vue/views/Review";
 const routes = [
 
     {
-        path: '/',
+        path: '/product',
         name: 'Products',
         component: Products,
     },
     {
-        path: '/show/:id',
+        path: '/product/show/:id',
         name: 'Show',
         component: Show,
         props: true,
     },
     {
-        path: '/char/:id',
+        path: '/product/char/:id',
         name: 'Character',
         component: Character,
         props: true
     },
     {
-        path: '/review/:id',
+        path: '/product/review/:id',
         name: 'Review',
         component: Review,
         props: true
@@ -34,7 +34,7 @@ const routes = [
 
 
     const router = createRouter({
-        history: createWebHashHistory(),
+        history: createWebHistory(process.env.BASE_URL),
         routes,
     })
 

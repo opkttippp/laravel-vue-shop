@@ -44,7 +44,7 @@
             <a class="nav-link" href={{ route('review') }}>Отзывы</a>
         </div>
         <div class="nav-item">
-            <a class="nav-link" href={{ route('reviewAdd') }}>Добавить</a>
+            <a class="nav-link" href={{ route('reviewAdd') }}>Admin</a>
         </div>
         <div class="nav-item">
             <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#myModal">Categories</a>
@@ -55,13 +55,14 @@
         <div class="reg_auth">
             <i class="nav-icon far fas fa-table"></i>
             {{ Auth::user()->name }}
-            <a href="{{ route('logout') }}">Выход</a>
+            <a href="{{ url('/admin/logout') }}">Выход</a>
+{{--            <a href="{{ route('logout') }}">Выход</a>--}}
         </div>
         @endrole
         @role('manager')
         <div class="reg_auth">
             {{ Auth::user()->name }}
-            <a href="{{ route('logout') }}">Выход</a>
+            <a href="{{ url('/admin/logout') }}">Выход</a>
         </div>
         @endrole
         @role('user')
@@ -75,7 +76,7 @@
         @endrole
         @guest
             <div class="reg_auth">
-                <a href="{{ route('login') }}" class="btn btn-secondary">
+                <a href="{{ url('/admin/login') }}" class="btn btn-secondary">
                     Войти
                 </a>
                 <a href="{{ route('register') }}" class="btn btn-secondary">

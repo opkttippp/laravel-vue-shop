@@ -16,7 +16,6 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'address' => $this->address,
             'phone' => $this->phone,
-//            'user' => Auth::user()->name,
         ];
     }
 }

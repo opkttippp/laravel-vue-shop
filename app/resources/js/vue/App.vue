@@ -1,10 +1,5 @@
 <template>
 
-    <router-view>
-        <review-modal v-model:show="show">
-            <form-review @create="createRev"></form-review>
-        </review-modal>
-    </router-view>
 </template>
 
 <script>

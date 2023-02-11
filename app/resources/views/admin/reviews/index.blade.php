@@ -1,4 +1,4 @@
-@extends('layouts.layoutAdmin')
+@extends('layouts.layout')
 
 @section('title')
     Reviews
@@ -67,6 +67,7 @@
         {{--            {{ $products->links() }}--}}
         {{--        </div>--}}
     </div>
+
 
 @endsection
 

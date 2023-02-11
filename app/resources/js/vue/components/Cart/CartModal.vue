@@ -92,7 +92,4 @@ export default {
 }
 </script>
 <style>
-/*.btn {*/
-/*    z-index: -1*/
-/*}*/
 </style>

@@ -1,38 +1,39 @@
 <template>
-    <Carousel></Carousel>
-    <div id="grid" class="mb-3">
-        <div id="inner-grid" v-for="product in PRODUCTS.data" :key="product.id">
-            <div style="overflow: hidden; height: 150px;">
-                <router-link :to="{name: 'Show', params: {id: product.id }}">
-                    <img class="rounded mx-auto d-block" :src="'http://larav.local/storage/' + product.image"
-                         height="125px" alt="tv" style="width: 80%; height: 80%; object-fit: contain;">
-                </router-link>
-            </div>
-            <div id="inner-grid-div">
-                <div class="ml-3">
+    <div class="content">
+        <Carousel></Carousel>
+        <div id="grid" class="mb-3">
+            <div id="inner-grid" v-for="product in PRODUCTS.data" :key="product.id">
+                <div style="overflow: hidden; height: 150px;">
                     <router-link :to="{name: 'Show', params: {id: product.id }}">
-                        {{ product.title }}
+                        <img class="rounded mx-auto d-block" :src="'http://larav.local/storage/' + product.image"
+                             height="125px" alt="tv" style="width: 80%; height: 80%; object-fit: contain;">
                     </router-link>
                 </div>
-                <div class="pl-2">
-                    <p>
-                        <router-link class="d-flex justify-content-start mt-4"
-                                     :to="{name: 'Show', params: {id: product.id }}">
-                            <span class="badge badge-success">{{ product.category.name }}</span>
+                <div id="inner-grid-div">
+                    <div class="ml-3">
+                        <router-link :to="{name: 'Show', params: {id: product.id }}">
+                            {{ product.title }}
                         </router-link>
+                    </div>
+                    <div class="pl-2">
+                        <p>
+                            <router-link class="d-flex justify-content-start mt-4"
+                                         :to="{name: 'Show', params: {id: product.id }}">
+                                <span class="badge badge-success">{{ product.category.name }}</span>
+                            </router-link>
 
-                    </p>
-                </div>
-                <div class="pl-2">
-                    <p class="d-flex justify-content-start fw-bold">₴ {{ product.price }}</p>
-                </div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <span>В наличии -</span>
-                    <span>
+                        </p>
+                    </div>
+                    <div class="pl-2">
+                        <p class="d-flex justify-content-start fw-bold">₴ {{ product.price }}</p>
+                    </div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <span>В наличии -</span>
+                        <span>
                         <strong v-if="product.stock" class="text-success">{{ product.stock }}</strong>
                         <strong v-else class="text-danger">Sold out</strong>
                     </span>
-                    <span>
+                        <span>
 <!--                        <a href="{{ product.stock > 0 ? route('cart.add', ['productId' => $product->id]) : '#' }}"-->
                         <button :class="`btn w-100 shadow-none ${product.stock ? 'btn-success' : 'btn-secondary' }`"
                                 :disabled="!product.stock"
@@ -41,25 +42,26 @@
                             <i class="fas fa-cart-arrow-down"></i>
                         </button>
                     </span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="page__wraper">
-<!--        <div v-for="pageNumber in PRODUCTS.meta.links"-->
-<!--             :key="pageNumber.label"-->
-<!--             class="page"-->
-<!--             @click="GET_PRODUCTS(pageNumber.label)"-->
-<!--        >-->
-<!--            <p v-if="pageNumber.label !== 1" :class="pageNumber.active ? 'active' : ''">{{ pageNumber.label }}</p>-->
-<!--        </div>-->
-        <b-pagination
-            v-model="page"
-            :total-rows=PRODUCTS.meta.total
-            :per-page=PRODUCTS.meta.per_page
-            aria-controls="my-table"
-            @click="changePage(page)"
-        ></b-pagination>
+        <div class="page__wraper">
+            <!--        <div v-for="pageNumber in PRODUCTS.meta.links"-->
+            <!--             :key="pageNumber.label"-->
+            <!--             class="page"-->
+            <!--             @click="GET_PRODUCTS(pageNumber.label)"-->
+            <!--        >-->
+            <!--            <p v-if="pageNumber.label !== 1" :class="pageNumber.active ? 'active' : ''">{{ pageNumber.label }}</p>-->
+            <!--        </div>-->
+            <b-pagination
+                v-model="page"
+                :total-rows=PRODUCTS.meta.total
+                :per-page=PRODUCTS.meta.per_page
+                aria-controls="my-table"
+                @click="changePage(page)"
+            ></b-pagination>
+        </div>
     </div>
 </template>
 
@@ -108,7 +110,7 @@ export default {
 <style scoped>
 #grid {
     display: grid;
-    grid-template-columns:repeat(auto-fill, minmax(30%, 1fr));
+    grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
     margin: 0;
 }
 

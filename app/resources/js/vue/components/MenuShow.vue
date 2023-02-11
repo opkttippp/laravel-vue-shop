@@ -2,7 +2,7 @@
     <div class="col-12">
         <ul class="menu-product d-flex justify-content-around">
             <li class="nav-item menu" v-if="products.id">
-                <router-link class="nav-link router-link" to="/">Назад</router-link>
+                <router-link class="nav-link router-link" to="/product">Назад</router-link>
             </li>
             <li class="nav-item menu" v-if="products.id">
                 <router-link class="nav-link router-link" :to="{name: 'Show', params: {id: products.id}}">Все о товаре

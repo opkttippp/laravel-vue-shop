@@ -20,7 +20,7 @@
                 <button @click="$emit('increment-amount')" type="button" class="btn shadow-none">+</button>
             </div>
         </td>
-        <td class="text-center py-3">{{ `$${price}` }}</td>
+        <td class="text-center p-3">{{ `$${price}` }}</td>
         <td>
             <button @click="$emit('remove')" class="btn shadow-none">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"

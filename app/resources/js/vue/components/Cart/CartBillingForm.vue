@@ -132,7 +132,6 @@ export default {
                 for (let i = 0; i < 2; ++i) {
                     data[i].remove();
                 }
-            console.log(data);
             return axios.post('http://larav.local/api/order',
                 {
                     user_id: this.id,

@@ -69,7 +69,9 @@ class UserAdminController extends Controller
         $date = $request->all();
 
         if (isset($path)) {
-            $this->deleteImage($user->avatar);
+            if ($user->avatar) {
+                $this->deleteImage($user->avatar);
+            }
             $date['avatar'] = $path;
         }
 

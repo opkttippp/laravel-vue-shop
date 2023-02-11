@@ -20,7 +20,8 @@
         "vue": "^3.2.*",
         "vue-query": "^1.26.0",
         "vue-router": "^4.0.13",
-        "vuex": "^4.1.0"
+        "vuex": "^4.1.0",
+        "vuikit": "^0.8.10"
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",

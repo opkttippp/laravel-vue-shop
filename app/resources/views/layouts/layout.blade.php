@@ -6,45 +6,40 @@
           content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{--    <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script>--}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('title')</title>
-    <!-- Fonts -->
-    <link rel="icon" href="/images/favicone/favic.ico" type="image/x-icon">
-    <!-- Styles -->
+
+    <link rel="icon" href="./public/images/favicone/favic.ico" type="image/x-icon">
+
     <link href={{ asset('css/style.css') }} rel="stylesheet" type="text/css">
-{{--    <link href={{ asset('css/name.css') }} rel="stylesheet" type="text/css">--}}
-<!-- Scripts -->
+
 
 </head>
 <body>
-
-<div id="app">
-    <header>
-        @include('inc.nav')
-    </header>
-    <main>
-        <aside>
-            @role('admin|manager')
-            @include('inc.admin_aside')
-            @else
-                @include('inc.aside')
-                @endrole
-        </aside>
-        <section>
-            <div class="container">
-                <cart-modal></cart-modal>
-                @include('inc.message')
-                @yield('main_content')
-            </div>
-        </section>
-    </main>
-    <footer>
-        @include('inc.footer')
-    </footer>
-</div>
-<script src={{ asset('js/style.js') }}></script>
+<header>
+    @role('admin|manager')
+    @include('inc.nav')
+    @endrole
+</header>
+<main>
+    <aside>
+        @role('admin|manager')
+        @include('inc.admin_aside')
+        @endrole
+    </aside>
+    <section>
+            @include('inc.message')
+            @yield('main_content')
+        </div>
+    </section>
+</main>
+<footer>
+    @role('admin|manager')
+    @include('inc.footer')
+    @endrole
+</footer>
+<script src={{ asset('js/style.js') }} ></script>
 </body>
 </html>
 
