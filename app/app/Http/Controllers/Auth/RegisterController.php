@@ -11,20 +11,21 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = RouteServiceProvider::HOME;
 
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    protected function validator(array $data)
+    protected function validator(array $data): \Illuminate\Validation\Validator
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
@@ -44,14 +45,16 @@ class RegisterController extends Controller
         ]);
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
 
-        $role = Role::findByName('user');
-        $user->assignRole($role);
+        $user->assignRole(Role::findByName('user'));
 
         $this->guard()->login($user);
 //        $this->guard()->logout();

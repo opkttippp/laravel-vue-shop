@@ -16,7 +16,7 @@ export default {
     name: "CartButton",
     computed: {
         productsCount() {
-            return this.$store.getters.totalAmount;
+            return this.$store.getters['product/totalAmount'];
         },
     },
 }

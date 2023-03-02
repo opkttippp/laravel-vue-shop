@@ -1,32 +1,47 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\OrderApiController;
 use App\Http\Controllers\Api\ProductApiController;
 use App\Http\Controllers\Api\ReviewApiController;
 use App\Http\Controllers\Api\SearchApiController;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\CategoryApiController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\ConfirmPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 Route::middleware('auth:sanctum')->get('/auth', function (Request $request) {
     return $request->user();
 });
 
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 
-Route::apiResources([
-    'products' => ProductApiController::class,
-    'category' => CategoryApiController::class,
-    'user' => UserApiController::class,
-    'order' => OrderApiController::class,
-    'review' => ReviewApiController::class,
+Route::middleware('auth:api')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
 
-]);
 
-Route::get('/auth', function () {
-    return Auth::user() ?? User::findOrFail(4);
+Route::middleware('verified')->group(function () {
+    Route::apiResources([
+        'products' => ProductApiController::class,
+        'category' => CategoryApiController::class,
+        'manufactur' => CategoryApiController::class,
+        'user' => UserApiController::class,
+        'order' => OrderApiController::class,
+        'review' => ReviewApiController::class,
+    ]);
 });
 
 Route::post('/search', [SearchApiController::class, 'show']);
 
-//Route::get('/{product}/review', [ReviewApiController::class, 'index']);
+Route::post('/filter', [SearchApiController::class, 'filter']);
+
+Route::get('/password/confirm', [ConfirmPasswordController::class,'showConfirmForm'])->name('password.confirm');
+Route::post('/password/confirm', [ConfirmPasswordController::class,'confirm']);
+Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');

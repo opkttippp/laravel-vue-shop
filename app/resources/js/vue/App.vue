@@ -1,20 +1,13 @@
 <template>
-
+    <nav-bar></nav-bar>
+    <cart-modal></cart-modal>
+    <router-view></router-view>
+    <footer-site></footer-site>
 </template>
 
 <script>
 export default {
-    name: "Main",
-    created() {
-        window.addEventListener('resize', function () {
-            if (window.innerWidth > 767) {
-                console.log('Desktop')
-            } else {
-                console.log('Mobile')
-            }
-
-        })
-    }
+    name: "App"
 }
 </script>
 

@@ -1,5 +1,7 @@
 import {createApp} from "vue";
 
+import App from "./vue/App";
+
 import axios from "axios";
 import store from './vue/store/store';
 import router from "./vue/router/router";
@@ -16,9 +18,9 @@ import RangeSlider from "./vue/components/RangeSlider";
 import SearchButton from "./vue/components/SearchButton";
 import CatalogButton from "./vue/components/CatalogButton";
 import InputButton from "./vue/components/UI/InputButton";
-import directive from './vue/directives'
+import directive from './vue/directives';
 
-const app = createApp({});
+const app = createApp(App);
 
 directive.forEach(directive => {
     app.directive(directive.name, directive)
@@ -39,3 +41,4 @@ app.use(store)
 app.use(router)
 app.config.globalProperties.axios = axios
 app.mount('#app')
+

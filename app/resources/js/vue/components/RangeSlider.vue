@@ -1,71 +1,73 @@
 <template>
-    <div class="range-slider">
-        <div class="d-flex justify-content-between">
-            <p>Min: {{ minPrice }}</p>
-            <p>Max: {{ maxPrice }}</p>
+    <div class="col">
+        <div class="d-flex flex-column align-self-center justify-content-center m-2"
+             style="border: 1px solid #26313b; height: 130px;">
+            <div>
+                <Slider v-model="value" @update="getValue" :max="30000"/>
+            </div>
+            <div class="col-11 d-flex justify-content-between mt-4">
+                <b-form-input class="col-5 " v-model="value[0]" @input="getValue"></b-form-input>
+                <b-form-input class="col-5" v-model="value[1]" @input="getValue"></b-form-input>
+            </div>
         </div>
-        <input type="range"
-               min="0"
-               max="50000"
-               step="100"
-               v-model.number="minPrice"
-               @change="setRangeSlider"
-        >
-        <input type="range"
-               min="0"
-               max="50000"
-               step="100"
-               v-model.number="maxPrice"
-               @change="setRangeSlider"
-        >
-        <div class="range-value">
+        <div class="d-flex flex-column m-2" style="border: 1px solid #26313b;
+              height: 130px;">
+            <div>
+                Manufacturer:
+            </div>
+            <div v-for="(firm, i) in MANUFACTUR" class="d-flex justify-content-around">
+                <label for="jack">{{firm.name}}</label>
+                <input type="checkbox" :id="firm.id" :value="firm.id" v-model="checkedNames" @change="getValue">
+            </div>
+            <br>
+            <span>Отмеченные имена: {{ checkedNames }}</span>
         </div>
     </div>
 </template>
 <script>
+
+import Slider from '@vueform/slider'
+
 export default {
-    name: "AsideRange",
-    data() {
+    name: "range-slider",
+    components: {
+        Slider
+    },
+    data: () => {
         return {
-            minPrice: 0,
-            maxPrice: 50000,
+            value: [150, 15000],
+            priceMin: Number,
+            priceMax: Number,
+            checkedNames: [],
+            selected: '',
+            query: {}
+        }
+    },
+    mounted() {
+        this.getManufactor();
+    },
+    computed: {
+        MANUFACTUR() {
+            return this.$store.getters['product/MANUFACTUR'];
         }
     },
     methods: {
-        setRangeSlider() {
-            if (this.minPrice > this.maxPrice) {
-                let tmp = this.maxPrice;
-                this.maxPrice = this.minPrice;
-                this.minPrice = tmp;
-            }
+        getValue() {
+            this.query = {};
+            this.query.priceMin = this.value[0];
+            this.query.priceMax = this.value[1];
+            this.query.checkedNames = this.checkedNames;
+            this.$emit('filter', this.query)
         },
-
+        getManufactor() {
+            this.$store.dispatch('product/GET_MANUFACTUR');
+        }
     }
 }
 </script>
 
 <style scoped>
-.range-slider {
-    width: 95%;
-    margin: 300px 16px;
-    text-align: center;
-    position: relative;
-}
 
-.range-slider > input {
-    width: 95%;
-}
+@import "@vueform/slider/themes/default.css";
 
-.range-slider svg, .range-slider input[type=range] {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-}
-
-input[type=range]::-webkit-slider-thumb {
-    z-index: 2;
-    position: relative;
-    top: 2px;
-    margin-top: -7px;
-}
 </style>

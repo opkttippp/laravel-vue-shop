@@ -16,9 +16,9 @@
             :price="product.price"
             :image="product.image"
             :amount="product.amount"
-            @increment-amount="$store.commit('incrementProductAmount', index)"
-            @decrement-amount="$store.commit('decrementProductAmount', index)"
-            @remove="$store.commit('removeProductFromCart', index)"
+            @increment-amount="this.$store.commit('product/incrementProductAmount', index)"
+            @decrement-amount="this.$store.commit('product/decrementProductAmount', index)"
+            @remove="this.$store.commit('product/removeProductFromCart', index)"
         ></cart-product-item>
         </tbody>
         <tfoot>
@@ -46,10 +46,10 @@ export default {
     },
     computed: {
         totalAmount() {
-            return this.$store.getters.totalAmount;
+            return this.$store.getters['product/totalAmount'];
         },
         totalPrice() {
-            return this.$store.getters.totalPrice;
+            return this.$store.getters['product/totalPrice'];
         }
     },
 }

@@ -3,7 +3,7 @@
         <Carousel></Carousel>
         <div id="grid" class="mb-3">
             <div id="inner-grid" v-for="product in PRODUCTS.data" :key="product.id">
-                <div style="overflow: hidden; height: 150px;">
+                <div style="overflow: hidden; height: 150px; align-self: center;">
                     <router-link :to="{name: 'Show', params: {id: product.id }}">
                         <img class="rounded mx-auto d-block" :src="'http://larav.local/storage/' + product.image"
                              height="125px" alt="tv" style="width: 80%; height: 80%; object-fit: contain;">
@@ -21,7 +21,6 @@
                                          :to="{name: 'Show', params: {id: product.id }}">
                                 <span class="badge badge-success">{{ product.category.name }}</span>
                             </router-link>
-
                         </p>
                     </div>
                     <div class="pl-2">
@@ -46,14 +45,7 @@
                 </div>
             </div>
         </div>
-        <div class="page__wraper">
-            <!--        <div v-for="pageNumber in PRODUCTS.meta.links"-->
-            <!--             :key="pageNumber.label"-->
-            <!--             class="page"-->
-            <!--             @click="GET_PRODUCTS(pageNumber.label)"-->
-            <!--        >-->
-            <!--            <p v-if="pageNumber.label !== 1" :class="pageNumber.active ? 'active' : ''">{{ pageNumber.label }}</p>-->
-            <!--        </div>-->
+        <div class="page__wraper" v-if="PRODUCTS.meta.total > 3">
             <b-pagination
                 v-model="page"
                 :total-rows=PRODUCTS.meta.total
@@ -67,8 +59,10 @@
 
 <script>
 
+import { createNamespacedHelpers } from 'vuex'
+const {mapActions, mapGetters} = createNamespacedHelpers('product')
 import Carousel from "../components/Carousel"
-import {mapActions, mapGetters} from 'vuex'
+
 
 export default {
     name: "Products",
@@ -82,15 +76,15 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['PRODUCTS']),
+        ...mapGetters(['PRODUCTS'])
     },
     watch: {
         page() {
-            return this.GET_PRODUCTS(this.page)
+            return this.GET_PRODUCTS(this.page);
         }
     },
     created() {
-        this.GET_PRODUCTS(this.page);
+        return this.GET_PRODUCTS(this.page);
     }
     ,
     methods: {
@@ -101,7 +95,7 @@ export default {
             'GET_PRODUCTS',
         ]),
         addProductToCart(product) {
-            this.$store.commit("addProductToCart", product)
+            this.$store.commit("product/addProductToCart", product)
         }
     },
 }
@@ -134,10 +128,6 @@ export default {
     grid-template-rows: 1fr 1fr 1fr 1fr;
     /*text-align: center;*/
     align-self: center;
-}
-
-#inner-grid > div > a > img {
-    margin-top: 10%;
 }
 
 .page__wraper {

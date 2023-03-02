@@ -52,23 +52,7 @@ export default {
             isModalVisible: false
         }
     },
-    // watch: {
-    //     isModal: function() {
-    //         this.isModalVisible = true;
-    //     }
-    // },
-    // mounted() {
-    // },
-    // updated() {
-    //     this.focus();
-    // },
     methods: {
-    //     focus() {
-    //         this.$refs.inputSearch.$el.focus();
-    //     },
-        // showModal() {
-        //     this.isModalVisible = true;
-        // },
         closeModal() {
             this.search = '';
             this.lists = '';
@@ -88,7 +72,7 @@ export default {
             this.lists = '';
         },
         getProduct(id) {
-            this.$store.dispatch('GET_PRODUCTS_ID', id);
+            this.$store.dispatch('product/GET_PRODUCTS_ID', id);
             this.closeModal();
         },
     }

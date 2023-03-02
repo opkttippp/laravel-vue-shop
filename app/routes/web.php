@@ -9,17 +9,29 @@ use App\Http\Controllers\Admin\RevController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManufactursController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\UserController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+
+//-------------------------email confirm-------------------------------------
+
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+//Route::post('email/resend', 'VerificationController@resend');
 
 //--------------------------------Admin Users---------------------------------
 Route::group(
@@ -167,11 +179,11 @@ Route::group(
 //---------------------------------Admin-LTE-----------------------------
 Route::get('/admin', [LoginController::class, 'showLoginForm']);
 
-Route::get('/admin/logout', [LoginController::class, 'logout']);
+Route::get('/admin/logout', [LoginController::class, 'logout'])->middleware(['role:admin|manager', 'web']);
 
 Route::prefix('/admin/panel')->group(function () {
     Route::get('/', [IndexController::class, 'index']);
-})->middleware(['role:admin|manager']);
+})->middleware(['role:admin|manager', 'web']);
 
 //--------------------------------Vue--------------------------------------
 
@@ -306,19 +318,6 @@ Route::fallback(function () {
     echo "<img src='images/404-desktop-not-found.jpg'>";
 });
 
-//-------------------------email confirm-------------------------------------
-
-Auth::routes(['verify' => true]);
-
-Route::get('/email/verify', function () {
-    return view('auth.verify');
-})->middleware('auth')->name('verification.notice');
-
-Route::get('/login', [
-    LoginController::class, 'showLoginForm'
-])->middleware('verified');
-
-
 //-------------------------авторизация через соцсети-------------------------
 Route::group(['middleware' => ['web']], function () {
     Route::get(
@@ -380,17 +379,13 @@ Route::put('/user/{user}', [UserController::class, 'update'])->name(
     'user.update'
 );
 
-Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('home');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-    ->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-    ->name('home');

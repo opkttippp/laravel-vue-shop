@@ -7,7 +7,7 @@
     </div>
     <div class="stars d-flex justify-content-center align-items-center ml-4">
         <b id="grade">{{ this.stars }}</b>
-        &nbsp;({{ this.item }}&nbsp;оценки)
+        ({{ this.item }})
     </div>
 </template>
 <script>
@@ -27,10 +27,10 @@ export default {
     data: function () {
         return {
             stars: {
-                type: Number
+                type: Number,
             },
             item: {
-                type: Number
+                type: Number,
             }
         }
     },
@@ -40,17 +40,28 @@ export default {
             return this.stars / this.starLimit * 100
         },
         ratingWidthStyle() {
-            return `width: ${this.ratingWidth}%;`
+            if(this.review.length > 0) {
+                return `width: ${this.ratingWidth}%;`
+            }else {
+                this.item = 'оценок нет';
+                this.stars = 0;
+            }
+            return `width: 0%;`
         }
     },
     methods: {
         getResults() {
-            let item = this.review.length
+                let item = this.review.length
             let sum = this.review.reduce(function (sum, n) {
-                return sum + n.status;
-            }, 0);
-            this.stars = (sum / item).toFixed(2)
-            this.item = item
+                    return sum + n.status;
+                }, 0);
+                this.stars = (sum / item).toFixed(2)
+            if(item  === 1 ){
+                this.item = `${item} оценка`
+            }else if(item  > 1 && item  < 5){
+                this.item = `${item} оценки`
+            }else
+                this.item = `${item} оценок`
         }
     }
 }

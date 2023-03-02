@@ -3,7 +3,7 @@
 
         <div class="top">
             <p><img :src="'/images/leaf_1.jpg'" width="25" alt="leaf"></p>
-            <router-link class="nav-link router-link" to="/">Mysite</router-link>
+            <router-link to="/">Mysite</router-link>
         </div>
 
         <div id="myTopnav" class="topnav">
@@ -20,7 +20,7 @@
                 <catalog-button>
                 </catalog-button>
             </a>
-            <!--<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#myModal">Catalog</a>-->
+
             <a href="javascript:void(0);">
                 <cart-button>
                 </cart-button>
@@ -29,71 +29,48 @@
                 <search-button>
                 </search-button>
             </a>
-            <!--                @role('admin|manager')-->
-            <!--                <img src="{{asset('storage/'.Auth::user()->avatar)}}" alt="image" height="20" width="20"-->
-            <!--                     class="mr-2">-->
-
-            <!--                <div class="drop dropdown-menu" aria-labelledby="dropdownMenuLink">-->
-            <!--                    <a class="dropdown-item" href="#">Profile</a>-->
-            <!--                    <a class="dropdown-item" href="#">Orders</a>-->
-            <!--                    <a class="dropdown-item" href="{{ route('logout') }}">Выход</a>-->
-            <!--                </div>-->
-            <!--                @endrole-->
-            <!--                @role('user')-->
-            <!--                <div class="dropdown" style="display: flex; align-items: center;">-->
-            <!--                    <p class="dropdown-toggle" type="button" id="dropdownMenuButton1"-->
-            <!--                       data-bs-toggle="dropdown" aria-expanded="false">-->
-            <!--                        <img src="{{asset('storage/'.Auth::user()->avatar)}}" alt="image" height="20" width="20"-->
-            <!--                             class="mr-2">-->
-
-            <!--                        {{ Auth::user()->name }}-->
-            <!--                    </p>-->
-            <!--                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">-->
-            <!--                        <li><a class="dropdown-item" href="#">Profile</a></li>-->
-            <!--                        <li><a class="dropdown-item" href="#">Orders</a></li>-->
-            <!--                        <li><a class="dropdown-item" href="{{ route('logout') }}">Выход</a></li>-->
-            <!--                    </ul>-->
-            <!--                </div>-->
-            <!--                @endrole-->
-            <!--                @guest-->
-
-            <!--                <a href="{{ route('login') }}" class="">-->
-            <!--                    Войти-->
-            <!--                </a>-->
-
-            <!--                @endguest-->
-
-            <!--            <a href="#" class="dropdown showdropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown"-->
-            <!--               aria-haspopup="true" aria-expanded="false"-->
-            <!--            >-->
-            <!--            </a>-->
             <a href="javascript:void(0);" class="icon" @click="myFunction">
                 <i class="fa fa-bars"></i>
             </a>
-            <a href="javascript:void(0);">
 
-<!--                        <div class="navbar-nav" v-if="loggedUser">-->
-<!--                            <h5>Dashboard</h5>-->
-<!--                            <a href="javascript:void(0)" @click="logout()" class="nav-item nav-link ml-3">Logout</a>-->
-<!--                        </div>-->
-<!--                        <div v-else>-->
-                            <router-link to="/login">Login</router-link>
-            </a>
+            <div v-if="loggedIn" class="d-flex">
+                <a href="javascript:void(0);">{{ user }}</a>
+
                 <a href="javascript:void(0);">
-                            <router-link to="/register">Register</router-link>
-<!--                        </div>-->
+                    <router-link @click="logout" to="">Logout</router-link>
+                </a>
+            </div>
 
-            </a>
+            <div v-else class="d-flex">
+                <a href="javascript:void(0);">
+                    <router-link to="/login">Login</router-link>
+                </a>
+                <a href="javascript:void(0);">
+                    <router-link to="/register">Register</router-link>
+                </a>
+
+            </div>
+
         </div>
     </div>
-
-    <div class="menu top">
-        <nav class="menu-list">
-            <a href="#">Главная</a>
-            <a href="#">Новости</a>
-            <a href="#">Контакты</a>
-            <a href="#">Портфолио</a>
-        </nav>
+    <div class="row menu top">
+        <div class="col-10 d-flex flex-column align-self-center justify-content-center pl-4">
+            <div>
+                <nav class="menu-list">
+                    <a href="#">Главная</a>
+                    <a href="#">Новости</a>
+                    <a href="#">Контакты</a>
+                    <a href="#">Портфолио</a>
+                </nav>
+            </div>
+                <range-slider
+                    @filter="filter"
+                >
+                </range-slider>
+        </div>
+        <div class="col-2 d-flex align-items-center justify-content-center cursor">
+            <img class="cursorLeft" :src="'/images/cursorRight.png'" width="25" height="25" alt="cursorLeft">
+        </div>
     </div>
 
 
@@ -101,25 +78,41 @@
 
 <script>
 
-
 export default {
-    name: "NavBar"
-    ,
-    data() {
-        return {
-            currentLink: "installation",
-        }
+    name: "NavBar",
+    data: () => {
+    },
+    computed: {
+        loggedIn() {
+            return this.$store.state.auth.status.loggedIn;
+        },
+        user() {
+            return this.$store.state.auth.user.name;
+        },
     },
     mounted() {
         this.topNav();
         this.activeNav();
+        this.asideMenu();
     },
     methods: {
-        goToInstallation() {
-            this.currentLink = "installation";
-        },
-        goToCommunication() {
-            this.currentLink = "communication";
+        asideMenu() {
+            let isShow = false;
+            let cursor = document.querySelector('.cursor');
+            let menu = document.querySelector('.menu');
+            cursor.addEventListener('click', function () {
+                if (isShow === false) {
+                    isShow = true;
+                    menu.style.left = '0';
+                    cursor.style.transform = ' rotate(180deg)';
+                    cursor.style.transition = 'all .6s';
+                } else {
+                    isShow = false;
+                    menu.style.left = '-280px';
+                    cursor.style.transform = ' rotate(360deg)';
+                    cursor.style.transition = 'all .6s';
+                }
+            })
         },
         myFunction() {
             let x = document.getElementById("myTopnav");
@@ -130,21 +123,6 @@ export default {
             }
         },
         topNav() {
-            // const top = document.querySelector('.top');
-            // const header = document.querySelector('#myTopnav');
-            //
-            // window.addEventListener('scroll', function () {
-            //
-            //     if (pageYOffset > 0) {
-            //         // top.style = 'margin-top: -2rem; transition: all 1s;';
-            //         header.classList.add('fixed-top');
-            //     } else {
-            //         top.style = 'margin-top: 0px; transition: all 0.3s;';
-            //         header.classList.remove('fixed-top');
-            //     }
-            // });
-            // window.onscroll = function() {myFunction()};
-
             let navbar = document.getElementById("myTopnav");
             let sticky = navbar.offsetTop;
 
@@ -157,22 +135,28 @@ export default {
             })
         },
         activeNav() {
-            // let container = document.querySelector(".topnav");
-            // let a = container.getElementsByTagName("a");
-            // for (let i = 0; i < a.length; i++) {
-            //     a[i].addEventListener("click", function () {
-            //         console.log(a);
-            //         let current = document.getElementsByClassName("active");
-            //         current[0].className = '';
-            //         this.className = "active";
-            //     });
-            // }
+            let container = document.querySelector(".topnav");
+            let a = container.getElementsByTagName("a");
+            let current = document.getElementsByClassName("active");
+            for (let i = 0; i < a.length; i++) {
+                a[i].addEventListener("click", function () {
+                    current[0].classList.remove('active');
+                    a[i].classList.add('active');
+                });
+            }
+        },
+        logout() {
+            this.$store.dispatch("auth/logout").then(
+                () => {
+                    this.$router.push("/login")
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        filter(data) {
+            return this.$store.dispatch('product/SET_FILTER', data).then(() => this.$store.dispatch('product/GET_FILTER')).then(() => this.$router.push('/product/filter'));
         }
-        // ,
-        // sidebar() {
-        //     let menu = document.querySelector('.menu');
-        //     menu.className = "menu_active";
-        // }
     }
 }
 </script>
@@ -182,31 +166,32 @@ export default {
 .menu {
     display: flex;
     position: fixed;
-    flex-direction: column;
     top: 0;
-    left: -250px;
+    left: -280px;
     z-index: 20;
-    background-color: #b0d4f1;
+    background-color: whitesmoke;
     color: #000;
-    width: 280px;
+    width: 330px;
     cursor: pointer;
     height: 100%;
-    padding: 10px;
-    font-size: 1.5em;
 
     /* анимация всех свойств */
     -webkit-transition: all .6s;
     -o-transition: all .6s;
     -moz-transition: all .6s;
     transition: all .6s;
+
+
+    /*left: 0;*/
 }
 
-.menu:hover {
+.active {
     z-index: 20;
     left: 0;
     color: #FFFFFF;
     background-color: ghostwhite;
 }
+
 
 .menu-list {
     margin-top: 100px;

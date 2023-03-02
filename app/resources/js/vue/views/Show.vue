@@ -73,14 +73,10 @@
         </div>
     </div>
 </template>
-
 <script>
 
 import StarRating from "../components/StarRating";
-import StarRatingUser from "../components/StarRatingUser";
 import MenuShow from "../components/MenuShow";
-// import {mapActions} from "vuex";
-// import {mapActions, mapGetters} from 'vuex'
 
 export default {
     name: "Show",
@@ -92,18 +88,18 @@ export default {
         MenuShow
     },
     created() {
-        this.$store.dispatch('GET_REVIEW')
-        this.$store.dispatch('GET_PRODUCTS_ID',(parseInt(this.id)));
+        this.$store.dispatch('product/GET_REVIEW')
+        this.$store.dispatch('product/GET_PRODUCTS_ID',(parseInt(this.id)));
     },
     mounted() {
         this.selectImage();
     },
     computed: {
         products() {
-            return this.$store.getters.getProductById(parseInt(this.id));
+            return this.$store.getters['product/getProductById'](parseInt(this.id));
         },
         review() {
-            return this.$store.getters.getReviewById(parseInt(this.id));
+            return this.$store.getters['product/getReviewById'](parseInt(this.id));
         }
     },
     methods: {
@@ -111,7 +107,7 @@ export default {
             const one = document.querySelector('.one');
             let div = document.querySelectorAll(".many");
             div.forEach(n => {
-                addEventListener("click", function (e) {
+                n.addEventListener("click", function (e) {
                     if (e.target.src) {
                         div.forEach(n => {
                             n.style.border = 'none';
@@ -129,7 +125,6 @@ export default {
         }
 
     },
-
 }
 </script>
 <style>

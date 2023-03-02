@@ -14,7 +14,7 @@
         </template>
         <template v-slot:body>
             <div class="col-12 d-flex flex-row">
-                <div class="col-6 d-flex flex-column catalog">
+                <div class="col-6 d-flex flex-column catalog" >
                     <router-link :to="{path: '/category'}"
                                  @click="close"
                                  @mouseover="showIndex('category')"
@@ -28,7 +28,7 @@
                         Products
                     </router-link>
                 </div>
-                <div class="col-6 d-flex flex-column">
+                <div class="col-6 d-flex flex-column"  style="color:#000000;">
                         <catalog-item
                             :show="show"
                             :items="this.category"

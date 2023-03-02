@@ -121,19 +121,19 @@ export default {
     },
     computed: {
         products() {
-            return this.$store.getters.getProductById(parseInt(this.id));
+            return this.$store.getters['product/getProductById'](parseInt(this.id));
         },
         review() {
-            return this.$store.getters.getReviewById(parseInt(this.id));
+            return this.$store.getters['product/getReviewById'](parseInt(this.id));
 
         },
         user() {
-            return this.$store.getters.getUser;
+            return this.$store.state.auth.user;
         }
     },
     created() {
-        this.$store.dispatch('GET_REVIEW')
-        this.$store.dispatch('GET_PRODUCTS_ID', (parseInt(this.id)));
+        this.$store.dispatch('product/GET_REVIEW')
+        this.$store.dispatch('product/GET_PRODUCTS_ID', (parseInt(this.id)));
     },
     methods: {
         writeReview() {
@@ -143,7 +143,6 @@ export default {
             this.isInfoPopupVisible = false
         },
         sendReview() {
-            // console.log(this.user);
             return axios.post('http://larav.local/api/review',
                 {
                     name: this.user.name,
@@ -156,7 +155,7 @@ export default {
                 }).then((res) => {
                 (console.log(res));
                 this.closePopupInfo();
-                this.$store.dispatch('GET_REVIEW')
+                this.$store.dispatch('product/GET_REVIEW')
                 });
         }
     }
