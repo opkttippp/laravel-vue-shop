@@ -9,6 +9,7 @@ import Filter from "../../vue/views/Filter";
 import Show from "../../vue/views/Show";
 import Character from "../../vue/views/Character";
 import Review from "../../vue/views/Review";
+import Chat from "../../vue/views/Chat";
 
 const routes = [
 
@@ -60,18 +61,24 @@ const routes = [
         component: Review,
         props: true
     },
+    {
+        path: '/chat',
+        name: 'Chat',
+        component: Chat,
+        props: true
+    },
     // {
     //     path: '/category/:id',
     //     name: 'CategoryName',
     //     component: CategoryName,
     //     props: true
     // }
-];
+    ];
 
 
-const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
-    routes,
-})
+    const router = createRouter({
+        history: createWebHistory(process.env.BASE_URL),
+        routes,
+    })
 
-export default router;
+    export default router;

@@ -12,13 +12,13 @@
 
     <link rel="icon" href="./public/images/favicone/favic.ico" type="image/x-icon">
 
-    <link href={{ asset('css/style.css') }} rel="stylesheet" type="text/css">
+    <link href={{ mix('css/style.css') }} rel="stylesheet" type="text/css">
 
 
 </head>
 <body>
     @yield('main_content')
-<script src={{ asset('js/style.js') }}></script>
+<script src={{ mix('js/style.js') }}></script>
 </body>
 </html>
 

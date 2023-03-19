@@ -1,6 +1,6 @@
 <template>
     <transition name="modal-fade">
-        <div class="modal-backdrop" v-if="isModalVisible">
+        <div class="modal-backdrop">
             <div class="modal"
                  role="dialog"
                  aria-labelledby="modalTitle"
@@ -11,14 +11,7 @@
                     id="modalTitle"
                 >
                     <slot name="header">
-                        Header
-                        <button
-                            type="button"
-                            class="btn-close"
-                            @click="close"
-                            aria-label="Close modal"
-                        >
-                        </button>
+                         Header
                     </slot>
                 </header>
                 <section
@@ -38,17 +31,7 @@
 <script>
 
 export default {
-    name: "modal-show",
-    data() {
-        return {
-            isModalVisible: true,
-        }
-    },
-    methods: {
-        close() {
-            this.$emit('close');
-        },
-    }
+    name: "modal-show"
 }
 </script>
 <style scoped>

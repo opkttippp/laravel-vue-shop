@@ -19,13 +19,16 @@ class SearchApiController extends Controller
     public function filter(Request $request)
     {
 
-        $categor = $request->data['checkedNames'];
+        $manufac = $request->data['checkedManuf'];
+        $categor = $request->data['checkedCateg'];
         return ProductResource::collection(
             Product::whereBetween(
                 'price',
                 [$request->data['priceMin'], $request->data['priceMax']])
 
-                ->when($categor, function ($query, $categor) {
+                ->when($manufac, function ($query, $manufac) {
+                    return $query->whereIn('manufactur_id', $manufac);
+                })->when($categor, function ($query, $categor) {
                     return $query->whereIn('category_id', $categor);
                 })->paginate(3));
 //            )->where('category_id', [$request->data['checkedNames']] )->paginate(3));

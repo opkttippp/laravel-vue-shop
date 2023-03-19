@@ -6,6 +6,7 @@ export const product = {
     state: {
         cartProducts: cart ? JSON.parse(cart) : [],
         products: [],
+        category: [],
         manufactur: [],
         review: [],
         queryFilter: query ? JSON.parse(query) : [],
@@ -13,6 +14,10 @@ export const product = {
     mutations: {
         SET_PRODUCTS_STATE: (state, products) => {
             state.products = products;
+        },
+
+        SET_CATEGORY_STATE: (state, category) => {
+            state.category = category;
         },
 
         SET_MANUFACTUR_STATE: (state, manufactur) => {
@@ -116,16 +121,26 @@ export const product = {
                     return error
                 });
         },
+        GET_CATEGORY({commit}) {
+            return axios.get('http://larav.local/api/category')
+                .then(category => {
+                    commit('SET_CATEGORY_STATE', category.data);
+                    // console.log(category);
+                    return category.data;
+                }).catch((error) => {
+                    return error
+                });
+        },
         GET_MANUFACTUR({commit}) {
             return axios.get('http://larav.local/api/manufactur')
                 .then(manufactur => {
                     commit('SET_MANUFACTUR_STATE', manufactur.data);
-                    // console.log(manufactur);
                     return manufactur.data;
                 }).catch((error) => {
                     return error
                 });
         },
+
         GET_FILTER({state, commit}, page = 1) {
             return axios.post('http://larav.local/api/filter', {
                 page: page,
@@ -149,6 +164,9 @@ export const product = {
     getters: {
         PRODUCTS(state) {
             return state.products;
+        },
+        CATEGORY(state) {
+            return state.category;
         },
         MANUFACTUR(state) {
             return state.manufactur;

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Http\Controllers\YIIController;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,6 @@ class DatabaseSeeder extends Seeder
 //            'review'  => 'It is a new views',
 //            'email'  => 'ddd@ooo.net',
 //        ]);
-        $this->call(yi::class);
+//        User::factory(1)->create();
     }
 }

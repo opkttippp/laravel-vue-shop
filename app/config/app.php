@@ -70,8 +70,8 @@ return [
     |
     */
 
-//    'timezone' => 'UTC',
-    'timezone' => 'Europe/Kiev',
+    'timezone' => 'UTC',
+//    'timezone' => 'Europe/Kiev',
 
     /*
     |--------------------------------------------------------------------------

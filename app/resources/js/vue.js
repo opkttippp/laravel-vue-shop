@@ -2,12 +2,15 @@ import {createApp} from "vue";
 
 import App from "./vue/App";
 
+import VueChatScroll from 'vue-chat-scroll'
+
 import axios from "axios";
 import store from './vue/store/store';
 import router from "./vue/router/router";
 import BootstrapVue from 'bootstrap-vue-next';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
+import Toaster from '@meforma/vue-toaster';
 
 import NavBar from "./vue/views/inc/NavBar";
 import Footer from "./vue/views/inc/Footer";
@@ -39,6 +42,8 @@ app.component("range-slider", RangeSlider);
 app.use(BootstrapVue)
 app.use(store)
 app.use(router)
+app.use(Toaster)
+app.use(VueChatScroll)
 app.config.globalProperties.axios = axios
 app.mount('#app')
 

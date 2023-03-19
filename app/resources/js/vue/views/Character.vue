@@ -34,13 +34,13 @@ export default {
         id: String
     },
     created() {
-        this.$store.product.dispatch('GET_REVIEW')
-        this.$store.product.dispatch('GET_PRODUCTS_ID', (parseInt(this.id)));
+        this.$store.dispatch('product/GET_REVIEW');
+        this.$store.dispatch('product/GET_PRODUCTS_ID', (parseInt(this.id)));
     },
     computed: {
         products() {
-            return this.$store.product.getters.getProductById(parseInt(this.id))
-        }
+            return this.$store.getters['product/getProductById'](parseInt(this.id));
+        },
     },
 }
 

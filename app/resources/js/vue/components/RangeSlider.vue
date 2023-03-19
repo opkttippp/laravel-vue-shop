@@ -1,5 +1,19 @@
 <template>
     <div class="col">
+        <div class="d-flex flex-column m-2" style="border: 1px solid #26313b;
+              height: 130px;">
+            <div class="head">
+                Manufacturer:
+            </div>
+            <div style="padding: 0 10px; overflow: scroll;">
+                <div v-for="(firm) in MANUFACTUR" class="firm d-flex justify-content-between">
+                    <label>{{firm.name}}</label>
+                    <input type="checkbox" :id="firm.id" :value="firm.id" v-model="checkedManuf" @change="getValue"
+                           style="padding: 0 10px;">
+                </div>
+            </div>
+            <br>
+        </div>
         <div class="d-flex flex-column align-self-center justify-content-center m-2"
              style="border: 1px solid #26313b; height: 130px;">
             <div>
@@ -10,17 +24,17 @@
                 <b-form-input class="col-5" v-model="value[1]" @input="getValue"></b-form-input>
             </div>
         </div>
+
         <div class="d-flex flex-column m-2" style="border: 1px solid #26313b;
               height: 130px;">
             <div>
-                Manufacturer:
+                Category:
             </div>
-            <div v-for="(firm, i) in MANUFACTUR" class="d-flex justify-content-around">
-                <label for="jack">{{firm.name}}</label>
-                <input type="checkbox" :id="firm.id" :value="firm.id" v-model="checkedNames" @change="getValue">
+            <div v-for="(firm) in CATEGORY" class="d-flex justify-content-around">
+                <label>{{firm.name}}</label>
+                <input type="checkbox" :id="firm.id" :value="firm.id" v-model="checkedCateg" @change="getValue">
             </div>
             <br>
-            <span>Отмеченные имена: {{ checkedNames }}</span>
         </div>
     </div>
 </template>
@@ -38,15 +52,20 @@ export default {
             value: [150, 15000],
             priceMin: Number,
             priceMax: Number,
-            checkedNames: [],
+            checkedManuf: [],
+            checkedCateg: [],
             selected: '',
             query: {}
         }
     },
     mounted() {
+        this.getCategory();
         this.getManufactor();
     },
     computed: {
+        CATEGORY() {
+            return this.$store.getters['product/CATEGORY'];
+        },
         MANUFACTUR() {
             return this.$store.getters['product/MANUFACTUR'];
         }
@@ -56,8 +75,12 @@ export default {
             this.query = {};
             this.query.priceMin = this.value[0];
             this.query.priceMax = this.value[1];
-            this.query.checkedNames = this.checkedNames;
+            this.query.checkedManuf = this.checkedManuf;
+            this.query.checkedCateg = this.checkedCateg;
             this.$emit('filter', this.query)
+        },
+        getCategory() {
+            this.$store.dispatch('product/GET_CATEGORY');
         },
         getManufactor() {
             this.$store.dispatch('product/GET_MANUFACTUR');
@@ -67,7 +90,14 @@ export default {
 </script>
 
 <style scoped>
-
 @import "@vueform/slider/themes/default.css";
+
+.firm {
+    display: none;
+}
+
+.head:active .firm{
+    display: block;
+}
 
 </style>

@@ -4,9 +4,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Verify Your Email Address</div>
-
                     <div class="card-body">
-
                         'Before proceeding, please check your email for a verification link.
                         'If you did not receive the email'
                         <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">

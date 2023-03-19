@@ -33,7 +33,7 @@
 {{--</div>--}}
 <nav class="header navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
 
-    <div class="container-fluid product_menu" style="position: relative">
+    <div class="container-fluid product_menu" style="position: relative;">
         <div class="nav-item">
             <a class="nav-link" style="color: #00b44e;" href={{ route('home') }}>Главная</a>
         </div>
@@ -88,19 +88,6 @@
             style="margin-right: 170px;"
         >
         </cart-button>
-        {{--        <div class="nav-link searc">--}}
-        {{--            <a data-widget="navbar-search" href="#" role="button" onclick="searc()">--}}
-        {{--                <div class="d-flex p-2"--}}
-        {{--                     style="height: 20%;--}}
-        {{--                    border: 1px solid white;--}}
-        {{--                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);--}}
-        {{--                    border-radius: 25px;">--}}
-        {{--                    <p class="navbar-nav nav-flex-icon cart ml-3 mr-3">Search</p>--}}
-        {{--                    <i class="fas fa-search mr-3 ml-3"></i>--}}
-        {{--                </div>--}}
-        {{--            </a>--}}
-        {{--        </div>--}}
-
         <form id="form" class="form-inline searchForm" method="get" action="{{route('product.search')}}">
             <div class="input-group input-group"
                  style="height: 88%;
@@ -116,21 +103,9 @@
                     <button class="btn btn-navbar submit" type="submit" style="visibility: hidden;">
                         <i class="fas fa-search"></i>
                     </button>
-                    {{--                        <button class="btn btn-navbar" onclick="clos()" type="button" data-widget="navbar-search"--}}
-                    {{--                                style="border-radius: 32%; background: none; border: none;">--}}
-                    {{--                            <i class="fas fa-times"></i>--}}
-                    {{--                        </button>--}}
                 </div>
             </div>
         </form>
-
-
-        {{--        <form class="d-flex" method="get" action="{{route('product.search')}}">--}}
-        {{--                            @csrf--}}
-        {{--            <input id="search" value="" onkeyup="checkEvent()" aria-label="Search" name='search'--}}
-        {{--                   autocomplete="off">--}}
-        {{--            <button class="btn btn-outline-success" type="submit">Search</button>--}}
-        {{--        </form>--}}
     </div>
 </nav>
 {{-----------------------------Modal Category-------------------------------------}}

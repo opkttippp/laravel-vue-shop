@@ -14,7 +14,7 @@
 
             <router-link to="/">Отзывы</router-link>
 
-            <router-link to="/">Добавить</router-link>
+            <router-link to="/chat">Chat</router-link>
 
             <a href="javascript:void(0);">
                 <catalog-button>
@@ -180,9 +180,6 @@ export default {
     -o-transition: all .6s;
     -moz-transition: all .6s;
     transition: all .6s;
-
-
-    /*left: 0;*/
 }
 
 .active {
@@ -207,19 +204,14 @@ export default {
     width: 100%;
 }
 
-/*#myTopnav {*/
-/*    overflow: hidden;*/
-/*    z-index: 160;*/
-/*    background-color: #333;*/
-/*}*/
-
-
 .topnav {
     overflow: hidden;
     background-color: #333;
     z-index: 160;
     display: flex;
     justify-content: space-around;
+    box-shadow: 0 2px 16px 11px rgba(229, 235, 240, 0.2);
+
 }
 
 .topnav a {
@@ -233,14 +225,42 @@ export default {
     font-size: 14px;
 }
 
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
+.topnav:hover {
+    /*filter: blur(1px);*/
+}
+
+/*-------------------------------------------------------------*/
+/*.topnav:hover {*/
+/*    opacity: 1;*/
+/*    animation: flash 1s;*/
+/*}*/
+
+/*@keyframes flash {*/
+/*    0% { opacity: .3; }*/
+/*    100% { opacity: 1;  }*/
+/*}*/
+/*-------------------------------------------------------------*/
+
+
+a:hover {
+    /*background-color: #ddd;*/
+    transition: .5s;
+    color: #00a379;
 }
 
 .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
+    /*background-color: #333;*/
+
+    background-color: #00a379;
+    /*color: white;*/
+    /*color: #808080;*/
+    opacity: 1;
+    animation: flash 1s;
+}
+
+@keyframes flash {
+    0% { opacity: .1; }
+    100% { opacity: 1;  }
 }
 
 .topnav .icon {

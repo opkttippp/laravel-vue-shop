@@ -132,7 +132,7 @@ export default {
         }
     },
     created() {
-        this.$store.dispatch('product/GET_REVIEW')
+        this.$store.dispatch('product/GET_REVIEW');
         this.$store.dispatch('product/GET_PRODUCTS_ID', (parseInt(this.id)));
     },
     methods: {
