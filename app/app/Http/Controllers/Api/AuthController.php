@@ -42,14 +42,10 @@ class AuthController extends Controller
             'password' => Hash::make($requestData['password']),
         ]);
         $user->assignRole(Role::findByName('user'));
-
         event(new Registered($user));
 
-
         $this->guard()->login($user);
-
         $accessToken = Auth::user()->createToken('authToken')->accessToken;
-
         return response(
             ['user' => Auth::user(), 'access_token' => $accessToken],
             200

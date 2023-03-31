@@ -1,5 +1,5 @@
 <template>
-    <div class="container py-5">
+    <div v-if="user" class="container py-5">
         <div class="row d-flex justify-content-center">
             <div class="col-md-12 col-lg-10 col-xl-8">
                 <div class="card" id="chat2">
@@ -28,6 +28,9 @@
             </div>
         </div>
     </div>
+    <div v-else>
+        You Unauthenticated!
+    </div>
 </template>
 
 <script>
@@ -44,58 +47,71 @@ export default {
     },
     data() {
         return {
-            user: {},
-            usersOnChat: [],
+            user: Object,
+            usersOnChat: ''
         }
     },
-    mounted() {
-        this.getMainInfo();
+    created() {
         this.getUser();
+    },
+    mounted() {
+        console.log('mounted');
+        this.getMainInfo();
+    },
+    unmounted() {
+        this.leaveChannel();
     },
     methods: {
         getUser() {
-            this.user = this.$store.state.auth.user;
+            if (this.$store.state.auth.user) {
+                this.user = this.$store.state.auth.user;
+                window.Echo.options.auth.headers.Authorization = 'Bearer ' + window.localStorage.getItem('token')
+            }else
+            this.user = null;
+            console.log(this.user);
         },
         sendMessage: (data) => {
-            return axios.post('/api/chat/send',  data).then((res) => {
+            return axios.post('/api/chat/send', data).then((res) => {
                 console.log(res);
             }).catch((res) => {
                 console.log(res);
                 this.errors = res.data.errors;
             })
         },
-    SendEditMessage(data) {
-        return axios.post('/api/chat/update', data).then((res) => {
-                console.log(res);
+        SendEditMessage(data) {
+            return axios.post('/api/chat/update', data).then((res) => {
             }).catch((res) => {
                 console.log(res);
                 this.errors = res.data.errors;
             })
-    },
+        },
         deleteMessage: (name, id) => {
             return axios.post('/api/chat/delete', {name, id}).then((res) => {
-                console.log(res);
             }).catch((res) => {
                 console.log(res);
                 this.errors = res.data.errors;
             })
         },
         getMainInfo() {
+
             Echo.join('chat')
                 .here((users) => {
                     this.usersOnChat = users.length
                 })
                 .joining((user) => {
-                    this.usersOnChat += 1;
+                    this.usersOnChat++;
                     this.$toast.success(`User ${user.name} is joining ...`);
                 })
                 .leaving((user) => {
-                    this.usersOnChat -= 1;
+                    this.usersOnChat--;
                     this.$toast.success(`User ${user.name} is leaving ...`);
                 })
                 .error((error) => {
                     console.error(error);
                 });
+        },
+        leaveChannel() {
+            Echo.leave(`chat`);
         }
     }
 }

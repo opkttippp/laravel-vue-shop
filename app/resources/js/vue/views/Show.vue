@@ -12,7 +12,7 @@
                         <img :src="'http://larav.local/storage/' + products.image"
                              alt="image" style="width: 80%; height: 80%; object-fit: contain; justify-content: center;">
                     </div>
-                    <div id="grid" style="cursor: pointer;">
+                    <div id="list-photo" style="cursor: pointer;">
                         <img v-for="image in products.imageAll" :key="image.id" class="many"
                              :src="'http://larav.local/storage/' + image.photos"
                              alt="images" v-on:click="selectImage()">
@@ -89,7 +89,7 @@ export default {
     },
     created() {
         this.$store.dispatch('product/GET_REVIEW');
-        this.$store.dispatch('product/GET_PRODUCTS_ID',(parseInt(this.id)));
+        this.$store.dispatch('product/GET_PRODUCTS_ID', (parseInt(this.id)));
     },
     mounted() {
         this.selectImage();
@@ -128,17 +128,18 @@ export default {
 }
 </script>
 <style>
-#grid {
+#list-photo {
     display: grid;
+    height: 16vh;
     margin-left: 20px;
     grid-template-columns:repeat(auto-fill, minmax(25%, 1fr));
 }
 
-#grid > img {
-    font-size: 1.1vw;
+#list-photo > img {
+    object-fit: contain;
+    width: 100%;
+    height: 100px;
     background: white;
     padding: 5px;
-    width: 80%;
-    height: 80%;
 }
 </style>

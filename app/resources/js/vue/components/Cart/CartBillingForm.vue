@@ -144,10 +144,15 @@ export default {
                     total: this.totalPrice,
                     cartProducts: this.cartProducts,
                 }).then((res) => {
-                this.order = res.data;
+                this.order = res.data.id;
+                this.sendMailOrder(res.data);
                 this.removeAll();
             });
-        }
+        },
+        sendMailOrder(data) {
+            return axios.post('http://larav.local/api/mail/order',
+                data
+        )}
     }
 }
 </script>

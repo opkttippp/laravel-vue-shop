@@ -63,10 +63,10 @@
                     <a href="#">Портфолио</a>
                 </nav>
             </div>
-                <range-slider
-                    @filter="filter"
-                >
-                </range-slider>
+            <range-slider
+                @filter="filter"
+            >
+            </range-slider>
         </div>
         <div class="col-2 d-flex align-items-center justify-content-center cursor">
             <img class="cursorLeft" :src="'/images/cursorRight.png'" width="25" height="25" alt="cursorLeft">
@@ -138,11 +138,13 @@ export default {
             let container = document.querySelector(".topnav");
             let a = container.getElementsByTagName("a");
             let current = document.getElementsByClassName("active");
-            for (let i = 0; i < a.length; i++) {
-                a[i].addEventListener("click", function () {
-                    current[0].classList.remove('active');
-                    a[i].classList.add('active');
-                });
+            if (current) {
+                for (let i = 0; i < a.length; i++) {
+                    a[i].addEventListener("click", function () {
+                        current[0].classList.remove('active');
+                        a[i].classList.add('active');
+                    });
+                }
             }
         },
         logout() {
@@ -225,42 +227,27 @@ export default {
     font-size: 14px;
 }
 
-.topnav:hover {
-    /*filter: blur(1px);*/
-}
-
-/*-------------------------------------------------------------*/
-/*.topnav:hover {*/
-/*    opacity: 1;*/
-/*    animation: flash 1s;*/
-/*}*/
-
-/*@keyframes flash {*/
-/*    0% { opacity: .3; }*/
-/*    100% { opacity: 1;  }*/
-/*}*/
-/*-------------------------------------------------------------*/
-
-
 a:hover {
-    /*background-color: #ddd;*/
     transition: .5s;
     color: #00a379;
+    cursor: pointer;
 }
 
 .topnav a.active {
     /*background-color: #333;*/
 
     background-color: #00a379;
-    /*color: white;*/
-    /*color: #808080;*/
     opacity: 1;
     animation: flash 1s;
 }
 
 @keyframes flash {
-    0% { opacity: .1; }
-    100% { opacity: 1;  }
+    0% {
+        opacity: .1;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .topnav .icon {

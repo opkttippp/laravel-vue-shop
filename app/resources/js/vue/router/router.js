@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
 import Home from "../../vue/views/Home";
-import VerifiMail from "../../vue/views/VerifiMail"
+import VerifyMail from "../../vue/views/VerifyMail"
 import Register from "../../vue/views/Register";
 import Login from "../../vue/views/Login";
 import Products from "../../vue/views/Products";
@@ -20,8 +20,8 @@ const routes = [
     },
     {
         path: '/verificationMail',
-        name: 'VerifiMail',
-        component: VerifiMail,
+        name: 'VerifyMail',
+        component: VerifyMail,
     },
     {
         path: '/register',
@@ -65,14 +65,7 @@ const routes = [
         path: '/chat',
         name: 'Chat',
         component: Chat,
-        props: true
     },
-    // {
-    //     path: '/category/:id',
-    //     name: 'CategoryName',
-    //     component: CategoryName,
-    //     props: true
-    // }
     ];
 
 

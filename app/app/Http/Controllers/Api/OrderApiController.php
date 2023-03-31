@@ -27,7 +27,7 @@ class OrderApiController extends Controller
             'comment' => $request->comment,
             'total' => $request->total,
         ]);
-        $order = $OrderItem->id;
+
         foreach ($request->cartProducts as $product) {
             $Item =
             new OrderItem([
@@ -37,7 +37,7 @@ class OrderApiController extends Controller
                 ]);
             $OrderItem->item()->save($Item);
         }
-        return response()->json($order);
+        return response()->json($OrderItem);
     }
 
     public function show($id)
