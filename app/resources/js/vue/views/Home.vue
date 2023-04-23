@@ -25,16 +25,16 @@ export default {
     methods: {
         javaScript() {
 
-            // let form = document.forms[1].elements[0].value;
-            // form = 'qwert';
-            //
-            // for (let i = 0; i < document.forms[1].elements.length; i++){
-            //     // console.log(document.forms[1].elements[i]);
-            //     document.forms[1].elements[i].onfocus = function () {
-            //         document.forms[1].elements[i].style.border = '1px solid red';
-            //     }
-            //     document.write('Hello!!');
-            // }
+            let form = document.forms[1].elements[0].value;
+            form = 'qwert';
+
+            for (let i = 0; i < document.forms[1].elements.length; i++){
+                // console.log(document.forms[1].elements[i]);
+                document.forms[1].elements[i].onfocus = function () {
+                    document.forms[1].elements[i].style.border = '1px solid red';
+                }
+                document.write('Hello!!');
+            }
 
             let a = 99999999999999999999999n;
             let b = {

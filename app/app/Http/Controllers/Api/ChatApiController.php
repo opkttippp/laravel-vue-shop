@@ -16,7 +16,6 @@ class ChatApiController extends Controller
     public function __construct()
     {
         auth()->user();
-//        auth()->loginUsingId(1);
     }
 
     public function index()
