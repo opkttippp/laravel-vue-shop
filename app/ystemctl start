@@ -1,0 +1,702 @@
+-- Logs begin at Sat 2022-12-31 14:08:00 EET, end at Tue 2023-10-24 15:20:15 EEST. --
+жов 24 15:05:10 bora kernel: microcode: microcode updated early to revision 0xf8, date = 2023-02-26
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mLinux version 5.15.0-87-generic (buildd@bos03-amd64-016) (gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #97~20.04.1-Ubuntu SMP Thu Oct 5 08:25:28 UTC 2023 (Ubuntu 5.15.0-87.97~20.04.1-generic 5.15.122)[0m
+жов 24 15:05:10 bora kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-5.15.0-87-generic root=UUID=143c5ae6-89e0-402c-8f01-0d7899ea0b4a ro quiet splash vt.handoff=7
+жов 24 15:05:10 bora kernel: KERNEL supported cpus:
+жов 24 15:05:10 bora kernel:   Intel GenuineIntel
+жов 24 15:05:10 bora kernel:   AMD AuthenticAMD
+жов 24 15:05:10 bora kernel:   Hygon HygonGenuine
+жов 24 15:05:10 bora kernel:   Centaur CentaurHauls
+жов 24 15:05:10 bora kernel:   zhaoxin   Shanghai  
+жов 24 15:05:10 bora kernel: BIOS-provided physical RAM map:
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009efff] usable
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x000000000009f000-0x00000000000fffff] reserved
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x0000000000100000-0x000000007f216fff] usable
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x000000007f217000-0x000000007fb16fff] reserved
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x000000007fb17000-0x000000008dd2cfff] usable
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x000000008dd2d000-0x000000008f2cdfff] reserved
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x000000008f2ce000-0x000000008fbcdfff] ACPI NVS
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x000000008fbce000-0x000000008fc4dfff] ACPI data
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x000000008fc4e000-0x000000008fc4efff] usable
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x000000008fc4f000-0x000000009b7fffff] reserved
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x00000000e0000000-0x00000000efffffff] reserved
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x00000000fe000000-0x00000000fe010fff] reserved
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x00000000fed10000-0x00000000fed19fff] reserved
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x00000000fed84000-0x00000000fed84fff] reserved
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x00000000fee00000-0x00000000fee00fff] reserved
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x00000000ff500000-0x00000000ffffffff] reserved
+жов 24 15:05:10 bora kernel: BIOS-e820: [mem 0x0000000100000000-0x00000002627fffff] usable
+жов 24 15:05:10 bora kernel: NX (Execute Disable) protection: active
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: update [mem 0x7b3dc018-0x7b3ec057] usable ==> usable[0m
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: update [mem 0x7b3dc018-0x7b3ec057] usable ==> usable[0m
+жов 24 15:05:10 bora kernel: extended physical RAM map:
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x0000000000000000-0x000000000009efff] usable
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x000000000009f000-0x00000000000fffff] reserved
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x0000000000100000-0x000000007b3dc017] usable
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x000000007b3dc018-0x000000007b3ec057] usable
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x000000007b3ec058-0x000000007f216fff] usable
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x000000007f217000-0x000000007fb16fff] reserved
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x000000007fb17000-0x000000008dd2cfff] usable
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x000000008dd2d000-0x000000008f2cdfff] reserved
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x000000008f2ce000-0x000000008fbcdfff] ACPI NVS
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x000000008fbce000-0x000000008fc4dfff] ACPI data
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x000000008fc4e000-0x000000008fc4efff] usable
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x000000008fc4f000-0x000000009b7fffff] reserved
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x00000000e0000000-0x00000000efffffff] reserved
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x00000000fe000000-0x00000000fe010fff] reserved
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x00000000fed10000-0x00000000fed19fff] reserved
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x00000000fed84000-0x00000000fed84fff] reserved
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x00000000fee00000-0x00000000fee00fff] reserved
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x00000000ff500000-0x00000000ffffffff] reserved
+жов 24 15:05:10 bora kernel: reserve setup_data: [mem 0x0000000100000000-0x00000002627fffff] usable
+жов 24 15:05:10 bora kernel: efi: EFI v2.70 by XXXXXX
+жов 24 15:05:10 bora kernel: efi: ACPI=0x8fc4d000 ACPI 2.0=0x8fc4d014 TPMFinalLog=0x8fbc5000 SMBIOS=0x8e2c3000 SMBIOS 3.0=0x8e2c1000 ESRT=0x8e2bfb98 MEMATTR=0x7c184018 MOKvar=0x8e178000 RNG=0x8fbef018 TPMEventLog=0x7b3fd018 
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mrandom: crng init done[0m
+жов 24 15:05:10 bora kernel: secureboot: Secure boot enabled
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mKernel is locked down from EFI Secure Boot mode; see man kernel_lockdown.7[0m
+жов 24 15:05:10 bora kernel: SMBIOS 3.2.0 present.
+жов 24 15:05:10 bora kernel: DMI: HONOR NBR-WAX9/NBR-WAX9-PCB, BIOS 3.15 02/22/2022
+жов 24 15:05:10 bora kernel: tsc: Detected 2600.000 MHz processor
+жов 24 15:05:10 bora kernel: tsc: Detected 2599.992 MHz TSC
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: update [mem 0x00000000-0x00000fff] usable ==> reserved[0m
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: remove [mem 0x000a0000-0x000fffff] usable[0m
+жов 24 15:05:10 bora kernel: last_pfn = 0x262800 max_arch_pfn = 0x400000000
+жов 24 15:05:10 bora kernel: x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+жов 24 15:05:10 bora kernel: last_pfn = 0x8fc4f max_arch_pfn = 0x400000000
+жов 24 15:05:10 bora kernel: esrt: Reserving ESRT space from 0x000000008e2bfb98 to 0x000000008e2bfbf8.
+жов 24 15:05:10 bora kernel: Using GB pages for direct mapping
+жов 24 15:05:10 bora kernel: secureboot: Secure boot enabled
+жов 24 15:05:10 bora kernel: RAMDISK: [mem 0x761d7000-0x7a8c8fff]
+жов 24 15:05:10 bora kernel: ACPI: Early table checksum verification disabled
+жов 24 15:05:10 bora kernel: ACPI: RSDP 0x000000008FC4D014 000024 (v02 HONOR )
+жов 24 15:05:10 bora kernel: ACPI: XSDT 0x000000008FC2C188 0000FC (v01 HONOR  CML-ULT  00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: FACP 0x000000008FC2F000 00010C (v05 HONOR  CML-ULT  00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: DSDT 0x000000008FBF7000 034774 (v02 HONOR  CML-ULT  00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: FACS 0x000000008FB85000 000040
+жов 24 15:05:10 bora kernel: ACPI: UEFI 0x000000008FBCD000 000236 (v01 HONOR  H2O BIOS 00000001 ACPI 00040000)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FC47000 0046E3 (v02 HONOR  DptfTabl 00001000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FC44000 0020AD (v02 HONOR  CpuSsdt  00003000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FC40000 0031DA (v02 HONOR  SaSsdt   00003000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FC3F000 00045A (v02 HONOR  Tpm2Tabl 00001000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FC3E000 000046 (v02 HONOR  MeSsdt   00003000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: TPM2 0x000000008FC3D000 000034 (v03 HONOR  EDK2     00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: MSDM 0x000000008FC3C000 000055 (v03 HONOR  H2O BIOS 00000001 ACPI 00040000)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FC3B000 000CA1 (v01 HONOR  WmiTable 00001000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: LPIT 0x000000008FC3A000 000094 (v01 HONOR  CML-ULT  00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: WSMT 0x000000008FC39000 000028 (v01 HONOR  CML-ULT  00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FC38000 000B14 (v02 HONOR  PtidDevc 00001000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: DBGP 0x000000008FC37000 000034 (v01 HONOR           00000002 ACPI 00040000)
+жов 24 15:05:10 bora kernel: ACPI: DBG2 0x000000008FC36000 000054 (v00 HONOR           00000002 ACPI 00040000)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FC35000 000B9F (v02 HONOR  UsbCTabl 00001000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FC31000 003218 (v02 HONOR  xh_cmud4 00000000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: NHLT 0x000000008FC30000 00002D (v00 HONOR  CML-ULT  00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: HPET 0x000000008FC2E000 000038 (v01 HONOR  CML-ULT  00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: APIC 0x000000008FC2D000 000164 (v03 HONOR  CML-ULT  00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: MCFG 0x000000008FC4C000 00003C (v01 HONOR  CML-ULT  00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FBF6000 000FBD (v02 HONOR  CML-ULT  00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FBF3000 00115F (v02 HONOR  SgRpSsdt 00001000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0x000000008FBF2000 000164 (v01 HONOR  PcdTabl  00001000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: DMAR 0x000000008FBF5000 0000A8 (v01 HONOR  EDK2     00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: FPDT 0x000000008FBF1000 000044 (v01 HONOR  CML-ULT  00000002      01000013)
+жов 24 15:05:10 bora kernel: ACPI: BGRT 0x000000008FBF0000 000038 (v01 HONOR  H2O BIOS 00000001 ACPI 00040000)
+жов 24 15:05:10 bora kernel: ACPI: Reserving FACP table memory at [mem 0x8fc2f000-0x8fc2f10b]
+жов 24 15:05:10 bora kernel: ACPI: Reserving DSDT table memory at [mem 0x8fbf7000-0x8fc2b773]
+жов 24 15:05:10 bora kernel: ACPI: Reserving FACS table memory at [mem 0x8fb85000-0x8fb8503f]
+жов 24 15:05:10 bora kernel: ACPI: Reserving UEFI table memory at [mem 0x8fbcd000-0x8fbcd235]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fc47000-0x8fc4b6e2]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fc44000-0x8fc460ac]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fc40000-0x8fc431d9]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fc3f000-0x8fc3f459]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fc3e000-0x8fc3e045]
+жов 24 15:05:10 bora kernel: ACPI: Reserving TPM2 table memory at [mem 0x8fc3d000-0x8fc3d033]
+жов 24 15:05:10 bora kernel: ACPI: Reserving MSDM table memory at [mem 0x8fc3c000-0x8fc3c054]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fc3b000-0x8fc3bca0]
+жов 24 15:05:10 bora kernel: ACPI: Reserving LPIT table memory at [mem 0x8fc3a000-0x8fc3a093]
+жов 24 15:05:10 bora kernel: ACPI: Reserving WSMT table memory at [mem 0x8fc39000-0x8fc39027]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fc38000-0x8fc38b13]
+жов 24 15:05:10 bora kernel: ACPI: Reserving DBGP table memory at [mem 0x8fc37000-0x8fc37033]
+жов 24 15:05:10 bora kernel: ACPI: Reserving DBG2 table memory at [mem 0x8fc36000-0x8fc36053]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fc35000-0x8fc35b9e]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fc31000-0x8fc34217]
+жов 24 15:05:10 bora kernel: ACPI: Reserving NHLT table memory at [mem 0x8fc30000-0x8fc3002c]
+жов 24 15:05:10 bora kernel: ACPI: Reserving HPET table memory at [mem 0x8fc2e000-0x8fc2e037]
+жов 24 15:05:10 bora kernel: ACPI: Reserving APIC table memory at [mem 0x8fc2d000-0x8fc2d163]
+жов 24 15:05:10 bora kernel: ACPI: Reserving MCFG table memory at [mem 0x8fc4c000-0x8fc4c03b]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fbf6000-0x8fbf6fbc]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fbf3000-0x8fbf415e]
+жов 24 15:05:10 bora kernel: ACPI: Reserving SSDT table memory at [mem 0x8fbf2000-0x8fbf2163]
+жов 24 15:05:10 bora kernel: ACPI: Reserving DMAR table memory at [mem 0x8fbf5000-0x8fbf50a7]
+жов 24 15:05:10 bora kernel: ACPI: Reserving FPDT table memory at [mem 0x8fbf1000-0x8fbf1043]
+жов 24 15:05:10 bora kernel: ACPI: Reserving BGRT table memory at [mem 0x8fbf0000-0x8fbf0037]
+жов 24 15:05:10 bora kernel: No NUMA configuration found
+жов 24 15:05:10 bora kernel: Faking a node at [mem 0x0000000000000000-0x00000002627fffff]
+жов 24 15:05:10 bora kernel: NODE_DATA(0) allocated [mem 0x2627d6000-0x2627fffff]
+жов 24 15:05:10 bora kernel: Zone ranges:
+жов 24 15:05:10 bora kernel:   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+жов 24 15:05:10 bora kernel:   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+жов 24 15:05:10 bora kernel:   Normal   [mem 0x0000000100000000-0x00000002627fffff]
+жов 24 15:05:10 bora kernel:   Device   empty
+жов 24 15:05:10 bora kernel: Movable zone start for each node
+жов 24 15:05:10 bora kernel: Early memory node ranges
+жов 24 15:05:10 bora kernel:   node   0: [mem 0x0000000000001000-0x000000000009efff]
+жов 24 15:05:10 bora kernel:   node   0: [mem 0x0000000000100000-0x000000007f216fff]
+жов 24 15:05:10 bora kernel:   node   0: [mem 0x000000007fb17000-0x000000008dd2cfff]
+жов 24 15:05:10 bora kernel:   node   0: [mem 0x000000008fc4e000-0x000000008fc4efff]
+жов 24 15:05:10 bora kernel:   node   0: [mem 0x0000000100000000-0x00000002627fffff]
+жов 24 15:05:10 bora kernel: Initmem setup node 0 [mem 0x0000000000001000-0x00000002627fffff]
+жов 24 15:05:10 bora kernel: On node 0, zone DMA: 1 pages in unavailable ranges
+жов 24 15:05:10 bora kernel: On node 0, zone DMA: 97 pages in unavailable ranges
+жов 24 15:05:10 bora kernel: On node 0, zone DMA32: 2304 pages in unavailable ranges
+жов 24 15:05:10 bora kernel: On node 0, zone DMA32: 7969 pages in unavailable ranges
+жов 24 15:05:10 bora kernel: On node 0, zone Normal: 945 pages in unavailable ranges
+жов 24 15:05:10 bora kernel: On node 0, zone Normal: 22528 pages in unavailable ranges
+жов 24 15:05:10 bora kernel: Reserving Intel graphics memory at [mem 0x99800000-0x9b7fffff]
+жов 24 15:05:10 bora kernel: ACPI: PM-Timer IO Port: 0x1808
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x01] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x02] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x03] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x04] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x05] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x06] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x07] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x08] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x09] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x0a] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x0b] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x0c] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x0d] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x0e] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x0f] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x10] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x11] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x12] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x13] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: ACPI: LAPIC_NMI (acpi_id[0x14] high edge lint[0x1])
+жов 24 15:05:10 bora kernel: IOAPIC[0]: apic_id 2, version 32, address 0xfec00000, GSI 0-119
+жов 24 15:05:10 bora kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+жов 24 15:05:10 bora kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+жов 24 15:05:10 bora kernel: ACPI: Using ACPI (MADT) for SMP configuration information
+жов 24 15:05:10 bora kernel: ACPI: HPET id: 0x8086a201 base: 0xfed00000
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: update [mem 0x7b411000-0x7b439fff] usable ==> reserved[0m
+жов 24 15:05:10 bora kernel: TSC deadline timer available
+жов 24 15:05:10 bora kernel: smpboot: Allowing 4 CPUs, 0 hotplug CPUs
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0x0009f000-0x000fffff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0x7b3dc000-0x7b3dcfff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0x7b3ec000-0x7b3ecfff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0x7b411000-0x7b439fff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0x7f217000-0x7fb16fff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0x8dd2d000-0x8f2cdfff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0x8f2ce000-0x8fbcdfff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0x8fbce000-0x8fc4dfff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0x8fc4f000-0x9b7fffff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0x9b800000-0xdfffffff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0xe0000000-0xefffffff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0xf0000000-0xfdffffff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0xfe000000-0xfe010fff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0xfe011000-0xfed0ffff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0xfed10000-0xfed19fff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0xfed1a000-0xfed83fff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0xfed84000-0xfed84fff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0xfed85000-0xfedfffff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0xfee00000-0xfee00fff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0xfee01000-0xff4fffff]
+жов 24 15:05:10 bora kernel: PM: hibernation: Registered nosave memory: [mem 0xff500000-0xffffffff]
+жов 24 15:05:10 bora kernel: [mem 0x9b800000-0xdfffffff] available for PCI devices
+жов 24 15:05:10 bora kernel: Booting paravirtualized kernel on bare hardware
+жов 24 15:05:10 bora kernel: clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645519600211568 ns
+жов 24 15:05:10 bora kernel: setup_percpu: NR_CPUS:8192 nr_cpumask_bits:4 nr_cpu_ids:4 nr_node_ids:1
+жов 24 15:05:10 bora kernel: percpu: Embedded 61 pages/cpu s212992 r8192 d28672 u524288
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245mpcpu-alloc: s212992 r8192 d28672 u524288 alloc=1*2097152[0m
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245mpcpu-alloc: [0] 0 1 2 3 [0m
+жов 24 15:05:10 bora kernel: Built 1 zonelists, mobility grouping on.  Total pages: 1998653
+жов 24 15:05:10 bora kernel: Policy zone: Normal
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mKernel command line: BOOT_IMAGE=/boot/vmlinuz-5.15.0-87-generic root=UUID=143c5ae6-89e0-402c-8f01-0d7899ea0b4a ro quiet splash vt.handoff=7[0m
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mUnknown kernel command line parameters "splash BOOT_IMAGE=/boot/vmlinuz-5.15.0-87-generic", will be passed to user space.[0m
+жов 24 15:05:10 bora kernel: Dentry cache hash table entries: 1048576 (order: 11, 8388608 bytes, linear)
+жов 24 15:05:10 bora kernel: Inode-cache hash table entries: 524288 (order: 10, 4194304 bytes, linear)
+жов 24 15:05:10 bora kernel: mem auto-init: stack:off, heap alloc:on, heap free:off
+жов 24 15:05:10 bora kernel: Memory: 7733480K/8122160K available (16393K kernel code, 4388K rwdata, 10844K rodata, 3352K init, 18732K bss, 388420K reserved, 0K cma-reserved)
+жов 24 15:05:10 bora kernel: SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+жов 24 15:05:10 bora kernel: ftrace: allocating 50168 entries in 196 pages
+жов 24 15:05:10 bora kernel: ftrace: allocated 196 pages with 3 groups
+жов 24 15:05:10 bora kernel: rcu: Hierarchical RCU implementation.
+жов 24 15:05:10 bora kernel: rcu:         RCU restricting CPUs from NR_CPUS=8192 to nr_cpu_ids=4.
+жов 24 15:05:10 bora kernel:         Rude variant of Tasks RCU enabled.
+жов 24 15:05:10 bora kernel:         Tracing variant of Tasks RCU enabled.
+жов 24 15:05:10 bora kernel: rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+жов 24 15:05:10 bora kernel: rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=4
+жов 24 15:05:10 bora kernel: NR_IRQS: 524544, nr_irqs: 1024, preallocated irqs: 16
+жов 24 15:05:10 bora kernel: Console: colour dummy device 80x25
+жов 24 15:05:10 bora kernel: printk: console [tty0] enabled
+жов 24 15:05:10 bora kernel: ACPI: Core revision 20210730
+жов 24 15:05:10 bora kernel: hpet: HPET dysfunctional in PC10. Force disabled.
+жов 24 15:05:10 bora kernel: APIC: Switch to symmetric I/O mode setup
+жов 24 15:05:10 bora kernel: DMAR: Host address width 39
+жов 24 15:05:10 bora kernel: DMAR: DRHD base: 0x000000fed90000 flags: 0x0
+жов 24 15:05:10 bora kernel: DMAR: dmar0: reg_base_addr fed90000 ver 1:0 cap 1c0000c40660462 ecap 19e2ff0505e
+жов 24 15:05:10 bora kernel: DMAR: DRHD base: 0x000000fed91000 flags: 0x1
+жов 24 15:05:10 bora kernel: DMAR: dmar1: reg_base_addr fed91000 ver 1:0 cap d2008c40660462 ecap f050da
+жов 24 15:05:10 bora kernel: DMAR: RMRR base: 0x0000008f195000 end: 0x0000008f1b4fff
+жов 24 15:05:10 bora kernel: DMAR: RMRR base: 0x00000099000000 end: 0x0000009b7fffff
+жов 24 15:05:10 bora kernel: DMAR-IR: IOAPIC id 2 under DRHD base  0xfed91000 IOMMU 1
+жов 24 15:05:10 bora kernel: DMAR-IR: HPET id 0 under DRHD base 0xfed91000
+жов 24 15:05:10 bora kernel: DMAR-IR: Queued invalidation will be enabled to support x2apic and Intr-remapping.
+жов 24 15:05:10 bora kernel: DMAR-IR: Enabled IRQ remapping in x2apic mode
+жов 24 15:05:10 bora kernel: x2apic enabled
+жов 24 15:05:10 bora kernel: Switched APIC routing to cluster x2apic.
+жов 24 15:05:10 bora kernel: clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x257a34a6eea, max_idle_ns: 440795264358 ns
+жов 24 15:05:10 bora kernel: Calibrating delay loop (skipped), value calculated using timer frequency.. 5199.98 BogoMIPS (lpj=10399968)
+жов 24 15:05:10 bora kernel: CPU0: Thermal monitoring enabled (TM1)
+жов 24 15:05:10 bora kernel: process: using mwait in idle threads
+жов 24 15:05:10 bora kernel: Last level iTLB entries: 4KB 64, 2MB 8, 4MB 8
+жов 24 15:05:10 bora kernel: Last level dTLB entries: 4KB 64, 2MB 0, 4MB 0, 1GB 4
+жов 24 15:05:10 bora kernel: Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+жов 24 15:05:10 bora kernel: Spectre V2 : Mitigation: Enhanced IBRS
+жов 24 15:05:10 bora kernel: Spectre V2 : Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch
+жов 24 15:05:10 bora kernel: Spectre V2 : Spectre v2 / PBRSB-eIBRS: Retire a single CALL on VMEXIT
+жов 24 15:05:10 bora kernel: RETBleed: Mitigation: Enhanced IBRS
+жов 24 15:05:10 bora kernel: Spectre V2 : mitigation: Enabling conditional Indirect Branch Prediction Barrier
+жов 24 15:05:10 bora kernel: Speculative Store Bypass: Mitigation: Speculative Store Bypass disabled via prctl and seccomp
+жов 24 15:05:10 bora kernel: MMIO Stale Data: Mitigation: Clear CPU buffers
+жов 24 15:05:10 bora kernel: SRBDS: Mitigation: Microcode
+жов 24 15:05:10 bora kernel: GDS: Mitigation: Microcode
+жов 24 15:05:10 bora kernel: x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+жов 24 15:05:10 bora kernel: x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+жов 24 15:05:10 bora kernel: x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+жов 24 15:05:10 bora kernel: x86/fpu: Supporting XSAVE feature 0x008: 'MPX bounds registers'
+жов 24 15:05:10 bora kernel: x86/fpu: Supporting XSAVE feature 0x010: 'MPX CSR'
+жов 24 15:05:10 bora kernel: x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+жов 24 15:05:10 bora kernel: x86/fpu: xstate_offset[3]:  832, xstate_sizes[3]:   64
+жов 24 15:05:10 bora kernel: x86/fpu: xstate_offset[4]:  896, xstate_sizes[4]:   64
+жов 24 15:05:10 bora kernel: x86/fpu: Enabled xstate features 0x1f, context size is 960 bytes, using 'compacted' format.
+жов 24 15:05:10 bora kernel: Freeing SMP alternatives memory: 40K
+жов 24 15:05:10 bora kernel: pid_max: default: 32768 minimum: 301
+жов 24 15:05:10 bora kernel: LSM: Security Framework initializing
+жов 24 15:05:10 bora kernel: landlock: Up and running.
+жов 24 15:05:10 bora kernel: Yama: becoming mindful.
+жов 24 15:05:10 bora kernel: AppArmor: AppArmor initialized
+жов 24 15:05:10 bora kernel: Mount-cache hash table entries: 16384 (order: 5, 131072 bytes, linear)
+жов 24 15:05:10 bora kernel: Mountpoint-cache hash table entries: 16384 (order: 5, 131072 bytes, linear)
+жов 24 15:05:10 bora kernel: smpboot: Estimated ratio of average max frequency by base frequency (times 1024): 1457
+жов 24 15:05:10 bora kernel: smpboot: CPU0: Intel(R) Core(TM) i3-10110U CPU @ 2.10GHz (family: 0x6, model: 0x8e, stepping: 0xc)
+жов 24 15:05:10 bora kernel: Performance Events: PEBS fmt3+, Skylake events, 32-deep LBR, full-width counters, Intel PMU driver.
+жов 24 15:05:10 bora kernel: ... version:                4
+жов 24 15:05:10 bora kernel: ... bit width:              48
+жов 24 15:05:10 bora kernel: ... generic registers:      4
+жов 24 15:05:10 bora kernel: ... value mask:             0000ffffffffffff
+жов 24 15:05:10 bora kernel: ... max period:             00007fffffffffff
+жов 24 15:05:10 bora kernel: ... fixed-purpose events:   3
+жов 24 15:05:10 bora kernel: ... event mask:             000000070000000f
+жов 24 15:05:10 bora kernel: signal: max sigframe size: 2032
+жов 24 15:05:10 bora kernel: rcu: Hierarchical SRCU implementation.
+жов 24 15:05:10 bora kernel: NMI watchdog: Enabled. Permanently consumes one hw-PMU counter.
+жов 24 15:05:10 bora kernel: smp: Bringing up secondary CPUs ...
+жов 24 15:05:10 bora kernel: x86: Booting SMP configuration:
+жов 24 15:05:10 bora kernel: .... node  #0, CPUs:      #1 #2
+жов 24 15:05:10 bora kernel: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mMMIO Stale Data CPU bug present and SMT on, data leak possible. See https://www.kernel.org/doc/html/latest/admin-guide/hw-vuln/processor_mmio_stale_data.html for more details.[0m
+жов 24 15:05:10 bora kernel: [0;1;38;5;185m[0;1;39m[0;1;38;5;185m #3[0m
+жов 24 15:05:10 bora kernel: smp: Brought up 1 node, 4 CPUs
+жов 24 15:05:10 bora kernel: smpboot: Max logical packages: 1
+жов 24 15:05:10 bora kernel: smpboot: Total of 4 processors activated (20799.93 BogoMIPS)
+жов 24 15:05:10 bora kernel: devtmpfs: initialized
+жов 24 15:05:10 bora kernel: x86/mm: Memory block size: 128MB
+жов 24 15:05:10 bora kernel: ACPI: PM: Registering ACPI NVS region [mem 0x8f2ce000-0x8fbcdfff] (9437184 bytes)
+жов 24 15:05:10 bora kernel: clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+жов 24 15:05:10 bora kernel: futex hash table entries: 1024 (order: 4, 65536 bytes, linear)
+жов 24 15:05:10 bora kernel: pinctrl core: initialized pinctrl subsystem
+жов 24 15:05:10 bora kernel: PM: RTC time: 12:05:08, date: 2023-10-24
+жов 24 15:05:10 bora kernel: NET: Registered PF_NETLINK/PF_ROUTE protocol family
+жов 24 15:05:10 bora kernel: DMA: preallocated 1024 KiB GFP_KERNEL pool for atomic allocations
+жов 24 15:05:10 bora kernel: DMA: preallocated 1024 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+жов 24 15:05:10 bora kernel: DMA: preallocated 1024 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+жов 24 15:05:10 bora kernel: audit: initializing netlink subsys (disabled)
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39maudit: type=2000 audit(1698149108.008:1): state=initialized audit_enabled=0 res=1[0m
+жов 24 15:05:10 bora kernel: thermal_sys: Registered thermal governor 'fair_share'
+жов 24 15:05:10 bora kernel: thermal_sys: Registered thermal governor 'bang_bang'
+жов 24 15:05:10 bora kernel: thermal_sys: Registered thermal governor 'step_wise'
+жов 24 15:05:10 bora kernel: thermal_sys: Registered thermal governor 'user_space'
+жов 24 15:05:10 bora kernel: thermal_sys: Registered thermal governor 'power_allocator'
+жов 24 15:05:10 bora kernel: EISA bus registered
+жов 24 15:05:10 bora kernel: cpuidle: using governor ladder
+жов 24 15:05:10 bora kernel: cpuidle: using governor menu
+жов 24 15:05:10 bora kernel: ACPI: bus type PCI registered
+жов 24 15:05:10 bora kernel: acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+жов 24 15:05:10 bora kernel: PCI: MMCONFIG for domain 0000 [bus 00-ff] at [mem 0xe0000000-0xefffffff] (base 0xe0000000)
+жов 24 15:05:10 bora kernel: PCI: MMCONFIG at [mem 0xe0000000-0xefffffff] reserved in E820
+жов 24 15:05:10 bora kernel: PCI: Using configuration type 1 for base access
+жов 24 15:05:10 bora kernel: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mENERGY_PERF_BIAS: Set to 'normal', was 'performance'[0m
+жов 24 15:05:10 bora kernel: kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+жов 24 15:05:10 bora kernel: HugeTLB registered 1.00 GiB page size, pre-allocated 0 pages
+жов 24 15:05:10 bora kernel: HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+жов 24 15:05:10 bora kernel: ACPI: Added _OSI(Module Device)
+жов 24 15:05:10 bora kernel: ACPI: Added _OSI(Processor Device)
+жов 24 15:05:10 bora kernel: ACPI: Added _OSI(3.0 _SCP Extensions)
+жов 24 15:05:10 bora kernel: ACPI: Added _OSI(Processor Aggregator Device)
+жов 24 15:05:10 bora kernel: ACPI: Added _OSI(Linux-Dell-Video)
+жов 24 15:05:10 bora kernel: ACPI: Added _OSI(Linux-Lenovo-NV-HDMI-Audio)
+жов 24 15:05:10 bora kernel: ACPI: Added _OSI(Linux-HPI-Hybrid-Graphics)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.GPLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: fbcon: Taking over console
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.TPLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.GUPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.TUPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS01._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS01._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS02._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS02._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS03._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS03._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS04._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS04._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS05._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS05._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS06._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS06._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS07._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS07._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS08._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS08._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS09._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS09._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS10._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.HS10._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS01._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS01._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS02._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS02._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS03._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS03._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS04._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS04._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS05._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS05._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS06._UPC], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Failure creating named object [\_SB.PCI0.XHC.RHUB.SS06._PLD], AE_ALREADY_EXISTS (20210730/dswload2-326)[0m
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: AE_ALREADY_EXISTS, During name lookup/catalog (20210730/psobject-220)[0m
+жов 24 15:05:10 bora kernel: ACPI: Skipping parse of AML opcode: Method (0x0014)
+жов 24 15:05:10 bora kernel: ACPI: 13 ACPI AML tables successfully acquired and loaded
+жов 24 15:05:10 bora kernel: ACPI: Dynamic OEM Table Load:
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0xFFFF946D40F2DB00 0000FC (v02 PmRef  Cpu0Psd  00003000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: \_SB_.PR00: _OSC native thermal LVT Acked
+жов 24 15:05:10 bora kernel: ACPI: Dynamic OEM Table Load:
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0xFFFF946D40B09000 000400 (v02 PmRef  Cpu0Cst  00003001 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: Dynamic OEM Table Load:
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0xFFFF946D41175800 000605 (v02 PmRef  Cpu0Ist  00003000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: Dynamic OEM Table Load:
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0xFFFF946D40200C00 00016C (v02 PmRef  Cpu0Hwp  00003000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: Dynamic OEM Table Load:
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0xFFFF946D40185000 000BEA (v02 PmRef  HwpLvt   00003000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: Dynamic OEM Table Load:
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0xFFFF946D41177000 000778 (v02 PmRef  ApIst    00003000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: Dynamic OEM Table Load:
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0xFFFF946D40B0C400 0003D7 (v02 PmRef  ApHwp    00003000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: Dynamic OEM Table Load:
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0xFFFF946D40183000 000D22 (v02 PmRef  ApPsd    00003000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: Dynamic OEM Table Load:
+жов 24 15:05:10 bora kernel: ACPI: SSDT 0xFFFF946D40B0D000 0003CA (v02 PmRef  ApCst    00003000 INTL 20160422)
+жов 24 15:05:10 bora kernel: ACPI: EC: EC started
+жов 24 15:05:10 bora kernel: ACPI: EC: interrupt blocked
+жов 24 15:05:10 bora kernel: ACPI: EC: EC_CMD/EC_SC=0x66, EC_DATA=0x62
+жов 24 15:05:10 bora kernel: ACPI: \_SB_.PCI0.LPCB.EC0_: Boot DSDT EC used to handle transactions
+жов 24 15:05:10 bora kernel: ACPI: Interpreter enabled
+жов 24 15:05:10 bora kernel: ACPI: PM: (supports S0 S3 S4 S5)
+жов 24 15:05:10 bora kernel: ACPI: Using IOAPIC for interrupt routing
+жов 24 15:05:10 bora kernel: PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+жов 24 15:05:10 bora kernel: PCI: Using E820 reservations for host bridge windows
+жов 24 15:05:10 bora kernel: ACPI: Enabled 5 GPEs in block 00 to 7F
+жов 24 15:05:10 bora kernel: ACPI: PM: Power Resource [BTPR]
+жов 24 15:05:10 bora kernel: ACPI: PM: Power Resource [USBC]
+жов 24 15:05:10 bora kernel: ACPI: PM: Power Resource [PCRP]
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI BIOS Error (bug): Could not resolve symbol [\_SB.PCI0.DGPV], AE_NOT_FOUND (20210730/psargs-330)[0m
+жов 24 15:05:10 bora kernel: 
+жов 24 15:05:10 bora kernel: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mNo Local Variables are initialized for Method [_ON_][0m
+жов 24 15:05:10 bora kernel: 
+жов 24 15:05:10 bora kernel: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mNo Arguments are initialized for method [_ON_][0m
+жов 24 15:05:10 bora kernel: 
+жов 24 15:05:10 bora kernel: [0;1;31m[0;1;39m[0;1;31mACPI Error: Aborting method \_SB.PCI0.RP05.PCRP._ON due to previous error (AE_NOT_FOUND) (20210730/psparse-529)[0m
+жов 24 15:05:10 bora kernel: ACPI: PM: Power Resource [V0PR]
+жов 24 15:05:10 bora kernel: ACPI: PM: Power Resource [V1PR]
+жов 24 15:05:10 bora kernel: ACPI: PM: Power Resource [V2PR]
+жов 24 15:05:10 bora kernel: ACPI: PM: Power Resource [WRST]
+жов 24 15:05:10 bora kernel: ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-fe])
+жов 24 15:05:10 bora kernel: acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI EDR HPX-Type3]
+жов 24 15:05:10 bora kernel: acpi PNP0A08:00: _OSC: OS now controls [PCIeHotplug SHPCHotplug PME AER PCIeCapability LTR DPC]
+жов 24 15:05:10 bora kernel: PCI host bridge to bus 0000:00
+жов 24 15:05:10 bora kernel: pci_bus 0000:00: root bus resource [bus 00-fe]
+жов 24 15:05:10 bora kernel: pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+жов 24 15:05:10 bora kernel: pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+жов 24 15:05:10 bora kernel: pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+жов 24 15:05:10 bora kernel: pci_bus 0000:00: root bus resource [mem 0x9b800000-0xdfffffff window]
+жов 24 15:05:10 bora kernel: pci_bus 0000:00: root bus resource [mem 0xfc800000-0xfe7fffff window]
+жов 24 15:05:10 bora kernel: pci 0000:00:00.0: [8086:9b71] type 00 class 0x060000
+жов 24 15:05:10 bora kernel: pci 0000:00:02.0: [8086:9b41] type 00 class 0x030000
+жов 24 15:05:10 bora kernel: pci 0000:00:02.0: reg 0x10: [mem 0xb0000000-0xb0ffffff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:02.0: reg 0x18: [mem 0xa0000000-0xafffffff 64bit pref]
+жов 24 15:05:10 bora kernel: pci 0000:00:02.0: reg 0x20: [io  0x3000-0x303f]
+жов 24 15:05:10 bora kernel: pci 0000:00:02.0: BAR 2: assigned to efifb
+жов 24 15:05:10 bora kernel: pci 0000:00:02.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+жов 24 15:05:10 bora kernel: pci 0000:00:04.0: [8086:1903] type 00 class 0x118000
+жов 24 15:05:10 bora kernel: pci 0000:00:04.0: reg 0x10: [mem 0xb1210000-0xb1217fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:08.0: [8086:1911] type 00 class 0x088000
+жов 24 15:05:10 bora kernel: pci 0000:00:08.0: reg 0x10: [mem 0xb1224000-0xb1224fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:12.0: [8086:02f9] type 00 class 0x118000
+жов 24 15:05:10 bora kernel: pci 0000:00:12.0: reg 0x10: [mem 0xb1225000-0xb1225fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:14.0: [8086:02ed] type 00 class 0x0c0330
+жов 24 15:05:10 bora kernel: pci 0000:00:14.0: reg 0x10: [mem 0xb1200000-0xb120ffff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:14.0: PME# supported from D3hot D3cold
+жов 24 15:05:10 bora kernel: pci 0000:00:14.2: [8086:02ef] type 00 class 0x050000
+жов 24 15:05:10 bora kernel: pci 0000:00:14.2: reg 0x10: [mem 0xb1220000-0xb1221fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:14.2: reg 0x18: [mem 0xb1226000-0xb1226fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:14.3: [8086:02f0] type 00 class 0x028000
+жов 24 15:05:10 bora kernel: pci 0000:00:14.3: reg 0x10: [mem 0xb1218000-0xb121bfff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:14.3: PME# supported from D0 D3hot D3cold
+жов 24 15:05:10 bora kernel: pci 0000:00:15.0: [8086:02e8] type 00 class 0x0c8000
+жов 24 15:05:10 bora kernel: pci 0000:00:15.0: reg 0x10: [mem 0x00000000-0x00000fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:15.2: [8086:02ea] type 00 class 0x0c8000
+жов 24 15:05:10 bora kernel: pci 0000:00:15.2: reg 0x10: [mem 0x00000000-0x00000fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:16.0: [8086:02e0] type 00 class 0x078000
+жов 24 15:05:10 bora kernel: pci 0000:00:16.0: reg 0x10: [mem 0xb1229000-0xb1229fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:16.0: PME# supported from D3hot
+жов 24 15:05:10 bora kernel: pci 0000:00:17.0: [8086:02d3] type 00 class 0x010601
+жов 24 15:05:10 bora kernel: pci 0000:00:17.0: reg 0x10: [mem 0xb1222000-0xb1223fff]
+жов 24 15:05:10 bora kernel: pci 0000:00:17.0: reg 0x14: [mem 0xb1230000-0xb12300ff]
+жов 24 15:05:10 bora kernel: pci 0000:00:17.0: reg 0x18: [io  0x3080-0x3087]
+жов 24 15:05:10 bora kernel: pci 0000:00:17.0: reg 0x1c: [io  0x3088-0x308b]
+жов 24 15:05:10 bora kernel: pci 0000:00:17.0: reg 0x20: [io  0x3060-0x307f]
+жов 24 15:05:10 bora kernel: pci 0000:00:17.0: reg 0x24: [mem 0xb122f000-0xb122f7ff]
+жов 24 15:05:10 bora kernel: pci 0000:00:17.0: PME# supported from D3hot
+жов 24 15:05:10 bora kernel: pci 0000:00:19.0: [8086:02c5] type 00 class 0x0c8000
+жов 24 15:05:10 bora kernel: pci 0000:00:19.0: reg 0x10: [mem 0x00000000-0x00000fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:1d.0: [8086:02b0] type 01 class 0x060400
+жов 24 15:05:10 bora kernel: pci 0000:00:1d.0: PME# supported from D0 D3hot D3cold
+жов 24 15:05:10 bora kernel: pci 0000:00:1d.0: PTM enabled (root), 4ns granularity
+жов 24 15:05:10 bora kernel: pci 0000:00:1e.0: [8086:02a8] type 00 class 0x078000
+жов 24 15:05:10 bora kernel: pci 0000:00:1e.0: reg 0x10: [mem 0x00000000-0x00000fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:1e.3: [8086:02ab] type 00 class 0x0c8000
+жов 24 15:05:10 bora kernel: pci 0000:00:1e.3: reg 0x10: [mem 0x00000000-0x00000fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:1f.0: [8086:0284] type 00 class 0x060100
+жов 24 15:05:10 bora kernel: pci 0000:00:1f.3: [8086:02c8] type 00 class 0x040380
+жов 24 15:05:10 bora kernel: pci 0000:00:1f.3: reg 0x10: [mem 0xb121c000-0xb121ffff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:1f.3: reg 0x20: [mem 0xb1000000-0xb10fffff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:1f.3: PME# supported from D3hot D3cold
+жов 24 15:05:10 bora kernel: pci 0000:00:1f.4: [8086:02a3] type 00 class 0x0c0500
+жов 24 15:05:10 bora kernel: pci 0000:00:1f.4: reg 0x10: [mem 0xb122d000-0xb122d0ff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:1f.4: reg 0x20: [io  0xefa0-0xefbf]
+жов 24 15:05:10 bora kernel: pci 0000:00:1f.5: [8086:02a4] type 00 class 0x0c8000
+жов 24 15:05:10 bora kernel: pci 0000:00:1f.5: reg 0x10: [mem 0xfe010000-0xfe010fff]
+жов 24 15:05:10 bora kernel: pci 0000:01:00.0: [15b7:5006] type 00 class 0x010802
+жов 24 15:05:10 bora kernel: pci 0000:01:00.0: reg 0x10: [mem 0xb1100000-0xb1103fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:01:00.0: reg 0x20: [mem 0xb1104000-0xb11040ff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:1d.0: PCI bridge to [bus 01]
+жов 24 15:05:10 bora kernel: pci 0000:00:1d.0:   bridge window [mem 0xb1100000-0xb11fffff]
+жов 24 15:05:10 bora kernel: ACPI: EC: interrupt unblocked
+жов 24 15:05:10 bora kernel: ACPI: EC: event unblocked
+жов 24 15:05:10 bora kernel: ACPI: EC: EC_CMD/EC_SC=0x66, EC_DATA=0x62
+жов 24 15:05:10 bora kernel: ACPI: EC: GPE=0x50
+жов 24 15:05:10 bora kernel: ACPI: \_SB_.PCI0.LPCB.EC0_: Boot DSDT EC initialization complete
+жов 24 15:05:10 bora kernel: ACPI: \_SB_.PCI0.LPCB.EC0_: EC: Used to handle transactions and events
+жов 24 15:05:10 bora kernel: iommu: Default domain type: Translated 
+жов 24 15:05:10 bora kernel: iommu: DMA domain TLB invalidation policy: lazy mode 
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mSCSI subsystem initialized[0m
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245mlibata version 3.00 loaded.[0m
+жов 24 15:05:10 bora kernel: pci 0000:00:02.0: vgaarb: setting as boot VGA device
+жов 24 15:05:10 bora kernel: pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+жов 24 15:05:10 bora kernel: pci 0000:00:02.0: vgaarb: bridge control possible
+жов 24 15:05:10 bora kernel: vgaarb: loaded
+жов 24 15:05:10 bora kernel: ACPI: bus type USB registered
+жов 24 15:05:10 bora kernel: usbcore: registered new interface driver usbfs
+жов 24 15:05:10 bora kernel: usbcore: registered new interface driver hub
+жов 24 15:05:10 bora kernel: usbcore: registered new device driver usb
+жов 24 15:05:10 bora kernel: pps_core: LinuxPPS API ver. 1 registered
+жов 24 15:05:10 bora kernel: pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+жов 24 15:05:10 bora kernel: PTP clock support registered
+жов 24 15:05:10 bora kernel: EDAC MC: Ver: 3.0.0
+жов 24 15:05:10 bora kernel: Registered efivars operations
+жов 24 15:05:10 bora kernel: NetLabel: Initializing
+жов 24 15:05:10 bora kernel: NetLabel:  domain hash size = 128
+жов 24 15:05:10 bora kernel: NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+жов 24 15:05:10 bora kernel: NetLabel:  unlabeled traffic allowed by default
+жов 24 15:05:10 bora kernel: PCI: Using ACPI for IRQ routing
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245mPCI: pci_cache_line_size set to 64 bytes[0m
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: reserve RAM buffer [mem 0x0009f000-0x0009ffff][0m
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: reserve RAM buffer [mem 0x7b3dc018-0x7bffffff][0m
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: reserve RAM buffer [mem 0x7b411000-0x7bffffff][0m
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: reserve RAM buffer [mem 0x7f217000-0x7fffffff][0m
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: reserve RAM buffer [mem 0x8dd2d000-0x8fffffff][0m
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: reserve RAM buffer [mem 0x8fc4f000-0x8fffffff][0m
+жов 24 15:05:10 bora kernel: [0;38;5;245m[0;1;31m[0;38;5;245me820: reserve RAM buffer [mem 0x262800000-0x263ffffff][0m
+жов 24 15:05:10 bora kernel: clocksource: Switched to clocksource tsc-early
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mVFS: Disk quotas dquot_6.6.0[0m
+жов 24 15:05:10 bora kernel: VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+жов 24 15:05:10 bora kernel: AppArmor: AppArmor Filesystem Enabled
+жов 24 15:05:10 bora kernel: pnp: PnP ACPI init
+жов 24 15:05:10 bora kernel: system 00:00: [mem 0x40000000-0x403fffff] could not be reserved
+жов 24 15:05:10 bora kernel: system 00:01: [io  0x1800-0x18fe] has been reserved
+жов 24 15:05:10 bora kernel: system 00:01: [mem 0xfd000000-0xfd69ffff] has been reserved
+жов 24 15:05:10 bora kernel: system 00:01: [mem 0xfd6b0000-0xfd6cffff] has been reserved
+жов 24 15:05:10 bora kernel: system 00:01: [mem 0xfd6f0000-0xfdffffff] has been reserved
+жов 24 15:05:10 bora kernel: system 00:01: [mem 0xfe000000-0xfe01ffff] could not be reserved
+жов 24 15:05:10 bora kernel: system 00:01: [mem 0xfe200000-0xfe7fffff] has been reserved
+жов 24 15:05:10 bora kernel: system 00:01: [mem 0xff000000-0xffffffff] could not be reserved
+жов 24 15:05:10 bora kernel: system 00:02: [io  0x2000-0x20fe] has been reserved
+жов 24 15:05:10 bora kernel: system 00:03: [io  0x0680-0x069f] has been reserved
+жов 24 15:05:10 bora kernel: system 00:03: [io  0x164e-0x164f] has been reserved
+жов 24 15:05:10 bora kernel: system 00:05: [io  0x1854-0x1857] has been reserved
+жов 24 15:05:10 bora kernel: system 00:07: [mem 0xfed10000-0xfed17fff] has been reserved
+жов 24 15:05:10 bora kernel: system 00:07: [mem 0xfed18000-0xfed18fff] has been reserved
+жов 24 15:05:10 bora kernel: system 00:07: [mem 0xfed19000-0xfed19fff] has been reserved
+жов 24 15:05:10 bora kernel: system 00:07: [mem 0xe0000000-0xefffffff] has been reserved
+жов 24 15:05:10 bora kernel: system 00:07: [mem 0xfed20000-0xfed3ffff] has been reserved
+жов 24 15:05:10 bora kernel: system 00:07: [mem 0xfed90000-0xfed93fff] could not be reserved
+жов 24 15:05:10 bora kernel: system 00:07: [mem 0xfed45000-0xfed8ffff] could not be reserved
+жов 24 15:05:10 bora kernel: system 00:07: [mem 0xfee00000-0xfeefffff] could not be reserved
+жов 24 15:05:10 bora kernel: system 00:08: [mem 0xfe038000-0xfe038fff] has been reserved
+жов 24 15:05:10 bora kernel: pnp: PnP ACPI: found 9 devices
+жов 24 15:05:10 bora kernel: clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+жов 24 15:05:10 bora kernel: NET: Registered PF_INET protocol family
+жов 24 15:05:10 bora kernel: IP idents hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+жов 24 15:05:10 bora kernel: tcp_listen_portaddr_hash hash table entries: 4096 (order: 4, 65536 bytes, linear)
+жов 24 15:05:10 bora kernel: Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+жов 24 15:05:10 bora kernel: TCP established hash table entries: 65536 (order: 7, 524288 bytes, linear)
+жов 24 15:05:10 bora kernel: TCP bind hash table entries: 65536 (order: 8, 1048576 bytes, linear)
+жов 24 15:05:10 bora kernel: TCP: Hash tables configured (established 65536 bind 65536)
+жов 24 15:05:10 bora kernel: MPTCP token hash table entries: 8192 (order: 5, 196608 bytes, linear)
+жов 24 15:05:10 bora kernel: UDP hash table entries: 4096 (order: 5, 131072 bytes, linear)
+жов 24 15:05:10 bora kernel: UDP-Lite hash table entries: 4096 (order: 5, 131072 bytes, linear)
+жов 24 15:05:10 bora kernel: NET: Registered PF_UNIX/PF_LOCAL protocol family
+жов 24 15:05:10 bora kernel: NET: Registered PF_XDP protocol family
+жов 24 15:05:10 bora kernel: clipped [mem size 0x00000000 64bit] to [mem size 0xfffffffffffa0000 64bit] for e820 entry [mem 0x0009f000-0x000fffff]
+жов 24 15:05:10 bora kernel: clipped [mem size 0x00020000 64bit] to [mem size 0xfffffffffffc0000 64bit] for e820 entry [mem 0x0009f000-0x000fffff]
+жов 24 15:05:10 bora kernel: pci 0000:00:15.0: BAR 0: assigned [mem 0x9b800000-0x9b800fff 64bit]
+жов 24 15:05:10 bora kernel: clipped [mem size 0x00000000 64bit] to [mem size 0xfffffffffffa0000 64bit] for e820 entry [mem 0x0009f000-0x000fffff]
+жов 24 15:05:10 bora kernel: clipped [mem size 0x00020000 64bit] to [mem size 0xfffffffffffc0000 64bit] for e820 entry [mem 0x0009f000-0x000fffff]
+жов 24 15:05:10 bora kernel: pci 0000:00:15.2: BAR 0: assigned [mem 0x9b801000-0x9b801fff 64bit]
+жов 24 15:05:10 bora kernel: clipped [mem size 0x00000000 64bit] to [mem size 0xfffffffffffa0000 64bit] for e820 entry [mem 0x0009f000-0x000fffff]
+жов 24 15:05:10 bora kernel: clipped [mem size 0x00020000 64bit] to [mem size 0xfffffffffffc0000 64bit] for e820 entry [mem 0x0009f000-0x000fffff]
+жов 24 15:05:10 bora kernel: pci 0000:00:19.0: BAR 0: assigned [mem 0x9b802000-0x9b802fff 64bit]
+жов 24 15:05:10 bora kernel: clipped [mem size 0x00000000 64bit] to [mem size 0xfffffffffffa0000 64bit] for e820 entry [mem 0x0009f000-0x000fffff]
+жов 24 15:05:10 bora kernel: clipped [mem size 0x00020000 64bit] to [mem size 0xfffffffffffc0000 64bit] for e820 entry [mem 0x0009f000-0x000fffff]
+жов 24 15:05:10 bora kernel: pci 0000:00:1e.0: BAR 0: assigned [mem 0x9b803000-0x9b803fff 64bit]
+жов 24 15:05:10 bora kernel: clipped [mem size 0x00000000 64bit] to [mem size 0xfffffffffffa0000 64bit] for e820 entry [mem 0x0009f000-0x000fffff]
+жов 24 15:05:10 bora kernel: clipped [mem size 0x00020000 64bit] to [mem size 0xfffffffffffc0000 64bit] for e820 entry [mem 0x0009f000-0x000fffff]
+жов 24 15:05:10 bora kernel: pci 0000:00:1e.3: BAR 0: assigned [mem 0x9b804000-0x9b804fff 64bit]
+жов 24 15:05:10 bora kernel: pci 0000:00:1d.0: PCI bridge to [bus 01]
+жов 24 15:05:10 bora kernel: pci 0000:00:1d.0:   bridge window [mem 0xb1100000-0xb11fffff]
+жов 24 15:05:10 bora kernel: pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+жов 24 15:05:10 bora kernel: pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+жов 24 15:05:10 bora kernel: pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+жов 24 15:05:10 bora kernel: pci_bus 0000:00: resource 7 [mem 0x9b800000-0xdfffffff window]
+жов 24 15:05:10 bora kernel: pci_bus 0000:00: resource 8 [mem 0xfc800000-0xfe7fffff window]
+жов 24 15:05:10 bora kernel: pci_bus 0000:01: resource 1 [mem 0xb1100000-0xb11fffff]
+жов 24 15:05:10 bora kernel: PCI: CLS 64 bytes, default 64
+жов 24 15:05:10 bora kernel: PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+жов 24 15:05:10 bora kernel: software IO TLB: mapped [mem 0x0000000089382000-0x000000008d382000] (64MB)
+жов 24 15:05:10 bora kernel: Trying to unpack rootfs image as initramfs...
+жов 24 15:05:10 bora kernel: sgx: EPC section 0x90200000-0x95ffffff
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mInitialise system trusted keyrings[0m
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mKey type blacklist registered[0m
+жов 24 15:05:10 bora kernel: workingset: timestamp_bits=36 max_order=21 bucket_order=0
+жов 24 15:05:10 bora kernel: zbud: loaded
+жов 24 15:05:10 bora kernel: squashfs: version 4.0 (2009/01/31) Phillip Lougher
+жов 24 15:05:10 bora kernel: fuse: init (API version 7.34)
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mintegrity: Platform Keyring initialized[0m
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mKey type asymmetric registered[0m
+жов 24 15:05:10 bora kernel: [0;1;39m[0;1;31m[0;1;39mAsymmetric key parser 'x509' registered[0m
+жов 24 15:05:10 bora kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 243)
+жов 24 15:05:10 bora kernel: io scheduler mq-deadline registered
+жов 24 15:05:10 bora kernel: pcieport 0000:00:1d.0: PME: Signaling with IRQ 122
+жов 24 15:05:10 bora kernel: pcieport 0000:00:1d.0: AER: enabled with IRQ 122
+жов 24 15:05:10 bora kernel: pcieport 0000:00:1d.0: DPC: enabled with IRQ 122
+жов 24 15:05:10 bora kernel: pcieport 0000:00:1d.0: DPC: error containment capabilities: Int Msg #0, RPExt+ PoisonedTLP+ SwTrigger+ RP PIO Log 4, DL_ActiveErr+
+жов 24 15:05:10 bora kernel: shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+жов 24 15:05:10 bora kernel: ACPI: AC: AC Adapter [ACAD] (on-line)
+жов 24 15:05:10 bora kernel: input: Power Button as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0C:00/input/input0
+жов 24 15:05:10 bora kernel: ACPI: button: Power Button [PWRB]
+жов 24 15:05:10 bora kernel: input: Lid Switch as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0D:00/input/input1
+жов 24 15:05:10 bora kernel: ACPI: button: Lid Switch [LID0]
+жов 24 15:05:10 bora kernel: input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input2
+жов 24 15:05:10 bora kernel: ACPI: button: Power Button [PWRF]
+жов 24 15:05:10 bora kernel: smpboot: Estimated ratio of average max frequency by base frequency (times 1024): 1457
+жов 24 15:05:10 bora kernel: thermal LNXTHERM:00: registered as thermal_zone0
+жов 24 15:05:10 bora kernel: ACPI: thermal: Thermal Zone [TZ01] (36 C)
+жов 24 15:05:10 bora kernel: Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+жов 24 15:05:10 bora kernel: ACPI: battery: Slot [BAT1] (battery present)
+жов 24 15:05:10 bora kernel: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mhpet_acpi_add: no address or irqs in _CRS[0m
+жов 24 15:05:10 bora kernel: Linux agpgart interface v0.103
+жов 24 15:05:10 bora kernel: loop: module loaded
+жов 24 15:05:10 bora kernel: tun: Universal TUN/TAP device driver, 1.6
+жов 24 15:05:10 bora kernel: PPP generic driver version 2.4.2
+жов 24 15:05:10 bora kernel: VFIO - User Level meta-driver version: 0.3
+жов 24 15:05:10 bora kernel: ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+жов 24 15:05:10 bora kernel: ehci-pci: EHCI 

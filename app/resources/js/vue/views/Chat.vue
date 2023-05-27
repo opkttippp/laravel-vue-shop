@@ -55,7 +55,6 @@ export default {
         this.getUser();
     },
     mounted() {
-        console.log('mounted');
         this.getMainInfo();
     },
     unmounted() {
@@ -68,32 +67,23 @@ export default {
                 window.Echo.options.auth.headers.Authorization = 'Bearer ' + window.localStorage.getItem('token')
             }else
             this.user = null;
-            console.log(this.user);
         },
         sendMessage: (data) => {
-            return axios.post('/api/chat/send', data).then((res) => {
-                console.log(res);
-            }).catch((res) => {
-                console.log(res);
+            return axios.post('/api/chat/send', data).catch((res) => {
                 this.errors = res.data.errors;
             })
         },
         SendEditMessage(data) {
-            return axios.post('/api/chat/update', data).then((res) => {
-            }).catch((res) => {
-                console.log(res);
+            return axios.post('/api/chat/update', data).catch((res) => {
                 this.errors = res.data.errors;
             })
         },
         deleteMessage: (name, id) => {
-            return axios.post('/api/chat/delete', {name, id}).then((res) => {
-            }).catch((res) => {
-                console.log(res);
+            return axios.post('/api/chat/delete', {name, id}).catch((res) => {
                 this.errors = res.data.errors;
             })
         },
         getMainInfo() {
-
             Echo.join('chat')
                 .here((users) => {
                     this.usersOnChat = users.length

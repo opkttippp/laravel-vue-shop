@@ -25,11 +25,6 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'login' => 'required|string',
-            'password' => 'required|string'
-        ]);
-
         $credentials = [
             $this->loginType => $request->login,
             'password' => $request->password

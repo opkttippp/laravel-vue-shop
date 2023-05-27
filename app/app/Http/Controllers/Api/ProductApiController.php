@@ -31,7 +31,7 @@ class ProductApiController extends Controller
 
     public function show(Product $product)
     {
-//        return new ProductResource($product);
+//        return new ProductResource(Product::findOrFail($product->id));
         return ProductResource::collection(Product::Where('id', $product->id)->paginate(1));
     }
 

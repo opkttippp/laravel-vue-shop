@@ -62,9 +62,9 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
-                                <a href="{{ route('register') }}" class="btn btn-secondary">
-                                    Регистрация
-                                </a>
+{{--                                <a href="{{ route('register') }}" class="btn btn-secondary">--}}
+{{--                                    Регистрация--}}
+{{--                                </a>--}}
                             </div>
                         </div>
                     </form>

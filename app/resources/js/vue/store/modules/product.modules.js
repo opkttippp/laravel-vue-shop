@@ -95,9 +95,9 @@ export const product = {
                 params: {
                     page: page
                 }
-            })
-                .then(products => {
-                    commit('SET_PRODUCTS_STATE', products.data);
+            }).then(products => {
+                console.log(products);
+                commit('SET_PRODUCTS_STATE', products.data);
                     return products.data;
                 }).catch((error) => {
                     console.log(error)
@@ -190,8 +190,9 @@ export const product = {
         cartIsEmpty: (state) => !state.cartProducts.length,
 
         getProductById: (state) => (id) => {
-            if (state.products.data)
+            if (state.products.data) {
                 return state.products.data.find(product => product.id === id)
+            }
         },
 
         getReviewById: (state) => (id) => {

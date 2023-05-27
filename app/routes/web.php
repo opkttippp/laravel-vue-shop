@@ -178,14 +178,20 @@ Route::group(
 );
 //---------------------------------Admin-LTE-----------------------------
 Route::get('/admin', [LoginController::class, 'showLoginForm']);
+Route::post('/admin', [LoginController::class, 'login'])->name('login');
 
 Route::get('/admin/logout', [LoginController::class, 'logout'])->middleware(['role:admin|manager', 'web']);
 
 Route::prefix('/admin/panel')->group(function () {
     Route::get('/', [IndexController::class, 'index']);
+    //});
 })->middleware(['role:admin|manager', 'web']);
 
-//--------------------------------Vue--------------------------------------
+//--------------------------------404--------------------------------------
+Route::fallback(function () {
+    echo "<img src='images/404-desktop-not-found.jpg'>";
+});
+//--------------------------------VueFront--------------------------------------
 
 Route::get('{any}', function () {
     return view('home');
@@ -203,8 +209,6 @@ Route::prefix('/ttt')->group(function () {
 
 
 Route::get('/test/{id}', function ($id) {
-
-
     $mysql = [
         1 => [
             'id' => 1,
@@ -314,9 +318,6 @@ Route::group(
     }
 );
 
-Route::fallback(function () {
-    echo "<img src='images/404-desktop-not-found.jpg'>";
-});
 
 //-------------------------авторизация через соцсети-------------------------
 Route::group(['middleware' => ['web']], function () {
@@ -388,4 +389,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('home');
 
-Auth::routes();
+//Auth::routes();
