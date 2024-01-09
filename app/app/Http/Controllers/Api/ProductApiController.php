@@ -15,7 +15,7 @@ class ProductApiController extends Controller
     {
 
         $this->middleware("auth");
-        return ProductResource::collection(Product::paginate(3));
+        return ProductResource::collection(Product::paginate(6));
 //        return ProductResource::collection(Product::paginate(3, ['*'], 'page', $request['page']));
     }
 

@@ -11281,7 +11281,7 @@ html.os-html,html.os-html>.os-host{display:block;overflow:hidden;box-sizing:bord
 
 html,
 body {
-    background-image: url(/images/fone.jpeg?2db1a94ca6e10dcaea2ea9320582b267);
+    /*background-image: url("../../public/images/fone.jpeg");*/
     background-size: 100%;
     background-attachment: fixed;
     margin: 0;
@@ -11300,13 +11300,15 @@ body a {
 main {
     display: flex;
     flex-direction: row;
-    padding-top: 0;
-    margin-top: 0;
+    height: 100vh;
+    /*padding-top: 0;*/
+    /*margin-top: 0;*/
 }
 
 .content {
-    margin: 10px 10px 25px 35px;
-    /*padding: 20px;*/}
+    margin: 1em 1em 1em 4em;
+    overflow: auto;
+}
 
 section {
     display: flex;

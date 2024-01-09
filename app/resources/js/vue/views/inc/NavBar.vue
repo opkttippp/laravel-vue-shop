@@ -6,61 +6,79 @@
             <router-link to="/">Mysite</router-link>
         </div>
 
-        <div id="myTopnav" class="topnav">
+        <ul id="sticky-menu" class="topnav">
 
-            <router-link class="active" to="/">Главная</router-link>
+            <li class="menu-nav">
+                <router-link class="active" to="/">Главная</router-link>
+            </li>
 
-            <router-link to="/">Уведомления</router-link>
+            <li class="menu-nav">
+                <router-link to="/">Уведомления</router-link>
+            </li>
 
-            <router-link to="/">Отзывы</router-link>
+            <li class="menu-nav">
+                <router-link to="/">Отзывы</router-link>
+            </li>
 
-            <router-link to="/chat">Chat</router-link>
-
-            <a href="javascript:void(0);">
-                <catalog-button>
+            <li class="menu-nav">
+                <router-link to="/chat">Chat</router-link>
+            </li>
+            <li class="menu-nav"><a href="javascript:void(0);">
+                <catalog-button
+                >
                 </catalog-button>
-            </a>
+            </a></li>
 
-            <a href="javascript:void(0);">
+            <li><a href="javascript:void(0);">
                 <cart-button>
                 </cart-button>
-            </a>
-            <a href="javascript:void(0);">
+            </a></li>
+            <li><a href="javascript:void(0);">
                 <search-button>
                 </search-button>
-            </a>
-            <a href="javascript:void(0);" class="icon" @click="myFunction">
+            </a></li>
+            <li class="icon" href="javascript:void(0);" @click="burgerMenu">
                 <i class="fa fa-bars"></i>
-            </a>
-
-            <div v-if="loggedIn" class="d-flex">
-                <a href="javascript:void(0);">{{ user }}</a>
-
-                <a href="javascript:void(0);">
-                    <router-link @click="logout" to="">Logout</router-link>
+            </li>
+            <li style="position: relative;">
+                <!--                <a v-if="loggedIn" href="javascript:void(0);">{{ user }}</a>-->
+                <a v-if="loggedIn" v-on:click="showUser = !showUser">
+                    <img :src="'/images/avatar.png'" width="25" alt="avatar"
+                                        style="cursor: pointer;">
                 </a>
-            </div>
 
-            <div v-else class="d-flex">
-                <a href="javascript:void(0);">
+                <a v-else href="javascript:void(0);">
                     <router-link to="/login">Login</router-link>
                 </a>
-                <a href="javascript:void(0);">
-                    <router-link to="/register">Register</router-link>
-                </a>
 
-            </div>
+                <transition name="fade">
+                        <ul v-if="showUser" class="p-0 show-user"
+                            @mouseleave="showUser = !showUser"
+                        >
+                            <li class="d-flex justify-content-center show-user-li">
+                                <router-link to=""
+                                             class="animate__animated"
+                                             @mouseover="addAnimate($event)"
+                                             @mouseleave="addAnimate($event)"
+                                >Profile</router-link>
+                            </li>
+                            <li class="d-flex justify-content-center show-user-li">
+                                <router-link @click="logout" to=""
+                                             class="animate__animated"
+                                             @mouseover="addAnimate($event)"
+                                             @mouseleave="addAnimate($event)"
+                                >Logout</router-link>
+                            </li>
+                        </ul>
+                </transition>
 
-        </div>
+            </li>
+        </ul>
     </div>
     <div class="row menu top">
         <div class="col-10 d-flex flex-column align-self-center justify-content-center pl-4">
             <div>
                 <nav class="menu-list">
-                    <a href="#">Главная</a>
-                    <a href="#">Новости</a>
-                    <a href="#">Контакты</a>
-                    <a href="#">Портфолио</a>
                 </nav>
             </div>
             <range-slider
@@ -78,9 +96,14 @@
 
 <script>
 
+import 'animate.css';
+
 export default {
     name: "NavBar",
     data: () => {
+        return {
+            showUser: false,
+        }
     },
     computed: {
         loggedIn() {
@@ -114,16 +137,12 @@ export default {
                 }
             })
         },
-        myFunction() {
-            let x = document.getElementById("myTopnav");
-            if (x.className === "topnav") {
-                x.className += " responsive";
-            } else {
-                x.className = "topnav";
-            }
+        burgerMenu() {
+            let x = document.getElementById("sticky-menu");
+            x.classList.toggle('responsive');
         },
         topNav() {
-            let navbar = document.getElementById("myTopnav");
+            let navbar = document.getElementById("sticky-menu");
             let sticky = navbar.offsetTop;
 
             window.addEventListener('scroll', function () {
@@ -135,17 +154,18 @@ export default {
             })
         },
         activeNav() {
-            let container = document.querySelector(".topnav");
-            let a = container.getElementsByTagName("a");
-            let current = document.getElementsByClassName("active");
-            if (current) {
-                for (let i = 0; i < a.length; i++) {
-                    a[i].addEventListener("click", function () {
-                        current[0].classList.remove('active');
-                        a[i].classList.add('active');
+            let items = document.querySelectorAll(".topnav a");
+            items.forEach((item) => {
+                item.addEventListener('click', () => {
+                    items.forEach((itemOther) => {
+                        itemOther.classList.remove('active');
                     });
-                }
-            }
+                    item.classList.add('active');
+                })
+            })
+        },
+        addAnimate(e) {
+            e.target.classList.toggle('animate__headShake');
         },
         logout() {
             this.$store.dispatch("auth/logout").then(
@@ -184,14 +204,6 @@ export default {
     transition: all .6s;
 }
 
-.active {
-    z-index: 20;
-    left: 0;
-    color: #FFFFFF;
-    background-color: ghostwhite;
-}
-
-
 .menu-list {
     margin-top: 100px;
     height: 100%;
@@ -207,36 +219,98 @@ export default {
 }
 
 .topnav {
-    overflow: hidden;
-    background-color: #333;
-    z-index: 160;
     display: flex;
     justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
     box-shadow: 0 2px 16px 11px rgba(229, 235, 240, 0.2);
-
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 160;
+    height: 3.2em;
 }
 
-.topnav a {
+.topnav li {
     display: flex;
     align-items: center;
-    height: 50px;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 4px 16px;
-    text-decoration: none;
-    font-size: 14px;
+    min-width: 3em;
+    position: relative;
+    /*padding: 4px 16px;*/
 }
 
-a:hover {
-    transition: .5s;
-    color: #00a379;
-    cursor: pointer;
+.topnav li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+    color: whitesmoke;
+    min-width: 42px;
+    min-height: 38px;
 }
+
+.topnav li.menu-nav a::after {
+    background: #17baaa;
+    content: "";
+    height: 2px;
+    left: 0;
+    bottom: 4px;
+    position: absolute;
+    transform: scaleX(0);
+    transition: all .5s ease;
+    width: 100%;
+}
+
+.topnav li.menu-nav a:hover {
+    transition: all .5s ease;
+    color: #17baaa;
+}
+
+.topnav li.menu-nav a:hover::after {
+    transform: scaleX(1.0);
+}
+
+/*.topnav li a:hover {*/
+/*    background: rgb(121, 120, 120);*/
+/*}*/
+
+/*a:hover {*/
+/*    color: #00a379;*/
+/*    cursor: pointer;*/
+/*    !*text-shadow: 2px 2px 4px #00a379;*!*/
+
+/*    -webkit-animation: neon2 1.5s ease-in-out infinite alternate;*/
+/*    -moz-animation: neon2 1.5s ease-in-out infinite alternate;*/
+/*    animation: neon2 1.5s ease-in-out infinite alternate;*/
+
+/*}*/
+
+/*@keyframes neon2 {*/
+/*    from {*/
+/*        text-shadow: 0 0 10px #fff,*/
+/*        0 0 20px  #fff,*/
+/*        0 0 30px  #fff,*/
+/*        0 0 40px  #228DFF,*/
+/*        0 0 70px  #228DFF,*/
+/*        0 0 80px  #228DFF,*/
+/*        0 0 100px #228DFF,*/
+/*        0 0 150px #228DFF;*/
+/*    }*/
+/*    to {*/
+/*        text-shadow: 0 0 5px #fff,*/
+/*        0 0 10px #fff,*/
+/*        0 0 15px #fff,*/
+/*        0 0 20px #228DFF,*/
+/*        0 0 35px #228DFF,*/
+/*        0 0 40px #228DFF,*/
+/*        0 0 50px #228DFF,*/
+/*        0 0 75px #228DFF;*/
+/*    }*/
+/*}*/
 
 .topnav a.active {
-    /*background-color: #333;*/
-
-    background-color: #00a379;
+    color: #17baaa;
     opacity: 1;
     animation: flash 1s;
 }
@@ -250,25 +324,38 @@ a:hover {
     }
 }
 
-.topnav .icon {
+.topnav li.icon {
     display: none;
 }
 
 @media screen and (max-width: 768px) {
     .topnav {
-        overflow: hidden;
-        background-color: #333;
         z-index: 160;
         display: flex;
         justify-content: flex-start;
     }
 
-    .topnav a:not(:first-child) {
+    .topnav li {
+        margin: 0;
+        padding: 0;
+    }
+
+    .topnav li a {
+        height: 3.2em;
+    }
+
+    .topnav li:not(:first-child) {
         display: none;
     }
 
-    .topnav a.icon {
+    .topnav li.icon {
+        color: white;
         display: flex;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+        cursor: pointer;
+        margin-left: auto;
         position: absolute;
         right: 0;
     }
@@ -280,16 +367,69 @@ a:hover {
         flex-direction: column;
     }
 
-    .topnav.responsive .icon {
-        position: absolute;
-        text-align: center;
-        vertical-align: center;
-        top: 29px;
-        right: 0;
+    .topnav.responsive li:not(.icon) {
+        display: block;
+        background-color: #333;
     }
 
-    .topnav.responsive a {
+    .topnav.responsive li:hover {
+        background-color: #57595c;
+    }
+
+    .topnav.responsive li.icon {
+        color: white;
         display: flex;
+        justify-content: center;
+        align-items: center;
+        height: inherit;
+        cursor: pointer;
+        margin-left: auto;
+        position: absolute;
+        right: 0;
     }
 }
+
+/*-------------------menu user---------------------*/
+/*.fade-enter-active, .fade-leave-active {*/
+/*    transition: opacity .5s;*/
+/*}*/
+/*.fade-enter, .fade-leave-to !* .fade-leave-active до версии 2.1.8 *! {*/
+/*    opacity: 0;*/
+/*}*/
+
+
+.fade-enter-from,
+.fade-leave-to
+{
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.4s ease-out;
+    transform-origin: top;
+    /*color: rgb(51, 51, 51);*/
+}
+
+
+
+.show-user {
+    position: absolute;
+    background-color: rgb(121, 120, 120);
+    width: 8.2em;
+    height: inherit;
+    top: 3.2em;
+    left: -3em;
+}
+/*-------------------------------------------------*/
+
 </style>

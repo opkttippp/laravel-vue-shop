@@ -49,13 +49,51 @@
             </div>
         </div>
         <div class="page__wraper" v-if="PRODUCTS.meta.total > 3">
-            <b-pagination
-                          v-model="page"
-                          :total-rows=PRODUCTS.meta.total
-                          :per-page=PRODUCTS.meta.per_page
-                          aria-controls="my-table"
-                          @click="changePage(page)"
-            ></b-pagination>
+            <div v-show="amountPage > 1"
+                 class="text-small text-uppercase text-extra-dark-gray pagination">
+                <a v-show="page > 1" @click.prevent.stop="changePage(--page)"
+                   href="#">
+                    <i class="fas fa-long-arrow-alt-left"></i>
+                    <span class="xs-display-none border-none"></span>
+                </a>
+                <ul v-if="amountPage === 2" class="pagination-ul">
+                    <li class="pagination-li" @click.stop="changePage(item)" :class="[ page !== item ? '' : 'current']"
+                        v-for="item in massPage(page)">{{ item }}
+                    </li>
+                </ul>
+                <ul v-else class="pagination-ul">
+                    <li v-if="page > 2 && amountPage > 3" class="pagination-li" @click.stop="changePage(1)"
+                        :class="[ page !== item ? '' : 'current']">
+                        1
+                    </li>
+                    <li v-if="page === 4 && amountPage > 4" class="pagination-li" @click.stop="changePage(2)"
+                        :class="[ page !== item ? '' : 'current']">
+                        2
+                    </li>
+                    <span v-if="page > 4" class="page-numbers dots">…</span>
+                    <li class="pagination-li" @click.stop="changePage(item)" :class="[ page !== item ? '' : 'current']"
+                        v-for="item in massPage(page)">{{ item }}
+                    </li>
+                    <span v-if="page < amountPage - 3" class="page-numbers dots">…</span>
+
+                    <li v-if="page === amountPage - 3 && amountPage > 4" class="pagination-li"
+                        @click.stop="changePage(amountPage)"
+                        :class="[ page !== item ? '' : 'current']">
+                        {{ amountPage - 1 }}
+                    </li>
+                    <li v-if="page < amountPage - 1 && amountPage > 3" class="pagination-li"
+                        @click.stop="changePage(amountPage)"
+                        :class="[ page !== item ? '' : 'current']">
+                        {{ amountPage }}
+                    </li>
+                </ul>
+                <a v-show="page !== amountPage" @click.prevent.stop="changePage(++page)"
+                   href="#">
+                    <span class="xs-display-none border-none"></span>
+                    <i class="fas fa-long-arrow-alt-right">
+                    </i>
+                </a>
+            </div>
         </div>
     </div>
 </template>
@@ -64,14 +102,9 @@
 
 import { createNamespacedHelpers } from 'vuex'
 const {mapActions, mapGetters} = createNamespacedHelpers('product')
-import Carousel from "../components/Carousel"
 
 export default {
     name: "Filter",
-    components: {
-        Carousel
-    },
-    props: {},
     data() {
         return {
             page: 1,
@@ -81,7 +114,10 @@ export default {
         this.GET_FILTER(this.page);
     },
     computed: {
-        ...mapGetters(['PRODUCTS'])
+        ...mapGetters(['PRODUCTS']),
+        amountPage() {
+            return this.PRODUCTS.meta.last_page;
+        }
     },
     watch: {
         page() {
@@ -98,6 +134,27 @@ export default {
         ...mapActions([
             'GET_FILTER',
         ]),
+        massPage(page) {
+            if (this.amountPage > 2) {
+                let mas = [];
+                if (page === 1) {
+                    mas = [page, ++page, ++page];
+                } else if (page === this.amountPage) {
+                    mas = [page - 2, --page, ++page];
+                } else {
+                    mas = [--page, ++page, ++page];
+                }
+                return mas;
+            } else {
+                let mas = [];
+                if (page === 1) {
+                    mas = [page, ++page];
+                } else {
+                    mas = [--page, ++page];
+                }
+                return mas;
+            }
+        }
     },
 }
 </script>
@@ -155,6 +212,66 @@ export default {
     height: 80vh;
     color: white;
     font-size: 2em;
+}
+
+.pagination {
+    margin: 4em auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.pagination-ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+
+.pagination-li, .pagination a, .pagination span.dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3em;
+    height: 3em;
+    margin: 2px;
+    padding: 0 18px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 0px solid transparent;
+    border-radius: 100%;
+    background: #fff;
+}
+
+.pagination a.prev:hover, .pagination a.next:hover, .pagination-li:hover {
+    color: #f16a21;
+}
+
+.pagination li.current {
+    margin: 2px;
+    padding: 0 18px;
+    background-color: #f16a21;
+    color: #ffffff;
+    cursor: default;
+    line-height: 3rem;
+    text-decoration: none;
+}
+
+
+.text-small {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+span.dots {
+    padding: 0 18px;
+    line-height: 40px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-left-width: 0;
+    background: #fff;
 }
 </style>
 

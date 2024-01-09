@@ -60,7 +60,7 @@ export default {
     },
     mounted() {
         this.getCategory();
-        this.getManufactor();
+        this.getManufactur();
     },
     computed: {
         CATEGORY() {
@@ -82,7 +82,7 @@ export default {
         getCategory() {
             this.$store.dispatch('product/GET_CATEGORY');
         },
-        getManufactor() {
+        getManufactur() {
             this.$store.dispatch('product/GET_MANUFACTUR');
         }
     }

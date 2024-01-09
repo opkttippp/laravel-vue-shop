@@ -4,7 +4,9 @@ import Home from "../../vue/views/Home";
 import VerifyMail from "../../vue/views/VerifyMail"
 import Register from "../../vue/views/Register";
 import Login from "../../vue/views/Login";
-import Products from "../../vue/views/Products";
+import Category from "../../vue/views/Category";
+import Catalog from "../../vue/views/Catalog";
+import Product from "../../vue/views/Product";
 import Filter from "../../vue/views/Filter";
 import Show from "../../vue/views/Show";
 import Character from "../../vue/views/Character";
@@ -34,9 +36,18 @@ const routes = [
         component: Login,
     },
     {
+        path: '/category',
+        name: Category,
+        component: Category,
+    },    {
+        path: '/catalog',
+        name: Catalog,
+        component: Catalog,
+    },
+    {
         path: '/product',
-        component: Products,
-        name: Products,
+        name: Product,
+        component: Product,
     },
     {
         path: '/product/filter',

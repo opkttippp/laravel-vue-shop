@@ -1,6 +1,6 @@
 <template>
 
-    <div class="container-fluid dark-grey-text mt-0" v-if="products">
+    <div class="container-fluid dark-grey-text" v-if="products">
         <div class="card">
             <div class="col-12 mt-1 mb-1">
                 <p class="product_title">{{ products.title }}</p>
@@ -127,7 +127,12 @@ export default {
     },
 }
 </script>
+
 <style>
+.card {
+    margin: 2em 1em 4em 4em;
+}
+
 #list-photo {
     display: grid;
     height: 16vh;

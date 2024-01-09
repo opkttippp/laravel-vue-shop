@@ -38,16 +38,22 @@
                                 </div>
                             </div>
                             <div class="row mb-0">
-                                <div class="col-md-8 offset-md-4">
+                                <div class="col-md-8 offset-md-4 d-flex">
                                     <button type="submit" class="btn btn-primary">
                                         Login
                                     </button>
 
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        <routre-link to="/"></routre-link>
+                                        <!--                                        <routre-link to="/"></routre-link>-->
                                         'Forgot Your Password?'
                                     </a>
-
+                                    <router-link to="/register"
+                                                 class="ml-auto"
+                                                 style="font-weight: bold;
+                                                 align-self: center;"
+                                    >
+                                        Register
+                                    </router-link>
                                 </div>
                             </div>
                         </form>
@@ -91,14 +97,14 @@ export default {
                         if (this.$store.state.auth.errors)
                             this.errors.push(this.$store.state.auth.errors);
                         this.$store.dispatch('auth/zeroError');
-                    }).then( () => {
+                    }).then(() => {
                         if (this.$store.state.auth.status.loggedIn) {
                             this.$router.push('/');
                         }
                     }
                 ).catch((error) => {
-                        console.log(error);
-                    });
+                    console.log(error);
+                });
             }
         }
     }

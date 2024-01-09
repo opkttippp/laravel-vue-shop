@@ -1,5 +1,6 @@
 let cart = window.localStorage.getItem('cart');
-let query = window.localStorage.getItem('query');
+let queryFilter = window.localStorage.getItem('queryFilter');
+let queryCatalog = window.localStorage.getItem('queryCatalog');
 
 export const product = {
     namespaced: true,
@@ -9,7 +10,8 @@ export const product = {
         category: [],
         manufactur: [],
         review: [],
-        queryFilter: query ? JSON.parse(query) : [],
+        queryFilter: queryFilter ? JSON.parse(queryFilter) : [],
+        queryCatalog: queryCatalog ? JSON.parse(queryCatalog) : [],
     },
     mutations: {
         SET_PRODUCTS_STATE: (state, products) => {
@@ -24,6 +26,10 @@ export const product = {
             state.manufactur = manufactur;
         },
 
+        SET_CATALOG_STATE: (state, data) => {
+            state.queryCatalog = data;
+        },
+
         SET_FILTER_STATE: (state, data) => {
             state.queryFilter = data;
         },
@@ -36,8 +42,12 @@ export const product = {
             window.localStorage.setItem('cart', JSON.stringify(state.cartProducts));
         },
 
-        saveQuery: (state) => {
-            window.localStorage.setItem('query', JSON.stringify(state.queryFilter));
+        saveFilter: (state) => {
+            window.localStorage.setItem('queryFilter', JSON.stringify(state.queryFilter));
+        },
+
+        saveCatalog: (state) => {
+            window.localStorage.setItem('queryCatalog', JSON.stringify(state.queryCatalog));
         },
 
         addProductToCart(state, product) {
@@ -90,18 +100,26 @@ export const product = {
         }
     },
     actions: {
+        GET_CATEGORY({commit}) {
+            return axios.get('http://larav.local/api/category')
+                .then(category => {
+                    commit('SET_CATEGORY_STATE', category.data.data);
+                    return category.data;
+                }).catch((error) => {
+                    return error
+                });
+        },
         GET_PRODUCTS({state, commit}, page) {
             return axios.get('http://larav.local/api/products', {
                 params: {
                     page: page
                 }
             }).then(products => {
-                console.log(products);
                 commit('SET_PRODUCTS_STATE', products.data);
-                    return products.data;
-                }).catch((error) => {
-                    console.log(error)
-                });
+                return products.data;
+            }).catch((error) => {
+                console.log(error)
+            });
         },
         GET_PRODUCTS_ID({state, commit}, id) {
             return axios.get('http://larav.local/api/products/' + id)
@@ -121,16 +139,6 @@ export const product = {
                     return error
                 });
         },
-        GET_CATEGORY({commit}) {
-            return axios.get('http://larav.local/api/category')
-                .then(category => {
-                    commit('SET_CATEGORY_STATE', category.data);
-                    // console.log(category);
-                    return category.data;
-                }).catch((error) => {
-                    return error
-                });
-        },
         GET_MANUFACTUR({commit}) {
             return axios.get('http://larav.local/api/manufactur')
                 .then(manufactur => {
@@ -140,14 +148,31 @@ export const product = {
                     return error
                 });
         },
-
+        GET_CATALOG({state, commit}, page = 1) {
+            return axios.post('http://larav.local/api/catalog', {
+                page: page,
+                data: state.queryCatalog,
+            })
+                .then(catalog => {
+                    commit('SET_PRODUCTS_STATE', catalog.data);
+                    return catalog.data;
+                })
+                .catch((error) => {
+                    return error
+                });
+        },
+        SET_CATALOG({commit}, data) {
+            commit('SET_CATALOG_STATE', data);
+            commit('saveCatalog', data);
+            return data;
+        },
         GET_FILTER({state, commit}, page = 1) {
             return axios.post('http://larav.local/api/filter', {
                 page: page,
                 data: state.queryFilter,
             })
                 .then(filter => {
-                    console.log(filter.data);
+                    console.log(state.queryFilter);
                     commit('SET_PRODUCTS_STATE', filter.data);
                     return filter.data;
                 })
@@ -157,7 +182,7 @@ export const product = {
         },
         SET_FILTER({commit}, data) {
             commit('SET_FILTER_STATE', data);
-            commit('saveQuery', data);
+            commit('saveFilter', data);
             return data;
         }
     },
@@ -180,19 +205,19 @@ export const product = {
         totalAmount: (state) => (
             state.cartProducts.reduce((total, {amount}) => total + amount, 0)
         ),
-        totalPrice: (state) => (
+    totalPrice: (state) => (
             state.cartProducts.reduce(
                 (total, {price, amount}) =>
-                    total + (amount * price),
+                total + (amount * price),
                 0
             ).toFixed(2)
         ),
-        cartIsEmpty: (state) => !state.cartProducts.length,
+    cartIsEmpty: (state) => !state.cartProducts.length,
 
-        getProductById: (state) => (id) => {
-            if (state.products.data) {
-                return state.products.data.find(product => product.id === id)
-            }
+    getProductById: (state) => (id) => {
+        if (state.products.data) {
+            return state.products.data.find(product => product.id === id)
+        }
         },
 
         getReviewById: (state) => (id) => {

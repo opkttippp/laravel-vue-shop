@@ -43,6 +43,8 @@ Route::post('/search', [SearchApiController::class, 'show']);
 
 Route::post('/filter', [SearchApiController::class, 'filter']);
 
+Route::post('/catalog', [SearchApiController::class, 'catalog']);
+
 
 Route::get('/password/confirm', [ConfirmPasswordController::class, 'showConfirmForm'])->name('password.confirm');
 Route::post('/password/confirm', [ConfirmPasswordController::class, 'confirm']);
