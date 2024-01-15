@@ -26,11 +26,6 @@ const routes = [
         component: VerifyMail,
     },
     {
-        path: '/register',
-        name: 'Register',
-        component: Register,
-    },
-    {
         path: '/login',
         name: 'Login',
         component: Login,

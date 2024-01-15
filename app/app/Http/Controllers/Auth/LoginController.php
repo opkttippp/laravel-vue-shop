@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class LoginController extends Controller
     {
         $credentials = [
             $this->loginType => $request->login,
-            'password' => $request->password
+            'password' => $request->password,
+            'status' =>  User::STATUS_ACTIVE
         ];
 
         if (Auth::attempt($credentials)) {

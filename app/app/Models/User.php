@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\SendRegistrationMail;
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,9 +24,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     //--------------------------------email-----------------------------------
+    public const STATUS_ACTIVE = 1;
     public const STATUS_DELETED = 0;
-    public const STATUS_INACTIVE = 1;
-    public const STATUS_ACTIVE = 2;
+    public const STATUS_INACTIVE = 2;
     //------------------------------------------------------------------------
 
 //    protected string $guard_name = 'web';
@@ -72,4 +73,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Message::class);
     }
 
+    //--------------------verific Mail in queue(overwrite metod)---------------
+
+    public function sendEmailVerificationNotification()
+    {
+        SendRegistrationMail::dispatch($this);
+    }
+
+    public function markEmailAsVerified()
+    {
+        return $this->forceFill([
+            'email_verified_at' => $this->freshTimestamp(),
+            'status' => self::STATUS_ACTIVE,
+        ])->save();
+    }
 }

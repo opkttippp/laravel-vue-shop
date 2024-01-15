@@ -23,8 +23,17 @@
                     data-accordion="false">
 
                     <li class="nav-item">
-                        <a href="{{url('/admin')}}" class="nav-link">
+                        <a href="{{url('/')}}" class="nav-link">
                             <i class="nav-icon far fa-image"></i>
+                            <p>
+                                Site page
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{url('/admin')}}" class="nav-link">
+                            <i class="nav-icon fas fa-bars"></i>
                             <p>
                                 Home Page
                             </p>

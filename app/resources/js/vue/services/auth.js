@@ -15,6 +15,8 @@ class Auth {
 
     register(data)
     {
+        console.log(data);
+
         return axios.post('http://larav.local/api/register', data).then((res) => {
             window.localStorage.setItem('token', res.data.access_token);
             window.localStorage.setItem('user', JSON.stringify(res.data.user));

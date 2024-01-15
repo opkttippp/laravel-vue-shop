@@ -6,20 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
     use RegistersUsers;
-
-    protected $redirectTo = RouteServiceProvider::HOME;
-    protected $loginType;
 
     public function register(Request $request)
     {
@@ -39,12 +36,17 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $requestData['name'],
             'email' => $requestData['email'],
+            'status' => User::STATUS_INACTIVE,
             'password' => Hash::make($requestData['password']),
         ]);
+
         $user->assignRole(Role::findByName('user'));
+
+
         event(new Registered($user));
 
         $this->guard()->login($user);
+
         $accessToken = Auth::user()->createToken('authToken')->accessToken;
         return response(
             ['user' => Auth::user(), 'access_token' => $accessToken],
@@ -61,16 +63,14 @@ class AuthController extends Controller
 
         $credentials = [
             $this->checkLoginInput() => $request->login,
-            'password' => $request->password
+            'password' => $request->password,
         ];
 
         if (Auth::attempt($credentials)) {
             return response()->json(
                 [
                     'user' => Auth::user(),
-                    'access_token' => Auth::user()->createToken(
-                        'authToken'
-                    )->accessToken
+                    'access_token' => Auth::user()->createToken('authToken')->accessToken,
                 ],
                 200
             );
@@ -102,5 +102,34 @@ class AuthController extends Controller
         $token->revoke();
         $response = ['message' => 'You have been successfully logged out!'];
         return response($response, 200);
+    }
+
+    public function redirectGoogle()
+    {
+//        return Socialite::driver('google')->stateless()->redirect();
+    }
+
+    public function callbackGoogle()
+    {
+        $googleUser = Socialite::driver('google')->stateless()->user();
+        $user = User::where('email', $googleUser->email)->first();
+
+//        $userData = User::firstWhere('email', $user->email);
+//        if ($user) {
+//            $user->update([
+//                'google_token' => $user->token,
+//                'google_refresh_token' => $user->refreshToken,
+//            ]);
+        //        }
+        Auth::login($user);
+        return response()->json(
+            [
+                'user' => Auth::user(),
+                'access_token' => Auth::user()->createToken(
+                    'authToken'
+                )->accessToken,
+            ],
+            200
+        );
     }
 }

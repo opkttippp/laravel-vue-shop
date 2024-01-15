@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    public const HOME = '/admin/panel';
-    public const LOGIN = '/admin';
+//    public const HOME = '/admin/panel';
+    public const HOME = '/';
+    public const LOGIN = '/login';
 
     public function boot()
     {

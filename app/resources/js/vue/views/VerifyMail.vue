@@ -7,11 +7,11 @@
                     <div class="card-body">
                         'Before proceeding, please check your email for a verification link.
                         'If you did not receive the email'
-                        <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                            <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
+                            <button type="submit" class="btn btn-link p-0 m-0 align-baseline"
+                                    @click="verificationResend"
+                            >
                                 click here to request another
                             </button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -21,8 +21,20 @@
 
 <script>
 
+import axios from "axios";
+
 export default {
-    name: "VerifyMail"
+    name: "VerifyMail",
+    methods: {
+        verificationResend() {
+            return axios.post('http://larav.local/api/verificationResend').then((res) => {
+                console.log(res);
+                console.log("resend");
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+    }
 }
 </script>
 

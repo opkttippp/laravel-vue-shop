@@ -1,7 +1,5 @@
 <?php
 
-//declare(strict_types=1);
-
 use App\Http\Controllers\Admin\CategController;
 use App\Http\Controllers\Admin\ManufacturController;
 use App\Http\Controllers\Admin\ProdController;
@@ -9,6 +7,7 @@ use App\Http\Controllers\Admin\RevController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\ManufactursController;
@@ -16,22 +15,37 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\UserController;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
 //-------------------------email confirm-------------------------------------
 
 Route::get('/email/verify', function () {
-    return view('auth.verify');
+    return Auth::user()->hasVerifiedEmail()
+        ?
+        redirect()->intended(RouteServiceProvider::HOME)
+        :
+        view('auth.verify');
 })->middleware('auth')->name('verification.notice');
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-    return redirect('/');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/notification-verification', function () {
+    Auth::user()->SendEmailVerificationNotification();
+    return back()->with('message', 'Verification link send!');
+})->middleware('auth')->name('verification.resend');
 
-//Route::post('email/resend', 'VerificationController@resend');
+Route::get(
+    '/email/verify/{id}/{hash}',
+    function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect()->intended(RouteServiceProvider::HOME);
+    }
+)->middleware(['auth', 'signed'])->name('verification.verify');
+
+//Route::get('email/resend', [VerificationController::class,'resend']);
 
 //--------------------------------Admin Users---------------------------------
 Route::group(
@@ -163,7 +177,6 @@ Route::group(
     ],
     function () {
         Route::get('/', 'index')->name('admin.reviews.index');
-        ;
         Route::get('/show/{review}', 'showReview')->name('admin.reviews.show');
 
         Route::get('/edit', 'reviewOneUpdate')->name('reviewOneUpdate')
@@ -177,15 +190,21 @@ Route::group(
     }
 );
 //---------------------------------Admin-LTE-----------------------------
-Route::get('/admin', [LoginController::class, 'showLoginForm']);
-Route::post('/admin', [LoginController::class, 'login'])->name('login');
 
-Route::get('/admin/logout', [LoginController::class, 'logout'])->middleware(['role:admin|manager', 'web']);
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::prefix('/admin/panel')->group(function () {
-    Route::get('/', [IndexController::class, 'index']);
-    //});
-})->middleware(['role:admin|manager', 'web']);
+Route::group(
+    [
+        'middleware' => ['role:admin|manager'],
+    ],
+    function () {
+        Route::get('/admin', function () {
+            return redirect('/admin/panel');
+        });
+        Route::get('/admin/panel', [IndexController::class, 'index']);
+        Route::get('/admin/logout', [LoginController::class, 'logout']);
+    }
+);
 
 //--------------------------------404--------------------------------------
 Route::fallback(function () {

@@ -10,17 +10,23 @@ use App\Http\Controllers\Api\SearchApiController;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\CategoryApiController;
 use App\Jobs\SendOrderEmail;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\ConfirmPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
-Route::middleware('auth:sanctum')->get('/auth', function (Request $request) {
+Route::middleware('auth:api')->get('/auth', function (Request $request) {
     return $request->user();
 });
 
 Route::post('register', [AuthController::class, 'register']);
+//Route::post('verificationResend', function (Request $request) {
+//    $request->user()->SendEmailVerificationNotification();
+//    return $request->user();
+//})->middleware('auth')->name('verification.resend');
+
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
@@ -66,7 +72,5 @@ Route::group([
 });
 
 Route::post('/mail/order', function (Request $request) {
-
     dispatch(new SendOrderEmail($request->all()));
-
 })->middleware('verified');

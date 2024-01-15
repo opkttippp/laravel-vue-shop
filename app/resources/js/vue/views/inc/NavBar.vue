@@ -23,32 +23,33 @@
             <li class="menu-nav">
                 <router-link to="/chat">Chat</router-link>
             </li>
-            <li class="menu-nav"><a href="javascript:void(0);">
+            <li class="menu-nav"><a href="#">
                 <catalog-button
                 >
                 </catalog-button>
             </a></li>
 
-            <li><a href="javascript:void(0);">
+            <li class="menu-nav-add"><a href="#">
                 <cart-button>
                 </cart-button>
             </a></li>
-            <li><a href="javascript:void(0);">
+            <li class="menu-nav-add"><a href="#">
                 <search-button>
                 </search-button>
             </a></li>
-            <li class="icon" href="javascript:void(0);" @click="burgerMenu">
+            <li class="icon" @click="burgerMenu">
                 <i class="fa fa-bars"></i>
             </li>
-            <li style="position: relative;">
+            <li class="menu-nav-add" style="position: relative;">
                 <!--                <a v-if="loggedIn" href="javascript:void(0);">{{ user }}</a>-->
                 <a v-if="loggedIn" v-on:click="showUser = !showUser">
                     <img :src="'/images/avatar.png'" width="25" alt="avatar"
                                         style="cursor: pointer;">
                 </a>
 
-                <a v-else href="javascript:void(0);">
-                    <router-link to="/login">Login</router-link>
+                <a v-else href="#" @click.stop="showLogin = !showLogin">
+<!--                    <router-link to="/login">Login</router-link>-->
+                    Login
                 </a>
 
                 <transition name="fade">
@@ -58,15 +59,15 @@
                             <li class="d-flex justify-content-center show-user-li">
                                 <router-link to=""
                                              class="animate__animated"
-                                             @mouseover="addAnimate($event)"
-                                             @mouseleave="addAnimate($event)"
+                                             @mouseover="changeAnimate($event)"
+                                             @mouseleave="changeAnimate($event)"
                                 >Profile</router-link>
                             </li>
                             <li class="d-flex justify-content-center show-user-li">
                                 <router-link @click="logout" to=""
                                              class="animate__animated"
-                                             @mouseover="addAnimate($event)"
-                                             @mouseleave="addAnimate($event)"
+                                             @mouseover="changeAnimate($event)"
+                                             @mouseleave="changeAnimate($event)"
                                 >Logout</router-link>
                             </li>
                         </ul>
@@ -90,19 +91,28 @@
             <img class="cursorLeft" :src="'/images/cursorRight.png'" width="25" height="25" alt="cursorLeft">
         </div>
     </div>
-
+    <login-form
+        v-if="showLogin"
+        @close = close
+    >
+    </login-form>
 
 </template>
 
 <script>
 
 import 'animate.css';
+import loginForm from "../Login";
 
 export default {
     name: "NavBar",
+    components: {
+        loginForm
+    },
     data: () => {
         return {
             showUser: false,
+            showLogin: false,
         }
     },
     computed: {
@@ -153,6 +163,9 @@ export default {
                 }
             })
         },
+        close() {
+            this.showLogin = false;
+        },
         activeNav() {
             let items = document.querySelectorAll(".topnav a");
             items.forEach((item) => {
@@ -164,13 +177,13 @@ export default {
                 })
             })
         },
-        addAnimate(e) {
+        changeAnimate(e) {
             e.target.classList.toggle('animate__headShake');
         },
         logout() {
             this.$store.dispatch("auth/logout").then(
                 () => {
-                    this.$router.push("/login")
+                    this.$router.push("/")
                 })
                 .catch((error) => {
                     console.log(error);
@@ -246,8 +259,8 @@ export default {
     font-family: 'Raleway', sans-serif;
     text-decoration: none;
     color: whitesmoke;
-    min-width: 42px;
-    min-height: 38px;
+    min-width: 2.8em;
+    min-height: 2.8em;
 }
 
 .topnav li.menu-nav a::after {
@@ -309,7 +322,16 @@ export default {
 /*    }*/
 /*}*/
 
-.topnav a.active {
+.menu-nav-add a {
+    width: 2.8em;
+}
+
+.menu-nav-add > a:hover{
+    background-color: gray;
+    border-radius: 0.4em;
+}
+
+.topnav li.menu-nav a.active {
     color: #17baaa;
     opacity: 1;
     animation: flash 1s;

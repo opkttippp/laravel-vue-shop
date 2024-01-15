@@ -1,36 +1,5 @@
-<style>
-    /*.menu-list {*/
-    /*    position: relative;*/
-    /*    width: 30%;*/
-    /*    height: 60px;*/
-    /*}*/
-
-    /*.menu_categ {*/
-    /*    position: absolute;*/
-    /*    width: 100%;*/
-    /*    height: 65%;*/
-    /*    left: 130px;*/
-    /*    bottom: 0;*/
-    /*    right: 0;*/
-    /*    top: 18px;*/
-    /*    padding: 5px;*/
-    /*    display: none;*/
-    /*}*/
-
-    /*.menu-list > ul > li > a:hover, .list:hover {*/
-    /*    color: #10707f;*/
-    /*}*/
-
-    /*.menu-list > ul > li > .menu_category:hover .menu_categ {*/
-    /*    display: block;*/
-    /*}*/
-</style>
 
 @include('inc.header');
-{{--<div class="top fixed-top">--}}
-{{--    <p><img src="{{ asset('images/leaf_1.jpg') }}" width="25px" alt="leaf"></p>--}}
-{{--    <p><a class="nav-link" href={{ route('home') }}>Mysite</a></p>--}}
-{{--</div>--}}
 <nav class="header navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
 
     <div class="container-fluid product_menu" style="position: relative;">
@@ -51,39 +20,38 @@
         </div>
         <div class="showScroll"></div>
         {{---------------------------------------------------------------------------------------------}}
-        @role('admin')
-        <div class="reg_auth">
-            <i class="nav-icon far fas fa-table"></i>
-            {{ Auth::user()->name }}
-            <a href="{{ url('/admin/logout') }}">Выход</a>
+{{--        @role('admin')--}}
+{{--        <div class="reg_auth">--}}
+{{--            <i class="nav-icon far fas fa-table"></i>--}}
+{{--            {{ Auth::user()->name }}--}}
+{{--            <a href="{{ url('/admin/logout') }}">Выход</a>--}}
+{{--        </div>--}}
+{{--        @endrole--}}
+{{--        @role('manager')--}}
+{{--        <div class="reg_auth">--}}
+{{--            {{ Auth::user()->name }}--}}
+{{--            <a href="{{ url('/admin/logout') }}">Выход</a>--}}
+{{--        </div>--}}
+{{--        @endrole--}}
+{{--        @role('user')--}}
+{{--        <div class="reg_auth">--}}
+{{--            <img src="{{asset('storage/'.Auth::user()->avatar)}}" alt="image" height="20px">--}}
+{{--            <a href="{{ route('user.index',['user' => Auth::user()]) }}">--}}
+{{--                {{ Auth::user()->name }}--}}
+{{--            </a>--}}
 {{--            <a href="{{ route('logout') }}">Выход</a>--}}
-        </div>
-        @endrole
-        @role('manager')
-        <div class="reg_auth">
-            {{ Auth::user()->name }}
-            <a href="{{ url('/admin/logout') }}">Выход</a>
-        </div>
-        @endrole
-        @role('user')
-        <div class="reg_auth">
-            <img src="{{asset('storage/'.Auth::user()->avatar)}}" alt="image" height="20px">
-            <a href="{{ route('user.index',['user' => Auth::user()]) }}">
-                {{ Auth::user()->name }}
-            </a>
-            <a href="{{ route('logout') }}">Выход</a>
-        </div>
-        @endrole
-        @guest
-            <div class="reg_auth">
-                <a href="{{ url('/admin/login') }}" class="btn btn-secondary">
-                    Войти
-                </a>
-                <a href="{{ route('register') }}" class="btn btn-secondary">
-                    Регистрация
-                </a>
-            </div>
-        @endguest
+{{--        </div>--}}
+{{--        @endrole--}}
+{{--        @guest--}}
+{{--            <div class="reg_auth">--}}
+{{--                <a href="{{ url('/admin/login') }}" class="btn btn-secondary">--}}
+{{--                    Войти--}}
+{{--                </a>--}}
+{{--                <a href="{{ route('register') }}" class="btn btn-secondary">--}}
+{{--                    Регистрация--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--        @endguest--}}
         <cart-button
             style="margin-right: 170px;"
         >
