@@ -2,7 +2,6 @@ import {createRouter, createWebHistory} from 'vue-router';
 
 import Home from "../../vue/views/Home";
 import VerifyMail from "../../vue/views/VerifyMail"
-import Register from "../../vue/views/Register";
 import Login from "../../vue/views/Login";
 import Category from "../../vue/views/Category";
 import Catalog from "../../vue/views/Catalog";
@@ -34,7 +33,7 @@ const routes = [
         path: '/category',
         name: Category,
         component: Category,
-    },    {
+    }, {
         path: '/catalog',
         name: Catalog,
         component: Catalog,
@@ -71,6 +70,12 @@ const routes = [
         path: '/chat',
         name: 'Chat',
         component: Chat,
+    },
+    {
+        path: '/auth/:provider/callback',
+        component: {
+            template: '<div class="auth-component"></div>'
+        }
     },
     ];
 

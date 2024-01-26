@@ -174,6 +174,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
 
 //----------------авторизация через соцсети------------------------------
         Laravel\Socialite\SocialiteServiceProvider::class,

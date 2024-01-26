@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategController;
 use App\Http\Controllers\Admin\ManufacturController;
 use App\Http\Controllers\Admin\ProdController;
 use App\Http\Controllers\Admin\RevController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Auth\LoginController;

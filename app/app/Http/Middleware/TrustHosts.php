@@ -11,10 +11,18 @@ class TrustHosts extends Middleware
      *
      * @return array<int, string|null>
      */
+//    public function hosts()
+//    {
+//        return [
+//            $this->allSubdomainsOfApplicationUrl(),
+//        ];
+//    }
+
     public function hosts()
     {
         return [
             $this->allSubdomainsOfApplicationUrl(),
+            'https://http://larav.local/api/redirect/google'
         ];
     }
 }

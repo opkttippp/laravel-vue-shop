@@ -11,8 +11,7 @@ export const auth = {
     errors: [],
     actions: {
         login({commit}, user) {
-            return AuthService.login(user).then(
-                (response) => {
+            return AuthService.login(user).then((response) => {
                     if (response.errors) {
                         commit('loginFailure', response.message);
                     } else {
@@ -24,6 +23,18 @@ export const auth = {
                 return commit('loginFailure', error);
             });
         },
+        loginOauth({commit}, data) {
+            // commit('loginSuccess', AuthService.loginOauth(data));
+            // return AuthService.loginOauth(data);
+            const response = AuthService.loginOauth(data);
+            console.log(response)
+            if (response.errors) {
+                commit('loginFailure', response.message);
+            } else {
+                commit('loginSuccess', response);
+                return response;
+            }
+        },
         logout({commit}) {
             AuthService.logout();
             commit('logout');
@@ -31,7 +42,7 @@ export const auth = {
         register({commit}, user) {
             return AuthService.register(user).then(
                 (response) => {
-                commit('registerSuccess', response);
+                    commit('registerSuccess', response);
                 }
             ).catch((error) => {
                 return commit('registerFailure', error);

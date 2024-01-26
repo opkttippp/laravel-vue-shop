@@ -1,126 +1,11 @@
 <template>
     <div class="container">
-        <!--        <div class="row justify-content-center">-->
-        <!--            <div class="col-md-8">-->
 
         <div v-if="this.errors.length" class="alert alert-danger">
             <ul>
                 <li v-for="error of this.errors">{{ error }}</li>
             </ul>
         </div>
-
-
-        <!--    <transition name="card" mode="out-in">-->
-        <!--        <div class="card" v-if="front === true" key="front">-->
-        <!--            <div class="card-header">Login</div>-->
-        <!--            <div class="card-body">-->
-        <!--                <form method="POST" @submit.prevent="loginUser">-->
-        <!--                    <div class="row mb-3">-->
-        <!--                        <label for="email" class="col-md-4 col-form-label text-md-end">Login or-->
-        <!--                            Email</label>-->
-        <!--                        <div class="col-md-6">-->
-        <!--                            <input id="login" v-model="user.login" type="text" class="form-control"-->
-        <!--                                   required>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="row mb-3">-->
-        <!--                        <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>-->
-        <!--                        <div class="col-md-6">-->
-        <!--                            <input id="password" v-model="user.password" type="password"-->
-        <!--                                   class="form-control"-->
-        <!--                                   required>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="row mb-3">-->
-        <!--                        <div class="col-md-6 offset-md-4">-->
-        <!--                            <div class="form-check">-->
-        <!--                                <input class="form-check-input" type="checkbox" name="remember"-->
-        <!--                                       id="remember">-->
-
-        <!--                                <label class="form-check-label" for="remember">-->
-        <!--                                    Remember Me-->
-        <!--                                </label>-->
-        <!--                            </div>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <div class="row mb-0">-->
-        <!--                        <div class="col-md-8 offset-md-4 d-flex">-->
-        <!--                            <button type="submit" class="btn btn-primary">-->
-        <!--                                Login-->
-        <!--                            </button>-->
-
-        <!--                            <a class="btn btn-link" href="{{ route('password.request') }}">-->
-        <!--                                                                        <routre-link to="/"></routre-link>-->
-        <!--                                'Forgot Your Password?'-->
-        <!--                            </a>-->
-        <!--                                                                <router-link to="/register"-->
-        <!--                                                                             class="ml-auto"-->
-        <!--                                                                             style="font-weight: bold;-->
-        <!--                                                                             align-self: center;"-->
-        <!--                                                                >-->
-        <!--                                                                Register-->
-        <!--                                                                </router-link>-->
-        <!--                            <p @click="front = false">-->
-        <!--                                Register-->
-        <!--                            </p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </form>-->
-        <!--            </div>-->
-        <!--        </div>-->
-
-
-        <!--    <div class="card" v-else key="back">-->
-        <!--        <div class="card-header">Register</div>-->
-        <!--        <div class="card-body">-->
-        <!--            <form method="POST" @submit.prevent="register">-->
-        <!--                <div class="row mb-3">-->
-        <!--                    <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>-->
-        <!--                    <div class="col-md-6">-->
-        <!--                        <input id="name" v-model="userReg.name" type="text" class="form-control"-->
-        <!--                               required>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <div class="row mb-3">-->
-        <!--                    <label for="email" class="col-md-4 col-form-label text-md-end">Email Address</label>-->
-        <!--                    <div class="col-md-6">-->
-        <!--                        <input id="email" v-model="userReg.email" type="email" class="form-control"-->
-        <!--                               required>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <div class="row mb-3">-->
-        <!--                    <label for="pass" class="col-md-4 col-form-label text-md-end">Password</label>-->
-        <!--                    <div class="col-md-6">-->
-        <!--                        <input id="pass" v-model="userReg.password" type="password" class="form-control"-->
-        <!--                               required>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <div class="row mb-3">-->
-        <!--                    <label for="password-confirm" class="col-md-4 col-form-label text-md-end">Confirm-->
-        <!--                        Password</label>-->
-
-        <!--                    <div class="col-md-6">-->
-        <!--                        <input id="password-confirm" v-model="userReg.password_confirmation"-->
-        <!--                               type="password" class="form-control" required>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <div class="row mb-0">-->
-        <!--                    <div class="col-md-6 offset-md-4">-->
-        <!--                        <button type="submit" class="btn btn-primary">-->
-        <!--                            Register-->
-        <!--                        </button>-->
-        <!--                        <p @click="front = true">-->
-        <!--                            Back-->
-        <!--                        </p>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </form>-->
-        <!--        </div>-->
-        <!--    </div>-->
-        <!--    </transition>-->
-        <!--        </div>-->
-        <!--    </div>-->
-        <!--</div>-->
 
         <transition name="card" mode="out-in">
             <div class="content" v-if="front === true" key="front"
@@ -148,12 +33,41 @@
                     Or login with
                 </div>
                 <div class="links">
-                    <div class="facebook">
-                        <i class="fab fa-facebook-f"><span>Facebook</span></i>
+                    <div class="auth-social"
+                         @click="authenticate('google')"
+                         style="background-color: rgb(252, 0, 47);"
+                    >
+                        <i class="fab fa-google"></i>
                     </div>
-                    <div class="instagram">
-                        <i class="fab fa-instagram"><span>Instagram</span></i>
+
+                    <div class="auth-social"
+                         @click="authenticate('facebook')"
+                         style="background-color: rgb(68, 64, 151);"
+                    >
+                        <i class="fab fa-facebook-f"></i>
                     </div>
+
+                    <div class="auth-social"
+                         @click="authenticate('twitter')"
+                         style="background-color: rgb(17, 140, 241);"
+                    >
+                        <i class="fab fa-twitter"></i>
+                    </div>
+
+                    <div class="auth-social"
+                         @click="authenticate('github')"
+                         style="background-color: rgb(17, 140, 241);"
+                    >
+                        <i class="fab fa-github"></i>
+                    </div>
+
+                    <div class="auth-social"
+                         @click="authenticate('gitlab')"
+                         style="background-color: rgb(17, 140, 241);"
+                    >
+                        <i class="fab fa-gitlab"></i>
+                    </div>
+
                 </div>
                 <div class="signup">
                     Don't have account?
@@ -218,8 +132,13 @@ export default {
             }
         };
     },
+    computed: {},
     mounted() {
         this.formfunction();
+        window.addEventListener('message', this.onMessage, false);
+    },
+    beforeDestroy() {
+        window.removeEventListener('message', this.onMessage);
     },
     methods: {
         loginValidator() {
@@ -230,7 +149,7 @@ export default {
             if (!this.userReg.password || this.userReg.password.length < 5) {
                 this.errors.push('The password field less than 5 characters...');
             }
-            if (this.userReg.password !== this.userReg.password_confirmation ) {
+            if (this.userReg.password !== this.userReg.password_confirmation) {
                 this.errors.push('Passwords mismatch...');
             }
             if (!this.errors.length)
@@ -252,28 +171,27 @@ export default {
             });
         },
         loginUser() {
-                this.errors = [];
-                this.$store.dispatch("auth/login", this.user)
-                    .then(() => {
-                        if (this.$store.state.auth.errors)
-                            this.errors.push(this.$store.state.auth.errors);
-                        this.$store.dispatch('auth/zeroError');
-                    }).then(() => {
-                        if (this.$store.state.auth.status.loggedIn) {
-                            this.$router.push('/');
-                            this.$emit('close', false);
-                        }
+            this.errors = [];
+            this.$store.dispatch("auth/login", this.user)
+                .then(() => {
+                    if (this.$store.state.auth.errors)
+                        this.errors.push(this.$store.state.auth.errors);
+                    this.$store.dispatch('auth/zeroError');
+                }).then(() => {
+                    if (this.$store.state.auth.status.loggedIn) {
+                        this.$router.push('/');
+                        this.$emit('close', false);
                     }
-                ).catch((error) => {
-                    console.log(error);
-                });
+                }
+            ).catch((error) => {
+                console.log(error);
+            });
         },
         registerUser() {
             if (this.loginValidator()) {
                 this.$store.dispatch("auth/register", this.userReg).then(
                     () => {
                         window.location.href = 'http://larav.local/email/verify';
-                        // this.$router.push("/verificationMail");
                         this.$emit('close', false);
                     })
                     .catch((error) => {
@@ -281,8 +199,78 @@ export default {
                     });
             }
             return 'error sign up';
+        },
+        authGoogle() {
+            window.location.href = 'http://larav.local/google/redirect';
+
+            return axios.get('http://larav.local/api/google/redirect', {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(res => console.log(res))
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        //-----------------------vue-authenticate--------------------------------
+
+        async authenticate(provider) {
+            const newWindow = openWindow('', '_blank');
+
+            const {data} = await axios.post(`/api/oauth/${provider}`)
+            // console.log(data);
+            newWindow.location.href = data.url
+        },
+        /**
+         * @param {MessageEvent} e
+         */
+        onMessage(e) {
+            if (e.origin !== window.origin || !e.data.access_token) {
+                return
+            }
+            console.log(e.data);
+            this.$store.dispatch('auth/loginOauth', {
+                token: e.data.access_token,
+                user: e.data.user,
+            });
+            this.$emit('close', false);
+            this.$router.push({name: 'Home'});
+
         }
     }
+}
+
+function openWindow(url, title, options = {}) {
+    if (typeof url === 'object') {
+        options = url
+        url = ''
+    }
+
+    options = {url, title, width: 600, height: 720, ...options}
+
+    const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screen.left
+    const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screen.top
+    const width = window.innerWidth || document.documentElement.clientWidth || window.screen.width
+    const height = window.innerHeight || document.documentElement.clientHeight || window.screen.height
+
+    options.left = ((width / 2) - (options.width / 2)) + dualScreenLeft
+    options.top = ((height / 2) - (options.height / 2)) + dualScreenTop
+
+    const optionsStr = Object.keys(options).reduce((acc, key) => {
+        acc.push(`${key}=${options[key]}`)
+        return acc
+    }, []).join(',')
+
+    const newWindow = window.open(url, title, optionsStr)
+
+    if (window.focus) {
+        newWindow.focus()
+    }
+
+    return newWindow
 }
 </script>
 <style scoped>
@@ -414,16 +402,28 @@ export default {
 
 .links {
     display: flex;
+    justify-content: space-between;
     cursor: pointer;
     color: white;
-    margin: 0 0 20px 0;
+    margin: 0;
 }
 
-.facebook, .instagram {
-    width: 100%;
-    height: 45px;
-    line-height: 45px;
-    margin-left: 10px;
+.auth-social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    margin: 5px;
+    opacity: 70%;
+}
+
+.auth-social:hover {
+    opacity: 100%;
+    box-shadow: 0 0 18px rgba(255,255,255,0.75);
+    /*-webkit-box-shadow: 0px 0px 18px rgba(255,255,255,0.75);*/
+    /*-moz-box-shadow: 0px 0px 18px rgba(255,255,255,0.75);*/
 }
 
 .facebook {

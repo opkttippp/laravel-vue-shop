@@ -86,7 +86,7 @@ class SocialAuthController extends Controller
             $user->assignRole('user');
         }
 
-        // Войти пользователю, логин веб-версии, Verious Very Verification
+        // Войти пользователю, логин веб-версии, Verification
         Auth::login($user, true);
 
         return $this->sendSuccessResponse();

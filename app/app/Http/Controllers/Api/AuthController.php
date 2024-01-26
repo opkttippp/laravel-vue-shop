@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
 use Spatie\Permission\Models\Role;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class AuthController extends Controller
 {
@@ -70,7 +71,9 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'user' => Auth::user(),
-                    'access_token' => Auth::user()->createToken('authToken')->accessToken,
+                    'access_token' => Auth::user()->createToken(
+                        'authToken'
+                    )->accessToken,
                 ],
                 200
             );
@@ -104,32 +107,72 @@ class AuthController extends Controller
         return response($response, 200);
     }
 
-    public function redirectGoogle()
+    public function redirectGoogle($provider)
     {
-//        return Socialite::driver('google')->stateless()->redirect();
+        return response()->json([
+            'url' => Socialite::driver($provider)->redirect()->getTargetUrl(),
+        ]);
     }
 
-    public function callbackGoogle()
-    {
-        $googleUser = Socialite::driver('google')->stateless()->user();
-        $user = User::where('email', $googleUser->email)->first();
 
-//        $userData = User::firstWhere('email', $user->email);
-//        if ($user) {
-//            $user->update([
-//                'google_token' => $user->token,
-//                'google_refresh_token' => $user->refreshToken,
-//            ]);
-        //        }
-        Auth::login($user);
-        return response()->json(
+    public function callbackGoogle($provider)
+    {
+        try {
+            $user = Socialite::driver($provider)->user();
+        } catch (Exception $e) {
+            return redirect('/login');
+//            return response()->json($e->getMessage());
+        }
+
+        $authUser = $this->findOrCreateUser($user, $provider);
+
+        Auth::login($authUser);
+
+        return view('oauth/callback', [
+            'user' => $authUser,
+//            'userInfo' => $user,
+            'access_token' => $authUser->createToken('authToken')->accessToken,
+        ]);
+    }
+
+    private function findOrCreateUser($socialUser, $provider)
+    {
+        $user = User::firstOrNew(
             [
-                'user' => Auth::user(),
-                'access_token' => Auth::user()->createToken(
-                    'authToken'
-                )->accessToken,
+                'email' => $socialUser->email,
             ],
-            200
+            [
+                'name' => $socialUser->name,
+                'email' => $socialUser->email ?? null,
+                'avatar' => 'public/avatar/guest.jpg',
+                'provider' => $provider,
+                'provider_id' => $socialUser->id,
+                'access_token' => $socialUser->token,
+            ]
         );
+        $user->save();
+        return $user;
     }
+//        $user = User::where('email', $socialUser->email)->orWhere('access_token', $socialUser->token)->first();
+//
+//        if ($user) {
+//            return $user;
+//        } else {
+//            $user = User::create([
+//                'name' => $socialUser->name,
+//                'email' => $socialUser->email ?? '',
+//                'avatar' => 'public/avatar/guest.jpg',
+//                'provider' => $provider,
+//                'provider_id' => $socialUser->id,
+//                'access_token' => $socialUser->token,
+//            ]);
+//            if (($socialUser->email !== '') && $socialUser->email
+//                && !$user->hasVerifiedEmail()
+//            ) {
+//                $user->markEmailAsVerified();
+//                $user->status = 1;
+//            }
+//            $user->save();
+//            return $user;
+//        }
 }

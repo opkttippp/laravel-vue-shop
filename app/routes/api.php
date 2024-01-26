@@ -10,7 +10,6 @@ use App\Http\Controllers\Api\SearchApiController;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\CategoryApiController;
 use App\Jobs\SendOrderEmail;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\ConfirmPasswordController;
@@ -21,13 +20,17 @@ Route::middleware('auth:api')->get('/auth', function (Request $request) {
     return $request->user();
 });
 
-Route::post('register', [AuthController::class, 'register']);
+Route::post('/oauth/{driver}', [AuthController::class, 'redirectGoogle'])->middleware('api-session');
+Route::get('/oauth/{driver}/callback', [AuthController::class, 'callbackGoogle'])->middleware('api-session');
+
+Route::post('/register', [AuthController::class, 'register']);
+
 //Route::post('verificationResend', function (Request $request) {
 //    $request->user()->SendEmailVerificationNotification();
 //    return $request->user();
 //})->middleware('auth')->name('verification.resend');
 
-Route::post('login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -42,15 +45,11 @@ Route::apiResources([
     'review' => ReviewApiController::class,
 ]);
 
-//Route::middleware('verified')->group(function () {
-//});
-
 Route::post('/search', [SearchApiController::class, 'show']);
 
 Route::post('/filter', [SearchApiController::class, 'filter']);
 
 Route::post('/catalog', [SearchApiController::class, 'catalog']);
-
 
 Route::get('/password/confirm', [ConfirmPasswordController::class, 'showConfirmForm'])->name('password.confirm');
 Route::post('/password/confirm', [ConfirmPasswordController::class, 'confirm']);

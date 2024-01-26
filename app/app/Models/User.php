@@ -23,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasPermissions;
 
 
+
     //--------------------------------email-----------------------------------
     public const STATUS_ACTIVE = 1;
     public const STATUS_DELETED = 0;
