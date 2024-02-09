@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
 use Spatie\Permission\Models\Role;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class AuthController extends Controller
 {
@@ -43,10 +42,10 @@ class AuthController extends Controller
 
         $user->assignRole(Role::findByName('user'));
 
-
         event(new Registered($user));
 
         $this->guard()->login($user);
+//        auth()->guard('api')->user();
 
         $accessToken = Auth::user()->createToken('authToken')->accessToken;
         return response(
@@ -107,7 +106,7 @@ class AuthController extends Controller
         return response($response, 200);
     }
 
-    public function redirectGoogle($provider)
+    public function redirectSocialAuth($provider)
     {
         return response()->json([
             'url' => Socialite::driver($provider)->redirect()->getTargetUrl(),
@@ -115,7 +114,7 @@ class AuthController extends Controller
     }
 
 
-    public function callbackGoogle($provider)
+    public function callbackSocialAuth($provider)
     {
         try {
             $user = Socialite::driver($provider)->user();
@@ -128,10 +127,11 @@ class AuthController extends Controller
 
         Auth::login($authUser);
 
+        $accessToken = Auth::user()->createToken('authToken')->accessToken;
+
         return view('oauth/callback', [
             'user' => $authUser,
-//            'userInfo' => $user,
-            'access_token' => $authUser->createToken('authToken')->accessToken,
+            'access_token' => $accessToken,
         ]);
     }
 

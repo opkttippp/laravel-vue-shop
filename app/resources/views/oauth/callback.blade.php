@@ -4,7 +4,7 @@
         {{--userInfo: <?php echo json_encode($userInfo)?>,--}}
         access_token: "{{$access_token }}",
     })
-    window.close()
+    window.close();
 </script>
 
 

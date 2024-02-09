@@ -91,6 +91,7 @@
             <img class="cursorLeft" :src="'/images/cursorRight.png'" width="25" height="25" alt="cursorLeft">
         </div>
     </div>
+
     <login-form
         v-if="showLogin"
         @close = close
@@ -103,11 +104,13 @@
 
 import 'animate.css';
 import loginForm from "../Login";
+import SentEmail from "../verification/VerifyRespondEmail";
 
 export default {
     name: "NavBar",
     components: {
-        loginForm
+        loginForm,
+        SentEmail
     },
     data: () => {
         return {
@@ -165,6 +168,9 @@ export default {
         },
         close() {
             this.showLogin = false;
+        },
+        showMesSendEmail() {
+            this.showMessageSendEmail = true;
         },
         activeNav() {
             let items = document.querySelectorAll(".topnav a");

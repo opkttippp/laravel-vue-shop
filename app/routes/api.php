@@ -9,9 +9,14 @@ use App\Http\Controllers\Api\ReviewApiController;
 use App\Http\Controllers\Api\SearchApiController;
 use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\CategoryApiController;
+use App\Http\Controllers\Api\VerifyEmailController;
 use App\Jobs\SendOrderEmail;
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\ConfirmPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -20,8 +25,11 @@ Route::middleware('auth:api')->get('/auth', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/oauth/{driver}', [AuthController::class, 'redirectGoogle'])->middleware('api-session');
-Route::get('/oauth/{driver}/callback', [AuthController::class, 'callbackGoogle'])->middleware('api-session');
+Route::post('/email/verify/{user}', [VerifyEmailController::class, 'verify'])->name('verification.verify');
+Route::post('/email/resend', [VerifyEmailController::class, 'resend']);
+
+Route::post('/oauth/{driver}', [AuthController::class, 'redirectSocialAuth'])->middleware('api-session');
+Route::get('/oauth/{driver}/callback', [AuthController::class, 'callbackSocialAuth'])->middleware('api-session');
 
 Route::post('/register', [AuthController::class, 'register']);
 

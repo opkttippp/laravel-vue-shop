@@ -4,9 +4,10 @@ require('./admin.js');
 require('./main.js');
 require('./vue.js');
 
-// -----------------app-------------------------------
+// -----------------app------------------------------
 // import "bootstrap/dist/js/bootstrap.bundle.js";
 // -----------------Admin-lte-js---------------------
+
 import "admin-lte/plugins/jquery/jquery.js";
 import "admin-lte/plugins/jquery/jquery.min.js";
 import "admin-lte/plugins/jquery-ui/jquery-ui.min.js";

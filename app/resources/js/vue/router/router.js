@@ -1,7 +1,8 @@
 import {createRouter, createWebHistory} from 'vue-router';
 
 import Home from "../../vue/views/Home";
-import VerifyMail from "../../vue/views/VerifyMail"
+import VerifyMail from "../../vue/views/VerifyMail";
+import PageError from "../components/PageError";
 import Login from "../../vue/views/Login";
 import Category from "../../vue/views/Category";
 import Catalog from "../../vue/views/Catalog";
@@ -11,6 +12,8 @@ import Show from "../../vue/views/Show";
 import Character from "../../vue/views/Character";
 import Review from "../../vue/views/Review";
 import Chat from "../../vue/views/Chat";
+import VerifySentEmail from "../views/verification/VerifySentEmail";
+import VerifyRespondEmail from "../views/verification/VerifyRespondEmail";
 
 const routes = [
 
@@ -71,12 +74,11 @@ const routes = [
         name: 'Chat',
         component: Chat,
     },
-    {
-        path: '/auth/:provider/callback',
-        component: {
-            template: '<div class="auth-component"></div>'
-        }
-    },
+    {path: '/email/verify', name: 'VerifySentEmail', component: VerifySentEmail},
+    {path: '/email/verify/:id', name: 'verification.verify', component: VerifyRespondEmail},
+    // {path: '/email/resend', name: 'verification.resend', component: page('auth/verification/resend.vue')},
+
+    { path: '/:pathMatch(.*)*', name: 'PageError', component: PageError }
     ];
 
 

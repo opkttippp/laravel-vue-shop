@@ -25,26 +25,18 @@ use App\Http\Controllers\MainController;
 
 //-------------------------email confirm-------------------------------------
 
-Route::get('/email/verify', function () {
-    return Auth::user()->hasVerifiedEmail()
-        ?
-        redirect()->intended(RouteServiceProvider::HOME)
-        :
-        view('auth.verify');
-})->middleware('auth')->name('verification.notice');
+//Route::get('/email/verify', function () {
+//    return Auth::user()->hasVerifiedEmail()
+//        ?
+//        redirect()->intended(RouteServiceProvider::HOME)
+//        :
+//        view('auth.verify');
+//})->middleware('auth')->name('verification.notice');
 
-Route::post('/email/notification-verification', function () {
-    Auth::user()->SendEmailVerificationNotification();
-    return back()->with('message', 'Verification link send!');
-})->middleware('auth')->name('verification.resend');
-
-Route::get(
-    '/email/verify/{id}/{hash}',
-    function (EmailVerificationRequest $request) {
-        $request->fulfill();
-        return redirect()->intended(RouteServiceProvider::HOME);
-    }
-)->middleware(['auth', 'signed'])->name('verification.verify');
+//Route::post('/email/notification-verification', function () {
+//    Auth::user()->SendEmailVerificationNotification();
+//    return back()->with('message', 'Verification link send!');
+//})->middleware(['auth', 'signed'])->name('verification.resend');
 
 //Route::get('email/resend', [VerificationController::class,'resend']);
 

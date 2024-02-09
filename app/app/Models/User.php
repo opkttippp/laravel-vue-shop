@@ -8,7 +8,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-//use Laravel\Sanctum\HasApiTokens;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasPermissions;
 use Spatie\Permission\Traits\HasRoles;
@@ -81,7 +80,7 @@ class User extends Authenticatable implements MustVerifyEmail
         SendRegistrationMail::dispatch($this);
     }
 
-    public function markEmailAsVerified()
+    public function markEmailAsVerified(): bool
     {
         return $this->forceFill([
             'email_verified_at' => $this->freshTimestamp(),

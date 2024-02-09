@@ -7,7 +7,34 @@
             </ul>
         </div>
 
-        <transition name="card" mode="out-in">
+        <div class="content"
+             v-if="showMessage"
+             style="height: auto; margin: 0;"
+             v-click-outside="() => {this.$emit('close', false)}"
+        >
+            <template v-if="status">
+                <div class="alert alert-success" role="alert">
+                    {{ status }} {{(amount)}}
+                </div>
+            </template>
+
+            <div class="card row justify-content-center">
+                <div class="card-header">Verify Your Email Address</div>
+                <div class="card-body">
+                    'Before proceeding, please check your email for a verification link.
+                    'If you did not receive the email'
+                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline"
+                            @click="mailResend"
+                    >
+                        click here to request another
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <transition name="card" mode="out-in"
+                    v-if="showForm"
+        >
             <div class="content" v-if="front === true" key="front"
                  v-click-outside="() => {this.$emit('close', false)}"
             >
@@ -118,6 +145,10 @@ export default {
     name: "Login",
     data() {
         return {
+            status: '',
+            amount: 1,
+            showForm: true,
+            showMessage: false,
             user: {
                 login: '',
                 password: '',
@@ -132,7 +163,12 @@ export default {
             }
         };
     },
-    computed: {},
+    watch: {
+
+    },
+    computed: {
+
+    },
     mounted() {
         this.formfunction();
         window.addEventListener('message', this.onMessage, false);
@@ -141,6 +177,20 @@ export default {
         window.removeEventListener('message', this.onMessage);
     },
     methods: {
+        async mailResend() {
+            const {data} = await axios.post('http://larav.local/api/email/resend', {
+                email: this.userReg.email
+            })
+            this.status = await data.status;
+            this.amount++;
+        },
+        //     verificationResend() {
+        //     return axios.post('http://larav.local/api/email/resend').then((res) => {
+        //         console.log(res);
+        //     }).catch((error) => {
+        //         console.log(error);
+        //     });
+        // },
         loginValidator() {
             this.errors = [];
             if (!this.userReg.name || this.userReg.name.length < 5) {
@@ -191,8 +241,10 @@ export default {
             if (this.loginValidator()) {
                 this.$store.dispatch("auth/register", this.userReg).then(
                     () => {
-                        window.location.href = 'http://larav.local/email/verify';
-                        this.$emit('close', false);
+                        // this.$emit('close', false);
+                        this.showForm = false;
+                        this.status = 'verification.sent';
+                        this.showMessage = true;
                     })
                     .catch((error) => {
                         console.log(error);
@@ -224,21 +276,18 @@ export default {
             // console.log(data);
             newWindow.location.href = data.url
         },
-        /**
-         * @param {MessageEvent} e
-         */
         onMessage(e) {
             if (e.origin !== window.origin || !e.data.access_token) {
                 return
             }
-            console.log(e.data);
+            // console.log(e.data);
             this.$store.dispatch('auth/loginOauth', {
                 token: e.data.access_token,
                 user: e.data.user,
             });
             this.$emit('close', false);
             this.$router.push({name: 'Home'});
-
+            this.$emit('showMesSendEmail', true);
         }
     }
 }
@@ -275,28 +324,6 @@ function openWindow(url, title, options = {}) {
 </script>
 <style scoped>
 
-/*.card {*/
-/*    height: 24em;*/
-/*    width: 32em;*/
-/*}*/
-
-/*-----------------new Form-------------------*/
-
-/*.bg-img{*/
-/*  !*background: url('bg.jpg');*!*/
-/*  height: 100vh;*/
-/*  background-size: cover;*/
-/*  background-position: center;*/
-/*}*/
-/*.bg-img:after{*/
-/*  position: absolute;*/
-/*  content: '';*/
-/*  top: 0;*/
-/*  left: 0;*/
-/*  height: 100%;*/
-/*  width: 100%;*/
-/*  background: rgba(0,0,0,0.7);*/
-/*}*/
 .content {
     position: fixed;
     top: 17%;
@@ -421,7 +448,7 @@ function openWindow(url, title, options = {}) {
 
 .auth-social:hover {
     opacity: 100%;
-    box-shadow: 0 0 18px rgba(255,255,255,0.75);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.75);
     /*-webkit-box-shadow: 0px 0px 18px rgba(255,255,255,0.75);*/
     /*-moz-box-shadow: 0px 0px 18px rgba(255,255,255,0.75);*/
 }
