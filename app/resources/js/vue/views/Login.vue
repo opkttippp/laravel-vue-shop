@@ -1,11 +1,15 @@
 <template>
     <div class="container">
 
+<!-------------------------------------- Login Register Error ------------------------------------>
+
         <div v-if="this.errors.length" class="alert alert-danger">
             <ul>
                 <li v-for="error of this.errors">{{ error }}</li>
             </ul>
         </div>
+
+<!--------------------------------------- Send Verify Email -------------------------------------->
 
         <div class="content"
              v-if="showMessage"
@@ -32,6 +36,32 @@
             </div>
         </div>
 
+<!--------------------------------------- Send Request Password ----------------------------------->
+
+        <div class="content" v-if="showEmail"
+             style="height: auto;"
+        >
+            <template v-if="status">
+                <div class="alert alert-success" role="alert">
+                    {{ status }}
+                </div>
+            </template>
+
+            <header>Change password</header>
+            <form @submit.prevent="sendPassword">
+                <div class="field">
+                    <span class="fa fa-user"></span>
+                    <input type="text" v-model="sendEmail" required placeholder="Email">
+                </div>
+
+                <div class="field">
+                    <input type="submit" value="Send">
+                </div>
+            </form>
+        </div>
+
+<!--------------------------------------- Register Login ----------------------------------------->
+
         <transition name="card" mode="out-in"
                     v-if="showForm"
         >
@@ -50,7 +80,7 @@
                         <span class="show">SHOW</span>
                     </div>
                     <div class="pass">
-                        <a class="btn btn-link" href="{{ route('password.request') }}">Forgot Password?</a>
+                        <a class="btn btn-link" @click.stop="showEmailRequest">Forgot Password?</a>
                     </div>
                     <div class="field">
                         <input type="submit" value="LOGIN">
@@ -115,13 +145,11 @@
                     </div>
                     <div class="field space">
                         <span class="fa fa-lock"></span>
-                        <input id="pass" type="password" v-model="userReg.password" class="pass-key" required
-                               placeholder="Password">
+                        <input id="pass" type="password" v-model="userReg.password" required placeholder="Password">
                     </div>
                     <div class="field space">
                         <span class="fa fa-lock"></span>
-                        <input id="password-confirm" type="password" v-model="userReg.password_confirmation"
-                               class="pass-key" required placeholder="Confirm password">
+                        <input id="password-confirm" type="password" v-model="userReg.password_confirmation" required placeholder="Confirm password">
                     </div>
                     <div class="field">
                         <input type="submit" value="REGISTER">
@@ -147,8 +175,10 @@ export default {
         return {
             status: '',
             amount: 1,
+            sendEmail: '',
             showForm: true,
             showMessage: false,
+            showEmail: false,
             user: {
                 login: '',
                 password: '',
@@ -164,10 +194,8 @@ export default {
         };
     },
     watch: {
-
     },
     computed: {
-
     },
     mounted() {
         this.formfunction();
@@ -184,13 +212,19 @@ export default {
             this.status = await data.status;
             this.amount++;
         },
-        //     verificationResend() {
-        //     return axios.post('http://larav.local/api/email/resend').then((res) => {
-        //         console.log(res);
-        //     }).catch((error) => {
-        //         console.log(error);
-        //     });
-        // },
+        showEmailRequest(){
+            this.showForm = false;
+            this.showEmail = true;
+        },
+        async sendPassword(){
+            const { data } = await axios.post('http://larav.local/api/password/email',{
+                email: this.sendEmail
+            });
+            this.status = data.status;
+            setTimeout(() => {
+                this.status = '';
+            }, 3000)
+        },
         loginValidator() {
             this.errors = [];
             if (!this.userReg.name || this.userReg.name.length < 5) {
@@ -212,7 +246,7 @@ export default {
                 if (pass_field.type === "password") {
                     pass_field.type = "text";
                     showBtn.textContent = "HIDE";
-                    showBtn.style.color = "#3498db";
+                    showBtn.style.color = "#222";
                 } else {
                     pass_field.type = "password";
                     showBtn.textContent = "SHOW";
@@ -241,7 +275,6 @@ export default {
             if (this.loginValidator()) {
                 this.$store.dispatch("auth/register", this.userReg).then(
                     () => {
-                        // this.$emit('close', false);
                         this.showForm = false;
                         this.status = 'verification.sent';
                         this.showMessage = true;
@@ -382,7 +415,7 @@ function openWindow(url, title, options = {}) {
     font-size: 13px;
     font-weight: 700;
     color: #222;
-    display: none;
+    /*display: none;*/
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
 }

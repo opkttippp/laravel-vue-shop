@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ChatApiController;
+use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\ManufacturApiController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\OrderApiController;
@@ -11,19 +12,16 @@ use App\Http\Controllers\Api\UserApiController;
 use App\Http\Controllers\Api\CategoryApiController;
 use App\Http\Controllers\Api\VerifyEmailController;
 use App\Jobs\SendOrderEmail;
-use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Auth\ConfirmPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Api\ResetPasswordController;
 
 Route::middleware('auth:api')->get('/auth', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+Route::post('/password/reset', [ResetPasswordController::class, 'reset']);
 
 Route::post('/email/verify/{user}', [VerifyEmailController::class, 'verify'])->name('verification.verify');
 Route::post('/email/resend', [VerifyEmailController::class, 'resend']);
@@ -59,12 +57,12 @@ Route::post('/filter', [SearchApiController::class, 'filter']);
 
 Route::post('/catalog', [SearchApiController::class, 'catalog']);
 
-Route::get('/password/confirm', [ConfirmPasswordController::class, 'showConfirmForm'])->name('password.confirm');
-Route::post('/password/confirm', [ConfirmPasswordController::class, 'confirm']);
-Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+//Route::get('/password/confirm', [ConfirmPasswordController::class, 'showConfirmForm'])->name('password.confirm');
+//Route::post('/password/confirm', [ConfirmPasswordController::class, 'confirm']);
+//Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+//Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+//Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+//Route::get('/password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 
 Route::group([
     'prefix' => 'chat',

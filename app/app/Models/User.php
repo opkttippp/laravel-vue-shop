@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Jobs\SendRegistrationMail;
+use App\Jobs\SendResetPasswordEmail;
 use Collective\Html\Eloquent\FormAccessible;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -73,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Message::class);
     }
 
-    //--------------------verific Mail in queue(overwrite metod)---------------
+    //--------------------verify Mail in queue (overwrite method)---------------
 
     public function sendEmailVerificationNotification()
     {
@@ -86,5 +87,12 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => $this->freshTimestamp(),
             'status' => self::STATUS_ACTIVE,
         ])->save();
+    }
+
+    //--------------------reset Pass (overwrite method)-------------------------
+
+    public function sendPasswordResetNotification($token)
+    {
+        SendResetPasswordEmail::dispatch($this, $token);
     }
 }

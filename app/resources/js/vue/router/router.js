@@ -14,6 +14,7 @@ import Review from "../../vue/views/Review";
 import Chat from "../../vue/views/Chat";
 import VerifySentEmail from "../views/verification/VerifySentEmail";
 import VerifyRespondEmail from "../views/verification/VerifyRespondEmail";
+import ResetPass from "../views/password/ResetPass";
 
 const routes = [
 
@@ -74,8 +75,10 @@ const routes = [
         name: 'Chat',
         component: Chat,
     },
-    {path: '/email/verify', name: 'VerifySentEmail', component: VerifySentEmail},
-    {path: '/email/verify/:id', name: 'verification.verify', component: VerifyRespondEmail},
+    // { path: '/password/reset', name: 'password.request', component: page('auth/password/email.vue') },
+    { path: '/password/reset/:token', name: 'password.reset', component: ResetPass },
+    // {path: '/email/verify', name: 'VerifySentEmail', component: VerifySentEmail},
+    {path: '/email/verify/:id', name: 'verification.verify', component: VerifyRespondEmail },
     // {path: '/email/resend', name: 'verification.resend', component: page('auth/verification/resend.vue')},
 
     { path: '/:pathMatch(.*)*', name: 'PageError', component: PageError }
